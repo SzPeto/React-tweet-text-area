@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <TextArea />
-      <Button />
+      <Button text="Submit" type="submit" onClick="" />
     </>
   );
 }
