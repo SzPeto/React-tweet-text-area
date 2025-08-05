@@ -1,12 +1,18 @@
-# React + Vite
+# Tweet TextArea – The "Yes, I struggled a lot" edition
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a humble attempt to complete a seemingly impossible assignment.  
+It includes:
+- React
+- Vite
+- JavaScript
+- Zustand (Never heard of ... once i'll find out)
+- localStorage (ehm...)
 
-Currently, two official plugins are available:
+For now, I have no idea what i am doing and where to start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## How to run it?
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+cd frontend
+npm install
+npm run dev
