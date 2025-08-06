@@ -9,7 +9,7 @@ function Tweet(){
 
     // Only for experimenting purposes
     function handleClick(e){
-        e.target.textContent = "New button text";
+        e.target.textContent = "Tweet tweet";
     }
 
     return (

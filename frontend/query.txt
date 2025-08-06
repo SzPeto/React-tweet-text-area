@@ -1,0 +1,8 @@
+5.8. prve zadanie
+- react vite s typescriptom
+- textarea na zadanie tweetu
+- tlacitko na odoslanie
+- prida to do lokalneho storu ktory si bude pamatat len kym nerefreshnes
+- tlacitko na zmazanie konkretneho tweetu
+- prerobit store na zustand globalny
+- potom pridat ze kazda zmena sa ulozi do localstoragu
