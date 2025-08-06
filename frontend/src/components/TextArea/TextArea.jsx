@@ -1,11 +1,16 @@
+import "./TextArea.css"
 
 function TextArea({value, onChange}){
     
     return (
-        <textarea 
+        <textarea className="text-area"
             value={ value }
-            onChange={ (e) => { onChange(e.target.value) } }
-            rows={ 4 }
+            onChange={ 
+                (e) => { 
+                    onChange(e.target.value); 
+                } 
+            }
+            rows={ 7 }
         />
     );
 }
