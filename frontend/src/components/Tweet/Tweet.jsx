@@ -17,7 +17,7 @@ function Tweet(){
         const newTweets = [...tweets, tweet]
         setTweets(newTweets);
 
-        console.log(newTweets);
+        console.log(newTweets); // Use newTweets to be up to date
     }
 
     function handleTweetChange(e){
