@@ -8,7 +8,7 @@ function TextArea({value, onChange}){
             value={ value }
             onChange={ 
                 (e) => { 
-                    onChange(e.target.value); 
+                    onChange(e); 
                 } 
             }
             rows={ 7 }
