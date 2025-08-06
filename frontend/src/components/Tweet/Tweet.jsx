@@ -11,10 +11,10 @@ function Tweet(){
     const [tweets, setTweets] = useState([]);
 
     function handleClick(){
-        // We do not need an event, since onChange on TextArea updates the current tweet on every change
-        let items = tweets;
-        items.push(tweet);
-        setTweets(items);
+        /* We do not need an event, since onChange on TextArea updates the current tweet on every change,
+           use spread to extract the individual elements of the tweet array, and keep the convention of not
+           directly modifying the tweets array, this way React knows som change happened */
+        setTweets(...tweets, tweet);
 
         console.log(tweets);
     }
