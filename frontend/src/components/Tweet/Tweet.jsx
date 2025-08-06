@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import Button from "../Button/Button.jsx"
-import TextArea from "../TextArea/TextArea.jsx"
-import "./Tweet.css"
+import Button from "../Button/Button.jsx";
+import TextArea from "../TextArea/TextArea.jsx";
+import "./Tweet.css";
 
 function Tweet(){
 
     const [tweet, setTweet] = useState("Initial text");
 
+    // Only for experimenting purposes
     function handleClick(e){
         e.target.textContent = "New button text";
     }

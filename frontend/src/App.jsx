@@ -1,5 +1,5 @@
 import './App.css';
-import Tweet from "./components/Tweet/Tweet.jsx"
+import Tweet from "./components/Tweet/Tweet.jsx";
 
 function App() {
 
