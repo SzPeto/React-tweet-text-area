@@ -7,10 +7,14 @@ function Tweet(){
 
     const [tweet, setTweet] = useState("Initial text");
 
+    function handleClick(e){
+        e.target.textContent = "New button text";
+    }
+
     return (
         <div className="tweet-container">
             <TextArea value={ tweet } onChange={ setTweet } />
-            <Button text="Submit" type="submit" onClick={() => console.log(tweet)} />
+            <Button text="Submit" type="submit" onClick={ (e) => handleClick(e) } />
             <Button text="Clear text" type="info" onClick={ () => setTweet("") } />
         </div>
     );
