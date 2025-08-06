@@ -5,10 +5,8 @@ It includes:
 - React
 - Vite
 - JavaScript
-- Zustand (Never heard of ... once i'll find out)
-- localStorage (ehm...)
-
-For now, I have no idea what i am doing and where to start
+- Zustand (My current abstraction of Zustand is : wrap the entire React app into a class, and make a global array)
+- localStorage (Maybe the local variable to each component separately, that lives accross multiple renders?)
 
 ## How to run it?
 
