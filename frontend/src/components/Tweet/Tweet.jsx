@@ -14,9 +14,10 @@ function Tweet(){
         /* We do not need an event, since onChange on TextArea updates the current tweet on every change,
            use spread to extract the individual elements of the tweet array, and keep the convention of not
            directly modifying the tweets array, this way React knows some change happened */
-        setTweets([...tweets, tweet]);
+        const newTweets = [...tweets, tweet]
+        setTweets(newTweets);
 
-        console.log(tweets);
+        console.log(newTweets);
     }
 
     function handleTweetChange(e){
