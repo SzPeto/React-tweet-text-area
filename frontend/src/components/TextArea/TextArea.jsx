@@ -1,9 +1,9 @@
 
-function TextArea({text, onChange}){
+function TextArea({value, onChange}){
     
     return (
         <textarea 
-            value={ text }
+            value={ value }
             onChange={ (e) => { onChange(e.target.value) } }
             rows={ 4 }
         />

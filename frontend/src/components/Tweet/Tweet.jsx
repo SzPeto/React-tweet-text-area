@@ -9,7 +9,7 @@ function Tweet(){
 
     return (
         <div className="tweet-container">
-            <TextArea text={ tweet } onChange={ setTweet } />
+            <TextArea value={ tweet } onChange={ setTweet } />
             <Button text="submit" type="submit" onClick={() => console.log(tweet)} />
         </div>
     );
