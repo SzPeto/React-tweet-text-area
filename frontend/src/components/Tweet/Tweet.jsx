@@ -5,9 +5,11 @@ import "./Tweet.css";
 
 function Tweet(){
 
-    const [tweet, setTweet] = useState("Initial text");
+    /* useState keeps the tweet stored across multiple renders, after page refresh, the entire app runs from beginning, 
+       changing the tweet to its default state */
+    const [tweet, setTweet] = useState("Tweet me!");
 
-    // Only for experimenting purposes
+    // Only for experimenting purposes (so far)
     function handleClick(e){
         e.target.textContent = "Tweet tweet";
     }
