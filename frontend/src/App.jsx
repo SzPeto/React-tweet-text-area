@@ -1,14 +1,12 @@
 import './App.css';
-import TextArea from "./components/TextArea/TextArea.jsx";
-import Button from "./components/Button/Button.jsx";
+import Tweet from "./components/Tweet/Tweet.jsx"
 
 function App() {
 
   return (
-    <>
-      <TextArea />
-      <Button text="Submit" type="submit" onClick="" />
-    </>
+    <div className="main-container">
+      <Tweet />
+    </div>
   );
 }
 
