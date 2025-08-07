@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "../Button/Button.jsx";
 import TextArea from "../TextArea/TextArea.jsx";
 import "./Tweet.css";
-import useTweetStore from "../../store/useTweetStore.js"
+import useTweetStore from "../../store/useTweetStore.js";
 
 function Tweet(){
 
@@ -14,17 +14,13 @@ function Tweet(){
     const addTweet = useTweetStore((state) => state.addTweet); 
 
     function handleClick(){
-        /* We do not need an event, since onChange on TextArea updates the current tweet on every change,
-           use spread to extract the individual elements of the tweet array, and keep the convention of not
-           directly modifying the tweets array, this way React knows some change happened */
-        const newTweets = [...tweets, tweet]
-        setTweets(newTweets);
-
-        console.log(newTweets); // Use newTweets to be up to date
+        const newTweets = [...tweets, tweet];
+        addTweet(tweet);
+        console.log(newTweets);
     }
 
     function handleTweetChange(e){
-        setTweet(e.target.value)
+        setTweet(e.target.value);
     }
 
     return (
