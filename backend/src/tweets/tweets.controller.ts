@@ -1,5 +1,6 @@
-import { Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { TweetsService } from "./tweets.service";
+import { Tweet } from "./entities/tweet.entity"
 
 @Controller('tweets')
 export class TweetsController {
@@ -36,8 +37,8 @@ export class TweetsController {
     */
 
     @Post()
-    addTweet(){
-
+    addTweet(@Body() tweet: Tweet){
+        return this.tweetService.addTweet(tweet);
     }
 
 

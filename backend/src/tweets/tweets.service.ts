@@ -10,8 +10,8 @@ export class TweetsService {
         return this.tweets;
     }
 
-    addTweet(){
-
+    addTweet(tweet: Tweet){
+        this.tweets.push(tweet);
     }
 
 }
