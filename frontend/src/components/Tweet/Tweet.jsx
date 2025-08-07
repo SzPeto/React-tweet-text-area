@@ -2,13 +2,16 @@ import { useEffect, useState } from "react";
 import Button from "../Button/Button.jsx";
 import TextArea from "../TextArea/TextArea.jsx";
 import "./Tweet.css";
+import useTweetStore from "../../store/useTweetStore.js"
 
 function Tweet(){
 
     /* useState keeps the tweet stored across multiple renders, after page refresh, the entire app runs from beginning, 
        changing the tweet to its default state */
     const [tweet, setTweet] = useState("Tweet me!");
-    const [tweets, setTweets] = useState([]);
+    const tweets = useTweetStore((state) => state.tweets);
+    // Here we get a refernce to the custom Zustand hook's addTweet function(state=object, addTweet=key to returned function)
+    const addTweet = useTweetStore((state) => state.addTweet); 
 
     function handleClick(){
         /* We do not need an event, since onChange on TextArea updates the current tweet on every change,
