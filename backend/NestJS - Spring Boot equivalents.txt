@@ -1,0 +1,61 @@
+Spring Boot vs NestJS - Side-by-Side Equivalents
+
+Controllers
+    @RestController                             |     @Controller()
+    @RequestMapping("/path")                    |     @Get('/path'), @Post('/path'), etc.
+
+Dependency Injection & Services
+    @Autowired                                  |     constructor injection
+    @Component / @Service / @Repository         |     @Injectable()
+
+Routing Parameters & Request Data
+    @PathVariable                               |     @Param()
+    @RequestParam                               |     @Query()
+    @RequestBody                                |     @Body()
+    @RequestHeader                              |     @Headers()
+
+App Entry Point
+    public static void main(String[] args)      |     async function bootstrap() { ... }
+    SpringApplication.run(App.class, args)      |     await NestFactory.create(AppModule)
+
+Modules & Configuration
+    @SpringBootApplication                      |     @Module()
+    @Configuration                              |     @Module({ providers: [...] })
+
+Exception Handling
+    @ControllerAdvice + @ExceptionHandler       |     @Catch() + ExceptionFilter
+                                                |     + useGlobalFilters()
+
+Validation
+    @Valid + javax.validation annotations       |     class-validator decorators
+    e.g. @NotNull, @Size                        |     e.g. @IsString(), @IsNotEmpty()
+                                                |     + useGlobalPipes(new ValidationPipe())
+
+Middlewares / Filters / Interceptors
+    OncePerRequestFilter                        |     Middleware (custom classes)
+    HandlerInterceptor                          |     Interceptors (@Injectable() + @UseInterceptors)
+
+Security
+    Spring Security + filters/config            |     Passport.js strategies + @UseGuards()
+
+Database Integration (ORM)
+    Spring Data JPA + Hibernate                 |     TypeORM / Prisma
+
+REST Client / HTTP Calls
+    RestTemplate / WebClient                    |     @nestjs/axios (HttpModule, HttpService)
+
+Environment Configuration
+    application.properties / .yml               |     .env file + ConfigModule
+    @Value("${some.prop}")                      |     process.env.VAR or ConfigService.get()
+
+Project Structure
+    src/main/java/...                           |     src/...
+    resources/application.yml                   |     .env + config modules
+    @ComponentScan                              |     auto-managed by imports in @Module()
+
+Testing
+    @SpringBootTest                             |     @nestjs/testing utilities
+    MockMvc                                     |     supertest (for e2e tests)
+
+Dev Tools / Hot Reload
+    Spring DevTools                             |     ts-node-dev / nest CLI with --watch
