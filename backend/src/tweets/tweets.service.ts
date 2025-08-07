@@ -12,6 +12,7 @@ export class TweetsService {
 
     addTweet(tweet: Tweet){
         this.tweets.push(tweet);
+        return tweet;
     }
 
 }
