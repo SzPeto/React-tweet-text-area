@@ -9,7 +9,6 @@ function Tweet(){
     /* useState keeps the tweet stored across multiple renders, after page refresh, the entire app runs from beginning, 
        changing the tweet to its default state */
     const [tweet, setTweet] = useState("Tweet me!");
-    const [response, setResponse] = useState("");
 
     /* 
     const tweets = useTweetStore((state) => state.tweets);
@@ -18,20 +17,28 @@ function Tweet(){
      */
 
     async function handleClick(e) {
-        const postMessage = {
-            id: 8,
-            content: tweet
-        };
 
-        console.log(postMessage);
+        const buttonId = e.target.id;
 
-        const response = await fetch("/api/tweets/", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(postMessage),
-        });
-        const text = await response.json();
-        setResponse(text);
+        if(buttonId == "get"){
+            const response = await fetch('/api/tweets');
+            const json = await response.json();
+            console.log("Tweets : ", json);
+        }else if(buttonId == "submit"){
+            const postMessage = {
+                id: 8,
+                content: tweet
+            };
+
+            const response = await fetch("/api/tweets/", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(postMessage),
+            });
+            const json = await response.json();
+            console.log(`Post response : ${json}`);
+        }
+
     }
 
     function handleTweetChange(e){
@@ -43,6 +50,7 @@ function Tweet(){
             <TextArea value={ tweet } onChange={ handleTweetChange } />
             <Button text="Submit" type="submit" onClick={ handleClick } />
             <Button text="Clear text" type="info" onClick={ () => setTweet("") } />
+            <Button text="Get tweets on console" type="get" onClick={ handleClick } />
         </div>
     );
 
