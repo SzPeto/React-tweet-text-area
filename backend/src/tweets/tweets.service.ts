@@ -51,13 +51,17 @@ export class TweetsService {
     ============================================================================================================================
     */
 
+    deleteAll(): object{
+        this.tweets.splice(0);
+        return {message: "All tweets were deleted"};
+    }
 
     deleteById(id: number): object{
         let isFound: boolean = false;
         for(let i = 0; i < this.tweets.length; i++){
             if(this.tweets[i].id == id){
                 isFound = true;
-                this.tweets.splice(id, 1); // Second argument : how many elements to delete beginning from given index
+                this.tweets.splice(i, 1); // Second argument : how many elements to delete beginning from given index
             }
         }
 

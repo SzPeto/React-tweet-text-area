@@ -67,8 +67,9 @@ export class TweetsController {
     }
 
     @Delete()
-    deleteAll(){
+    deleteAll(): object{
 
+        return this.tweetService.deleteAll();
     }
 
 }
