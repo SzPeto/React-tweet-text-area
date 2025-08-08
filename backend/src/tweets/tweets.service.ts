@@ -51,4 +51,18 @@ export class TweetsService {
     ============================================================================================================================
     */
 
+
+    deleteById(id: number): object{
+        let isFound: boolean = false;
+        for(let i = 0; i < this.tweets.length; i++){
+            if(this.tweets[i].id == id){
+                isFound = true;
+                this.tweets.splice(id, 1); // Second argument : how many elements to delete beginning from given index
+            }
+        }
+
+        if(isFound) return { message: `Tweet with ID : ${id} deleted successfully` };
+        return { message: `Tweet with ID : ${id} not found!` };
+    }
+
 }

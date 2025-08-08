@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import Button from "../Button/Button.jsx";
 import TextArea from "../TextArea/TextArea.jsx";
 import "./Tweet.css";
-import useTweetStore from "../../store/useTweetStore.js";
+import useCounterStore from "../../store/useCounterStore.js";
 
 function Tweet(){
-
-    /* useState keeps the tweet stored across multiple renders, after page refresh, the entire app runs from beginning, 
-       changing the tweet to its default state */
+    
     const [tweet, setTweet] = useState("Tweet me!");
+    const count = useCounterStore((state) => state.count);
+    const setCount = useCounterStore((state) => state.setCount); 
 
     /* 
     const tweets = useTweetStore((state) => state.tweets);
@@ -20,13 +20,15 @@ function Tweet(){
 
         const buttonId = e.target.id;
 
+        console.log(count);
+
         if(buttonId == "get"){
             const response = await fetch('/api/tweets');
             const json = await response.json();
             console.log("Get response : ", json);
         }else if(buttonId == "submit"){
             const postMessage = {
-                id: 8,
+                id: count,
                 content: tweet
             };
 
@@ -37,6 +39,7 @@ function Tweet(){
             });
             const json = await response.json();
             console.log("Post response : ", json);
+            setCount(count + 1);
         }
 
     }

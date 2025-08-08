@@ -26,7 +26,7 @@ export class TweetsController {
 
     @Get(":id") // api/tweets/1
     getTweetById(@Param("id") id: string): Tweet { // Param - request path variable
-        const numId = parseInt(id, 10) // 10 means we want a decimal values
+        const numId = parseInt(id, 10); // 10 means we want a decimal values
         return this.tweetService.getTweetById(numId);
     }
 
@@ -51,7 +51,6 @@ export class TweetsController {
 
     @Put()
     updateTweet(){
-        
     }
 
 
@@ -61,9 +60,10 @@ export class TweetsController {
     ============================================================================================================================
     */
 
-    @Delete()
-    deleteById(){
-
+    @Delete(":id")
+    deleteById(@Param("id") id: string): object{
+        const numId: number = parseInt(id, 10);
+        return this.tweetService.deleteById(numId);
     }
 
     @Delete()
