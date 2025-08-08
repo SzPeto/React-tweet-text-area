@@ -6,11 +6,7 @@ function TextArea({value, onChange}){
     return (
         <textarea className="text-area"
             value={ value }
-            onChange={ 
-                (e) => { 
-                    onChange(e); 
-                } 
-            }
+            onChange={ (e) => onChange(e) }
             rows={ 7 }
         />
     );

@@ -4,7 +4,7 @@ import { Tweet } from "./entities/tweet.entity";
 @Injectable()
 export class TweetsService {
 
-    private tweets: Tweet[] = [];
+    private tweets: Tweet[] = [new Tweet(1, "First"), new Tweet(2, "Second"), new Tweet(3, "Third")];
 
 
     /*

@@ -9,14 +9,29 @@ function Tweet(){
     /* useState keeps the tweet stored across multiple renders, after page refresh, the entire app runs from beginning, 
        changing the tweet to its default state */
     const [tweet, setTweet] = useState("Tweet me!");
+    const [response, setResponse] = useState("");
+
+    /* 
     const tweets = useTweetStore((state) => state.tweets);
     // Here we get a refernce to the custom Zustand hook's addTweet function(state=object, addTweet=key to returned function)
     const addTweet = useTweetStore((state) => state.addTweet); 
+     */
 
-    function handleClick(){
-        const newTweets = [...tweets, tweet];
-        addTweet(tweet);
-        console.log(newTweets);
+    async function handleClick(e) {
+        const postMessage = {
+            id: 8,
+            content: tweet
+        };
+
+        console.log(postMessage);
+
+        const response = await fetch("/api/tweets/", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(postMessage),
+        });
+        const text = await response.json();
+        setResponse(text);
     }
 
     function handleTweetChange(e){
@@ -26,7 +41,7 @@ function Tweet(){
     return (
         <div className="tweet-container">
             <TextArea value={ tweet } onChange={ handleTweetChange } />
-            <Button text="Submit" type="submit" onClick={ () => handleClick() } />
+            <Button text="Submit" type="submit" onClick={ handleClick } />
             <Button text="Clear text" type="info" onClick={ () => setTweet("") } />
         </div>
     );
