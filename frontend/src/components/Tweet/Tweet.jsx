@@ -23,7 +23,7 @@ function Tweet(){
         if(buttonId == "get"){
             const response = await fetch('/api/tweets');
             const json = await response.json();
-            console.log("Tweets : ", json);
+            console.log("Get response : ", json);
         }else if(buttonId == "submit"){
             const postMessage = {
                 id: 8,
@@ -36,7 +36,7 @@ function Tweet(){
                 body: JSON.stringify(postMessage),
             });
             const json = await response.json();
-            console.log(`Post response : ${json}`);
+            console.log("Post response : ", json);
         }
 
     }
