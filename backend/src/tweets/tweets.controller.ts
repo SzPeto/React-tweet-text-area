@@ -63,13 +63,13 @@ export class TweetsController {
     @Delete(":id")
     deleteById(@Param("id") id: string): object{
         const numId: number = parseInt(id, 10);
-        return this.tweetService.deleteById(numId);
+        return this.tweetService.deleteTweetById(numId);
     }
 
     @Delete()
     deleteAll(): object{
 
-        return this.tweetService.deleteAll();
+        return this.tweetService.deleteAllTweets();
     }
 
 }
