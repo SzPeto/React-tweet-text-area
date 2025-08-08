@@ -25,8 +25,9 @@ export class TweetsController {
     }
 
     @Get(":id") // api/tweets/1
-    getTweetById(@Param("id") id: string){ // Param - request path variable
+    getTweetById(@Param("id") id: string): Tweet { // Param - request path variable
         const numId = parseInt(id, 10) // 10 means we want a decimal values
+        return this.tweetService.getTweetById(numId);
     }
 
 
