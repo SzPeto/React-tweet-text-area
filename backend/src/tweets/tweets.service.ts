@@ -1,10 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { Tweet } from "./entities/tweet.entity";
+import { CreateTweetDto } from "./dto/create-tweet.dto";
 
 @Injectable()
 export class TweetsService {
 
-    private tweets: Tweet[] = [new Tweet(1, "First"), new Tweet(2, "Second"), new Tweet(3, "Third")];
+    private tweets: Tweet[] = [];
 
 
     /*
@@ -23,7 +24,10 @@ export class TweetsService {
                 return this.tweets[i];
             }
         }
-        return new Tweet(-1, "Tweet not found");
+        const notFoundTweet = new Tweet();
+        notFoundTweet.id = -1;
+        notFoundTweet.content = "Tweet not found";
+        return notFoundTweet;
     }
 
     /*
@@ -32,7 +36,10 @@ export class TweetsService {
     ============================================================================================================================
     */
 
-    addTweet(tweet: Tweet){
+    addTweet(createTweetDto: CreateTweetDto): Tweet{
+        const tweet = new Tweet();
+        tweet.id = createTweetDto.id;
+        tweet.content = createTweetDto.content;
         this.tweets.push(tweet);
         return tweet;
     }

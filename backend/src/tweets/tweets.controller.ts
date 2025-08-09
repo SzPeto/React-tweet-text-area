@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { TweetsService } from "./tweets.service";
-import { Tweet } from "./entities/tweet.entity"
+import { Tweet } from "./entities/tweet.entity";
+import { CreateTweetDto } from "./dto/create-tweet.dto";
 
 @Controller('tweets')
 export class TweetsController {
@@ -38,8 +39,8 @@ export class TweetsController {
     */
 
     @Post()
-    addTweet(@Body() tweet: Tweet){
-        return this.tweetService.addTweet(tweet);
+    addTweet(@Body() createTweetDto: CreateTweetDto){
+        return this.tweetService.addTweet(createTweetDto);
     }
 
 
