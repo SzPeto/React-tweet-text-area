@@ -5,7 +5,13 @@ import "./Tweet.css";
 import useCounterStore from "../../store/useCounterStore.js";
 import useCounter from "../../hooks/useCounter.jsx";
 
-// Helper functions
+
+/*
+============================================================================================================================
+                                             Helper function
+============================================================================================================================
+*/
+
 async function fetchFromBe(){
     const response = await fetch("/api/tweets");
     const json = await response.json();
@@ -27,6 +33,13 @@ async function sendToBe(tweet, count, setCount){
     setCount(count + 1);
     return json;
 }
+
+
+/*
+============================================================================================================================
+                                             The Tweet component
+============================================================================================================================
+*/
 
 function Tweet(){
     
