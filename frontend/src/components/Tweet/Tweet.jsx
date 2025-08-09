@@ -3,42 +3,47 @@ import Button from "../Button/Button.jsx";
 import TextArea from "../TextArea/TextArea.jsx";
 import "./Tweet.css";
 import useCounterStore from "../../store/useCounterStore.js";
-import useCounter from "../../hooks/useCounter.jsx"
+import useCounter from "../../hooks/useCounter.jsx";
+
+// Helper functions
+async function fetchFromBe(){
+    const response = await fetch("/api/tweets");
+    const json = await response.json();
+    return json;
+}
+
+async function sendToBe(tweet, count, setCount){
+    const postMessage = {
+        id: count,
+        content: tweet
+    };
+
+    const response = await fetch("/api/tweets", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(postMessage),
+    });
+    const json = await response.json();
+    setCount(count + 1);
+    return json;
+}
 
 function Tweet(){
     
     const [tweet, setTweet] = useState("Tweet me!");
     const [count, setCount] = useCounter(1);
-    /* 
-    const tweets = useTweetStore((state) => state.tweets);
-    // Here we get a refernce to the custom Zustand hook's addTweet function(state=object, addTweet=key to returned function)
-    const addTweet = useTweetStore((state) => state.addTweet); 
-     */
 
     async function handleClick(e) {
 
         const buttonId = e.target.id;
-
         console.log(`Counter = ${count}`);
 
         if(buttonId == "get"){
-            const response = await fetch('/api/tweets');
-            const json = await response.json();
+            const json = await fetchFromBe();
             console.log("Get response : ", json);
         }else if(buttonId == "submit"){
-            const postMessage = {
-                id: count,
-                content: tweet
-            };
-
-            const response = await fetch("/api/tweets/", {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(postMessage),
-            });
-            const json = await response.json();
+            const json = await sendToBe(tweet, count, setCount)
             console.log("Post response : ", json);
-            setCount(count + 1);
         }
 
     }
@@ -59,3 +64,9 @@ function Tweet(){
 }
 
 export default Tweet;
+
+/* 
+const tweets = useTweetStore((state) => state.tweets);
+// Here we get a refernce to the custom Zustand hook's addTweet function(state=object, addTweet=key to returned function)
+const addTweet = useTweetStore((state) => state.addTweet); 
+*/
