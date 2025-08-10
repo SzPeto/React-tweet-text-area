@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { Tweet } from "./entities/tweet.entity";
 import { CreateTweetDto } from "./dto/create-tweet.dto";
 
@@ -19,15 +19,17 @@ export class TweetsService {
     }
 
     getTweetById(id: number): Tweet {
+        let tweet: Tweet | undefined;
         for(let i = 0; i < this.tweets.length; i++){
             if(this.tweets[i].id == id){
-                return this.tweets[i];
+                tweet = this.tweets[i];
             }
         }
-        const notFoundTweet = new Tweet();
-        notFoundTweet.id = -1;
-        notFoundTweet.content = "Tweet not found";
-        return notFoundTweet;
+        if(!tweet){
+            throw new NotFoundException(`Tweet with id : ${id} not found!`);
+        }
+        
+        return tweet;
     }
 
     /*

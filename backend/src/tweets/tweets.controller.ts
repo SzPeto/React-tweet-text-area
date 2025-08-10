@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from "@nestjs/common";
 import { TweetsService } from "./tweets.service";
 import { Tweet } from "./entities/tweet.entity";
 import { CreateTweetDto } from "./dto/create-tweet.dto";
@@ -21,7 +21,7 @@ export class TweetsController {
     */
 
     @Get()
-    getAllTweets(){
+    getAllTweets(): Tweet[] {
         return this.tweetService.getAllTweets();
     }
 
