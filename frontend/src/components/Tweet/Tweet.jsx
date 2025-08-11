@@ -30,7 +30,7 @@ async function sendToBe(tweet, count, setCount){
         body: JSON.stringify(postMessage),
     });
     const json = await response.json();
-    setCount(count + 1);
+    setCount((c) => c + 1);
     return json;
 }
 
