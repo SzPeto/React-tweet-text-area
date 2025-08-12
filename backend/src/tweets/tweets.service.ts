@@ -56,6 +56,23 @@ export class TweetsService {
     */
 
 
+    replaceTweetById(id: number, createTweetDto: CreateTweetDto): Tweet{
+        let tweet: Tweet | undefined;
+
+        for(let i = 0; i < this.tweets.length; i++){
+            if(this.tweets[i].id === id){
+                tweet = this.tweets[i];
+                tweet.content = createTweetDto.content;
+                break;
+            }
+        }
+
+        if(!tweet) {
+            throw new NotFoundException(`Tweet with id : ${id} not found, replacement unsuccessful!`)
+        }
+        return tweet;
+    }
+
     /*
     ============================================================================================================================
                                                  Functions for DELETE requests

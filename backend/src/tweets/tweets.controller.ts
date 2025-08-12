@@ -50,9 +50,11 @@ export class TweetsController {
     ============================================================================================================================
     */
 
-    @Put()
-    updateTweet(){
-        
+    @Put(":id")
+    replaceTweetById(@Param("id") id: string, 
+                     @Body() createTweetDto: CreateTweetDto){
+        const numId = parseInt(id, 10);
+        return this.tweetService.replaceTweetById(numId, createTweetDto);
     }
 
 
