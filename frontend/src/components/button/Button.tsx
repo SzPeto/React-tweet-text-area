@@ -6,10 +6,19 @@ type ButtonProps = {
     type?: 'submit' | 'info' | 'get'
 }
 
-function Button({ text='Push me', onClick, type='submit' }: ButtonProps) {
+function Button({ text='Push me', 
+                  onClick, 
+                  type='submit' }: ButtonProps) {
 
     return (
-        <button onClick={ (e) => onClick(e) } className={`base-button-${ type }`} type='button' id={ type } >{ text }</button>
+        <button 
+            onClick={ (e) => onClick(e) } 
+            className={`base-button-${ type }`} 
+            type='button' 
+            id={ type } >
+            
+            { text }
+        </button>
     )
 }
 
