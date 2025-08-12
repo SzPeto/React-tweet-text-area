@@ -1,5 +1,10 @@
 import './TextArea.css'
 
+type TextAreaProps = {
+    value?: string,
+    onChange: (...args: any[]) => any
+}
+
 function TextArea({value='Type as you wish', onChange}: TextAreaProps){
     
     return (
@@ -9,11 +14,6 @@ function TextArea({value='Type as you wish', onChange}: TextAreaProps){
             rows={ 7 }
         />
     )
-}
-
-type TextAreaProps = {
-    value?: string,
-    onChange: (...args: any[]) => any
 }
 
 export default TextArea
