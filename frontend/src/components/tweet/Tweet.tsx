@@ -2,44 +2,12 @@ import { useState } from 'react'
 import Button from '../button/Button.tsx'
 import TextArea from '../text-area/TextArea.tsx'
 import './Tweet.css'
-
-
-/*
-============================================================================================================================
-                                             Helper functions
-============================================================================================================================
-*/
-
-async function fetchFromBe(){
-    const response = await fetch('/api/tweets')
-    const json = await response.json()
-    return json
-}
-
-async function sendToBe(tweet: string){
-    const postMessage = {
-        content: tweet
-    }
-
-    const response = await fetch('/api/tweets', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(postMessage),
-    })
-    const json = await response.json()
-    return json
-}
-
-
-/*
-============================================================================================================================
-                                             The Tweet component
-============================================================================================================================
-*/
+import { useTweetHelpers } from '@/hooks/useTweetHeplers'
 
 const Tweet = () => {
     
     const [tweet, setTweet] = useState('Tweet me!')
+    const { fetchFromBe, sendToBe } = useTweetHelpers()
 
     async function handleClick(e: React.ChangeEvent<HTMLInputElement>) {
 
