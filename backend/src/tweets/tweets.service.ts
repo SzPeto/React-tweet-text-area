@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { Tweet } from "./entities/tweet.entity";
-import { CreateTweetDto } from "./dto/create-tweet.dto";
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Tweet } from './entities/tweet.entity';
+import { CreateTweetDto } from './dto/create-tweet.dto';
 
 @Injectable()
 export class TweetsService {
@@ -81,7 +81,7 @@ export class TweetsService {
 
     deleteAllTweets(): object{
         this.tweets.splice(0);
-        return {message: "All tweets were deleted"};
+        return {message: 'All tweets were deleted'};
     }
 
     deleteTweetById(id: number): object{

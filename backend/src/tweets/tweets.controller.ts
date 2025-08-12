@@ -1,7 +1,7 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from "@nestjs/common";
-import { TweetsService } from "./tweets.service";
-import { Tweet } from "./entities/tweet.entity";
-import { CreateTweetDto } from "./dto/create-tweet.dto";
+import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { TweetsService } from './tweets.service';
+import { Tweet } from './entities/tweet.entity';
+import { CreateTweetDto } from './dto/create-tweet.dto';
 
 @Controller('tweets')
 export class TweetsController {
@@ -25,8 +25,8 @@ export class TweetsController {
         return this.tweetService.getAllTweets();
     }
 
-    @Get(":id") // api/tweets/1
-    getTweetById(@Param("id") id: string): Tweet { // Param - request path variable
+    @Get(':id') // api/tweets/1
+    getTweetById(@Param('id') id: string): Tweet { // Param - request path variable
         const numId = parseInt(id, 10); // 10 means we want a decimal values
         return this.tweetService.getTweetById(numId);
     }
@@ -50,8 +50,8 @@ export class TweetsController {
     ============================================================================================================================
     */
 
-    @Put(":id")
-    replaceTweetById(@Param("id") id: string, 
+    @Put(':id')
+    replaceTweetById(@Param('id') id: string, 
                      @Body() createTweetDto: CreateTweetDto){
         const numId = parseInt(id, 10);
         return this.tweetService.replaceTweetById(numId, createTweetDto);
@@ -64,8 +64,8 @@ export class TweetsController {
     ============================================================================================================================
     */
 
-    @Delete(":id")
-    deleteById(@Param("id") id: string): object{
+    @Delete(':id')
+    deleteById(@Param('id') id: string): object{
         const numId: number = parseInt(id, 10);
         return this.tweetService.deleteTweetById(numId);
     }

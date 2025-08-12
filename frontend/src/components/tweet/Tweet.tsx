@@ -1,7 +1,7 @@
-import { useState } from "react";
-import Button from "../button/Button.tsx";
-import TextArea from "../text-area/TextArea.tsx";
-import "./Tweet.css";
+import { useState } from 'react';
+import Button from '../button/Button.tsx';
+import TextArea from '../text-area/TextArea.tsx';
+import './Tweet.css';
 
 
 /*
@@ -11,7 +11,7 @@ import "./Tweet.css";
 */
 
 async function fetchFromBe(){
-    const response = await fetch("/api/tweets");
+    const response = await fetch('/api/tweets');
     const json = await response.json();
     return json;
 }
@@ -21,9 +21,9 @@ async function sendToBe(tweet: string){
         content: tweet
     };
 
-    const response = await fetch("/api/tweets", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+    const response = await fetch('/api/tweets', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(postMessage),
     });
     const json = await response.json();
@@ -39,28 +39,28 @@ async function sendToBe(tweet: string){
 
 function Tweet(){
     
-    const [tweet, setTweet] = useState("Tweet me!");
+    const [tweet, setTweet] = useState('Tweet me!');
 
     async function handleClick(e: React.ChangeEvent<HTMLInputElement>) {
 
         const buttonId = e.target.id;
 
-        if(buttonId == "get"){
+        if(buttonId == 'get'){
             const json = await fetchFromBe();
-            console.log("Get response : ", json);
-        }else if(buttonId == "submit"){
+            console.log('Get response : ', json);
+        }else if(buttonId == 'submit'){
             const json = await sendToBe(tweet);
-            console.log("Post response : ", json);
+            console.log('Post response : ', json);
         }
 
     }
 
     return (
-        <div className="tweet-container">
+        <div className='tweet-container'>
             <TextArea value={ tweet } onChange={ (e) => setTweet(e.target.value) } />
-            <Button text="Submit" type="submit" onClick={ handleClick } />
-            <Button text="Clear text" type="info" onClick={ () => setTweet("") } />
-            <Button text="Get tweets on console" type="get" onClick={ handleClick } />
+            <Button text='Submit' type='submit' onClick={ handleClick } />
+            <Button text='Clear text' type='info' onClick={ () => setTweet('') } />
+            <Button text='Get tweets on console' type='get' onClick={ handleClick } />
         </div>
     );
 

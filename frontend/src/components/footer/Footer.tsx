@@ -1,13 +1,13 @@
-import "./Footer.css";
+import './Footer.css';
 
 function Footer(){
 
     const year = new Date().getFullYear();
 
     return (
-        <div className="footer-container">
+        <div className='footer-container'>
             <p>{`© ${ year } Peter Szepesi`}</p>
-            <small><a href="mailto:szpeto12@gmail.com">szpeto12@gmail.com</a></small>
+            <small><a href='mailto:szpeto12@gmail.com'>szpeto12@gmail.com</a></small>
         </div>
     );
 }

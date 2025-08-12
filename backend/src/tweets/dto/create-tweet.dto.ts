@@ -1,4 +1,4 @@
-import { IsInt, IsPositive, IsString, IsNotEmpty } from "class-validator";
+import { IsInt, IsPositive, IsString, IsNotEmpty } from 'class-validator';
 
 export class CreateTweetDto{
     @IsString()
