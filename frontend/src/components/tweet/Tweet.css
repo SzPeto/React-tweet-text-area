@@ -7,4 +7,32 @@
     font-family: Bahnschrift;
     width: 80vw;
     margin: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.upper-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+}
+
+.lower-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tweet-container Button {
+  min-width: 180px;
+}
+
+@media (max-width: 768px) {
+  .lower-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }

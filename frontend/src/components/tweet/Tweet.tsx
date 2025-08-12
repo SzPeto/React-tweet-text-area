@@ -25,10 +25,10 @@ const Tweet = () => {
 
   return (
     <div className='tweet-container'>
-      <div>
+      <div className="upper-container">
         <TextArea value={ tweet } onChange={ (e) => setTweet(e.target.value) } />
       </div>
-      <div>
+      <div className="lower-container">
         <Button text='Submit' type='submit' onClick={ handleClick } />
         <Button text='Clear text' type='info' onClick={ () => setTweet('') } />
         <Button text='Get tweets on console' type='get' onClick={ handleClick } />
