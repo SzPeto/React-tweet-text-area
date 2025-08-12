@@ -1,9 +1,7 @@
 import { useState } from "react";
-import Button from "../Button/Button.jsx";
-import TextArea from "../TextArea/TextArea.jsx";
+import Button from "../button/Button.tsx";
+import TextArea from "../text-area/TextArea.tsx";
 import "./Tweet.css";
-import useCounterStore from "../../store/useCounterStore.js";
-import useCounter from "../../hooks/useCounter.jsx";
 
 
 /*
@@ -18,7 +16,7 @@ async function fetchFromBe(){
     return json;
 }
 
-async function sendToBe(tweet){
+async function sendToBe(tweet: string){
     const postMessage = {
         content: tweet
     };
@@ -43,7 +41,7 @@ function Tweet(){
     
     const [tweet, setTweet] = useState("Tweet me!");
 
-    async function handleClick(e) {
+    async function handleClick(e: React.ChangeEvent<HTMLInputElement>) {
 
         const buttonId = e.target.id;
 

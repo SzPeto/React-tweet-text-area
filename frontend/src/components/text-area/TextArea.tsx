@@ -1,7 +1,6 @@
 import "./TextArea.css";
-import PropTypes from "prop-types";
 
-function TextArea({value, onChange}){
+function TextArea({value="Type as you wish", onChange}: TextAreaProps){
     
     return (
         <textarea className="text-area"
@@ -12,9 +11,9 @@ function TextArea({value, onChange}){
     );
 }
 
-TextArea.propTypes = {
-    value: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
-}
+type TextAreaProps = {
+    value?: string,
+    onChange: (...args: any[]) => any
+};
 
 export default TextArea;
