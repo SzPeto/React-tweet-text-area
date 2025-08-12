@@ -6,6 +6,7 @@ import { CreateTweetDto } from "./dto/create-tweet.dto";
 export class TweetsService {
 
     private tweets: Tweet[] = [];
+    private counter: number = 1;
 
 
     /*
@@ -40,9 +41,10 @@ export class TweetsService {
 
     addTweet(createTweetDto: CreateTweetDto): Tweet{
         const tweet = new Tweet();
-        tweet.id = createTweetDto.id;
+        tweet.id = this.counter;
         tweet.content = createTweetDto.content;
         this.tweets.push(tweet);
+        this.counter ++;
         return tweet;
     }
 

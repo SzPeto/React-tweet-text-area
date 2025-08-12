@@ -18,19 +18,17 @@ async function fetchFromBe(){
     return json;
 }
 
-async function sendToBe(tweet, count, setCount){
+async function sendToBe(tweet){
     const postMessage = {
-        id: count,
         content: tweet
     };
 
     const response = await fetch("/api/tweets", {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(postMessage),
     });
     const json = await response.json();
-    setCount((c) => c + 1);
     return json;
 }
 
@@ -44,30 +42,24 @@ async function sendToBe(tweet, count, setCount){
 function Tweet(){
     
     const [tweet, setTweet] = useState("Tweet me!");
-    const [count, setCount] = useCounter(1);
 
     async function handleClick(e) {
 
         const buttonId = e.target.id;
-        console.log(`Counter = ${count}`);
 
         if(buttonId == "get"){
             const json = await fetchFromBe();
             console.log("Get response : ", json);
         }else if(buttonId == "submit"){
-            const json = await sendToBe(tweet, count, setCount)
+            const json = await sendToBe(tweet);
             console.log("Post response : ", json);
         }
 
     }
 
-    function handleTweetChange(e){
-        setTweet(e.target.value);
-    }
-
     return (
         <div className="tweet-container">
-            <TextArea value={ tweet } onChange={ handleTweetChange } />
+            <TextArea value={ tweet } onChange={ (e) => setTweet(e.target.value) } />
             <Button text="Submit" type="submit" onClick={ handleClick } />
             <Button text="Clear text" type="info" onClick={ () => setTweet("") } />
             <Button text="Get tweets on console" type="get" onClick={ handleClick } />
