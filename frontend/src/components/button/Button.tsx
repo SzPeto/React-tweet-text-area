@@ -6,9 +6,7 @@ type ButtonProps = {
     type?: 'submit' | 'info' | 'get'
 }
 
-function Button({ text='Push me', 
-                  onClick, 
-                  type='submit' }: ButtonProps) {
+const Button = ({ text='Push me', onClick, type='submit' }: ButtonProps) => {
 
     return (
         <button 

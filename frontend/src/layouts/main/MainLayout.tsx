@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import NavBar from '../../components/navbar/NavBar.tsx'
 import Footer from '../../components/footer/Footer'
 
-function MainLayout({ children }: { children: ReactNode }){
+const MainLayout = ({ children }: { children: ReactNode }) => {
     
     return(
         <>

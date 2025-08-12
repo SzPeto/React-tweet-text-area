@@ -5,7 +5,7 @@ type TextAreaProps = {
     onChange: (...args: any[]) => any
 }
 
-function TextArea({value='Type as you wish', onChange}: TextAreaProps){
+const TextArea = ({value='Type as you wish', onChange}: TextAreaProps) => {
     
     return (
         <textarea className='text-area'

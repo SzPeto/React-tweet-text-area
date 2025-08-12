@@ -1,7 +1,7 @@
 import './Home.css'
 import Tweet from '@/components/tweet/Tweet.tsx'
 
-function Home(){
+const Home = () => {
 
     return(
         <div className='home-container'>

@@ -37,7 +37,7 @@ async function sendToBe(tweet: string){
 ============================================================================================================================
 */
 
-function Tweet(){
+const Tweet = () => {
     
     const [tweet, setTweet] = useState('Tweet me!')
 

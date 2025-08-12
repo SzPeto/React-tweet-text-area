@@ -2,7 +2,7 @@ import './NavBar.css'
 import logo from '../../assets/letter-t.png'
 import { useState } from 'react'
 
-function NavBar(){
+const NavBar = () => {
 
     const [menuOpen, setMenuOpen] = useState(false)
 
