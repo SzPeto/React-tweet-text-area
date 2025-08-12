@@ -1,10 +1,10 @@
-import './NavBar.css';
-import logo from '../../assets/letter-t.png';
-import { useState } from 'react';
+import './NavBar.css'
+import logo from '../../assets/letter-t.png'
+import { useState } from 'react'
 
 function NavBar(){
 
-    const [menuOpen, setMenuOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false)
 
     return(
         <nav className='navbar'>
@@ -45,7 +45,7 @@ function NavBar(){
 
             </div>
         </nav>
-    );
+    )
 }
 
-export default NavBar;
+export default NavBar

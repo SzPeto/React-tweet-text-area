@@ -1,16 +1,16 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
-import { TweetsService } from './tweets.service';
-import { Tweet } from './entities/tweet.entity';
-import { CreateTweetDto } from './dto/create-tweet.dto';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common'
+import { TweetsService } from './tweets.service'
+import { Tweet } from './entities/tweet.entity'
+import { CreateTweetDto } from './dto/create-tweet.dto'
 
 @Controller('tweets')
 export class TweetsController {
 
     // NestJS automatic DI via constructor
-    private readonly tweetService: TweetsService; // Readonly is like const, but for instances
+    private readonly tweetService: TweetsService // Readonly is like const, but for instances
 
     constructor(tweetsService: TweetsService){
-        this.tweetService = tweetsService;        
+        this.tweetService = tweetsService        
     }
 
 
@@ -22,13 +22,13 @@ export class TweetsController {
 
     @Get()
     getAllTweets(): Tweet[] {
-        return this.tweetService.getAllTweets();
+        return this.tweetService.getAllTweets()
     }
 
     @Get(':id') // api/tweets/1
     getTweetById(@Param('id') id: string): Tweet { // Param - request path variable
-        const numId = parseInt(id, 10); // 10 means we want a decimal values
-        return this.tweetService.getTweetById(numId);
+        const numId = parseInt(id, 10) // 10 means we want a decimal values
+        return this.tweetService.getTweetById(numId)
     }
 
 
@@ -40,7 +40,7 @@ export class TweetsController {
 
     @Post()
     addTweet(@Body() createTweetDto: CreateTweetDto){
-        return this.tweetService.addTweet(createTweetDto);
+        return this.tweetService.addTweet(createTweetDto)
     }
 
 
@@ -53,8 +53,8 @@ export class TweetsController {
     @Put(':id')
     replaceTweetById(@Param('id') id: string, 
                      @Body() createTweetDto: CreateTweetDto){
-        const numId = parseInt(id, 10);
-        return this.tweetService.replaceTweetById(numId, createTweetDto);
+        const numId = parseInt(id, 10)
+        return this.tweetService.replaceTweetById(numId, createTweetDto)
     }
 
 
@@ -66,14 +66,14 @@ export class TweetsController {
 
     @Delete(':id')
     deleteById(@Param('id') id: string): object{
-        const numId: number = parseInt(id, 10);
-        return this.tweetService.deleteTweetById(numId);
+        const numId: number = parseInt(id, 10)
+        return this.tweetService.deleteTweetById(numId)
     }
 
     @Delete()
     deleteAll(): object{
 
-        return this.tweetService.deleteAllTweets();
+        return this.tweetService.deleteAllTweets()
     }
 
 }

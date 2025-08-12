@@ -1,4 +1,4 @@
-import './TextArea.css';
+import './TextArea.css'
 
 function TextArea({value='Type as you wish', onChange}: TextAreaProps){
     
@@ -8,12 +8,12 @@ function TextArea({value='Type as you wish', onChange}: TextAreaProps){
             onChange={ (e) => onChange(e) }
             rows={ 7 }
         />
-    );
+    )
 }
 
 type TextAreaProps = {
     value?: string,
     onChange: (...args: any[]) => any
-};
+}
 
-export default TextArea;
+export default TextArea

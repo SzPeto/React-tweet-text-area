@@ -1,6 +1,5 @@
-import './Home.css';
-import Tweet from '../components/tweet/Tweet.tsx';
-import { useState } from 'react';
+import './Home.css'
+import Tweet from '../components/tweet/Tweet.tsx'
 
 function Home(){
 
@@ -8,7 +7,7 @@ function Home(){
         <div className='home-container'>
             <Tweet />
         </div>
-    );
+    )
 }
 
-export default Home;
+export default Home

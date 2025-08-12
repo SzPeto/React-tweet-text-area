@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import Button from '../button/Button.tsx';
-import TextArea from '../text-area/TextArea.tsx';
-import './Tweet.css';
+import { useState } from 'react'
+import Button from '../button/Button.tsx'
+import TextArea from '../text-area/TextArea.tsx'
+import './Tweet.css'
 
 
 /*
@@ -11,23 +11,23 @@ import './Tweet.css';
 */
 
 async function fetchFromBe(){
-    const response = await fetch('/api/tweets');
-    const json = await response.json();
-    return json;
+    const response = await fetch('/api/tweets')
+    const json = await response.json()
+    return json
 }
 
 async function sendToBe(tweet: string){
     const postMessage = {
         content: tweet
-    };
+    }
 
     const response = await fetch('/api/tweets', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(postMessage),
-    });
-    const json = await response.json();
-    return json;
+    })
+    const json = await response.json()
+    return json
 }
 
 
@@ -39,18 +39,18 @@ async function sendToBe(tweet: string){
 
 function Tweet(){
     
-    const [tweet, setTweet] = useState('Tweet me!');
+    const [tweet, setTweet] = useState('Tweet me!')
 
     async function handleClick(e: React.ChangeEvent<HTMLInputElement>) {
 
-        const buttonId = e.target.id;
+        const buttonId = e.target.id
 
         if(buttonId == 'get'){
-            const json = await fetchFromBe();
-            console.log('Get response : ', json);
+            const json = await fetchFromBe()
+            console.log('Get response : ', json)
         }else if(buttonId == 'submit'){
-            const json = await sendToBe(tweet);
-            console.log('Post response : ', json);
+            const json = await sendToBe(tweet)
+            console.log('Post response : ', json)
         }
 
     }
@@ -62,14 +62,14 @@ function Tweet(){
             <Button text='Clear text' type='info' onClick={ () => setTweet('') } />
             <Button text='Get tweets on console' type='get' onClick={ handleClick } />
         </div>
-    );
+    )
 
 }
 
-export default Tweet;
+export default Tweet
 
 /* 
-const tweets = useTweetStore((state) => state.tweets);
+const tweets = useTweetStore((state) => state.tweets)
 // Here we get a refernce to the custom Zustand hook's addTweet function(state=object, addTweet=key to returned function)
-const addTweet = useTweetStore((state) => state.addTweet); 
+const addTweet = useTweetStore((state) => state.addTweet) 
 */

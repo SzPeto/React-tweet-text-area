@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react';
-import NavBar from '../../components/navbar/NavBar.tsx';
-import Footer from '../../components/footer/Footer';
+import type { ReactNode } from 'react'
+import NavBar from '../../components/navbar/NavBar.tsx'
+import Footer from '../../components/footer/Footer'
 
 function MainLayout({ children }: { children: ReactNode }){
     
@@ -10,7 +10,7 @@ function MainLayout({ children }: { children: ReactNode }){
             <main>{ children }</main>
             <footer><Footer /></footer>
         </>
-    );
+    )
 }
 
-export default MainLayout;
+export default MainLayout
