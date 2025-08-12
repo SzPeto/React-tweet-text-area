@@ -6,32 +6,35 @@ import { useTweetHelpers } from '@/hooks/useTweetHeplers'
 
 const Tweet = () => {
     
-    const [tweet, setTweet] = useState('Tweet me!')
-    const { fetchFromBe, sendToBe } = useTweetHelpers()
+  const [tweet, setTweet] = useState('Tweet me!')
+  const { fetchFromBe, sendToBe } = useTweetHelpers()
 
-    async function handleClick(e: React.ChangeEvent<HTMLInputElement>) {
+  async function handleClick(e: React.ChangeEvent<HTMLInputElement>) {
 
-        const buttonId = e.target.id
+    const buttonId = e.target.id
 
-        if(buttonId == 'get'){
-            const json = await fetchFromBe()
-            console.log('Get response : ', json)
-        }else if(buttonId == 'submit'){
-            const json = await sendToBe(tweet)
-            console.log('Post response : ', json)
-        }
-
+    if(buttonId == 'get'){
+      const json = await fetchFromBe()
+      console.log('Get response : ', json)
+    }else if(buttonId == 'submit'){
+      const json = await sendToBe(tweet)
+      console.log('Post response : ', json)
     }
 
-    return (
-        <div className='tweet-container'>
-            <TextArea value={ tweet } onChange={ (e) => setTweet(e.target.value) } />
-            <Button text='Submit' type='submit' onClick={ handleClick } />
-            <Button text='Clear text' type='info' onClick={ () => setTweet('') } />
-            <Button text='Get tweets on console' type='get' onClick={ handleClick } />
-        </div>
-    )
+  }
 
+  return (
+    <div className='tweet-container'>
+      <div>
+        <TextArea value={ tweet } onChange={ (e) => setTweet(e.target.value) } />
+      </div>
+      <div>
+        <Button text='Submit' type='submit' onClick={ handleClick } />
+        <Button text='Clear text' type='info' onClick={ () => setTweet('') } />
+        <Button text='Get tweets on console' type='get' onClick={ handleClick } />
+      </div>
+    </div>
+  )
 }
 
 export default Tweet

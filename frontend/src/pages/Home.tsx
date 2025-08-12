@@ -3,11 +3,11 @@ import Tweet from '@/components/tweet/Tweet.tsx'
 
 const Home = () => {
 
-    return(
-        <div className='home-container'>
-            <Tweet />
-        </div>
-    )
+  return(
+    <div className='home-container'>
+      <Tweet />
+    </div>
+  )
 }
 
 export default Home

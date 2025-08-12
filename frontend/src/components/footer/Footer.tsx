@@ -2,14 +2,14 @@ import './Footer.css'
 
 const Footer = () => {
 
-    const year = new Date().getFullYear()
+  const year = new Date().getFullYear()
 
-    return (
-        <div className='footer-container'>
-            <p>{`© ${ year } Peter Szepesi`}</p>
-            <small><a href='mailto:szpeto12@gmail.com'>szpeto12@gmail.com</a></small>
-        </div>
-    )
+  return (
+    <div className='footer-container'>
+      <p>{`© ${ year } Peter Szepesi`}</p>
+      <small><a href='mailto:szpeto12@gmail.com'>szpeto12@gmail.com</a></small>
+    </div>
+  )
 }
 
 export default Footer

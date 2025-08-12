@@ -4,13 +4,13 @@ import Footer from '../../components/footer/Footer'
 
 const MainLayout = ({ children }: { children: ReactNode }) => {
     
-    return(
-        <>
-            <header><NavBar /></header>
-            <main>{ children }</main>
-            <footer><Footer /></footer>
-        </>
-    )
+  return(
+    <>
+      <header><NavBar /></header>
+      <main>{ children }</main>
+      <footer><Footer /></footer>
+    </>
+  )
 }
 
 export default MainLayout
