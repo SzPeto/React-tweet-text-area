@@ -11,7 +11,7 @@ const TextArea = (props: TextAreaProps) => {
     <textarea className='text-area'
       value={ props.value }
       onChange={ (e) => props.onChange(e) }
-      rows={ 7 }
+      rows={ 4 }
     />
   )
 }

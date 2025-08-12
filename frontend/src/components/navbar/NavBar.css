@@ -7,7 +7,12 @@
 .navbar {
     background-color: rgb(200, 255, 255);
     color: rgb(130, 130, 130);
-    padding: 8px 8px;
+    padding: 0px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .navbar-container {
@@ -35,9 +40,10 @@
 .navbar-brand {
     display: flex;
     align-items: center;
-    font-size: 18px;
+    font-size: 21px;
     color: rgb(0, 148, 148) !important;
     font-weight: 600;
+    font-family: Bahnschrift;
 }
 
 /* Unordered lists */
@@ -48,7 +54,7 @@
     gap: 4px;
 }
 
-/* List items and projects button */
+/* List items */
 .navbar-links li a {
     color: rgb(130, 130, 130);
     text-decoration: none;
@@ -56,8 +62,9 @@
     display: block;
     border: none;
     background-color: rgb(200, 255, 255);
-    font-family: Bahnschrift;
-    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .navbar-links li a:hover {
@@ -116,4 +123,5 @@
         width: 90%;
         margin: 4px;
     }
+
 }

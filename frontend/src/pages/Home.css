@@ -1,5 +1,15 @@
 .home-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
+    min-height: 70vh;
+    padding-top: 80px;
+}
+
+.home-container hr{
+    width: 100%;
+    border: none;
+    height: 1px;
+    background-color: rgb(215, 215, 215);
 }
