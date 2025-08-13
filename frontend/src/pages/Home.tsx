@@ -1,5 +1,5 @@
 import './Home.css'
-import TweetInput from '@/components/tweets/tweet-input/TweetInput.tsx'
+import TweetInput from '@/components/tweets/tweet-input/TweetInput'
 import TweetList from '@/components/tweets/tweet-list/TweetList.tsx'
 import { useState } from 'react'
 import { useTweetHelpers } from '@/hooks/useTweetHeplers'
@@ -29,7 +29,7 @@ const Home = () => {
       setTweet('')
     }
   }
-
+  
   return(
     <div className='home-container'>
       <div className='tweet-input-container-l1'>
