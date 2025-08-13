@@ -11,7 +11,7 @@ type TweetInputProps = {
 const TweetInput = (props: TweetInputProps) => {
 
   return (
-    <div className='tweet-container'>
+    <div className='tweet-input-container-l2'>
       <div className="upper-container">
         <TextArea value={ props.value } onChange={ props.onChange } />
       </div>
