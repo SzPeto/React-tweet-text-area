@@ -1,5 +1,5 @@
 import './Home.css'
-import Tweet from '@/components/tweet/Tweet.tsx'
+import Tweet from '@/components/tweets/tweet-input/TweetInput'
 
 const Home = () => {
 

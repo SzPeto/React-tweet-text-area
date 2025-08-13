@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import Button from '../button/Button.tsx'
-import TextArea from '../text-area/TextArea.tsx'
-import './Tweet.css'
+import Button from '../../button/Button.tsx'
+import TextArea from '../../text-area/TextArea.tsx'
+import './TweetInput.css'
 import { useTweetHelpers } from '@/hooks/useTweetHeplers'
 
 const Tweet = () => {
