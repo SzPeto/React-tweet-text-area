@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
-import NavBar from '../../components/navbar/NavBar.tsx'
-import Footer from '../../components/footer/Footer'
+import NavBar from '@/components/navbar/NavBar.tsx'
+import Footer from '@/components/footer/Footer'
 
 type MainLayoutProps = {
   children: ReactNode

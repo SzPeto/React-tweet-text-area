@@ -1,6 +1,15 @@
-import 'TweetList.css'
+import './TweetList.css'
 
-const TweetList = () => {
+type Tweet = {
+  id: number,
+  content: string
+}
+
+type TweetListProps = {
+  tweets: Tweet[]
+}
+
+const TweetList = (props: TweetListProps) => {
 
   return (
     <></>
