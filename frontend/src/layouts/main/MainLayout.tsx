@@ -2,12 +2,16 @@ import type { ReactNode } from 'react'
 import NavBar from '../../components/navbar/NavBar.tsx'
 import Footer from '../../components/footer/Footer'
 
-const MainLayout = ({ children }: { children: ReactNode }) => {
+type MainLayoutProps = {
+  children: ReactNode
+}
+
+const MainLayout = (props: MainLayoutProps) => {
     
   return(
     <>
       <header><NavBar /></header>
-      <main>{ children }</main>
+      <main>{ props.children }</main>
       <footer><Footer /></footer>
     </>
   )

@@ -6,16 +6,18 @@ type ButtonProps = {
   type?: 'submit' | 'info' | 'get'
 }
 
-const Button = ({ text='Push me', onClick, type='submit' }: ButtonProps) => {
+//{ text='Push me', onClick, type='submit' }
+
+const Button = (props: ButtonProps) => {
 
   return (
     <button 
-      onClick={ (e) => onClick(e) } 
-      className={`base-button-${ type }`} 
+      onClick={ (e) => props.onClick(e) } 
+      className={`base-button-${ props.type ?? "submit" }`} 
       type='button' 
-      id={ type } >
+      id={ props.type ?? "submit" } >
       
-      { text }
+      { props.text ?? "Push me" }
     </button>
   )
 }
