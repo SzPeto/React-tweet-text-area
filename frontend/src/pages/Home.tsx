@@ -32,13 +32,17 @@ const Home = () => {
 
   return(
     <div className='home-container'>
-      <TweetInput 
-        onClick={ handleClick } 
-        onChange={ (e) => setTweet(e.target.value) } 
-        value={ tweet } 
-      />
+      <div className='tweet-input-container'>
+        <TweetInput 
+          onClick={ handleClick } 
+          onChange={ (e) => setTweet(e.target.value) } 
+          value={ tweet } 
+        />
+      </div>
       <hr />
-      <TweetList tweets={ tweets } />
+      <div className='tweet-list-container'>
+        <TweetList tweets={ tweets } />
+      </div>
     </div>
   )
 }
