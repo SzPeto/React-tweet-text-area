@@ -1,4 +1,5 @@
 import './TweetList.css'
+import Tweet from '@/components/tweets/tweet/Tweet.tsx'
 
 type Tweet = {
   id: number,
@@ -12,7 +13,9 @@ type TweetListProps = {
 const TweetList = (props: TweetListProps) => {
 
   return (
-    <></>
+    Array.isArray(props.tweets) && props.tweets.length > 0 ? 
+      props.tweets.map((tweet) => (<Tweet id={ tweet.id } content={ tweet.content } />)) : 
+      'There are no tweets available'
   )
 }
 

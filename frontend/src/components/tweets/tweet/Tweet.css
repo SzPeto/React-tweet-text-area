@@ -6,8 +6,12 @@
     box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif UI;
     width: 80vw;
-    margin: 15px;
+    margin: 5px;
     justify-content: center;
     align-items: center;
     background-color: rgb(250, 255, 255);
+}
+
+.titles-label {
+  font-size: 18px;
 }

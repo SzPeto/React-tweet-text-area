@@ -6,14 +6,13 @@ import { useTweetHelpers } from '@/hooks/useTweetHeplers'
 
 const Home = () => {
 
-  const [tweet, setTweet] = useState('Tweet me!')
+  const [ tweet, setTweet ] = useState('Tweet me!')
   const { fetchFromBe, sendToBe } = useTweetHelpers()
   const [ tweets, setTweets ] = useState([])
 
   async function handleClick(e: any) {
 
     const buttonId = e.target.id
-    console.log(`Button id : `, buttonId)
     let json;
     let getJson;
 
@@ -22,7 +21,7 @@ const Home = () => {
         json = await sendToBe(tweet)
         getJson = await fetchFromBe()
       }catch(err){
-        console.error(`Error during communication with backend : `,)
+        console.error(`Error during communication with backend : `, err)
       }
       console.log('Post response : ', json)
       setTweets(getJson)
