@@ -5,7 +5,7 @@
   border-radius: 4px;
   box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif UI;
-  width: 50%;
+  width: 100%;
   margin: 15px;
   justify-content: center;
   align-items: center;
@@ -16,13 +16,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 88%;
+  width: 87%;
 }
 
 .lower-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .tweet-container Button {

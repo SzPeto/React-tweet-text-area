@@ -19,7 +19,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 50%;
 }
 
 .tweet-list-container {
@@ -28,5 +28,5 @@
   justify-content: center;
   align-items: center;
   margin: 40px 20px 20px 20px;
-  width: 100%;
+  width: 40%;
 }
