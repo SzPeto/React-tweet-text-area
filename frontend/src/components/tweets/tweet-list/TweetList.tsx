@@ -16,7 +16,7 @@ const TweetList = (props: TweetListProps) => {
   return (
     <div className='tweet-list-container-l2'>
       {Array.isArray(props.tweets) && props.tweets.length > 0 ? 
-        props.tweets.map((tweet) => (
+        [...props.tweets].reverse().map((tweet) => (
           <Tweet 
             id={ tweet.id } 
             content={ tweet.content }
