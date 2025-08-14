@@ -1,7 +1,11 @@
 import { IsInt, IsPositive, IsString, IsNotEmpty } from 'class-validator'
 
 export class CreateTweetDto{
-    @IsString()
-    @IsNotEmpty()
-    content: string
+  @IsString()
+  @IsNotEmpty()
+  content: string
+
+  @IsString()
+  @IsNotEmpty()
+  dateSubmitted: string
 }

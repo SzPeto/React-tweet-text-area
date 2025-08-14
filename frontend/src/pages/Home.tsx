@@ -3,6 +3,7 @@ import TweetInput from '@/components/tweets/tweet-input/TweetInput'
 import TweetList from '@/components/tweets/tweet-list/TweetList.tsx'
 import { useState } from 'react'
 import { useTweetHelpers } from '@/hooks/useTweetHeplers'
+import { getDateTime } from '@/utils/getDateTime.ts'
 
 const Home = () => {
 
@@ -13,12 +14,14 @@ const Home = () => {
   async function handleClick(e: any) {
 
     const buttonId = e.target.id
+    const dateSubmitted = getDateTime()
+    console.log(`Date submitted : ${dateSubmitted}`)
     let json;
     let getJson;
 
     if(buttonId == 'submit'){
       try{
-        json = await sendToBe(tweet)
+        json = await sendToBe(tweet, dateSubmitted)
         getJson = await fetchFromBe()
       }catch(err){
         console.error(`Error during communication with backend : `, err)

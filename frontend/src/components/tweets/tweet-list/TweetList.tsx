@@ -3,7 +3,8 @@ import Tweet from '@/components/tweets/tweet/Tweet.tsx'
 
 type TweetType = {
   id: number,
-  content: string
+  content: string,
+  dateSubmitted: string
 }
 
 type TweetListProps = {
@@ -18,7 +19,8 @@ const TweetList = (props: TweetListProps) => {
         props.tweets.map((tweet) => (
           <Tweet 
             id={ tweet.id } 
-            content={ tweet.content } 
+            content={ tweet.content }
+            dateSubmitted={ tweet.dateSubmitted }
             key={ tweet.id } 
           />
         )) : 

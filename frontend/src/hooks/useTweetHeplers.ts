@@ -7,9 +7,10 @@ export const useTweetHelpers = () => {
     return json
   }
   
-  async function sendToBe(tweet: string){
+  async function sendToBe(tweet: string, dateSubmitted: string){
     const postMessage = {
-      content: tweet
+      content: tweet,
+      dateSubmitted: dateSubmitted
     }
 
     const response = await fetch('/api/tweets', {

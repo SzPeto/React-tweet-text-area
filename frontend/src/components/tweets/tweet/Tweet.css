@@ -1,4 +1,4 @@
-.tweet-container {
+.tweet-tweet-container {
     display: flex;
     flex-direction: column;
     border: 1px solid rgb(205, 205, 205);
@@ -10,16 +10,28 @@
     color: rgb(60, 60, 60);
     margin: 5px;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     background-color: rgb(250, 255, 255);
     width: 100%;
     padding: 15px;
 }
 
-.tweet-container p {
+.tweet-tweet-container p {
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
+  margin: 20px;
+}
+
+.tweet-tweet-container small {
+  margin: 10px 20px;
+}
+
+.tweet-tweet-container hr {
+  width: 100%;
+  border: none;
+  height: 1px;
+  background-color: rgb(215, 215, 215);
 }
 
 .titles-label {
