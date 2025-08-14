@@ -1,13 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
-import { Tweet } from './entities/tweet.entity'
 import { CreateTweetDto } from './dto/create-tweet.dto'
+import { InjectModel } from '@nestjs/mongoose'
+import { Model } from 'mongoose'
+import { Tweet, TweetDocument } from './schemas/tweet.schema'
 
 @Injectable()
 export class TweetsService {
 
-  private tweets: Tweet[] = []
-  private counter: number = 1
-
+  constructor(@InjectModel(Tweet.name) private tweetModel: Model<TweetDocument>){}
 
   /*
   ============================================================================================================================
@@ -15,22 +15,8 @@ export class TweetsService {
   ============================================================================================================================
   */
 
-  getAllTweets(): Tweet[] {
-    return this.tweets
-  }
-
-  getTweetById(id: number): Tweet {
-    let tweet: Tweet | undefined
-    for(let i = 0; i < this.tweets.length; i++){
-      if(this.tweets[i].id == id){
-          tweet = this.tweets[i]
-      }
-    }
-    if(!tweet){
-      throw new NotFoundException(`Tweet with id : ${id} not found!`)
-    }
-    
-    return tweet
+  getAllTweets() {
+    return this.tweetModel.find()
   }
 
   /*
@@ -39,14 +25,9 @@ export class TweetsService {
   ============================================================================================================================
   */
 
-  addTweet(createTweetDto: CreateTweetDto): Tweet{
-    const tweet = new Tweet()
-    tweet.id = this.counter
-    tweet.content = createTweetDto.content
-    tweet.dateSubmitted = createTweetDto.dateSubmitted
-    this.tweets.push(tweet)
-    this.counter ++
-    return tweet
+  addTweet(createTweetDto: CreateTweetDto) {
+    const tweet = new this.tweetModel(createTweetDto)
+    return tweet.save()
   }
 
 
@@ -60,14 +41,6 @@ export class TweetsService {
   replaceTweetById(id: number, createTweetDto: CreateTweetDto): Tweet{
     let tweet: Tweet | undefined
 
-    for(let i = 0; i < this.tweets.length; i++){
-      if(this.tweets[i].id === id){
-        tweet = this.tweets[i]
-        tweet.content = createTweetDto.content
-        break
-      }
-    }
-
     if(!tweet) {
       throw new NotFoundException(`Tweet with id : ${id} not found, replacement unsuccessful!`)
     }
@@ -80,18 +53,11 @@ export class TweetsService {
   ============================================================================================================================
   */
 
-  deleteAllTweets(): object{
-    this.tweets.splice(0)
-    return {message: 'All tweets were deleted'}
+  deleteAllTweets() {
+    return this.tweetModel.deleteMany({})
   }
 
   deleteTweetById(id: number): object{
-    for(let i = 0; i < this.tweets.length; i++){
-      if(this.tweets[i].id == id){
-        this.tweets.splice(i, 1) // Second argument : how many elements to delete beginning from given index
-        return { message: `Tweet with ID : ${id} deleted successfully` }
-      }
-    }
     
     return { message: `Tweet with ID : ${id} not found!` }
   }

@@ -1,17 +1,13 @@
 import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common'
 import { TweetsService } from './tweets.service'
-import { Tweet } from './entities/tweet.entity'
+import { Tweet } from './schemas/tweet.schema'
 import { CreateTweetDto } from './dto/create-tweet.dto'
 
 @Controller('tweets')
 export class TweetsController {
 
-    // NestJS automatic DI via constructor
-    private readonly tweetService: TweetsService // Readonly is like const, but for instances
-
-    constructor(tweetsService: TweetsService){
-      this.tweetService = tweetsService        
-    }
+    // NestJS automatic DI via constructor, readonly is like const, but for instances
+    constructor(private readonly tweetsService: TweetsService){}
 
 
     /*
@@ -21,16 +17,9 @@ export class TweetsController {
     */
 
     @Get()
-    getAllTweets(): Tweet[] {
-      return this.tweetService.getAllTweets()
+    getAllTweets() {
+      return this.tweetsService.getAllTweets()
     }
-
-    @Get(':id') // api/tweets/1
-    getTweetById(@Param('id') id: string): Tweet { // Param - request path variable
-      const numId = parseInt(id, 10) // 10 means we want a decimal values
-      return this.tweetService.getTweetById(numId)
-    }
-
 
     /*
     ============================================================================================================================
@@ -40,7 +29,7 @@ export class TweetsController {
 
     @Post()
     addTweet(@Body() createTweetDto: CreateTweetDto){
-      return this.tweetService.addTweet(createTweetDto)
+      return this.tweetsService.addTweet(createTweetDto)
     }
 
 
@@ -54,7 +43,7 @@ export class TweetsController {
     replaceTweetById(@Param('id') id: string, 
                      @Body() createTweetDto: CreateTweetDto){
       const numId = parseInt(id, 10)
-      return this.tweetService.replaceTweetById(numId, createTweetDto)
+      return this.tweetsService.replaceTweetById(numId, createTweetDto)
     }
 
 
@@ -64,16 +53,9 @@ export class TweetsController {
     ============================================================================================================================
     */
 
-    @Delete(':id')
-    deleteById(@Param('id') id: string): object{
-      const numId: number = parseInt(id, 10)
-      return this.tweetService.deleteTweetById(numId)
-    }
-
     @Delete()
     deleteAll(): object{
-
-      return this.tweetService.deleteAllTweets()
+      return this.tweetsService.deleteAllTweets()
     }
 
 }
