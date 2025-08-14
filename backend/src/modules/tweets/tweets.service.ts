@@ -58,7 +58,6 @@ export class TweetsService {
   }
 
   deleteTweetById(id: number): object{
-    
     return { message: `Tweet with ID : ${id} not found!` }
   }
 }
