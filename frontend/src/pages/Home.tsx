@@ -20,8 +20,8 @@ const Home = () => {
       }catch(err){
         console.error(`Error on initial GET request : ${err}`)
       }
-      console.log('=================\n\nInitial fetch\n\n=================')
     })()
+    console.log('=================\n\nInitial fetch\n\n=================')
     setIsFirstStart(false)
   }
 

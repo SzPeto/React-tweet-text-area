@@ -2,7 +2,7 @@ import './TweetList.css'
 import Tweet from '@/components/tweets/tweet/Tweet.tsx'
 
 type TweetType = {
-  id: number,
+  _id: string,
   content: string,
   dateSubmitted: string
 }
@@ -18,10 +18,10 @@ const TweetList = (props: TweetListProps) => {
       {Array.isArray(props.tweets) && props.tweets.length > 0 ? 
         [...props.tweets].reverse().map((tweet) => (
           <Tweet 
-            id={ tweet.id } 
+            id={ tweet._id } 
             content={ tweet.content }
             dateSubmitted={ tweet.dateSubmitted }
-            key={ tweet.id } 
+            key={ tweet._id } 
           />
         )) : 
         'There are no tweets available'}
