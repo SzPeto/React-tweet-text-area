@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { CreateTweetDto } from './dto/create-tweet.dto'
 import { InjectModel } from '@nestjs/mongoose'
-import { Model } from 'mongoose'
+import { Model, Types } from 'mongoose'
 import { Tweet, TweetDocument } from './schemas/tweet.schema'
 
 @Injectable()
@@ -15,12 +15,16 @@ export class TweetsService {
   ============================================================================================================================
   */
 
-  getAllTweets() {
-    return this.tweetModel.find()
+  async getAllTweets() {
+    return await this.tweetModel.find()
   }
 
-  getTweetById(id: string){
-    return this.tweetModel.findById(id)
+  async getTweetById(id: string){
+    // Ensure to throw NotFoundException if the id isn't valid
+    if (!Types.ObjectId.isValid(id)) throw new NotFoundException(`Invalid Tweet ID : ${id}`)
+    const tweet = await this.tweetModel.findById(id)
+    if(!tweet) throw new NotFoundException(`Tweet with ID : ${id} not found!`)
+    return tweet
   }
 
 
