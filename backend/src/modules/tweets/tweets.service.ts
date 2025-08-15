@@ -9,6 +9,7 @@ export class TweetsService {
 
   constructor(@InjectModel(Tweet.name) private tweetModel: Model<TweetDocument>){}
 
+
   /*
   ============================================================================================================================
                                                 Functions for GET requests
@@ -55,6 +56,7 @@ export class TweetsService {
     return tweet
   }
 
+  
   /*
   ============================================================================================================================
                                                 Functions for DELETE requests
