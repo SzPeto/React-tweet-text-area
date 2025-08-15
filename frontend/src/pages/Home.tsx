@@ -44,8 +44,12 @@ const Home = () => {
     }else if(buttonId == 'info'){
       setTweet('')
     }else if(buttonId == 'delete'){
-      await deleteAll()
-      getJson = await fetchFromBe()
+      try{
+        await deleteAll()
+        getJson = await fetchFromBe()
+      }catch(err){
+        console.error(`Error during communication with backend : `, err)
+      }
       setTweets(getJson)
     }
   }

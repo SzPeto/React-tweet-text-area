@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { TweetsService } from './tweets.service'
 import { CreateTweetDto } from './dto/create-tweet.dto'
 
