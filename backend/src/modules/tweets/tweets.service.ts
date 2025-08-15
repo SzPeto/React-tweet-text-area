@@ -47,13 +47,10 @@ export class TweetsService {
   ============================================================================================================================
   */
 
-  replaceTweetById(id: number, createTweetDto: CreateTweetDto): Tweet{
-    let tweet: Tweet | undefined
+  async replaceTweetById(id: string, createTweetDto: CreateTweetDto){
+    const tweet = this.tweetModel.findByIdAndUpdate(id, {$set: createTweetDto}, {new: true})
 
-    if(!tweet) {
-      throw new NotFoundException(`Tweet with id : ${id} not found, replacement unsuccessful!`)
-    }
-    return tweet
+    return await tweet
   }
 
 
