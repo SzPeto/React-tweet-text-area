@@ -35,9 +35,9 @@ export class TweetsService {
   ============================================================================================================================
   */
 
-  addTweet(createTweetDto: CreateTweetDto) {
+  async addTweet(createTweetDto: CreateTweetDto) {
     const tweet = new this.tweetModel(createTweetDto)
-    return tweet.save()
+    return await tweet.save()
   }
 
 
@@ -56,7 +56,7 @@ export class TweetsService {
     return tweet
   }
 
-  
+
   /*
   ============================================================================================================================
                                                 Functions for DELETE requests

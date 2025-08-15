@@ -33,8 +33,8 @@ export class TweetsController {
   */
 
   @Post()
-  addTweet(@Body() createTweetDto: CreateTweetDto){
-    return this.tweetsService.addTweet(createTweetDto)
+  async addTweet(@Body() createTweetDto: CreateTweetDto){
+    return await this.tweetsService.addTweet(createTweetDto)
   }
 
 
