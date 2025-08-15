@@ -13,15 +13,15 @@ const Home = () => {
   const [ tweets, setTweets ] = useState([])
 
   if(getIsFirstStart()){
-    async function initialFetch(){
+    (async () => {
       try{
         const getJson = await fetchFromBe()
         setTweets(getJson)
       }catch(err){
         console.error(`Error on initial GET request : ${err}`)
       }
-    }
-    initialFetch()
+      console.log('=================\n\nInitial fetch\n\n=================')
+    })()
     setIsFirstStart(false)
   }
 
@@ -29,7 +29,6 @@ const Home = () => {
 
     const buttonId = e.target.id
     const dateSubmitted = getDateTime()
-    console.log(`Date submitted : ${dateSubmitted}`)
     let json;
     let getJson;
 
