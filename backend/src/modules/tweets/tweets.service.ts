@@ -19,6 +19,11 @@ export class TweetsService {
     return this.tweetModel.find()
   }
 
+  getTweetById(id: string){
+    return this.tweetModel.findById(id)
+  }
+
+
   /*
   ============================================================================================================================
                                                 Functions for POST requests
@@ -36,7 +41,6 @@ export class TweetsService {
                                                 Functions for PUT requests
   ============================================================================================================================
   */
-
 
   replaceTweetById(id: number, createTweetDto: CreateTweetDto): Tweet{
     let tweet: Tweet | undefined

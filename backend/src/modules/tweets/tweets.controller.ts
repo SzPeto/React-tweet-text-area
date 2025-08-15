@@ -21,6 +21,12 @@ export class TweetsController {
       return this.tweetsService.getAllTweets()
     }
 
+    @Get(":id")
+    getTweetById(@Param("id") id: string){
+      return this.tweetsService.getTweetById(id)
+    }
+
+
     /*
     ============================================================================================================================
                                                  POST mapping
