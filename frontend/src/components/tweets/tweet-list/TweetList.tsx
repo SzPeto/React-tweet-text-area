@@ -9,6 +9,7 @@ type TweetType = {
 
 type TweetListProps = {
   tweets: TweetType[]
+  onClick: (...args: any[]) => any
 }
 
 const TweetList = (props: TweetListProps) => {
@@ -21,12 +22,12 @@ const TweetList = (props: TweetListProps) => {
             id={ tweet._id } 
             content={ tweet.content }
             dateSubmitted={ tweet.dateSubmitted }
-            key={ tweet._id } 
+            key={ tweet._id }
+            onClick={ props.onClick }
           />
         )) : 
         'There are no tweets available'}
     </div>
-    
   )
 }
 

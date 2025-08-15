@@ -18,7 +18,7 @@ const TweetInput = (props: TweetInputProps) => {
       <div className="lower-container">
         <Button text='Submit' type='submit' onClick={ props.onClick } />
         <Button text='Clear text' type='info' onClick={ props.onClick } />
-        <Button text='Delete all tweets' type='delete' onClick={ props.onClick } />
+        <Button text='Delete all tweets' type='delete-all' onClick={ props.onClick } />
       </div>
     </div>
   )

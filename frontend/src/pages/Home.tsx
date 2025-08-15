@@ -9,9 +9,10 @@ import { getIsFirstStart, setIsFirstStart } from '@/utils/globalStore'
 const Home = () => {
 
   const [ tweet, setTweet ] = useState('Tweet me!')
-  const { fetchFromBe, sendToBe, deleteAll } = useTweetHelpers()
+  const { fetchFromBe, sendToBe, deleteAll, deleteOne } = useTweetHelpers()
   const [ tweets, setTweets ] = useState([])
 
+  // Initial fetch after startup
   if(getIsFirstStart()){
     (async () => {
       try{
@@ -21,37 +22,33 @@ const Home = () => {
         console.error(`Error on initial GET request : ${err}`)
       }
     })()
-    console.log('=================\n\nInitial fetch\n\n=================')
     setIsFirstStart(false)
   }
 
+  // Handling button events from Tweet input
   async function handleClick(e: any) {
-
     const buttonId = e.target.id
     const dateSubmitted = getDateTime()
     let json;
     let getJson;
 
-    if(buttonId == 'submit'){
-      try{
+    try{
+      if(buttonId == 'submit'){
         json = await sendToBe(tweet, dateSubmitted)
-        getJson = await fetchFromBe()
-      }catch(err){
-        console.error(`Error during communication with backend : `, err)
+      }else if(buttonId == 'info'){
+        setTweet('')
+      }else if(buttonId == 'delete-all'){
+        json = await deleteAll()
+      }else if(buttonId == 'delete-one'){
+        const idToDelete = e.currentTarget.getAttribute('data-id')
+        json = await deleteOne(idToDelete)
       }
-      console.log('Post response : ', json)
-      setTweets(getJson)
-    }else if(buttonId == 'info'){
-      setTweet('')
-    }else if(buttonId == 'delete'){
-      try{
-        await deleteAll()
-        getJson = await fetchFromBe()
-      }catch(err){
-        console.error(`Error during communication with backend : `, err)
-      }
-      setTweets(getJson)
+    }catch(err){
+      console.error(`Error during communication with backend : `, err)
     }
+    console.log(json)
+    getJson = await fetchFromBe()
+    setTweets(getJson)
   }
   
   return(
@@ -65,7 +62,7 @@ const Home = () => {
       </div>
       <hr />
       <div className='tweet-list-container'>
-        <TweetList tweets={ tweets } />
+        <TweetList tweets={ tweets } onClick={ handleClick } />
       </div>
     </div>
   )

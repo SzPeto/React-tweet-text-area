@@ -30,5 +30,13 @@ export const useTweetHelpers = () => {
     return json
   }
 
-  return { fetchFromBe, sendToBe, deleteAll }
+  async function deleteOne(id: string){
+    const response = await fetch(`/api/tweets/${id}`, {
+      method: 'DELETE',
+    })
+    const json = await response.json()
+    return json
+  }
+
+  return { fetchFromBe, sendToBe, deleteAll, deleteOne }
 }

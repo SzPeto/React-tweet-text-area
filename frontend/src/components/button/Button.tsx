@@ -3,7 +3,8 @@ import './Button.css'
 type ButtonProps = {
   text?: string, // ? means optional
   onClick: (...args: any[]) => any,
-  type?: 'submit' | 'info' | 'get' | 'delete'
+  type?: 'submit' | 'info' | 'get' | 'delete-all' | 'delete-one',
+  data?: string
 }
 
 //{ text='Push me', onClick, type='submit' }
@@ -12,12 +13,15 @@ const Button = (props: ButtonProps) => {
 
   return (
     <button 
-      onClick={ (e) => props.onClick(e) } 
-      className={`base-button-${ props.type ?? "submit" }`} 
+      onClick={ props.onClick } 
+      className={`base-button-${ props.type ?? 'submit' }`} 
       type='button' 
-      id={ props.type ?? "submit" } >
+      id={ props.type ?? 'submit' } 
+      data-id={ props.data ?? '' }
+    >
       
-      { props.text ?? "Push me" }
+      
+      { props.text ?? 'Push me' }
     </button>
   )
 }
