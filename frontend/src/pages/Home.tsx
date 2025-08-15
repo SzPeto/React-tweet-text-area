@@ -4,12 +4,26 @@ import TweetList from '@/components/tweets/tweet-list/TweetList.tsx'
 import { useState } from 'react'
 import { useTweetHelpers } from '@/hooks/useTweetHeplers'
 import { getDateTime } from '@/utils/getDateTime.ts'
+import { getIsFirstStart, setIsFirstStart } from '@/utils/globalStore'
 
 const Home = () => {
 
   const [ tweet, setTweet ] = useState('Tweet me!')
   const { fetchFromBe, sendToBe } = useTweetHelpers()
   const [ tweets, setTweets ] = useState([])
+
+  if(getIsFirstStart()){
+    async function initialFetch(){
+      try{
+        const getJson = await fetchFromBe()
+        setTweets(getJson)
+      }catch(err){
+        console.error(`Error on initial GET request : ${err}`)
+      }
+    }
+    initialFetch()
+    setIsFirstStart(false)
+  }
 
   async function handleClick(e: any) {
 
