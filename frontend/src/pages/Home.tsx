@@ -25,7 +25,7 @@ const Home = () => {
     setIsFirstStart(false)
   }
 
-  // Handling button events from Tweet input
+  // Handling button events
   async function handleClick(e: any) {
     const buttonId = e.target.id
     const dateSubmitted = getDateTime()
