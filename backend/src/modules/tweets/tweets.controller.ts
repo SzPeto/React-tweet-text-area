@@ -59,7 +59,7 @@ export class TweetsController {
   */
 
   @Delete()
-  deleteAll(): object{
-    return this.tweetsService.deleteAllTweets()
+  async deleteAll(){
+    return await this.tweetsService.deleteAllTweets()
   }
 }

@@ -63,8 +63,8 @@ export class TweetsService {
   ============================================================================================================================
   */
 
-  deleteAllTweets() {
-    return this.tweetModel.deleteMany({})
+  async deleteAllTweets() {
+    return await this.tweetModel.deleteMany({})
   }
 
   deleteTweetById(id: number): object{
