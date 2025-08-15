@@ -62,4 +62,9 @@ export class TweetsController {
   async deleteAll(){
     return await this.tweetsService.deleteAllTweets()
   }
+
+  @Delete(':id')
+  async deleteTweetById(@Param('id') id: string){
+    return await this.tweetsService.deleteTweetById(id)
+  }
 }

@@ -67,7 +67,10 @@ export class TweetsService {
     return await this.tweetModel.deleteMany({})
   }
 
-  deleteTweetById(id: number): object{
-    return { message: `Tweet with ID : ${id} not found!` }
+  async deleteTweetById(id: string){
+    if (!Types.ObjectId.isValid(id)) throw new NotFoundException(`Invalid Tweet ID : ${id}`)
+    const result = await this.tweetModel.deleteOne({ _id: id })
+    if(result.deletedCount === 0) throw new NotFoundException(`Tweet with ID : ${id} not found!`)
+    return result
   }
 }
