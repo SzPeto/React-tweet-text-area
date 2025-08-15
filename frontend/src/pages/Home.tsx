@@ -9,7 +9,7 @@ import { getIsFirstStart, setIsFirstStart } from '@/utils/globalStore'
 const Home = () => {
 
   const [ tweet, setTweet ] = useState('Tweet me!')
-  const { fetchFromBe, sendToBe } = useTweetHelpers()
+  const { fetchFromBe, sendToBe, deleteAll } = useTweetHelpers()
   const [ tweets, setTweets ] = useState([])
 
   if(getIsFirstStart()){
@@ -43,6 +43,10 @@ const Home = () => {
       setTweets(getJson)
     }else if(buttonId == 'info'){
       setTweet('')
+    }else if(buttonId == 'delete'){
+      await deleteAll()
+      getJson = await fetchFromBe()
+      setTweets(getJson)
     }
   }
   
