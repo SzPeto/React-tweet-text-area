@@ -9,10 +9,9 @@ import { getIsFirstStart, setIsFirstStart } from '@/utils/globalStore'
 const Home = () => {
 
   const [ tweet, setTweet ] = useState('Tweet me!')
-  const { fetchFromBe, sendToBe, deleteAll, deleteOne, updateOne } = useTweetHelpers()
   const [ tweets, setTweets ] = useState([])
-  const [ updateTweet, setUpdateTweet ] = useState('')
-
+  const { fetchFromBe, sendToBe, deleteAll, deleteOne, updateOne } = useTweetHelpers() // BE REST API functions
+  const [ updateTweet, setUpdateTweet ] = useState('') // Passed down to : TweetList/Tweet/TextArea
   // Initial fetch after startup
   if(getIsFirstStart()){
     (async () => {
@@ -59,7 +58,7 @@ const Home = () => {
     <div className='home-container'>
       <div className='tweet-input-container-l1'>
         <TweetInput 
-          onClick={ handleClick } 
+          onClick={ handleClick }  /* Passed down to : TweetInput/TextArea/Button */
           onChange={ (e) => setTweet(e.target.value) } 
           value={ tweet } 
         />
@@ -68,9 +67,9 @@ const Home = () => {
       <div className='tweet-list-container'>
         <TweetList 
           tweets={ tweets } 
-          onClick={ handleClick } 
-          onChange={ (e) => setUpdateTweet(e.target.value) }
-          editValue={ updateTweet }
+          onClick={ handleClick }
+          onChange={ (e) => setUpdateTweet(e.target.value) } /* Passed down to : TweetList/Tweet/TextArea */
+          editValue={ updateTweet } /* Passed down to : TweetList/Tweet/TextArea */
         />
       </div>
     </div>

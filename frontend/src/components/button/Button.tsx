@@ -5,6 +5,7 @@ type ButtonProps = {
   onClick: (...args: any[]) => any,
   type?: 'submit' | 'info' | 'get' | 'delete-all' | 'delete-one' | 'update',
   data?: string
+  hidden?: boolean
 }
 
 //{ text='Push me', onClick, type='submit' }
@@ -18,6 +19,7 @@ const Button = (props: ButtonProps) => {
       type='button' 
       id={ props.type ?? 'submit' } 
       data-id={ props.data ?? '' }
+      hidden={ props.hidden ?? false }
     >
       { props.text ?? 'Push me' }
     </button>
