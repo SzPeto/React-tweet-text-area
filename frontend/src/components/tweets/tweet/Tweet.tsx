@@ -2,32 +2,45 @@ import Button from '@/components/button/Button'
 import './Tweet.css'
 import { useState } from 'react'
 import TextArea from '@/components/text-area/TextArea'
+import { useTweetHelpers } from '@/hooks/useTweetHeplers.ts'
 
 type TweeetProps = {
   id: string,
   content: string,
   dateSubmitted: string,
   onClick: (...args: any[]) => any
-  onChange: (...args: any[]) => any
-  editValue: string
 }
 
 const Tweet = (props: TweeetProps) => {
 
-  const [isEditing, setIsEditing] = useState(false)
+  const [ editValue, setEditValue ] = useState( props.content )
+  const [ isEditing, setIsEditing ] = useState(false)
+  const { fetchFromBe, updateOne } = useTweetHelpers()
+
+  async function handleSave(){
+    const response = await updateOne(props.id, editValue)
+    const getJson = await fetchFromBe()
+    setIsEditing(false)
+    console.log(response)
+  }
 
   return (
     <div className="tweet-tweet-container">
       <p className="titles-label"> UUID : { props.id } </p>
 
-      {/* Editing logic */}
-      {
-        isEditing ? (
-          <TextArea onChange={ props.onChange } value={ props.editValue } />
-        ) : (
-          <p>{ props.content }</p>
-        )
-      }
+        <div className='logic-container'>
+          {/* Editing logic */}
+          {
+            isEditing ? (
+              <div className='edit-container'>
+                <TextArea onChange={ (e) => setEditValue(e.target.value) } value={ editValue } />
+                <Button text='Save' onClick={ handleSave } type='submit' />
+              </div>
+            ) : (
+              <p>{ props.content }</p>
+            )
+          }
+        </div>
 
       <hr />
       <small>Date submitted : { props.dateSubmitted }</small>

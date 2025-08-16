@@ -8,7 +8,7 @@ type TextAreaProps = {
 const TextArea = (props: TextAreaProps) => {
     
   return (
-    <textarea className='text-area'
+    <textarea className='text-area-l1'
       value={ props.value }
       onChange={ props.onChange }
       rows={ 4 }

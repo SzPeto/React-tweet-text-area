@@ -10,8 +10,8 @@ const Home = () => {
 
   const [ tweet, setTweet ] = useState('Tweet me!')
   const [ tweets, setTweets ] = useState([])
-  const { fetchFromBe, sendToBe, deleteAll, deleteOne, updateOne } = useTweetHelpers() // BE REST API functions
-  const [ updateTweet, setUpdateTweet ] = useState('') // Passed down to : TweetList/Tweet/TextArea
+  const { fetchFromBe, sendToBe, deleteAll, deleteOne } = useTweetHelpers() // BE REST API functions
+
   // Initial fetch after startup
   if(getIsFirstStart()){
     (async () => {
@@ -42,9 +42,6 @@ const Home = () => {
       }else if(buttonId == 'delete-one'){
         const idToDelete = e.currentTarget.getAttribute('data-id')
         json = await deleteOne(idToDelete)
-      }else if(buttonId == 'update'){
-        const idToUpdate = e.currentTarget.getAttribute('data-id')
-        json = await updateOne(idToUpdate, updateTweet)
       }
     }catch(err){
       console.error(`Error during communication with backend : `, err)
@@ -68,8 +65,6 @@ const Home = () => {
         <TweetList 
           tweets={ tweets } 
           onClick={ handleClick }
-          onChange={ (e) => setUpdateTweet(e.target.value) } /* Passed down to : TweetList/Tweet/TextArea */
-          editValue={ updateTweet } /* Passed down to : TweetList/Tweet/TextArea */
         />
       </div>
     </div>
