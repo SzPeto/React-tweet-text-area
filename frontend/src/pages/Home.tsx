@@ -5,11 +5,13 @@ import { useState } from 'react'
 import { useTweetHelpers } from '@/hooks/useTweetHeplers'
 import { getDateTime } from '@/utils/getDateTime.ts'
 import { getIsFirstStart, setIsFirstStart } from '@/utils/globalStore'
+import { useTweetsStore } from '@/store/useTweetsStore'
 
 const Home = () => {
 
   const [ tweet, setTweet ] = useState('Tweet me!')
-  const [ tweets, setTweets ] = useState([])
+  const tweets = useTweetsStore((s) => s.tweets) // s stands for state
+  const setTweets = useTweetsStore((s) => s.setTweets)
   const { fetchFromBe, sendToBe, deleteAll, deleteOne } = useTweetHelpers() // BE REST API functions
 
   // Initial fetch after startup
