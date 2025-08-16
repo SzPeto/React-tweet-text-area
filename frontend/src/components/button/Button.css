@@ -20,7 +20,8 @@
     border: 1px inset rgb(30, 84, 35);
 }
 
-.base-button-info {
+.base-button-info,
+.base-button-update {
     padding: 8px 10px;
     background-color: rgb(55, 130, 250);
     border: 1px solid blue;
@@ -31,12 +32,14 @@
     margin: 10px;
 }
 
-.base-button-info:hover {
+.base-button-info:hover,
+.base-button-update:hover {
     background-color: rgb(67, 128, 226);
     border: 1px solid rgb(0, 0, 214);
 }
 
-.base-button-info:active {
+.base-button-info:active,
+.base-button-update:active {
     padding: 9px 9px 7px 11px;
     background-color: rgb(46, 88, 156);
     border: 1px inset rgb(0, 0, 143);

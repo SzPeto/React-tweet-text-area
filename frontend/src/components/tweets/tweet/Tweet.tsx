@@ -1,5 +1,6 @@
 import Button from '@/components/button/Button'
 import './Tweet.css'
+import { useState } from 'react'
 
 type TweeetProps = {
   id: string,
@@ -10,13 +11,19 @@ type TweeetProps = {
 
 const Tweet = (props: TweeetProps) => {
 
+  const [isEditing, setIsEditing] = useState(false)
+  console.log(isEditing)
+
   return (
     <div className="tweet-tweet-container">
       <p className="titles-label"> UUID : { props.id } </p>
       <p>{ props.content }</p>
       <hr />
-      <small>{ props.dateSubmitted }</small>
-      <Button text='Delete tweet' type='delete-one' onClick={ props.onClick } data={ props.id } />
+      <small>Date submitted : { props.dateSubmitted }</small>
+      <div className='delete-edit-button-container'>
+        <Button text='Delete tweet' type='delete-one' onClick={ props.onClick } data={ props.id } />
+        <Button text='Edit tweet' type='update' onClick={ () => setIsEditing(!isEditing) } data={ props.id } />
+      </div>
     </div>
   )
 }

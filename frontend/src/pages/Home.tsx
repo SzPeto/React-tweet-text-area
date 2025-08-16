@@ -42,6 +42,8 @@ const Home = () => {
       }else if(buttonId == 'delete-one'){
         const idToDelete = e.currentTarget.getAttribute('data-id')
         json = await deleteOne(idToDelete)
+      }else if(buttonId == 'update'){
+        
       }
     }catch(err){
       console.error(`Error during communication with backend : `, err)

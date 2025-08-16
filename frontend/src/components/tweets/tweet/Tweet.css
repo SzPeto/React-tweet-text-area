@@ -37,3 +37,11 @@
 .titles-label {
   font-size: 18px;
 }
+
+.delete-edit-button-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0px 20px;
+}
