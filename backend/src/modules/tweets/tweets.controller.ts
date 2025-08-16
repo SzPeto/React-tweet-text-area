@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, Patch } from '@nestjs/common'
 import { TweetsService } from './tweets.service'
 import { CreateTweetDto } from './dto/create-tweet.dto'
+import { UpdateTweetDto } from './dto/update-tweet.dto'
 
 @Controller('tweets')
 export class TweetsController {
@@ -40,15 +41,15 @@ export class TweetsController {
 
   /*
   ============================================================================================================================
-                                                PUT mapping
+                                                PATCH mapping
   ============================================================================================================================
   */
 
-  @Put(':id')
+  @Patch(':id')
   replaceTweetById(@Param('id') id: string, 
-                    @Body() createTweetDto: CreateTweetDto){
-    const numId = parseInt(id, 10)
-    return this.tweetsService.replaceTweetById(numId, createTweetDto)
+                   @Body() updateTweetDto: UpdateTweetDto){
+
+    return this.tweetsService.replaceTweetById(id, updateTweetDto)
   }
 
 

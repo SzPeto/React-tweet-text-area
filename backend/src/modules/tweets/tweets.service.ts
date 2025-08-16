@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { CreateTweetDto } from './dto/create-tweet.dto'
+import { UpdateTweetDto } from './dto/update-tweet.dto'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model, Types } from 'mongoose'
 import { Tweet, TweetDocument } from './schemas/tweet.schema'
@@ -43,14 +44,15 @@ export class TweetsService {
 
   /*
   ============================================================================================================================
-                                                Functions for PUT requests
+                                                Functions for PATCH requests
   ============================================================================================================================
   */
 
-  async replaceTweetById(id: string, createTweetDto: CreateTweetDto){
-    const tweet = this.tweetModel.findByIdAndUpdate(id, {$set: createTweetDto}, {new: true})
-
-    return await tweet
+  async replaceTweetById(id: string, updateTweetDto: UpdateTweetDto){
+    if(!Types.ObjectId.isValid(id)) throw new NotFoundException(`Invalid Tweet ID : ${id}`)
+    const updated = await this.tweetModel.findByIdAndUpdate(id, {$set: updateTweetDto}, {new: true}).exec()
+    if(!updated) throw new NotFoundException(`Error during updating, tweet with ID : ${id} not found`)
+    return updated
   }
 
 
