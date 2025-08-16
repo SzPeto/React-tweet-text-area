@@ -31,19 +31,20 @@ const Tweet = (props: TweeetProps) => {
     <div className="tweet-tweet-container">
       <p className="titles-label"> UUID : { props.id } </p>
 
-        <div className='logic-container'>
-          {/* Editing logic */}
-          {
-            isEditing ? (
-              <div className='edit-container'>
-                <TextArea onChange={ (e) => setEditValue(e.target.value) } value={ editValue } />
-                <Button text='Save' onClick={ handleSave } type='submit' />
-              </div>
-            ) : (
-              <p>{ props.content }</p>
-            )
-          }
-        </div>
+      <div className='logic-container'>
+        {/* Editing logic */}
+        {
+          isEditing ? (
+            <div className='edit-container'>
+              <TextArea onChange={ (e) => setEditValue(e.target.value) } value={ editValue } />
+              <Button text='Save' onClick={ handleSave } type='submit' />
+              <Button text='Cancel' onClick={ () => setIsEditing(false) } type='info' />
+            </div>
+          ) : (
+            <p>{ props.content }</p>
+          )
+        }
+      </div>
 
       <hr />
       <small>Date submitted : { props.dateSubmitted }</small>
