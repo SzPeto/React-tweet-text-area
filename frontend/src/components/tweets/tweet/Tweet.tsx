@@ -7,6 +7,8 @@ type TweeetProps = {
   content: string,
   dateSubmitted: string,
   onClick: (...args: any[]) => any
+  onChange: (...args: any[]) => any
+  editValue: string
 }
 
 const Tweet = (props: TweeetProps) => {

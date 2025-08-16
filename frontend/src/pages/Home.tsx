@@ -9,8 +9,9 @@ import { getIsFirstStart, setIsFirstStart } from '@/utils/globalStore'
 const Home = () => {
 
   const [ tweet, setTweet ] = useState('Tweet me!')
-  const { fetchFromBe, sendToBe, deleteAll, deleteOne } = useTweetHelpers()
+  const { fetchFromBe, sendToBe, deleteAll, deleteOne, updateOne } = useTweetHelpers()
   const [ tweets, setTweets ] = useState([])
+  const [ updateTweet, setUpdateTweet ] = useState('')
 
   // Initial fetch after startup
   if(getIsFirstStart()){
@@ -43,7 +44,8 @@ const Home = () => {
         const idToDelete = e.currentTarget.getAttribute('data-id')
         json = await deleteOne(idToDelete)
       }else if(buttonId == 'update'){
-        
+        const idToUpdate = e.currentTarget.getAttribute('data-id')
+        json = await updateOne(idToUpdate, updateTweet)
       }
     }catch(err){
       console.error(`Error during communication with backend : `, err)
@@ -64,7 +66,12 @@ const Home = () => {
       </div>
       <hr />
       <div className='tweet-list-container'>
-        <TweetList tweets={ tweets } onClick={ handleClick } />
+        <TweetList 
+          tweets={ tweets } 
+          onClick={ handleClick } 
+          onChange={ (e) => setUpdateTweet(e.target.value) }
+          editValue={ updateTweet }
+        />
       </div>
     </div>
   )

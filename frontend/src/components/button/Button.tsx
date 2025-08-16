@@ -19,8 +19,6 @@ const Button = (props: ButtonProps) => {
       id={ props.type ?? 'submit' } 
       data-id={ props.data ?? '' }
     >
-      
-      
       { props.text ?? 'Push me' }
     </button>
   )
