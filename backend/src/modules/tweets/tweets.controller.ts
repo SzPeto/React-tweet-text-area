@@ -46,10 +46,10 @@ export class TweetsController {
   */
 
   @Patch(':id')
-  replaceTweetById(@Param('id') id: string, 
-                   @Body() updateTweetDto: UpdateTweetDto){
+  async replaceTweetById(@Param('id') id: string, 
+                         @Body() updateTweetDto: UpdateTweetDto){
 
-    return this.tweetsService.replaceTweetById(id, updateTweetDto)
+    return await this.tweetsService.replaceTweetById(id, updateTweetDto)
   }
 
 
