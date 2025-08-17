@@ -28,6 +28,7 @@ const Tweet = (props: TweeetProps) => {
     console.log(response)
   }
 
+  // Reusable inline component Buttons, to avoid code duplication
   const Buttons = () => (
     <div className='delete-edit-button-container'>
       <Button 
