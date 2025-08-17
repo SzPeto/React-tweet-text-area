@@ -3,11 +3,13 @@ import type { Tweet } from '@/types/tweet.ts'
 export const useTweetHelpers = () => {
   
   async function fetchFromBe(){
+
     let json: Tweet[] = []
-    try{
+    
+    try {
       const response = await fetch('/api/tweets')
       json = await response.json()
-    }catch(err){
+    } catch (err) {
       console.log('Error during GET request from backend : ', err)
     }
     return json
