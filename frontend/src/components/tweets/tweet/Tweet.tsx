@@ -15,6 +15,7 @@ type TweeetProps = {
 const Tweet = (props: TweeetProps) => {
 
   const [ editValue, setEditValue ] = useState( props.content )
+  const [ isVisibleEdit, setIsVisibleEdit ] = useState(false)
   const [ isEditing, setIsEditing ] = useState(false)
   const { fetchFromBe, updateOne } = useTweetHelpers()
   const setTweets = useTweetsStore((s) => s.setTweets)
@@ -28,7 +29,10 @@ const Tweet = (props: TweeetProps) => {
   }
 
   return (
-    <div className="tweet-tweet-container">
+    <div className="tweet-tweet-container" 
+         onMouseEnter={ () => setIsVisibleEdit(true) } 
+         onMouseLeave={ () => setIsVisibleEdit( false ) }
+    >
       <p className="titles-label"> UUID : { props.id } </p>
 
       <div className='logic-container'>
@@ -50,15 +54,23 @@ const Tweet = (props: TweeetProps) => {
 
       <hr />
       <small>Date submitted : { props.dateSubmitted }</small>
-      <div className='delete-edit-button-container'>
-        <Button text='Delete tweet' type='delete-one' onClick={ props.onClick } data={ props.id } />
-        <Button 
-          text={ isEditing ? '' : 'Edit tweet' } 
-          type='update' onClick={ () => setIsEditing(!isEditing) } 
-          data={ props.id }
-          hidden={ isEditing ? true : false }
-        />
-      </div>
+
+      {
+        isVisibleEdit ? (
+          <div className='delete-edit-button-container'>
+            <Button text='Delete tweet' type='delete-one' onClick={ props.onClick } data={ props.id } />
+            <Button 
+              text={ isEditing ? '' : 'Edit tweet' } 
+              type='update' onClick={ () => setIsEditing(!isEditing) } 
+              data={ props.id }
+              hidden={ isEditing ? true : false }
+            />
+          </div>
+        ) : (
+          <p style={{ fontSize: '12px', color: 'blue' }} >( Hover over card to uncover buttons )</p>
+        )
+      }
+
     </div>
   )
 }
