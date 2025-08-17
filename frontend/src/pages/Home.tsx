@@ -64,10 +64,7 @@ const Home = () => {
       </div>
       <hr />
       <div className='tweet-list-container'>
-        <TweetList 
-          tweets={ tweets } 
-          onClick={ handleClick }
-        />
+        <TweetList tweets={ tweets } onClick={ handleClick } />
       </div>
     </div>
   )

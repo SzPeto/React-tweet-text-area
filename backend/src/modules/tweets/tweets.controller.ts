@@ -46,9 +46,10 @@ export class TweetsController {
   */
 
   @Patch(':id')
-  async replaceTweetById(@Param('id') id: string, 
-                         @Body() updateTweetDto: UpdateTweetDto){
-
+  async replaceTweetById(
+    @Param('id') id: string, 
+    @Body() updateTweetDto: UpdateTweetDto
+  ){
     return await this.tweetsService.replaceTweetById(id, updateTweetDto)
   }
 

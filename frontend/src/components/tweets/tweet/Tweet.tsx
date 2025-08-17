@@ -28,13 +28,33 @@ const Tweet = (props: TweeetProps) => {
     console.log(response)
   }
 
+  const Buttons = () => (
+    <div className='delete-edit-button-container'>
+      <Button 
+        text='Delete tweet' 
+        type='delete-one' 
+        onClick={ 
+          (e) => { 
+            if(window.confirm('Are you sure you want to delete this tweet?')) props.onClick(e) 
+          } 
+        } 
+        data={ props.id } 
+      />
+      <Button 
+        text={ isEditing ? '' : 'Edit tweet' } 
+        type='update' onClick={ () => setIsEditing(!isEditing) } 
+        data={ props.id }
+        hidden={ isEditing ? true : false }
+      />
+    </div>
+  )
+
   return (
     <div className="tweet-tweet-container" 
          onMouseEnter={ () => setIsVisibleEdit(true) } 
          onMouseLeave={ () => setIsVisibleEdit( false ) }
     >
       <p className="titles-label"> 🆔 { props.id } </p>
-
       <div className='logic-container'>
         {/* Editing logic */}
         {
@@ -51,35 +71,20 @@ const Tweet = (props: TweeetProps) => {
           )
         }
       </div>
-
       <hr />
       <small>🗓️ { props.dateSubmitted }</small>
-
-      {
-        isVisibleEdit ? (
-          <div className='delete-edit-button-container'>
-            <Button 
-              text='Delete tweet' 
-              type='delete-one' 
-              onClick={ 
-                (e) => { 
-                  if(window.confirm('Are you sure you want to delete this tweet?')) props.onClick(e) 
-                } 
-              } 
-              data={ props.id } 
-            />
-            <Button 
-              text={ isEditing ? '' : 'Edit tweet' } 
-              type='update' onClick={ () => setIsEditing(!isEditing) } 
-              data={ props.id }
-              hidden={ isEditing ? true : false }
-            />
-          </div>
-        ) : (
-          <p style={{ fontSize: '12px', color: 'blue' }} >ℹ️ ( Hover over card to uncover buttons )</p>
-        )
-      }
-
+      <div className='on-desktop-container'>
+        {
+          isVisibleEdit ? (
+            <Buttons />
+          ) : (
+            <p style={{ fontSize: '12px', color: 'blue' }} >ℹ️ ( Hover over card to uncover buttons )</p>
+          )
+        }
+      </div>
+      <div className='on-mobile-container'>
+        <Buttons />
+      </div>
     </div>
   )
 }

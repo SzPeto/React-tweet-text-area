@@ -59,3 +59,21 @@
   width: 100%;
   margin: 10px;
 }
+
+.on-desktop-container {
+  display: inline-block;
+}
+
+.on-mobile-container {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .on-desktop-container {
+    display: none;
+  }
+
+  .on-mobile-container {
+    display: inline-block;
+  }
+}
