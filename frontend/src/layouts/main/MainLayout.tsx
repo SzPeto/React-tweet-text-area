@@ -1,17 +1,14 @@
-import type { ReactNode } from 'react'
 import NavBar from '@/components/navbar/NavBar.tsx'
 import Footer from '@/components/footer/Footer'
+import { Outlet } from 'react-router-dom'
+import './MainLayout.css'
 
-type MainLayoutProps = {
-  children: ReactNode
-}
-
-const MainLayout = (props: MainLayoutProps) => {
+const MainLayout = () => {
     
   return(
     <>
       <header><NavBar /></header>
-      <main>{ props.children }</main>
+      <main><Outlet /></main>
       <footer><Footer /></footer>
     </>
   )

@@ -1,6 +1,7 @@
 import './NavBar.css'
 import logo from '../../assets/letter-t.png'
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
 const NavBar = () => {
 
@@ -27,7 +28,9 @@ const NavBar = () => {
         <div className='left-items-container'>
           <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>
             <li>
-              <a href='#home'>Home</a>
+              <NavLink to='/'>
+                Home
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -35,10 +38,14 @@ const NavBar = () => {
         <div className='right-items-container'>
           <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>
             <li>
-              <a href='#login'>Login</a>
+              <NavLink to='/login'>
+                Login
+              </NavLink>
             </li>
             <li>
-              <a href='#register'>Register</a>
+              <NavLink to='/register'>
+                Register
+              </NavLink>
             </li>
           </ul>
         </div>
