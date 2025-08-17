@@ -33,7 +33,7 @@ const Tweet = (props: TweeetProps) => {
          onMouseEnter={ () => setIsVisibleEdit(true) } 
          onMouseLeave={ () => setIsVisibleEdit( false ) }
     >
-      <p className="titles-label"> UUID : { props.id } </p>
+      <p className="titles-label"> 🆔 { props.id } </p>
 
       <div className='logic-container'>
         {/* Editing logic */}
@@ -53,7 +53,7 @@ const Tweet = (props: TweeetProps) => {
       </div>
 
       <hr />
-      <small>Date submitted : { props.dateSubmitted }</small>
+      <small>🗓️ { props.dateSubmitted }</small>
 
       {
         isVisibleEdit ? (
@@ -76,7 +76,7 @@ const Tweet = (props: TweeetProps) => {
             />
           </div>
         ) : (
-          <p style={{ fontSize: '12px', color: 'blue' }} >( Hover over card to uncover buttons )</p>
+          <p style={{ fontSize: '12px', color: 'blue' }} >ℹ️ ( Hover over card to uncover buttons )</p>
         )
       }
 
