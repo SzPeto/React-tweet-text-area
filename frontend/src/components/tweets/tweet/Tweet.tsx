@@ -58,7 +58,16 @@ const Tweet = (props: TweeetProps) => {
       {
         isVisibleEdit ? (
           <div className='delete-edit-button-container'>
-            <Button text='Delete tweet' type='delete-one' onClick={ props.onClick } data={ props.id } />
+            <Button 
+              text='Delete tweet' 
+              type='delete-one' 
+              onClick={ 
+                (e) => { 
+                  if(window.confirm('Are you sure you want to delete this tweet?')) props.onClick(e) 
+                } 
+              } 
+              data={ props.id } 
+            />
             <Button 
               text={ isEditing ? '' : 'Edit tweet' } 
               type='update' onClick={ () => setIsEditing(!isEditing) } 
