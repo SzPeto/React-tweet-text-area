@@ -37,8 +37,10 @@ const Tweet = (props: TweeetProps) => {
           isEditing ? (
             <div className='edit-container'>
               <TextArea onChange={ (e) => setEditValue(e.target.value) } value={ editValue } />
-              <Button text='Save' onClick={ handleSave } type='submit' />
-              <Button text='Cancel' onClick={ () => setIsEditing(false) } type='info' />
+              <div>
+                <Button text='Save' onClick={ handleSave } type='submit' />
+                <Button text='Cancel' onClick={ () => setIsEditing(false) } type='info' />
+              </div>
             </div>
           ) : (
             <p>{ props.content }</p>
