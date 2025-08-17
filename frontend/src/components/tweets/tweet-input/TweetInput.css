@@ -28,7 +28,7 @@
 }
 
 .tweet-input-container-l2 Button {
-  min-width: 180px;
+  width: 180px;
 }
 
 @media (max-width: 768px) {
