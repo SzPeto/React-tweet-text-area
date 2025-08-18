@@ -16,17 +16,14 @@ const Home = () => {
 
   // Initial fetch after startup
   useEffect(() => {
-    if(getIsFirstStart()){
-      (async () => {
-        try{
-          const getJson = await fetchFromBe()
-          setTweets(getJson)
-        }catch(err){
-          console.error(`Error on initial GET request : ${err}`)
-        }
-      })()
-      setIsFirstStart(false)
-    }
+    (async () => {
+      try{
+        const getJson = await fetchFromBe()
+        setTweets(getJson)
+      }catch(err){
+        console.error(`Error on initial GET request : ${err}`)
+      }
+    })()
   }, [])
   
 
