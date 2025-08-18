@@ -1,23 +1,10 @@
 import './App.css'
-import MainLayout from './layouts/main/MainLayout.tsx'
-import Home from './pages/Home.tsx'
-import Login from './pages/Login.tsx'
-import Register from './pages/Register.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { rootRoutes } from '@/routes/rootRoutes'
 
 function App() {
 
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <MainLayout />,
-      children: [
-        { index: true, element: <Home /> },
-        { path: 'login', element: <Login /> },
-        { path: 'register', element: <Register /> }
-      ]
-    }
-  ])
+  const router = createBrowserRouter([ rootRoutes ])
 
   return (
     <div className='body'>

@@ -11,10 +11,12 @@ const NavBar = () => {
     <nav className='navbar'>
       <div className='navbar-container'>
       
-        <div className='navbar-brand'>
-          <img src={ logo } className='brand-image' />
-          <p>Peter's Tweet</p>
-        </div>
+        <NavLink to='/' style={{ textDecoration: 'none' }}>
+          <div className='navbar-brand'>
+            <img src={ logo } className='brand-image' />
+            <p>Peter's Tweet</p>
+          </div>
+        </NavLink>
 
         {/* Hamburger Button */}
         <button
