@@ -1,7 +1,7 @@
 import './Home.css'
 import TweetInput from '@/components/tweets/tweet-input/TweetInput'
 import TweetList from '@/components/tweets/tweet-list/TweetList.tsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTweetHelpers } from '@/hooks/useTweetHeplers'
 import { getDateTime } from '@/utils/getDateTime.ts'
 import { getIsFirstStart, setIsFirstStart } from '@/utils/globalStore'
@@ -15,17 +15,20 @@ const Home = () => {
   const { fetchFromBe, sendToBe, deleteAll, deleteOne } = useTweetHelpers() // BE REST API functions
 
   // Initial fetch after startup
-  if(getIsFirstStart()){
-    (async () => {
-      try{
-        const getJson = await fetchFromBe()
-        setTweets(getJson)
-      }catch(err){
-        console.error(`Error on initial GET request : ${err}`)
-      }
-    })()
-    setIsFirstStart(false)
-  }
+  useEffect(() => {
+    if(getIsFirstStart()){
+      (async () => {
+        try{
+          const getJson = await fetchFromBe()
+          setTweets(getJson)
+        }catch(err){
+          console.error(`Error on initial GET request : ${err}`)
+        }
+      })()
+      setIsFirstStart(false)
+    }
+  }, [])
+  
 
   // Handling button events
   async function handleClick(e: any) {
