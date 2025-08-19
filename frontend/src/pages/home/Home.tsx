@@ -29,8 +29,8 @@ const Home = () => {
   async function handleClick(e: any) {
     const buttonId = e.target.id
     const dateSubmitted = getDateTime()
-    let json;
-    let getJson;
+    let json
+    let getJson
 
     if(buttonId == 'submit'){
       json = await sendToBe(tweet, dateSubmitted)
