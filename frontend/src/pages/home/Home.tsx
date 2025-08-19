@@ -9,7 +9,7 @@ import { useTweetsStore } from '@/store/useTweetsStore'
 const Home = () => {
 
   const [ tweet, setTweet ] = useState('Tweet me!')
-  const [isLoading, setIsLoading] = useState(false)
+  const [ isLoading, setIsLoading ] = useState(false)
   const tweets = useTweetsStore((s) => s.tweets) // s stands for state
   const setTweets = useTweetsStore((s) => s.setTweets)
   const { fetchFromBe, sendToBe, deleteAll, deleteOne } = useTweetHelpers() // BE REST API functions
@@ -23,7 +23,6 @@ const Home = () => {
       setTweets(getJson)
     })()
   }, [])
-  
 
   // Handling button events
   async function handleClick(e: any) {
