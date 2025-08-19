@@ -9,6 +9,7 @@ export const useTweetHelpers = () => {
     try {
       const response = await fetch('/api/tweets')
       json = await response.json()
+      await new Promise((resolve) => setTimeout(resolve, 1000))
     } catch (err) {
       console.log('Error during GET request from backend : ', err)
     }

@@ -4,12 +4,12 @@ import TweetList from '@/components/tweets/tweet-list/TweetList.tsx'
 import { useEffect, useState } from 'react'
 import { useTweetHelpers } from '@/hooks/useTweetHeplers'
 import { getDateTime } from '@/utils/getDateTime.ts'
-import { getIsFirstStart, setIsFirstStart } from '@/utils/globalStore'
 import { useTweetsStore } from '@/store/useTweetsStore'
 
 const Home = () => {
 
   const [ tweet, setTweet ] = useState('Tweet me!')
+  const [isLoading, setIsLoading] = useState(false)
   const tweets = useTweetsStore((s) => s.tweets) // s stands for state
   const setTweets = useTweetsStore((s) => s.setTweets)
   const { fetchFromBe, sendToBe, deleteAll, deleteOne } = useTweetHelpers() // BE REST API functions
@@ -17,12 +17,10 @@ const Home = () => {
   // Initial fetch after startup
   useEffect(() => {
     (async () => {
-      try{
-        const getJson = await fetchFromBe()
-        setTweets(getJson)
-      }catch(err){
-        console.error(`Error on initial GET request : ${err}`)
-      }
+      setIsLoading(true)
+      const getJson = await fetchFromBe()
+      setIsLoading(false)
+      setTweets(getJson)
     })()
   }, [])
   
@@ -34,20 +32,17 @@ const Home = () => {
     let json;
     let getJson;
 
-    try{
-      if(buttonId == 'submit'){
-        json = await sendToBe(tweet, dateSubmitted)
-      }else if(buttonId == 'info'){
-        setTweet('')
-      }else if(buttonId == 'delete-all'){
-        json = await deleteAll()
-      }else if(buttonId == 'delete-one'){
-        const idToDelete = e.currentTarget.getAttribute('data-id')
-        json = await deleteOne(idToDelete)
-      }
-    }catch(err){
-      console.error(`Error during communication with backend : `, err)
+    if(buttonId == 'submit'){
+      json = await sendToBe(tweet, dateSubmitted)
+    }else if(buttonId == 'info'){
+      setTweet('')
+    }else if(buttonId == 'delete-all'){
+      json = await deleteAll()
+    }else if(buttonId == 'delete-one'){
+      const idToDelete = e.currentTarget.getAttribute('data-id')
+      json = await deleteOne(idToDelete)
     }
+
     console.log(json)
     getJson = await fetchFromBe()
     setTweets(getJson)
@@ -63,9 +58,15 @@ const Home = () => {
         />
       </div>
       <hr />
-      <div className='tweet-list-container'>
-        <TweetList tweets={ tweets } onClick={ handleClick } />
-      </div>
+      {
+        isLoading ? (
+          <p>Loading tweets...</p>
+        ) : (
+          <div className='tweet-list-container'>
+            <TweetList tweets={ tweets } onClick={ handleClick } />
+          </div>
+        )
+      }
     </div>
   )
 }
