@@ -10,8 +10,8 @@ async function bootstrap() {
         credentials: true,
       })
   app.useGlobalPipes(new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
+      whitelist: true, // if you provide a field to json that doen't exist in DTO, it omits
+      forbidNonWhitelisted: true, // Throws an error if the JSON contains properties not defined in the DTO
       transform: true,  // important: converts JSON to class instances automatically
     }))
   await app.listen(process.env.PORT ?? 3000)
