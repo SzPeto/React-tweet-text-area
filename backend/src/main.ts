@@ -8,7 +8,7 @@ async function bootstrap() {
   app.enableCors({
         origin: ['http://localhost:5173'], // Vite dev server
         credentials: true,
-      });
+      })
   app.useGlobalPipes(new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true,

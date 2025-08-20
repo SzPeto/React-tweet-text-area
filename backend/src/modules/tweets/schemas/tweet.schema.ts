@@ -1,7 +1,7 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument } from "mongoose";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
+import { HydratedDocument } from "mongoose"
 
-export type TweetDocument = HydratedDocument<Tweet>;
+export type TweetDocument = HydratedDocument<Tweet>
 
 @Schema({ timestamps: true })
 export class Tweet{
