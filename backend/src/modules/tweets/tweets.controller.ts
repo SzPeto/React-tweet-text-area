@@ -7,7 +7,7 @@ import { UpdateTweetDto } from './dto/update-tweet.dto'
 export class TweetsController {
 
   // NestJS automatic DI via constructor, readonly is like const, but for instances
-  constructor(private readonly tweetsService: TweetsService){}
+  constructor(private readonly tweetsService: TweetsService) {}
 
 
   /*
@@ -22,7 +22,7 @@ export class TweetsController {
   }
 
   @Get(':id')
-  async getTweetById(@Param('id') id: string){
+  async getTweetById(@Param('id') id: string) {
     return await this.tweetsService.getTweetById(id)
   }
 
@@ -34,7 +34,7 @@ export class TweetsController {
   */
 
   @Post()
-  async addTweet(@Body() createTweetDto: CreateTweetDto){
+  async addTweet(@Body() createTweetDto: CreateTweetDto) {
     return await this.tweetsService.addTweet(createTweetDto)
   }
 
@@ -49,7 +49,7 @@ export class TweetsController {
   async replaceTweetById(
     @Param('id') id: string, 
     @Body() updateTweetDto: UpdateTweetDto
-  ){
+  ) {
     return await this.tweetsService.replaceTweetById(id, updateTweetDto)
   }
 
@@ -61,12 +61,12 @@ export class TweetsController {
   */
 
   @Delete()
-  async deleteAll(){
+  async deleteAll() {
     return await this.tweetsService.deleteAllTweets()
   }
 
   @Delete(':id')
-  async deleteTweetById(@Param('id') id: string){
+  async deleteTweetById(@Param('id') id: string) {
     return await this.tweetsService.deleteTweetById(id)
   }
 }
