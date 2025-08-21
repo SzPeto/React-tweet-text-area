@@ -63,12 +63,14 @@ export class TweetsController {
   */
 
   @Delete()
-  async deleteAll(): Promise<DeleteResult> {
-    return await this.tweetsService.deleteAllTweets()
+  async deleteAll(): Promise<object> {
+    const response = await this.tweetsService.deleteAllTweets()
+    return { success: response.acknowledged, deletedCount: response.deletedCount }
   }
 
   @Delete(':id')
-  async deleteTweetById(@Param('id') id: string): Promise<DeleteResult> {
-    return await this.tweetsService.deleteTweetById(id)
+  async deleteTweetById(@Param('id') id: string): Promise<object> {
+    const response = await this.tweetsService.deleteTweetById(id)
+    return { success: response.acknowledged, deletedCount: response.deletedCount }
   }
 }
