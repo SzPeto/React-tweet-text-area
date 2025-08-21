@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { useTweetHelpers } from '@/hooks/useTweetHeplers'
 import { getDateTime } from '@/utils/getDateTime.ts'
 import { useTweetsStore } from '@/store/useTweetsStore'
+import { useActiveSubmitStore } from '@/store/useActiveSubmitStore'
 
 const Home = () => {
 
@@ -13,6 +14,7 @@ const Home = () => {
   const tweets = useTweetsStore((s) => s.tweets) // s stands for state
   const setTweets = useTweetsStore((s) => s.setTweets)
   const { fetchFromBe, sendToBe, deleteAll, deleteOne } = useTweetHelpers() // BE REST API functions
+  const setIsActiveSumbit = useActiveSubmitStore((s) => s.setisActiveSubmit)
 
   // Initial fetch after startup
   useEffect(() => {
@@ -32,6 +34,7 @@ const Home = () => {
     let getJson
 
     if (buttonId == 'submit') {
+      setIsActiveSumbit(false)
       json = await sendToBe(tweet, dateSubmitted)
     } else if (buttonId == 'info') {
       setTweet('')
@@ -45,6 +48,7 @@ const Home = () => {
     console.log(json)
     getJson = await fetchFromBe()
     setTweets(getJson)
+    setIsActiveSumbit(true)
   }
   
   return(

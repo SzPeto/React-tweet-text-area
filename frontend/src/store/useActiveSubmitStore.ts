@@ -2,10 +2,10 @@ import { create } from 'zustand'
 
 type useActiveSubmitStore = {
   isActiveSubmit: boolean,
-  setisActiveSubmit: (active: boolean) => void
+  setisActiveSubmit: (newState: boolean) => void
 }
 
 export const useActiveSubmitStore = create<useActiveSubmitStore>((set) => ({
   isActiveSubmit: true,
-  setisActiveSubmit: (active) => set({ isActiveSubmit: active })
+  setisActiveSubmit: (newState) => set({ isActiveSubmit: newState })
 }))

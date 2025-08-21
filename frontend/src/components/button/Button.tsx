@@ -3,7 +3,7 @@ import './Button.css'
 type ButtonProps = {
   text?: string, // ? means optional
   onClick: (...args: any[]) => any,
-  type?: 'submit' | 'info' | 'get' | 'delete-all' | 'delete-one' | 'update',
+  type?: 'submit' | 'info' | 'get' | 'delete-all' | 'delete-one' | 'update' | 'disabled',
   data?: string
   hidden?: boolean
 }

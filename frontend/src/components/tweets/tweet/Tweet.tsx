@@ -79,7 +79,7 @@ const Tweet = (props: TweeetProps) => {
           isVisibleEdit ? (
             <Buttons />
           ) : (
-            <p style={{ fontSize: '12px', color: 'blue' }} >ℹ️ ( Hover over card to uncover buttons )</p>
+           <div></div> 
           )
         }
       </div>

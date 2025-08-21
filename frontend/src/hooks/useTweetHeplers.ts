@@ -22,7 +22,8 @@ export const useTweetHelpers = () => {
       content: tweet,
       dateSubmitted: dateSubmitted
     }
-
+    
+    await new Promise((resolve) => setTimeout(resolve, 2000))
     try {
       const response = await fetch('/api/tweets', {
         method: 'POST',
