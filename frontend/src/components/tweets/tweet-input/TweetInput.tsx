@@ -1,6 +1,8 @@
 import Button from '@/components/button/Button.tsx'
 import TextArea from '@/components/text-area/TextArea.tsx'
 import './TweetInput.css'
+import { useState } from 'react'
+import { useActiveSubmitStore } from '@/store/useActiveSubmitStore'
 
 type TweetInputProps = {
   value: string
@@ -10,13 +12,21 @@ type TweetInputProps = {
 
 const TweetInput = (props: TweetInputProps) => {
 
+  const isActiveSubmit = useActiveSubmitStore((s) => s.isActiveSubmit)
+
   return (
     <div className='tweet-input-container-l2'>
       <div className="upper-container">
         <TextArea value={ props.value } onChange={ props.onChange } />
       </div>
       <div className="lower-container">
-        <Button text='Submit' type='submit' onClick={ props.onClick } />
+        {
+          isActiveSubmit ? (
+            <Button text='Submit' type='submit' onClick={ props.onClick } />
+          ) : (
+            <Button text='Submit' type='submit' onClick={ props.onClick } />
+          )
+        }
         <Button text='Clear text' type='info' onClick={ props.onClick } />
         <Button 
           text='Delete all tweets' 
