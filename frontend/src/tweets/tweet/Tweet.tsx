@@ -1,9 +1,9 @@
-import Button from '@/ui/button/Button'
+import Button from '@/_shared/ui/button/Button'
 import './Tweet.css'
 import { useState } from 'react'
-import TextArea from '@/ui/text-area/TextArea'
-import { useTweetHelpers } from '@/hooks/useTweetHeplers.ts'
-import { useTweetsStore } from '@/store/useTweetsStore'
+import TextArea from '@/_shared/ui/text-area/TextArea'
+import { useTweetHelpers } from '../_hooks/useTweetHeplers'
+import { useTweetsStore } from '@/_shared/store/useTweetsStore'
 
 type TweeetProps = {
   id: string,

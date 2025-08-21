@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { Tweet } from '@/types/tweet.ts'
+import type { Tweet } from '@/tweets/tweet/types/tweet'
 
 type TweetsStore = {
   tweets: Tweet[],

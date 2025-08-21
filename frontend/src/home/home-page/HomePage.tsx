@@ -1,11 +1,11 @@
 import './HomePage.css'
-import TweetInput from '@/tweet/tweet-input/TweetInput'
-import TweetList from '@/tweet/tweet-list/TweetList'
+import TweetInput from '@/tweets/tweet-input/TweetInput'
+import TweetList from '@/tweets/tweet-list/TweetList'
 import { useEffect, useState } from 'react'
-import { useTweetHelpers } from '@/hooks/useTweetHeplers'
-import { getDateTime } from '@/utils/getDateTime.ts'
-import { useTweetsStore } from '@/store/useTweetsStore'
-import { useActiveSubmitStore } from '@/store/useActiveSubmitStore'
+import { useTweetHelpers } from '../../tweets/_hooks/useTweetHeplers'
+import { getDateTime } from '@/_shared/utils/getDateTime'
+import { useTweetsStore } from '@/_shared/store/useTweetsStore'
+import { useActiveSubmitStore } from '@/_shared/store/useActiveSubmitStore'
 
 const Home = () => {
 

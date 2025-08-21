@@ -1,4 +1,4 @@
-import type { Tweet } from '@/types/tweet.ts'
+import type { Tweet } from '@/tweets/tweet/types/tweet'
 
 export const useTweetHelpers = () => {
   
