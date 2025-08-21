@@ -2,6 +2,8 @@ import { Body, Controller, Delete, Get, Param, Post, Patch } from '@nestjs/commo
 import { TweetsService } from './tweets.service'
 import { CreateTweetDto } from './dto/create-tweet.dto'
 import { UpdateTweetDto } from './dto/update-tweet.dto'
+import { TweetDocument } from './schemas/tweet.schema'
+import { DeleteResult } from 'mongoose'
 
 @Controller('tweets')
 export class TweetsController {
@@ -17,12 +19,12 @@ export class TweetsController {
   */
 
   @Get()
-  async getAllTweets() {
+  async getAllTweets(): Promise<TweetDocument[]> {
     return await this.tweetsService.getAllTweets()
   }
 
   @Get(':id')
-  async getTweetById(@Param('id') id: string) {
+  async getTweetById(@Param('id') id: string): Promise<TweetDocument> {
     return await this.tweetsService.getTweetById(id)
   }
 
@@ -34,7 +36,7 @@ export class TweetsController {
   */
 
   @Post()
-  async addTweet(@Body() createTweetDto: CreateTweetDto) {
+  async addTweet(@Body() createTweetDto: CreateTweetDto): Promise<TweetDocument> {
     return await this.tweetsService.addTweet(createTweetDto)
   }
 
@@ -49,7 +51,7 @@ export class TweetsController {
   async replaceTweetById(
     @Param('id') id: string, 
     @Body() updateTweetDto: UpdateTweetDto
-  ) {
+  ): Promise<TweetDocument> {
     return await this.tweetsService.replaceTweetById(id, updateTweetDto)
   }
 
@@ -61,12 +63,12 @@ export class TweetsController {
   */
 
   @Delete()
-  async deleteAll() {
+  async deleteAll(): Promise<DeleteResult> {
     return await this.tweetsService.deleteAllTweets()
   }
 
   @Delete(':id')
-  async deleteTweetById(@Param('id') id: string) {
+  async deleteTweetById(@Param('id') id: string): Promise<DeleteResult> {
     return await this.tweetsService.deleteTweetById(id)
   }
 }
