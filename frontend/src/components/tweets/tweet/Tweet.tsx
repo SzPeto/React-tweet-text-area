@@ -20,7 +20,7 @@ const Tweet = (props: TweeetProps) => {
   const { fetchFromBe, updateOne } = useTweetHelpers()
   const setTweets = useTweetsStore((s) => s.setTweets)
 
-  async function handleSave(){
+  async function handleSave() {
     const response = await updateOne(props.id, editValue)
     const getJson = await fetchFromBe()
     setIsEditing(false)
@@ -36,7 +36,7 @@ const Tweet = (props: TweeetProps) => {
         type='delete-one' 
         onClick={ 
           (e) => { 
-            if(window.confirm('Are you sure you want to delete this tweet?')) props.onClick(e) 
+            if (window.confirm('Are you sure you want to delete this tweet?')) props.onClick(e) 
           } 
         } 
         data={ props.id } 

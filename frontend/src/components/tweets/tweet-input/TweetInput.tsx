@@ -23,7 +23,7 @@ const TweetInput = (props: TweetInputProps) => {
           type='delete-all' 
           onClick={ 
             (e) => {
-              if(window.confirm('Are you sure you want to delete all tweets?')) props.onClick(e)
+              if (window.confirm('Are you sure you want to delete all tweets?')) props.onClick(e)
             } 
           } 
         />

@@ -2,7 +2,7 @@ import type { Tweet } from '@/types/tweet.ts'
 
 export const useTweetHelpers = () => {
   
-  async function fetchFromBe(){
+  async function fetchFromBe() {
 
     let json: Tweet[] = []
     
@@ -15,7 +15,7 @@ export const useTweetHelpers = () => {
     return json
   }
   
-  async function sendToBe(tweet: string, dateSubmitted: string){
+  async function sendToBe(tweet: string, dateSubmitted: string) {
 
     let json: Tweet[] = []
     const postMessage = {
@@ -23,64 +23,64 @@ export const useTweetHelpers = () => {
       dateSubmitted: dateSubmitted
     }
 
-    try{
+    try {
       const response = await fetch('/api/tweets', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(postMessage),
       })
       json = await response.json()
-    }catch(err){
+    }catch(err) {
       console.log('Error during POST request to backend : ', err)
     }
     return json
   }
 
-  async function deleteAll(){
+  async function deleteAll() {
 
     let json: Tweet[] = []
 
-    try{
+    try {
       const response = await fetch('/api/tweets', {
         method: 'DELETE',
       })
       json = await response.json()
-    }catch(err){
+    }catch(err) {
       console.log('Error during DELETE request ( deleteAll() ) : ', err)
     }
     return json
   }
 
-  async function deleteOne(id: string){
+  async function deleteOne(id: string) {
 
     let json: Tweet[] = []
 
-    try{
+    try {
       const response = await fetch(`/api/tweets/${id}`, {
         method: 'DELETE',
       })
       json = await response.json()
-    }catch(err){
+    }catch(err) {
       console.log('Error during DELETE request ( deleteOne() ) : ', err)
     }
     return json
   }
 
-  async function updateOne(id: string, tweet: string){
+  async function updateOne(id: string, tweet: string) {
 
     let json: Tweet[] = []
     const updateMessage = {
       content: tweet
     }
 
-    try{
+    try {
       const response = await fetch(`/api/tweets/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updateMessage),
       })
       json = await response.json()
-    }catch(err){
+    }catch(err) {
       console.log('Error during PATCH request : ', err)
     }
     return json

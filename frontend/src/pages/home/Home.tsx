@@ -31,13 +31,13 @@ const Home = () => {
     let json
     let getJson
 
-    if(buttonId == 'submit'){
+    if (buttonId == 'submit') {
       json = await sendToBe(tweet, dateSubmitted)
-    }else if(buttonId == 'info'){
+    } else if (buttonId == 'info') {
       setTweet('')
-    }else if(buttonId == 'delete-all'){
+    } else if (buttonId == 'delete-all') {
       json = await deleteAll()
-    }else if(buttonId == 'delete-one'){
+    } else if (buttonId == 'delete-one') {
       const idToDelete = e.currentTarget.getAttribute('data-id')
       json = await deleteOne(idToDelete)
     }
