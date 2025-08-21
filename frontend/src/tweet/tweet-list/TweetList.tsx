@@ -1,5 +1,5 @@
 import './TweetList.css'
-import Tweet from '@/components/tweets/tweet/Tweet.tsx'
+import Tweet from '@/tweet/tweet/Tweet'
 
 type TweetType = {
   _id: string,

@@ -1,5 +1,5 @@
-import MainLayout from '@/layouts/main/MainLayout.tsx'
-import Home from '@/pages/home/Home.tsx'
+import MainLayout from '@/_layout/main/MainLayout'
+import Home from '@/home/home-page/HomePage'
 import Login from '@/pages/login/Login.tsx'
 import Register from '@/pages/register/Register.tsx'
 import NotFoundPage from '@/pages/not-found-page/NotFoundPage.tsx'

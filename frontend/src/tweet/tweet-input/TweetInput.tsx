@@ -1,5 +1,5 @@
-import Button from '@/components/button/Button.tsx'
-import TextArea from '@/components/text-area/TextArea.tsx'
+import Button from '@/ui/button/Button'
+import TextArea from '@/ui/text-area/TextArea'
 import './TweetInput.css'
 import { useActiveSubmitStore } from '@/store/useActiveSubmitStore'
 
