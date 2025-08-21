@@ -2,8 +2,9 @@ import Button from '@/_shared/ui/button/Button'
 import './Tweet.css'
 import { useState } from 'react'
 import TextArea from '@/_shared/ui/text-area/TextArea'
-import { useTweetHelpers } from '../_hooks/useTweetHeplers'
-import { useTweetsStore } from '@/_shared/store/useTweetsStore'
+import { useTweetsStore } from '@/tweets/_store/useTweetsStore'
+import { fetchTweets } from '../_services/fetchTweets'
+import { updateTweet } from '../_services/updateTweet'
 
 type TweeetProps = {
   id: string,
@@ -17,12 +18,11 @@ const Tweet = (props: TweeetProps) => {
   const [ editValue, setEditValue ] = useState( props.content )
   const [ isVisibleEdit, setIsVisibleEdit ] = useState(false)
   const [ isEditing, setIsEditing ] = useState(false)
-  const { fetchFromBe, updateOne } = useTweetHelpers()
   const setTweets = useTweetsStore((s) => s.setTweets)
 
   async function handleSave() {
-    const response = await updateOne(props.id, editValue)
-    const getJson = await fetchFromBe()
+    const response = await updateTweet(props.id, editValue)
+    const getJson = await fetchTweets()
     setIsEditing(false)
     setTweets(getJson)
     console.log(response)

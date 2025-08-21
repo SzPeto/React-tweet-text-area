@@ -2,10 +2,13 @@ import './HomePage.css'
 import TweetInput from '@/tweets/tweet-input/TweetInput'
 import TweetList from '@/tweets/tweet-list/TweetList'
 import { useEffect, useState } from 'react'
-import { useTweetHelpers } from '../../tweets/_hooks/useTweetHeplers'
 import { getDateTime } from '@/_shared/utils/getDateTime'
-import { useTweetsStore } from '@/_shared/store/useTweetsStore'
-import { useActiveSubmitStore } from '@/_shared/store/useActiveSubmitStore'
+import { useTweetsStore } from '@/tweets/_store/useTweetsStore'
+import { useActiveSubmitStore } from '@/tweets/_store/useActiveSubmitStore'
+import { fetchTweets } from '@/tweets/_services/fetchTweets'
+import { addTweet } from '@/tweets/_services/addTweet'
+import { deleteTweet } from '@/tweets/_services/deleteTweet'
+import { deleteAllTweets } from '@/tweets/_services/deleteAllTweets'
 
 const Home = () => {
 
@@ -13,14 +16,13 @@ const Home = () => {
   const [ isLoading, setIsLoading ] = useState(false)
   const tweets = useTweetsStore((s) => s.tweets) // s stands for state
   const setTweets = useTweetsStore((s) => s.setTweets)
-  const { fetchFromBe, sendToBe, deleteAll, deleteOne } = useTweetHelpers() // BE REST API functions
   const setIsActiveSumbit = useActiveSubmitStore((s) => s.setisActiveSubmit)
 
   // Initial fetch after startup
   useEffect(() => {
     (async () => {
       setIsLoading(true)
-      const getJson = await fetchFromBe()
+      const getJson = await fetchTweets()
       setIsLoading(false)
       setTweets(getJson)
     })()
@@ -35,18 +37,18 @@ const Home = () => {
 
     if (buttonId == 'submit') {
       setIsActiveSumbit(false)
-      json = await sendToBe(tweet, dateSubmitted)
+      json = await addTweet(tweet, dateSubmitted)
     } else if (buttonId == 'info') {
       setTweet('')
     } else if (buttonId == 'delete-all') {
-      json = await deleteAll()
+      json = await deleteAllTweets()
     } else if (buttonId == 'delete-one') {
       const idToDelete = e.currentTarget.getAttribute('data-id')
-      json = await deleteOne(idToDelete)
+      json = await deleteTweet(idToDelete)
     }
 
     console.log(json)
-    getJson = await fetchFromBe()
+    getJson = await fetchTweets()
     setTweets(getJson)
     setIsActiveSumbit(true)
   }

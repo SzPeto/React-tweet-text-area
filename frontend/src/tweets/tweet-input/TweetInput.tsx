@@ -1,7 +1,7 @@
 import Button from '@/_shared/ui/button/Button'
 import TextArea from '@/_shared/ui/text-area/TextArea'
 import './TweetInput.css'
-import { useActiveSubmitStore } from '@/_shared/store/useActiveSubmitStore'
+import { useActiveSubmitStore } from '@/tweets/_store/useActiveSubmitStore'
 
 type TweetInputProps = {
   value: string
