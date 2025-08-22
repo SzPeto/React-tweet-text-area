@@ -17,7 +17,7 @@ const FlashMessage = (props: FlashMessageProps) => {
       flex flex-col 
       justify-center items-center 
       rounded-lg 
-      shadow-xl 
+      shadow-md
       mx-auto my-4 
       w-fit 
       px-10 

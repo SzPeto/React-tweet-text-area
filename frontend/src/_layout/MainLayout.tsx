@@ -8,12 +8,15 @@ import FlashMessage from '@/_shared/ui/flash-message/FlashMessage'
 const MainLayout = () => {
     
   const flashMessage = useFlashMessageStore((s) => s.flashMessage)
+  const flashMessageType = useFlashMessageStore((s) => s.flashMessageType)
 
   return(
     <>
       <header><NavBar /></header>
       <main>
-        <FlashMessage value='Test' type='info' />
+        {
+          flashMessage && ( <FlashMessage value={ flashMessage } type={ flashMessageType } /> )
+        }
         <Outlet />
       </main>
       <footer><Footer /></footer>

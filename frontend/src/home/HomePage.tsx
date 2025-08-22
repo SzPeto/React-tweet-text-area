@@ -9,6 +9,7 @@ import { fetchTweets } from '@/tweets/_services/fetchTweets'
 import { addTweet } from '@/tweets/_services/addTweet'
 import { deleteTweet } from '@/tweets/_services/deleteTweet'
 import { deleteAllTweets } from '@/tweets/_services/deleteAllTweets'
+import { useFlashMessageStore } from '@/_shared/store/useFlashMessageStore'
 
 const Home = () => {
 
@@ -17,6 +18,8 @@ const Home = () => {
   const tweets = useTweetsStore((s) => s.tweets) // s stands for state
   const setTweets = useTweetsStore((s) => s.setTweets)
   const setIsActiveSumbit = useActiveSubmitStore((s) => s.setisActiveSubmit)
+  const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
+  const setFlashMessageType = useFlashMessageStore((s) => s.setFlashMessageType)
 
   // Initial fetch after startup
   useEffect(() => {
@@ -47,7 +50,15 @@ const Home = () => {
       json = await deleteTweet(idToDelete)
     }
 
-    if (json) setTweet('')
+    if (json) {
+      setTweet('')
+      setFlashMessage('Tweet added successfully!')
+      setFlashMessageType('success')
+    } else {
+      setFlashMessage('Error on inserting tweet!')
+      setFlashMessageType('warning')
+    }
+
     getJson = await fetchTweets()
     setTweets(getJson)
     setIsActiveSumbit(true)
