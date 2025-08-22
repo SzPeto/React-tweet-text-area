@@ -19,7 +19,6 @@ const Home = () => {
   const setTweets = useTweetsStore((s) => s.setTweets)
   const setIsActiveSumbit = useActiveSubmitStore((s) => s.setisActiveSubmit)
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
-  const setFlashMessageType = useFlashMessageStore((s) => s.setFlashMessageType)
 
   // Initial fetch after startup
   useEffect(() => {
@@ -52,11 +51,9 @@ const Home = () => {
 
     if (json) {
       setTweet('')
-      setFlashMessage('Tweet added successfully!')
-      setFlashMessageType('success')
+      setFlashMessage('Tweet added successfully!', 'success')
     } else {
-      setFlashMessage('Error on inserting tweet!')
-      setFlashMessageType('warning')
+      setFlashMessage('Error on inserting tweet', 'warning')
     }
 
     getJson = await fetchTweets()
