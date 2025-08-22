@@ -1,5 +1,5 @@
 import MainLayout from '@/_layout/MainLayout'
-import Home from '@/home/home-page/HomePage'
+import Home from '@/home/HomePage'
 import Login from '@/login/Login'
 import Register from '@/login/Register'
 import NotFoundPage from '@/home/not-found-page/NotFoundPage'
