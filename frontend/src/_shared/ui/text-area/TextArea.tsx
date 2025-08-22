@@ -3,6 +3,7 @@ import './TextArea.css'
 type TextAreaProps = {
   value?: string,
   onChange: (...args: any[]) => any
+  placeholder: string
 }
 
 const TextArea = (props: TextAreaProps) => {
@@ -12,6 +13,7 @@ const TextArea = (props: TextAreaProps) => {
       value={ props.value }
       onChange={ props.onChange }
       rows={ 4 }
+      placeholder={ props.placeholder }
     />
   )
 }

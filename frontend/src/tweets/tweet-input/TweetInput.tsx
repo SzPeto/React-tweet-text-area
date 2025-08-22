@@ -6,7 +6,8 @@ import { useActiveSubmitStore } from '@/tweets/_store/useActiveSubmitStore'
 type TweetInputProps = {
   value: string
   onChange: (...args: any[]) => any,
-  onClick: (...args: any[]) => any
+  onClick: (...args: any[]) => any,
+  placeholder: string
 }
 
 const TweetInput = (props: TweetInputProps) => {
@@ -16,9 +17,15 @@ const TweetInput = (props: TweetInputProps) => {
   return (
     <div className='tweet-input-container-l2'>
       <div className="upper-container">
-        <TextArea value={ props.value } onChange={ props.onChange } />
+        <TextArea 
+          value={ props.value } 
+          onChange={ props.onChange } 
+          placeholder={ props.placeholder } 
+        />
       </div>
       <div className="lower-container">
+        { /* Disabling the submit button while submitting isn't done to prevent accidentally submitting the same tweet
+             multiple times */ }
         {
           isActiveSubmit ? (
             <Button text='Submit' type='submit' onClick={ props.onClick } />

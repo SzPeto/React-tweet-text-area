@@ -12,7 +12,7 @@ import { deleteAllTweets } from '@/tweets/_services/deleteAllTweets'
 
 const Home = () => {
 
-  const [ tweet, setTweet ] = useState('Tweet me!')
+  const [ tweet, setTweet ] = useState('')
   const [ isLoading, setIsLoading ] = useState(false)
   const tweets = useTweetsStore((s) => s.tweets) // s stands for state
   const setTweets = useTweetsStore((s) => s.setTweets)
@@ -47,7 +47,7 @@ const Home = () => {
       json = await deleteTweet(idToDelete)
     }
 
-    console.log(json)
+    if (json) setTweet('')
     getJson = await fetchTweets()
     setTweets(getJson)
     setIsActiveSumbit(true)
@@ -60,6 +60,7 @@ const Home = () => {
           onClick={ handleClick }  /* Passed down to : TweetInput/TextArea/Button */
           onChange={ (e) => setTweet(e.target.value) } 
           value={ tweet } 
+          placeholder={ 'Tweet me!' }
         />
       </div>
       <hr />
