@@ -13,7 +13,13 @@ export class UsersService {
   async createUser(createUserDto: CreateUserDto) {
     const userExist = await this.userModel.findOne({ userName: createUserDto.userName })
     if (userExist) throw new ConflictException(`User with name ${ createUserDto.userName } already exists!`)
-    const hashedPw = bcrypt
+    const hashedPw = await bcrypt.hash(createUserDto.password, 10)
+    const user = new this.userModel({ 
+      userName: createUserDto.userName, 
+      email: createUserDto.email, 
+      password: hashedPw 
+    })
+    return user.save()
   }
 
 }

@@ -3,7 +3,6 @@ import { TweetsService } from './tweets.service'
 import { CreateTweetDto } from './dto/create-tweet.dto'
 import { UpdateTweetDto } from './dto/update-tweet.dto'
 import { TweetDocument } from './schemas/tweet.schema'
-import { DeleteResult } from 'mongoose'
 
 @Controller('tweets')
 export class TweetsController {
