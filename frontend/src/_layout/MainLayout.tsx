@@ -14,7 +14,15 @@ const MainLayout = () => {
       <header><NavBar /></header>
       <main>
         {
-          flashMessage[0] && ( <FlashMessage value={ flashMessage[0] } type={ flashMessage[1] } /> )
+          flashMessage.message ? (
+            <div>
+              <FlashMessage value={ flashMessage.message } type={ flashMessage.type } />
+            </div>
+          ) : (
+            <div className='invisible'>
+              <FlashMessage value={ flashMessage.message } type={ flashMessage.type } />
+            </div>
+          )
         }
         <Outlet />
       </main>
