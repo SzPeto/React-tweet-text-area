@@ -6,6 +6,8 @@ import { ConfigModule } from '@nestjs/config'
 @Module({
   imports: [
     TweetsModule,
+    UsersModule,
+    AuthModule,
     ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRoot(process.env.MONGODB_URI ?? 'mongodb://localhost:27017/tweetsdb')
   ],
