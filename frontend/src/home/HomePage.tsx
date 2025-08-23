@@ -40,21 +40,29 @@ const Home = () => {
     if (buttonId == 'submit') {
       setIsActiveSumbit(false)
       json = await addTweet(tweet, dateSubmitted)
+      if (json) {
+        setTweet('')
+        setFlashMessage('Tweet added successfully!', 'success')
+      } else {
+        setFlashMessage('Error on inserting tweet', 'warning')
+      }
     } else if (buttonId == 'info') {
       setTweet('')
     } else if (buttonId == 'delete-all') {
       json = await deleteAllTweets()
+      if (json) {
+        setFlashMessage('All tweets deleted successfully!', 'success')
+      } else {
+        setFlashMessage('Error on deleting tweets', 'warning')
+      }
     } else if (buttonId == 'delete-one') {
       const idToDelete = e.currentTarget.getAttribute('data-id')
       json = await deleteTweet(idToDelete)
-    }
-
-    if (json) {
-      setTweet('')
-      setFlashMessage('Tweet added successfully!', 'success')
-      setTimeout(() => { setFlashMessage('New message', 'info') }, 1000)
-    } else {
-      setFlashMessage('Error on inserting tweet', 'warning')
+      if (json) {
+        setFlashMessage('Tweet deleted successfully!', 'success')
+      } else {
+        setFlashMessage('Error on deleting tweet', 'warning')
+      }
     }
 
     getJson = await fetchTweets()

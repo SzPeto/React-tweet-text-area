@@ -13,21 +13,21 @@ const MainLayout = () => {
     <>
       <header><NavBar /></header>
       <main>
-        {
-          flashMessage.message ? (
-            <div>
-              <FlashMessage value={ flashMessage.message } type={ flashMessage.type } />
-            </div>
-          ) : (
-            <div className='invisible'
-            >
-              <FlashMessage value={ flashMessage.message } type={ flashMessage.type } />
-            </div>
-          )
-        }
-        <Outlet />
+        <div className='pt-8'>
+          <Outlet />
+        </div>
       </main>
       <footer><Footer /></footer>
+
+      {/* Floating Flash Message */}
+      {flashMessage.message && (
+        <div 
+          className="fixed top-18 left-1/2 transform -translate-x-1/2 z-50"
+        >
+          <FlashMessage value={flashMessage.message} type={flashMessage.type} />
+        </div>
+      )}
+
     </>
   )
 }
