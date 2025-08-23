@@ -4,7 +4,7 @@ import { HydratedDocument } from "mongoose"
 export type TweetDocument = HydratedDocument<Tweet>
 
 @Schema({ timestamps: true })
-export class Tweet{
+export class Tweet {
   @Prop({ required: true, trim: true })
   content: string
 
