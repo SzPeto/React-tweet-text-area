@@ -1,4 +1,4 @@
-import { ConflictException, Injectable } from '@nestjs/common'
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common'
 import { User, UserDocument } from './schemas/users.schema'
 import { Model } from 'mongoose'
 import { InjectModel } from '@nestjs/mongoose'
@@ -20,6 +20,12 @@ export class UsersService {
       password: hashedPw 
     })
     return user.save()
+  }
+
+  async findUserByName(userName: string) {
+    const user = await this.userModel.findOne({ userName: userName })
+    if (!user) throw new NotFoundException(`User with name : ${ userName } doesn't exist`)
+    return user
   }
 
 }
