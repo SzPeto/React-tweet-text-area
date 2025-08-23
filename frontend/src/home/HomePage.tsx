@@ -52,6 +52,7 @@ const Home = () => {
     if (json) {
       setTweet('')
       setFlashMessage('Tweet added successfully!', 'success')
+      setTimeout(() => { setFlashMessage('New message', 'info') }, 1000)
     } else {
       setFlashMessage('Error on inserting tweet', 'warning')
     }

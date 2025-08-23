@@ -19,7 +19,8 @@ const MainLayout = () => {
               <FlashMessage value={ flashMessage.message } type={ flashMessage.type } />
             </div>
           ) : (
-            <div className='invisible'>
+            <div className='invisible'
+            >
               <FlashMessage value={ flashMessage.message } type={ flashMessage.type } />
             </div>
           )
