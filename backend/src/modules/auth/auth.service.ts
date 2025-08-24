@@ -17,7 +17,6 @@ export class AuthService {
     // The destructuring extracts the password and the left fields besides password separately, e.g. : 
     // safeFields = { username: "peter", email: "a@b.com" }
     const { password, ...safeFields } = user.toObject ? user.toObject() : user
-    console.log(`From AuthService/validateUser safe fields : ${ safeFields }`)
     return safeFields
   }
 

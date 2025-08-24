@@ -12,7 +12,9 @@ export class AuthController {
   @UseGuards(LocalAuthGuard) 
   @Post('login')
   login(@Request() request) { // You can omit the use of DTO, since LocalStrategy and Passport substitute it
-    console.log(`Hello from AuthService/login, request : ${ request }, ${ process.env.JWT_SECRET }`)
+    console.log('Request body:', JSON.stringify(request.body, null, 2));
+    console.log('Request headers:', JSON.stringify(request.headers, null, 2));
+    console.log('Request user:', JSON.stringify(request.user, null, 2));
     return this.authService.login(request.user) // This returns the access token for frontend
   }
 
