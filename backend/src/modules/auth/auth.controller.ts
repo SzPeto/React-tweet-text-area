@@ -10,7 +10,7 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  login(@Request() request) {
+  login(@Request() request) { // You can omit the use of DTO, since LocalStrategy and Passport substitute it
     console.log(`Hello from AuthService/login, request : ${ request }`)
     return this.authService.login(request.user)
   }

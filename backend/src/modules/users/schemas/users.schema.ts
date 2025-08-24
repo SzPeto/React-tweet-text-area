@@ -17,6 +17,10 @@ export class User {
 
   @Prop({ default: '/uploads/profile-pictures/Default - user.jpg' })
   picturePath: string
+
+  @Prop({ default: false })
+  isAdmin: boolean
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)

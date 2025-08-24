@@ -1,4 +1,4 @@
-import { IsOptional, IsString, MinLength } from 'class-validator'
+import { IsBoolean, IsOptional, IsString, MinLength } from 'class-validator'
 
 export class CreateUserDto {
 
@@ -17,5 +17,9 @@ export class CreateUserDto {
   @IsString()
   @IsOptional()
   picturePath: string
+
+  @IsBoolean()
+  @IsOptional()
+  isAdmin: boolean
 
 }
