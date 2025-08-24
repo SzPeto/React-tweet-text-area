@@ -19,6 +19,7 @@ export class UsersService {
       email: createUserDto.email, 
       password: hashedPw 
     })
+    console.log('Hello from UsersService/createUser')
     return user.save()
   }
 

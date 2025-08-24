@@ -12,6 +12,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
+    console.log('Hello from JwtStrategy/validate')
     // payload comes from sign({ userId, username }) in AuthService
     return { userId: payload.sub, username: payload.username }
   }

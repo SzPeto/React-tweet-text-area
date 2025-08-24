@@ -9,7 +9,7 @@ export class UsersController {
 
   @Post('register')
   async createUser(@Body() createUserDto: CreateUserDto) {
-    console.log('inside users controller')
+    console.log('Hello from UsersController/createUser')
     await this.usersService.createUser(createUserDto)
   }
 

@@ -17,12 +17,14 @@ export class AuthService {
     // The destructuring extracts the password and the left fields besides password separately, e.g. : 
     // safeFields = { username: "peter", email: "a@b.com" }
     const { password, ...safeFields } = user.toObject ? user.toObject() : user
+    console.log(`From AuthService/validateUser safe fields : ${ safeFields }`)
     return safeFields
   }
 
   async login(user: any) {
     // ?? Nullish coalescing operator, use 'a' if not null or undefined, otherwise use 'b'
     const payload = { username: user.userName, sub: user._id ?? user.id }
+    console.log(`From AuthService/login username, sub : ${ payload.username }, ${ payload.sub }`)
     return { access_token: this.jwtService.sign(payload) }
   }
 
