@@ -24,8 +24,8 @@ export class AuthService {
   async login(user: any) {
     // ?? Nullish coalescing operator, use 'a' if not null or undefined, otherwise use 'b'
     const payload = { username: user.userName, sub: user._id ?? user.id }
-    console.log(`From AuthService/login username, sub : ${ payload.username }, ${ payload.sub }`)
-    return { access_token: this.jwtService.sign(payload) }
+    console.log(`User logged in successfully : ${ payload.username }, ${ payload.sub }`)
+    return { access_token: this.jwtService.sign(payload) } // This goes back to frontend through API
   }
 
 }
