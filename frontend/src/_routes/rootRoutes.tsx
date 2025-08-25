@@ -1,8 +1,8 @@
 import MainLayout from '@/_layout/MainLayout'
-import Home from '@/home/HomePage'
+import Home from '@/home/home-page/HomePage'
 import Login from '@/login/Login'
 import Register from '@/login/Register'
-import NotFoundPage from '@/home/not-found-page/NotFoundPage'
+import NotFoundPage from '@/_layout/not-found-page/NotFoundPage'
 
 
 export const rootRoutes = {
