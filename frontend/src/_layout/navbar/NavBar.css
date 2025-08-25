@@ -10,6 +10,7 @@
     text-gray-500
     font-semibold
     fixed top-0 left-0
+    z-40
     w-[100%];
 }
 
