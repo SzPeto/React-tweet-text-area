@@ -20,7 +20,7 @@ const FlashMessage = (props: FlashMessageProps) => {
       shadow-md
       mx-auto my-4 
       w-fit 
-      px-10 
+      px-10 py-3 
       ${ classTw[props.type] }
     `}>
       <p>{ props.value }</p>

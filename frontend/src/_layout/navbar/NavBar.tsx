@@ -14,7 +14,7 @@ const NavBar = () => {
         <NavLink to='/' style={{ textDecoration: 'none' }}>
           <div className='navbar-brand'>
             <img src={ logo } className='brand-image' />
-            <p>Peter's Tweet</p>
+            <p className='min-w-[150px]'>Peter's Tweet</p>
           </div>
         </NavLink>
 
@@ -27,7 +27,7 @@ const NavBar = () => {
           ☰
         </button>
 
-        <div className='flex flex-row w-[90%]'>
+        <div className='flex flex-row w-[80%]'>
           <div className='left-items-container'>
             <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>
               <li>
