@@ -5,7 +5,8 @@
     shadow-md
     w-full
     m-4
-    bg-white;
+    bg-white
+    p-2;
 }
 
 .upper-container {
