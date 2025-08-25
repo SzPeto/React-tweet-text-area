@@ -1,4 +1,4 @@
-import Button from '@/_shared/ui/button/Button'
+import MuiButton from '@/_shared/ui/mui-button/MuiButton'
 import TextArea from '@/_shared/ui/text-area/TextArea'
 import './TweetInput.css'
 import { useActiveSubmitStore } from '@/tweets/_store/useActiveSubmitStore'
@@ -28,13 +28,13 @@ const TweetInput = (props: TweetInputProps) => {
              multiple times */ }
         {
           isActiveSubmit ? (
-            <Button text='Submit' type='submit' onClick={ props.onClick } />
+            <MuiButton text='Submit' type='submit' onClick={ props.onClick } />
           ) : (
-            <Button text='Submit' type='disabled' onClick={ () => {} } />
+            <MuiButton text='Submit' type='disabled' onClick={ () => {} } />
           )
         }
-        <Button text='Clear text' type='info' onClick={ props.onClick } />
-        <Button 
+        <MuiButton text='Clear text' type='info' onClick={ props.onClick } />
+        <MuiButton 
           text='Delete all tweets' 
           type='delete-all' 
           onClick={ 

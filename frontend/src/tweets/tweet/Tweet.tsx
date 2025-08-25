@@ -1,10 +1,10 @@
-import Button from '@/_shared/ui/button/Button'
 import './Tweet.css'
 import { useState } from 'react'
 import TextArea from '@/_shared/ui/text-area/TextArea'
 import { useTweetsStore } from '@/tweets/_store/useTweetsStore'
 import { fetchTweets } from '../_services/fetchTweets'
 import { updateTweet } from '../_services/updateTweet'
+import MuiButton from '@/_shared/ui/mui-button/MuiButton'
 
 type TweeetProps = {
   id: string,
@@ -31,7 +31,7 @@ const Tweet = (props: TweeetProps) => {
   // Reusable inline component Buttons, to avoid code duplication
   const Buttons = () => (
     <div className='delete-edit-button-container'>
-      <Button 
+      <MuiButton 
         text='Delete tweet' 
         type='delete-one' 
         onClick={ 
@@ -41,8 +41,8 @@ const Tweet = (props: TweeetProps) => {
         } 
         data={ props.id } 
       />
-      <Button 
-        text={ isEditing ? '' : 'Edit tweet' } 
+      <MuiButton 
+        text='Edit tweet'
         type='update' onClick={ () => setIsEditing(!isEditing) } 
         data={ props.id }
         hidden={ isEditing ? true : false }
@@ -61,10 +61,14 @@ const Tweet = (props: TweeetProps) => {
         {
           isEditing ? (
             <div className='edit-container'>
-              <TextArea onChange={ (e) => setEditValue(e.target.value) } value={ editValue } />
+              <TextArea 
+                onChange={ (e) => setEditValue(e.target.value) } 
+                value={ editValue } 
+                placeholder='Edit tweet'
+                />
               <div>
-                <Button text='Save' onClick={ handleSave } type='submit' />
-                <Button text='Cancel' onClick={ () => setIsEditing(false) } type='info' />
+                <MuiButton text='Save' onClick={ handleSave } type='submit' />
+                <MuiButton text='Cancel' onClick={ () => setIsEditing(false) } type='info' />
               </div>
             </div>
           ) : (

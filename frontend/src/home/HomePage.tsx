@@ -74,7 +74,7 @@ const Home = () => {
     <div className='home-container'>
       <div className='tweet-input-container-l1'>
         <TweetInput 
-          onClick={ handleClick }  /* Passed down to : TweetInput/TextArea/Button */
+          onClick={ handleClick }
           onChange={ (e) => setTweet(e.target.value) } 
           value={ tweet } 
           placeholder={ 'Tweet me!' }
