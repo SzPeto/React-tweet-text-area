@@ -8,9 +8,9 @@
   @apply
     bg-cyan-100
     text-gray-500
+    font-semibold
     fixed top-0 left-0
-    w-[100%]
-    z-50;
+    w-[100%];
 }
 
 .navbar-container {
@@ -50,7 +50,15 @@
   @apply
     flex items-center
     gap-1
-    list-none;
+    list-none
+    max-md:hidden
+    max-md:flex-col
+    max-md:gap-0
+    max-md:bg-cyan-50
+    max-md:absolute max-md:top-[60px] max-md:left-[10px] max-md:right-[10px]
+    max-md:p-5
+    max-md:rounded-md
+    max-md:border-cyan-200;
 }
 
 /* List items */
@@ -62,49 +70,24 @@
 
 /* Hamburger button */
 .menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: rgb(130, 130, 130);
-  cursor: pointer;
+  @apply
+    hidden
+    bg-transparent
+    border-0
+    text-[24px] text-gray-400
+    cursor-pointer
+    max-md:block;
 }
 
+.navbar-links.active {
+  @apply
+    max-md:flex;
+}
 
-/*
-============================================================================================================================
-                                             Responsive style
-============================================================================================================================
-*/
-
-@media (max-width: 768px) {
-    .menu-toggle {
-      display: block;
-    }
-
-    .navbar-links {
-      display: none;
-      flex-direction: column;
-      gap: 0;
-      background-color: rgb(242, 255, 255);
-      position: absolute;
-      top: 60px;
-      left: 10px;
-      right: 10px;
-      padding: 18px;
-      border-radius: 4px;
-      border: 1px solid rgb(0, 216, 216);
-    }
-
-    .navbar-links.active {
-      display: flex;
-    }
-
-    .navbar-links li {
-      border-radius: 4px;
-      border: 1px solid rgb(0, 216, 216);
-      width: 90%;
-      margin: 4px;
-    }
-
+.navbar-links li {
+  @apply
+    max-md:rounded-sm
+    max-md:border-cyan-200
+    max-md:w-[90%]
+    max-md:m-1;
 }

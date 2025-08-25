@@ -9,6 +9,8 @@ const MainLayout = () => {
     
   const flashMessage = useFlashMessageStore((s) => s.flashMessage)
 
+  console.log('flash message : ', flashMessage.message)
+
   return(
     <>
       <header><NavBar /></header>
@@ -21,7 +23,7 @@ const MainLayout = () => {
 
       {/* Floating Flash Message */}
       {flashMessage.message && (
-        <div className='fixed top-18 left-1/2 transform -translate-x-1/2 z-50'>
+        <div className='fixed top-20 left-1/2 transform -translate-x-1/2 z-50'>
           <FlashMessage value={flashMessage.message} type={flashMessage.type} />
           <p className='test'>Test</p>
         </div>
