@@ -1,8 +1,6 @@
 .not-found-page-container {
-  font-size: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  @apply
+    text-2xl
+    flex flex-col justify-center items-center
+    w-full
 }
