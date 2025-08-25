@@ -39,7 +39,7 @@ const NavBar = () => {
 
         <div className='right-items-container'>
           <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>
-            <li>
+            <li className='mr-4'>
               <NavLink to='/login'>
                 Login
               </NavLink>

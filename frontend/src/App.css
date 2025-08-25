@@ -1,10 +1,10 @@
 * {
   box-sizing: border-box;
+  
 }
 
 .body {
-  background-color: rgb(240, 255, 255);
-  font-family: Bahnschrift;
-  color: rgb(131, 131, 131);
-  margin: 0px;
+  @apply
+    bg-cyan-50
+    text-gray-600;
 }
