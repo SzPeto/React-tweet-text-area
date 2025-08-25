@@ -27,30 +27,33 @@ const NavBar = () => {
           ☰
         </button>
 
-        <div className='left-items-container'>
-          <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>
-            <li>
-              <NavLink to='/'>
-                Home
-              </NavLink>
-            </li>
-          </ul>
-        </div>
+        <div className='flex flex-row w-[90%]'>
+          <div className='left-items-container'>
+            <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>
+              <li>
+                <NavLink to='/'>
+                  Home
+                </NavLink>
+              </li>
+            </ul>
+          </div>
 
-        <div className='right-items-container'>
-          <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>
-            <li className='mr-4'>
-              <NavLink to='/login'>
-                Login
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to='/register'>
-                Register
-              </NavLink>
-            </li>
-          </ul>
+          <div className='right-items-container'>
+            <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>
+              <li className='mr-4'>
+                <NavLink to='/login'>
+                  Login
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to='/register'>
+                  Register
+                </NavLink>
+              </li>
+            </ul>
+          </div>
         </div>
+        
 
       </div>
     </nav>

@@ -5,7 +5,8 @@ type MuiButtonProps = {
   type?: 'submit' | 'info' | 'get' | 'delete-all' | 'delete-one' | 'update' | 'disabled',
   data?: string | number,
   hidden?: boolean,
-  onClick: (...args: any[]) => any
+  onClick: (...args: any[]) => any,
+  size?: 'small' | 'medium' | 'large'
 }
 
 const buttonColor: any = {
@@ -20,6 +21,7 @@ const buttonColor: any = {
 
 const MuiButton = (props: MuiButtonProps) => {
   if (props.hidden) return null
+  if (props.type == 'disabled') return (<Button disabled >{props.text ?? 'Push me'}</Button>)
 
   return (
     <Button
@@ -29,6 +31,7 @@ const MuiButton = (props: MuiButtonProps) => {
       variant="contained"
       color={ buttonColor[props.type ?? 'info'] }
       sx={{ margin: '10px' }}
+      size={ props.size ?? 'medium' }
     >
       {props.text ?? 'Push me'}
     </Button>
