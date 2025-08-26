@@ -1,26 +1,28 @@
-import './Tweet.css'
+import './TweetItem.css'
 import { useState } from 'react'
 import TextArea from '@/ui/text-area/TextArea'
 import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
-import { fetchTweets } from '../_services/fetchTweets'
-import { updateTweet } from '../_services/updateTweet'
 import MuiButton from '@/ui/mui-button/MuiButton'
+import { deleteTweet } from './deleteTweet'
+import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
+import { updateTweet } from './updateTweet'
+import { fetchTweets } from '../tweet-list/fetchTweets'
 
 type TweeetProps = {
   id: string,
   content: string,
-  dateSubmitted: string,
-  onClick: (...args: any[]) => any
+  dateSubmitted: string
 }
 
-const Tweet = (props: TweeetProps) => {
+const TweetItem = (props: TweeetProps) => {
 
   const [ editValue, setEditValue ] = useState( props.content )
   const [ isVisibleEdit, setIsVisibleEdit ] = useState(false)
   const [ isEditing, setIsEditing ] = useState(false)
   const setTweets = useTweetsStore((s) => s.setTweets)
+  const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
 
-  async function handleSave() {
+  const handleSave = async () => {
     const response = await updateTweet(props.id, editValue)
     const getJson = await fetchTweets()
     setIsEditing(false)
@@ -28,15 +30,25 @@ const Tweet = (props: TweeetProps) => {
     console.log(response)
   }
 
+  const handleDelete = async (e: any) => {
+    const idToDelete = e.currentTarget.getAttribute('data-id')
+    const json = await deleteTweet(idToDelete)
+    if (json) {
+      setFlashMessage('Tweet deleted successfully!', 'success')
+    } else {
+      setFlashMessage('Error on deleting tweet', 'warning')
+    }
+  }
+
   // Reusable inline component Buttons, to avoid code duplication
   const Buttons = () => (
     <div className='delete-edit-button-container'>
       <MuiButton 
         text='Delete tweet' 
-        type='delete-one' 
+        type='delete' 
         onClick={ 
           (e) => { 
-            if (window.confirm('Are you sure you want to delete this tweet?')) props.onClick(e) 
+            if (window.confirm('Are you sure you want to delete this tweet?')) handleDelete(e) 
           }
         } 
         data={ props.id }
@@ -101,4 +113,4 @@ const Tweet = (props: TweeetProps) => {
   )
 }
 
-export default Tweet
+export default TweetItem

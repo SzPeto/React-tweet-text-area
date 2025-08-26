@@ -2,7 +2,7 @@ import Button from '@mui/material/Button'
 
 type MuiButtonProps = {
   text?: string,
-  type?: 'submit' | 'info' | 'get' | 'delete-all' | 'delete-one' | 'update' | 'disabled',
+  type?: 'submit' | 'info' | 'get' | 'delete' | 'update' | 'disabled',
   data?: string | number,
   hidden?: boolean,
   onClick: (...args: any[]) => any,
@@ -13,8 +13,7 @@ const buttonColor: any = {
   'submit': 'success',
   'info': 'primary',
   'get': 'primary',
-  'delete-all': 'error',
-  'delete-one': 'error',
+  'delete': 'error',
   'update': 'success',
   'disabled': 'info'
 }

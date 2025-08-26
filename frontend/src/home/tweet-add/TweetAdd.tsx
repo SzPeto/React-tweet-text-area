@@ -1,45 +1,64 @@
 import MuiButton from '@/ui/mui-button/MuiButton'
 import TextArea from '@/ui/text-area/TextArea'
-import './TweetInput.css'
+import './TweetAdd.css'
 import { useState } from 'react'
+import { addTweet } from './addTweet'
+import { deleteAllTweets } from './deleteAllTweets'
+import { getDateTime } from '@/_utils/getDateTime'
+import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 
-type TweetInputProps = {
-  value: string
-  onChange: (...args: any[]) => any,
-  onClick: (...args: any[]) => any,
-  placeholder: string
-}
+const TweetAdd = () => {
 
-const TweetAdd = (props: TweetInputProps) => {
+  const [ tweet, setTweet ] = useState('')
+  const [ isActiveSubmit, setIsActiveSubmit ] = useState(true)
+  const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
 
-  const handleClick = (e: any) => {
-    
+  const handleSubmit = async () => {
+    const dateSubmitted = getDateTime()
+    setIsActiveSubmit(false)
+
+    const json = await addTweet(tweet, dateSubmitted)
+    if (json) {
+      setTweet('')
+      setFlashMessage('Tweet added successfully!', 'success')
+    } else {
+      setFlashMessage('Error on inserting tweet', 'warning')
+    }
+    setIsActiveSubmit(true)
   }
 
-  const [ isActiveSubmit, setIsActiveSubmit ] = useState(false)
+  const handleDeleteAll = async (e: any) => {
+    const json = await deleteAllTweets()
+
+    if (json) {
+      setFlashMessage('All tweets deleted successfully!', 'success')
+    } else {
+      setFlashMessage('Error on deleting tweets', 'warning')
+    }
+  }
 
   return (
     <div className='tweet-input-container-l2'>
       <div className="upper-container">
         <TextArea 
-          value={ props.value } 
-          onChange={ props.onChange } 
-          placeholder={ props.placeholder } 
+          value={ tweet } 
+          onChange={ (e) => setTweet(e.target.value) } 
+          placeholder={ 'Tweet me!' } 
         />
       </div>
       <div className="lower-container">
         {
           isActiveSubmit ? (
-            <MuiButton text='Submit' type='submit' onClick={ handleClick } />
+            <MuiButton text='Submit' type='submit' onClick={ handleSubmit } />
           ) : (
             <MuiButton text='Submit' type='disabled' onClick={ () => {} } />
           )
         }
-        <MuiButton text='Clear text' type='info' onClick={ handleClick } />
+        <MuiButton text='Clear text' type='info' onClick={ () => setTweet('') } />
         <MuiButton 
           text='Delete all tweets' 
-          type='delete-all' 
-          onClick={ (e) => { if (window.confirm('Are you sure you want to delete all tweets?')) handleClick(e) } 
+          type='delete' 
+          onClick={ (e) => { if (window.confirm('Are you sure you want to delete all tweets?')) handleDeleteAll(e) } 
           } 
         />
       </div>

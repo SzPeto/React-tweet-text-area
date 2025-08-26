@@ -4,11 +4,7 @@ import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
 import { useEffect, useState } from 'react'
 import { fetchTweets } from './fetchTweets'
 
-type TweetListProps = {
-  onClick: (...args: any[]) => any
-}
-
-const TweetList = (props: TweetListProps) => {
+const TweetList = () => {
 
   const tweets = useTweetsStore((s) => s.tweets)
   const setTweets = useTweetsStore((s) => s.setTweets)
@@ -19,8 +15,8 @@ const TweetList = (props: TweetListProps) => {
     (async () => {
       setIsLoading(true)
       const getJson = await fetchTweets()
-      setIsLoading(false)
       setTweets(getJson)
+      setIsLoading(false)
     })()
   }, [])
 
@@ -37,7 +33,6 @@ const TweetList = (props: TweetListProps) => {
                 content={ tweet.content }
                 dateSubmitted={ tweet.dateSubmitted }
                 key={ tweet._id }
-                onClick={ props.onClick }
               />
             ))) : (
               'There are no tweets available'
