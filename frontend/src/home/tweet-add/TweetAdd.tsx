@@ -6,10 +6,13 @@ import { addTweet } from './addTweet'
 import { deleteAllTweets } from './deleteAllTweets'
 import { getDateTime } from '@/_utils/getDateTime'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
+import { useTweetsStore } from '../tweet-list/useTweetsStore'
+import { fetchTweets } from '../tweet-list/fetchTweets'
 
 const TweetAdd = () => {
 
   const [ tweet, setTweet ] = useState('')
+  const setTweets = useTweetsStore((s) => s.setTweets)
   const [ isActiveSubmit, setIsActiveSubmit ] = useState(true)
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
 
@@ -18,6 +21,7 @@ const TweetAdd = () => {
     setIsActiveSubmit(false)
 
     const json = await addTweet(tweet, dateSubmitted)
+    const getJson = await fetchTweets()
     if (json) {
       setTweet('')
       setFlashMessage('Tweet added successfully!', 'success')
@@ -25,16 +29,18 @@ const TweetAdd = () => {
       setFlashMessage('Error on inserting tweet', 'warning')
     }
     setIsActiveSubmit(true)
+    setTweets(getJson)
   }
 
-  const handleDeleteAll = async (e: any) => {
+  const handleDeleteAll = async () => { // TODO make fetch after delete
     const json = await deleteAllTweets()
-
+    const getJson = await fetchTweets()
     if (json) {
       setFlashMessage('All tweets deleted successfully!', 'success')
     } else {
       setFlashMessage('Error on deleting tweets', 'warning')
     }
+    setTweets(getJson)
   }
 
   return (
@@ -58,7 +64,7 @@ const TweetAdd = () => {
         <MuiButton 
           text='Delete all tweets' 
           type='delete' 
-          onClick={ (e) => { if (window.confirm('Are you sure you want to delete all tweets?')) handleDeleteAll(e) } 
+          onClick={ () => { if (window.confirm('Are you sure you want to delete all tweets?')) handleDeleteAll() } 
           } 
         />
       </div>
