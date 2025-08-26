@@ -1,7 +1,7 @@
 import MuiButton from '@/ui/mui-button/MuiButton'
 import TextArea from '@/ui/text-area/TextArea'
 import './TweetInput.css'
-import { useActiveSubmitStore } from '@/tweets/_store/useActiveSubmitStore'
+import { useActiveSubmitStore } from '@/home/tweet-add/useActiveSubmitStore'
 
 type TweetInputProps = {
   value: string

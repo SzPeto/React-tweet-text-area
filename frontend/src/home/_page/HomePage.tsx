@@ -3,31 +3,20 @@ import TweetAdd from '@/home/tweet-add/TweetAdd'
 import TweetList from '@/home/tweet-list/TweetList'
 import { useEffect, useState } from 'react'
 import { getDateTime } from '@/_utils/getDateTime'
-import { useTweetsStore } from '@/tweets/_store/useTweetsStore'
-import { useActiveSubmitStore } from '@/tweets/_store/useActiveSubmitStore'
+import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
+import { useActiveSubmitStore } from '@/home/tweet-add/useActiveSubmitStore'
 import { fetchTweets } from '@/home/tweet-list/fetchTweets'
-import { addTweet } from '@/tweets/_services/addTweet'
-import { deleteTweet } from '@/tweets/_services/deleteTweet'
-import { deleteAllTweets } from '@/tweets/_services/deleteAllTweets'
+import { addTweet } from '@/home/tweet-add/addTweet'
+import { deleteTweet } from '@/home/tweet-item/deleteTweet'
+import { deleteAllTweets } from '@/home/tweet-add/deleteAllTweets'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 
 const Home = () => {
 
   const [ tweet, setTweet ] = useState('')
-  const [ isLoading, setIsLoading ] = useState(false)
   const setTweets = useTweetsStore((s) => s.setTweets)
   const setIsActiveSumbit = useActiveSubmitStore((s) => s.setisActiveSubmit)
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
-
-  // Initial fetch after startup
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true)
-      const getJson = await fetchTweets()
-      setIsLoading(false)
-      setTweets(getJson)
-    })()
-  }, [])
 
   // Handling button events
   async function handleClick(e: any) {
@@ -80,15 +69,9 @@ const Home = () => {
         />
       </div>
       <hr />
-      {
-        isLoading ? (
-          <p>Loading tweets...</p>
-        ) : (
-          <div className='tweet-list-container'>
-            <TweetList onClick={ handleClick } />
-          </div>
-        )
-      }
+      <div className='tweet-list-container'>
+        <TweetList onClick={ handleClick } />
+      </div>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import './Tweet.css'
 import { useState } from 'react'
 import TextArea from '@/ui/text-area/TextArea'
-import { useTweetsStore } from '@/tweets/_store/useTweetsStore'
+import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
 import { fetchTweets } from '../_services/fetchTweets'
 import { updateTweet } from '../_services/updateTweet'
 import MuiButton from '@/ui/mui-button/MuiButton'
