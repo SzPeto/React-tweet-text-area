@@ -1,4 +1,4 @@
-import type { Tweet } from '@/home/tweet-item/tweetType'
+import type { Tweet } from '@/home/tweet-list/tweetType'
 
 export async function updateTweet(id: string, tweet: string) {
 
