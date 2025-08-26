@@ -32,9 +32,10 @@ const TweetAdd = () => {
     setTweets(getJson)
   }
 
-  const handleDeleteAll = async () => { // TODO make fetch after delete
+  const handleDeleteAll = async () => {
     const json = await deleteAllTweets()
     const getJson = await fetchTweets()
+
     if (json) {
       setFlashMessage('All tweets deleted successfully!', 'success')
     } else {

@@ -33,11 +33,13 @@ const TweetItem = (props: TweeetProps) => {
   const handleDelete = async (e: any) => {
     const idToDelete = e.currentTarget.getAttribute('data-id')
     const json = await deleteTweet(idToDelete)
+    const getJson = await fetchTweets()
     if (json) {
       setFlashMessage('Tweet deleted successfully!', 'success')
     } else {
       setFlashMessage('Error on deleting tweet', 'warning')
     }
+    setTweets(getJson)
   }
 
   // Reusable inline component Buttons, to avoid code duplication
