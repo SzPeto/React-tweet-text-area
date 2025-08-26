@@ -91,13 +91,7 @@ const Tweet = (props: TweeetProps) => {
       <hr />
       <small>🗓️ { props.dateSubmitted }</small>
       <div className='on-desktop-container'>
-        {
-          isVisibleEdit ? (
-            <Buttons />
-          ) : (
-           <div></div> 
-          )
-        }
+        { isVisibleEdit && (<Buttons />) }
       </div>
       <div className='on-mobile-container'>
         <Buttons />

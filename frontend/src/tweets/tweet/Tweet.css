@@ -57,12 +57,14 @@
 
 .on-desktop-container {
   @apply
-    inline-block
-    max-md:hidden;
+    flex flex-row
+    max-md:hidden
+    h-8;
 }
 
 .on-mobile-container {
   @apply
     hidden
-    max-md:inline-block;
+    max-md:flex max-md:flex-row
+    max-md:h-8;
 }
