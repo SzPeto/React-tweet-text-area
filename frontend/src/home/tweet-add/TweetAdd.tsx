@@ -1,7 +1,7 @@
 import MuiButton from '@/ui/mui-button/MuiButton'
 import TextArea from '@/ui/text-area/TextArea'
 import './TweetInput.css'
-import { useActiveSubmitStore } from '@/home/tweet-add/useActiveSubmitStore'
+import { useState } from 'react'
 
 type TweetInputProps = {
   value: string
@@ -12,7 +12,11 @@ type TweetInputProps = {
 
 const TweetAdd = (props: TweetInputProps) => {
 
-  const isActiveSubmit = useActiveSubmitStore((s) => s.isActiveSubmit)
+  const handleClick = (e: any) => {
+    
+  }
+
+  const [ isActiveSubmit, setIsActiveSubmit ] = useState(false)
 
   return (
     <div className='tweet-input-container-l2'>
@@ -24,23 +28,18 @@ const TweetAdd = (props: TweetInputProps) => {
         />
       </div>
       <div className="lower-container">
-        { /* Disabling the submit button while submitting isn't done to prevent accidentally submitting the same tweet
-             multiple times */ }
         {
           isActiveSubmit ? (
-            <MuiButton text='Submit' type='submit' onClick={ props.onClick } />
+            <MuiButton text='Submit' type='submit' onClick={ handleClick } />
           ) : (
             <MuiButton text='Submit' type='disabled' onClick={ () => {} } />
           )
         }
-        <MuiButton text='Clear text' type='info' onClick={ props.onClick } />
+        <MuiButton text='Clear text' type='info' onClick={ handleClick } />
         <MuiButton 
           text='Delete all tweets' 
           type='delete-all' 
-          onClick={ 
-            (e) => {
-              if (window.confirm('Are you sure you want to delete all tweets?')) props.onClick(e)
-            } 
+          onClick={ (e) => { if (window.confirm('Are you sure you want to delete all tweets?')) handleClick(e) } 
           } 
         />
       </div>
