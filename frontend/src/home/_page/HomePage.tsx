@@ -1,11 +1,11 @@
 import './HomePage.css'
-import TweetInput from '@/home/tweet-add/TweetInput'
+import TweetAdd from '@/home/tweet-add/TweetAdd'
 import TweetList from '@/home/tweet-list/TweetList'
 import { useEffect, useState } from 'react'
 import { getDateTime } from '@/_utils/getDateTime'
 import { useTweetsStore } from '@/tweets/_store/useTweetsStore'
 import { useActiveSubmitStore } from '@/tweets/_store/useActiveSubmitStore'
-import { fetchTweets } from '@/tweets/_services/fetchTweets'
+import { fetchTweets } from '@/home/tweet-list/fetchTweets'
 import { addTweet } from '@/tweets/_services/addTweet'
 import { deleteTweet } from '@/tweets/_services/deleteTweet'
 import { deleteAllTweets } from '@/tweets/_services/deleteAllTweets'
@@ -15,7 +15,6 @@ const Home = () => {
 
   const [ tweet, setTweet ] = useState('')
   const [ isLoading, setIsLoading ] = useState(false)
-  const tweets = useTweetsStore((s) => s.tweets) // s stands for state
   const setTweets = useTweetsStore((s) => s.setTweets)
   const setIsActiveSumbit = useActiveSubmitStore((s) => s.setisActiveSubmit)
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
@@ -73,7 +72,7 @@ const Home = () => {
   return(
     <div className='home-container'>
       <div className='tweet-input-container-l1'>
-        <TweetInput 
+        <TweetAdd 
           onClick={ handleClick }
           onChange={ (e) => setTweet(e.target.value) } 
           value={ tweet } 
@@ -86,7 +85,7 @@ const Home = () => {
           <p>Loading tweets...</p>
         ) : (
           <div className='tweet-list-container'>
-            <TweetList tweets={ tweets } onClick={ handleClick } />
+            <TweetList onClick={ handleClick } />
           </div>
         )
       }

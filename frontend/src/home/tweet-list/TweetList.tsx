@@ -1,23 +1,19 @@
 import './TweetList.css'
-import Tweet from '@/tweets/tweet/Tweet'
-
-type TweetType = {
-  _id: string,
-  content: string,
-  dateSubmitted: string
-}
+import Tweet from '@/home/tweet-item/TweetItem'
+import { useTweetsStore } from '@/tweets/_store/useTweetsStore'
 
 type TweetListProps = {
-  tweets: TweetType[],
   onClick: (...args: any[]) => any
 }
 
 const TweetList = (props: TweetListProps) => {
 
+  const tweets = useTweetsStore((s) => s.tweets)
+
   return (
     <div className='tweet-list-container-l2'>
-      {Array.isArray(props.tweets) && props.tweets.length > 0 ? 
-        [...props.tweets].reverse().map((tweet) => (
+      {Array.isArray(tweets) && tweets.length > 0 ? 
+        [...tweets].reverse().map((tweet) => (
           <Tweet 
             id={ tweet._id } 
             content={ tweet.content }

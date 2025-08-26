@@ -1,4 +1,4 @@
-import type { Tweet } from '@/home/tweet-list/tweet'
+import type { Tweet } from '@/home/tweet-list/tweetType'
 
 export async function addTweet(tweet: string, dateSubmitted: string) {
 

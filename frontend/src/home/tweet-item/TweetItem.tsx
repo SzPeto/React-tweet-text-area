@@ -44,7 +44,8 @@ const Tweet = (props: TweeetProps) => {
       />
       <MuiButton 
         text='Edit tweet'
-        type='update' onClick={ () => setIsEditing(!isEditing) } 
+        type='update' 
+        onClick={ () => setIsEditing(true) } 
         data={ props.id }
         hidden={ isEditing ? true : false }
         size='small'

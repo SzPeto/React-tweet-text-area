@@ -10,7 +10,7 @@ type TweetInputProps = {
   placeholder: string
 }
 
-const TweetInput = (props: TweetInputProps) => {
+const TweetAdd = (props: TweetInputProps) => {
 
   const isActiveSubmit = useActiveSubmitStore((s) => s.isActiveSubmit)
 
@@ -48,4 +48,4 @@ const TweetInput = (props: TweetInputProps) => {
   )
 }
 
-export default TweetInput
+export default TweetAdd
