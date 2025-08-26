@@ -1,7 +1,7 @@
-import MainLayout from '@/_layout/MainLayout'
-import Home from '@/home/home-page/HomePage'
-import Login from '@/login/Login'
-import Register from '@/login/Register'
+import MainLayout from '@/_layout/main/MainLayout'
+import Home from '@/home/_page/HomePage'
+import Login from '@/login/_login-page/Login'
+import Register from '@/login/_register-page/Register'
 import NotFoundPage from '@/_layout/not-found-page/NotFoundPage'
 
 

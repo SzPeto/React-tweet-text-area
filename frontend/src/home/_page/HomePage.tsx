@@ -1,15 +1,15 @@
 import './HomePage.css'
-import TweetInput from '@/tweets/tweet-input/TweetInput'
-import TweetList from '@/tweets/tweet-list/TweetList'
+import TweetInput from '@/home/tweet-add/TweetInput'
+import TweetList from '@/home/tweet-list/TweetList'
 import { useEffect, useState } from 'react'
-import { getDateTime } from '@/_shared/utils/getDateTime'
+import { getDateTime } from '@/_utils/getDateTime'
 import { useTweetsStore } from '@/tweets/_store/useTweetsStore'
 import { useActiveSubmitStore } from '@/tweets/_store/useActiveSubmitStore'
 import { fetchTweets } from '@/tweets/_services/fetchTweets'
 import { addTweet } from '@/tweets/_services/addTweet'
 import { deleteTweet } from '@/tweets/_services/deleteTweet'
 import { deleteAllTweets } from '@/tweets/_services/deleteAllTweets'
-import { useFlashMessageStore } from '@/_shared/store/useFlashMessageStore'
+import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 
 const Home = () => {
 

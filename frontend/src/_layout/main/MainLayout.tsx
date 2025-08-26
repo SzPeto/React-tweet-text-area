@@ -2,8 +2,8 @@ import NavBar from '@/_layout/navbar/NavBar'
 import Footer from '@/_layout/footer/Footer'
 import { Outlet } from 'react-router-dom'
 import './MainLayout.css'
-import { useFlashMessageStore } from '@/_shared/store/useFlashMessageStore'
-import FlashMessage from '@/_shared/ui/flash-message/FlashMessage'
+import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
+import FlashMessage from '@/ui/flash/FlashMessage'
 
 const MainLayout = () => {
     

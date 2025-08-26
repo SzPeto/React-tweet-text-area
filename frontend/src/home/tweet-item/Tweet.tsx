@@ -1,10 +1,10 @@
 import './Tweet.css'
 import { useState } from 'react'
-import TextArea from '@/_shared/ui/text-area/TextArea'
+import TextArea from '@/ui/text-area/TextArea'
 import { useTweetsStore } from '@/tweets/_store/useTweetsStore'
 import { fetchTweets } from '../_services/fetchTweets'
 import { updateTweet } from '../_services/updateTweet'
-import MuiButton from '@/_shared/ui/mui-button/MuiButton'
+import MuiButton from '@/ui/mui-button/MuiButton'
 
 type TweeetProps = {
   id: string,
@@ -67,7 +67,7 @@ const Tweet = (props: TweeetProps) => {
                 onChange={ (e) => setEditValue(e.target.value) } 
                 value={ editValue } 
                 placeholder='Edit tweet'
-                />
+              />
               <div>
                 <MuiButton 
                   text='Save' 

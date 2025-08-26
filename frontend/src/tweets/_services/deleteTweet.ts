@@ -1,4 +1,4 @@
-import type { Tweet } from '@/tweets/tweet/types/tweet'
+import type { Tweet } from '@/home/tweet-list/tweet'
 
 export async function deleteTweet(id: string) {
 

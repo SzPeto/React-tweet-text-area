@@ -1,5 +1,5 @@
-import MuiButton from '@/_shared/ui/mui-button/MuiButton'
-import TextArea from '@/_shared/ui/text-area/TextArea'
+import MuiButton from '@/ui/mui-button/MuiButton'
+import TextArea from '@/ui/text-area/TextArea'
 import './TweetInput.css'
 import { useActiveSubmitStore } from '@/tweets/_store/useActiveSubmitStore'
 
