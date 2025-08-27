@@ -1,8 +1,7 @@
-import type { Tweet } from '@/home/tweet-list/tweetType'
 
 export async function deleteTweet(id: string) {
 
-  let json: Tweet[] = []
+  let json
 
   try {
     const response = await fetch(`/api/tweets/${id}`, {
