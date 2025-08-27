@@ -38,6 +38,9 @@
 .navbar-links-left li,
 .navbar-links-right li {
   @apply
+    p-3
+    rounded-full
+  hover:bg-cyan-200
     max-md:rounded-md
     max-md:border-2 max-md:border-cyan-300
     max-md:w-[90%]
