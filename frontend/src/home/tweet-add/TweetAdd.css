@@ -1,25 +1,20 @@
 .tweet-input-container-l2 {
   @apply
-    flex flex-col justify-center items-center
-    border-2 border-gray-200 rounded-md
-    shadow-md
-    w-full
-    m-4
-    bg-white
-    p-2;
+    flex flex-col justify-center items-center w-full
+    border-2 border-gray-200 rounded-md shadow-md 
+    m-4 p-2
+    bg-white;
 }
 
 .upper-container {
   @apply
-    flex flex-row justify-center items-center
-    w-[87%]
+    flex flex-row justify-center items-center w-[87%]
     py-5 px-2;
 }
 
 .lower-container {
   @apply
-    flex flex-row justify-center items-center
-    w-full
+    flex flex-row justify-center items-center w-full
     max-md:flex max-md:flex-col;
 }
 

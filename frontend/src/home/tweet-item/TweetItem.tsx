@@ -15,7 +15,6 @@ type TweeetProps = {
 }
 
 const TweetItem = (props: TweeetProps) => {
-
   const [ editValue, setEditValue ] = useState( props.content )
   const [ isVisibleEdit, setIsVisibleEdit ] = useState(false)
   const [ isEditing, setIsEditing ] = useState(false)

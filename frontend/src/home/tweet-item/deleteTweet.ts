@@ -1,6 +1,5 @@
 
 export async function deleteTweet(id: string) {
-
   let json
 
   try {

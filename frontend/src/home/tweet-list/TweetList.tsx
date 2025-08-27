@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react'
 import { fetchTweets } from './fetchTweets'
 
 const TweetList = () => {
-
   const tweets = useTweetsStore((s) => s.tweets)
   const setTweets = useTweetsStore((s) => s.setTweets)
   const [ isLoading, setIsLoading ] = useState(false)
@@ -34,9 +33,10 @@ const TweetList = () => {
                 dateSubmitted={ tweet.dateSubmitted }
                 key={ tweet._id }
               />
-            ))) : (
-              'There are no tweets available'
-            )
+            ))
+          ) : (
+            'There are no tweets available'
+          )
         )
       }
     </div>

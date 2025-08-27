@@ -1,8 +1,6 @@
-import type { Tweet } from '@/home/tweet-list/tweetType'
 
 export async function addTweet(tweet: string, dateSubmitted: string) {
-
-  let json: object | null
+  let json
   const postMessage = {
     content: tweet,
     dateSubmitted: dateSubmitted
@@ -19,5 +17,6 @@ export async function addTweet(tweet: string, dateSubmitted: string) {
     json = null
     console.log('Error during POST request to backend : ', err)
   }
+  
   return json
 }

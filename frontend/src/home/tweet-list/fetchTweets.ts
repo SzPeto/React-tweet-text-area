@@ -1,8 +1,7 @@
-import type { Tweet } from '@/home/tweet-list/tweetType'
+import type { TweetType } from '@/home/tweet-list/tweetType'
 
 export async function fetchTweets() {
-
-  let json: Tweet[] = []
+  let json: TweetType[] = []
   
   try {
     const response = await fetch('/api/tweets')

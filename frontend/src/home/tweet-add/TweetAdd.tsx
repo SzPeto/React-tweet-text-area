@@ -10,26 +10,26 @@ import { useTweetsStore } from '../tweet-list/useTweetsStore'
 import { fetchTweets } from '../tweet-list/fetchTweets'
 
 const TweetAdd = () => {
-
   const [ tweet, setTweet ] = useState('')
-  const setTweets = useTweetsStore((s) => s.setTweets)
   const [ isActiveSubmit, setIsActiveSubmit ] = useState(true)
+  const setTweets = useTweetsStore((s) => s.setTweets)
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
 
   const handleSubmit = async () => {
     const dateSubmitted = getDateTime()
     setIsActiveSubmit(false)
-
     const json = await addTweet(tweet, dateSubmitted)
     const getJson = await fetchTweets()
+
     if (json) {
       setTweet('')
       setFlashMessage('Tweet added successfully!', 'success')
     } else {
       setFlashMessage('Error on inserting tweet', 'warning')
     }
-    setIsActiveSubmit(true)
+
     setTweets(getJson)
+    setIsActiveSubmit(true)
   }
 
   const handleDeleteAll = async () => {
@@ -41,6 +41,7 @@ const TweetAdd = () => {
     } else {
       setFlashMessage('Error on deleting tweets', 'warning')
     }
+    
     setTweets(getJson)
   }
 

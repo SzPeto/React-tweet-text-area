@@ -1,8 +1,6 @@
-import type { Tweet } from '@/home/tweet-list/tweetType'
 
 export async function updateTweet(id: string, tweet: string) {
-
-  let json: Tweet[] = []
+  let json
   const updateMessage = {
     content: tweet
   }

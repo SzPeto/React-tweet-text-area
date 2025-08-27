@@ -1,6 +1,5 @@
 .not-found-page-container {
   @apply
-    text-2xl
-    flex flex-col justify-center items-center
-    w-full
+    flex flex-col justify-center items-center w-full
+    text-2xl;
 }

@@ -1,5 +1,4 @@
 .tweet-list-container-l2 {
   @apply
-    flex flex-col justify-center items-center
-    w-full;
+    flex flex-col justify-center items-center w-full;
 }

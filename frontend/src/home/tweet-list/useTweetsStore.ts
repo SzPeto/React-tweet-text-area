@@ -1,10 +1,10 @@
 import { create } from 'zustand'
-import type { Tweet } from '@/home/tweet-list/tweetType'
+import type { TweetType } from '@/home/tweet-list/tweetType'
 
 type TweetsStore = {
-  tweets: Tweet[],
-  addTweet: (tweet: Tweet) => void
-  setTweets: (tweets: Tweet[]) => void
+  tweets: TweetType[],
+  addTweet: (tweet: TweetType) => void
+  setTweets: (tweets: TweetType[]) => void
 }
 
 export const useTweetsStore = create<TweetsStore>((set) => ({
