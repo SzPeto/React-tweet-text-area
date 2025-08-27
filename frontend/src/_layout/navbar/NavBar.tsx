@@ -1,4 +1,5 @@
-import './NavBar.css'
+import './NavBarContainers.css'
+import './NavBarMenuItems.css'
 import logo from '@/_layout/_assets/letter-t.png'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
@@ -27,9 +28,9 @@ const NavBar = () => {
           ☰
         </button>
 
-        <div className='flex flex-row w-[80%]'>
+        <div className='wrapper-container'>
           <div className='left-items-container'>
-            <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>
+            <ul className={`navbar-links-left ${menuOpen ? 'active' : ''}`}>
               <li>
                 <NavLink to='/'>
                   Home
@@ -39,7 +40,7 @@ const NavBar = () => {
           </div>
 
           <div className='right-items-container'>
-            <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>
+            <ul className={`navbar-links-right ${menuOpen ? 'active' : ''}`}>
               <li className='mr-4'>
                 <NavLink to='/login'>
                   Login

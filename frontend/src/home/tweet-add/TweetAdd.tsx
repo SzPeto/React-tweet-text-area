@@ -4,7 +4,7 @@ import './TweetAdd.css'
 import { useState } from 'react'
 import { addTweet } from './addTweet'
 import { deleteAllTweets } from './deleteAllTweets'
-import { getDateTime } from '@/_utils/getDateTime'
+import { getDateTime } from '@/_utils/date-time/getDateTime'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import { useTweetsStore } from '../tweet-list/useTweetsStore'
 import { fetchTweets } from '../tweet-list/fetchTweets'
@@ -56,15 +56,15 @@ const TweetAdd = () => {
       <div className="lower-container">
         {
           isActiveSubmit ? (
-            <MuiButton text='Submit' type='submit' onClick={ handleSubmit } />
+            <MuiButton text='Submit' type='success' onClick={ handleSubmit } />
           ) : (
             <MuiButton text='Submit' type='disabled' onClick={ () => {} } />
           )
         }
-        <MuiButton text='Clear text' type='info' onClick={ () => setTweet('') } />
+        <MuiButton text='Clear text' type='primary' onClick={ () => setTweet('') } />
         <MuiButton 
           text='Delete all tweets' 
-          type='delete' 
+          type='error' 
           onClick={ () => { if (window.confirm('Are you sure you want to delete all tweets?')) handleDeleteAll() } 
           } 
         />

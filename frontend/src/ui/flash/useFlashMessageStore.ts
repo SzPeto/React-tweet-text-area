@@ -17,7 +17,6 @@ export const useFlashMessageStore = create<useFlashMessageStore>((set, get) => (
     const newFlash = { message: newMessage, type: newType }
 
     if (!flashMessage.message) {
-
       set({ flashMessage: newFlash }) // Set always sets the zustand store variable, so the inner scope here is ignored
       setTimeout(() => { 
         set({ flashMessage: { message: '', type: 'info' } })
