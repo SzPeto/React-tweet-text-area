@@ -9,24 +9,24 @@
 .navbar-links-right {
   @apply
     flex items-center
-    gap-4
+    gap-3
     list-none
     max-md:hidden
     max-md:flex-col
-    max-md:gap-0
-    max-md:bg-cyan-50
-    max-md:p-5
-    max-md:rounded-md;
+    max-md:gap-0 max-md:p-5
+    max-md:bg-cyan-50 max-md:rounded-md;
 }
 
 .navbar-links-left {
   @apply
-  max-md:absolute max-md:top-[60px] max-md:left-[10px] max-md:right-[10px];
+  max-md:absolute max-md:top-[60px] max-md:left-[10px] max-md:right-[10px]
+  mr-auto;
 }
 
 .navbar-links-right {
   @apply
-  max-md:absolute max-md:top-[140px] max-md:left-[10px] max-md:right-[10px];
+  max-md:absolute max-md:top-[140px] max-md:left-[10px] max-md:right-[10px]
+  ml-auto;
 }
 
 .navbar-links-left.active,
@@ -39,16 +39,13 @@
 .navbar-links-right li {
   @apply
     p-3
-    rounded-full
-  hover:bg-cyan-200
-    max-md:rounded-md
-    max-md:border-2 max-md:border-cyan-300
+    rounded-lg
+    hover:bg-cyan-200
+    max-md:bg-cyan-100 max-md:rounded-md max-md:border-2 max-md:border-cyan-300
     max-md:w-[90%]
-    max-md:m-1 max-md:p-2
-    max-md:bg-cyan-100;
+    max-md:m-1 max-md:p-2;
 }
 
-/* List items */
 .brand-image {
   @apply
     w-[44px]
@@ -59,8 +56,7 @@
 .menu-toggle {
   @apply
     hidden
-    bg-transparent
-    border-0
+    bg-transparent border-0
     text-[24px] text-gray-400
     cursor-pointer
     max-md:block;

@@ -6,10 +6,7 @@ import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import FlashMessage from '@/ui/flash/FlashMessage'
 
 const MainLayout = () => {
-    
   const flashMessage = useFlashMessageStore((s) => s.flashMessage)
-
-  console.log('flash message : ', flashMessage.message)
 
   return(
     <>
@@ -22,12 +19,7 @@ const MainLayout = () => {
       <footer><Footer /></footer>
 
       {/* Floating Flash Message */}
-      {flashMessage.message && (
-        <div className='fixed top-20 left-1/2 transform -translate-x-1/2 z-50'>
-          <FlashMessage value={flashMessage.message} type={flashMessage.type} />
-        </div>
-      )}
-
+      {flashMessage.message && ( <FlashMessage value={flashMessage.message} type={flashMessage.type} /> )}
     </>
   )
 }

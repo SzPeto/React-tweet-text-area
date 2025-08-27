@@ -1,3 +1,4 @@
+import './FlashMessage.css'
 
 type FlashMessageProps = {
   value: string,
@@ -13,17 +14,15 @@ const FlashMessage = (props: FlashMessageProps) => {
   }
 
   return (
-    <div className={`
-      flex flex-col 
-      justify-center items-center 
-      rounded-lg 
-      shadow-md
-      mx-auto my-4 
-      w-fit 
-      px-10 py-3 
-      ${ classTw[props.type] }
-    `}>
-      <p>{ props.value }</p>
+    <div className='flash-main-container'>
+      <div className={`
+        flex flex-col justify-center items-center w-fit 
+        rounded-lg shadow-md
+        mx-auto my-4 px-10 py-3 
+        ${ classTw[props.type] }
+      `}>
+        <p>{ props.value }</p>
+      </div>
     </div>
   )
 }
