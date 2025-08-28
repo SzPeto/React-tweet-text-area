@@ -15,6 +15,7 @@ const MuiTextField = (props: PropTypes) => {
       variant="outlined" 
       onChange={ props.onChange }
       value={ props.value }
+      sx={{ width: '80%' }}
     />
   )
 }

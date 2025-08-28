@@ -59,7 +59,7 @@ const TweetAdd = () => {
           isActiveSubmit ? (
             <MuiButton text='Submit' type='success' onClick={ handleSubmit } />
           ) : (
-            <MuiButton text='Submit' type='disabled' onClick={ () => {} } />
+            <MuiButton text='Submit' type='disabled' />
           )
         }
         <MuiButton text='Clear text' type='primary' onClick={ () => setTweet('') } />
