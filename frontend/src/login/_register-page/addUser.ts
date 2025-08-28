@@ -1,3 +1,4 @@
+import api from '@/api'
 
 export const addUser = async (userName: string, email: string, password: string) => {
   let json
@@ -9,15 +10,10 @@ export const addUser = async (userName: string, email: string, password: string)
   }
 
   try {
-    const response = await fetch('/api/users/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(user)
-    })
-    json = await response.json()
+    const response = await api.post('/users/register', user)
+    json = response.data
   } catch(err) {
-    json = null
-    console.log('Error upon registering user : ', err)
+    return { error: err }
   }
 
   return await json

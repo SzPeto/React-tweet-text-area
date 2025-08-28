@@ -11,7 +11,7 @@ type useFlashMessageStore = {
 export const useFlashMessageStore = create<useFlashMessageStore>((set, get) => ({
   flashMessage: { message: '', type: 'info' },
   queue: [],
-  setFlashMessage: (newMessage, newType, duration=5000) => {
+  setFlashMessage: (newMessage, newType, duration=7000) => {
 
     const { flashMessage, queue } = get() // Getting a copy of the current state
     const newFlash = { message: newMessage, type: newType }

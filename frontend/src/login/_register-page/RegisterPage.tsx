@@ -15,13 +15,13 @@ const Register = () => {
     e.preventDefault()
     const json = await addUser(userName, email, password)
 
-    if (json) {
+    if (json.error) {
+      setFlashMessage('User registration failed!', 'warning')
+    } else {
       setUserName('')
       setEmail('')
       setPassword('')
-      setFlashMessage('User registered successfully', 'success')
-    } else {
-      setFlashMessage('User registration failed!', 'warning')
+      setFlashMessage(`User ${ json.userName } registered successfully`, 'success')
     }
   }
 
