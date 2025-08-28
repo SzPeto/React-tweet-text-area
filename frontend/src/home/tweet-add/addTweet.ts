@@ -10,7 +10,7 @@ export async function addTweet(tweet: string, dateSubmitted: string) {
     const response = await fetch('/api/tweets', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(postMessage),
+      body: JSON.stringify(postMessage)
     })
     json = await response.json()
   }catch(err) {

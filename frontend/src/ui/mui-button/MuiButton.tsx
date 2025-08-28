@@ -5,23 +5,25 @@ type MuiButtonProps = {
   type?: 'primary' | 'success' | 'error' | 'disabled',
   data?: string | number,
   hidden?: boolean,
-  onClick: (...args: any[]) => any,
-  size?: 'small' | 'medium' | 'large'
+  onClick?: (...args: any[]) => any,
+  size?: 'small' | 'medium' | 'large',
+  isSubmit?: boolean
 }
 
 const MuiButton = (props: MuiButtonProps) => {
   if (props.hidden) return null
-  if (props.type == 'disabled') return (<Button disabled >{props.text ?? 'Push me'}</Button>)
+  if (props.type == 'disabled') return (<Button disabled >{ props.text ?? 'Push me' }</Button>)
 
   return (
     <Button
       onClick={ props.onClick }
       id={ props.type ?? 'submit' }
       data-id={ props.data ?? '' }
-      variant="contained"
+      variant='contained'
       color={ props.type ?? 'info' }
       sx={{ margin: '10px' }}
       size={ props.size ?? 'medium' }
+      type={ props.isSubmit ? 'submit' : 'button' }
     >
       {props.text ?? 'Push me'}
     </Button>

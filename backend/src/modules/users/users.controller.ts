@@ -9,13 +9,19 @@ export class UsersController {
 
   @Post('register')
   async createUser(@Body() createUserDto: CreateUserDto) {
-    await this.usersService.createUser(createUserDto)
+    console.log('Hello from users controller')
+    return await this.usersService.createUser(createUserDto)
   }
 
   // TODO - Only for testing purposes, remove in production
   @Get(':userName')
   async findUserByName(@Param('userName') userName: string) {
-    return this.usersService.findUserByName(userName)
+    return await this.usersService.findUserByName(userName)
   }
 
+  // TODO - Only for testing purposes, remove in production
+  @Get()
+  async getAllUsers() {
+    return await this.usersService.getAllUsers()
+  }
 }

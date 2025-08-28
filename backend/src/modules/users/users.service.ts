@@ -28,4 +28,8 @@ export class UsersService {
     return user
   }
 
+  async getAllUsers() {
+    return await this.userModel.find()
+  }
+
 }
