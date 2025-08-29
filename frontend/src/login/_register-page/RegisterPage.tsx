@@ -37,11 +37,7 @@ const Register = () => {
     const json = await addUser(data.userName, data.email, data.password)
 
     if (json.error) {
-      const message =
-        json.error?.response?.data?.message ??
-        json.error?.message ??
-        'unknown error'
-        
+      const message = json.error?.response?.data?.message ?? json.error?.message ?? 'unknown error'
       setFlashMessage(`User registration failed : ${ message }`, 'warning')
     } else {
       reset()
@@ -101,7 +97,7 @@ const Register = () => {
                         onClick={() => setShowPassword(!showPassword)}
                         edge='end'
                       >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                        { showPassword ? <VisibilityOff /> : <Visibility /> }
                       </IconButton>
                     </InputAdornment>
                   )
