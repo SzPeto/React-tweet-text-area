@@ -1,23 +1,20 @@
-import TextField from '@mui/material/TextField'
+import TextField, { type TextFieldProps } from '@mui/material/TextField'
 
-type PropTypes = {
-  id: 'outlined-basic' | 'outlined-required' | 'outlined-password-input'
+type PropTypes = TextFieldProps & {
+  id: 'outlined-basic' | 'outlined-required' | 'outlined-password-input',
+  type?: 'password' | 'email' | 'text',
   label: string,
   onChange: (...args: any[]) => any,
   value: string,
-  type?: 'password'
 }
+
 
 const MuiTextField = (props: PropTypes) => {
 
   return (
     <TextField 
-      id='outlined-basic' 
-      label={ props.label } 
-      onChange={ props.onChange }
-      value={ props.value }
       sx={{ width: '80%' }}
-      type={ props.type }
+      { ...props }
     />
   )
 }
