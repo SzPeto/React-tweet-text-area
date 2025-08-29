@@ -15,17 +15,20 @@ import * as yup from 'yup'
 const schema = yup.object({
   userName: yup.string().min(3, 'Username has to be at least 3 characters').required('Username required!'),
   email: yup.string().email('Invalid email').required('Email required').min(6, 'Email has to be at least 6 characters long'),
-  password: yup.string().required('Password required!').min(6, 'Password has to be at least 6 characters long')
+  password: yup.string().required('Password required!').min(6, 'Password has to be at least 6 characters long'),
+  confirmPassword: yup.string().required('Confirm password required').min(6, 'Must contain at least 6 charaters')
+                      .oneOf([yup.ref('password')], 'Passwords must match')
 }).required()
 
 const Register = () => {
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
   const [ showPassword, setShowPassword ] = useState(false)
+  const [ showPasswordConfirm, setShowPasswordConfirm ] = useState(false)
 
   // 2️⃣ Initialize react-hook-form
   const { control, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: { userName: '', email: '', password: '' }
+    defaultValues: { userName: '', email: '', password: '', confirmPassword: '' }
   })
 
   // 3️⃣ Modify submit handler (data: any), addUser(data.userName, data.email, data.password)
@@ -94,6 +97,34 @@ const Register = () => {
                         edge='end'
                       >
                         {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }
+              }}
+            />
+          )}
+        />
+        <Controller
+          name='confirmPassword'
+          control={ control }
+          render={({ field }) => (
+            <MuiTextField
+              {...field}
+              label='Confirm password'
+              id='outlined-password-input'
+              type={ showPasswordConfirm ? 'text' : 'password' }
+              error={ errors.confirmPassword ? true : false }
+              helperText={ errors.confirmPassword?.message }
+              slotProps={{
+                input: {
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <IconButton
+                        onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
+                        edge='end'
+                      >
+                        { showPasswordConfirm ? <VisibilityOff /> : <Visibility /> }
                       </IconButton>
                     </InputAdornment>
                   )
