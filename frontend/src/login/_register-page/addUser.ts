@@ -2,7 +2,6 @@ import api from '@/api'
 
 export const addUser = async (userName: string, email: string, password: string) => {
   let json
-
   const user = {
     userName: userName,
     email: email,
@@ -10,7 +9,7 @@ export const addUser = async (userName: string, email: string, password: string)
   }
 
   try {
-    const response = await api.post('/users/register', user)
+    const response = await api.post('api/users/register', user)
     json = response.data
   } catch(err) {
     return { error: err }

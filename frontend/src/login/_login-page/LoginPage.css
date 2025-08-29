@@ -1,0 +1,18 @@
+.login-container {
+  @apply
+    flex flex-col justify-start items-center min-h-screen;
+}
+
+.login-heading {
+  @apply
+    text-[34px]
+    m-8;
+}
+
+.login-form {
+  @apply
+    flex flex-col justify-center items-start
+    bg-white rounded-lg shadow-lg min-w-[600px]
+    gap-7 p-8;
+
+}
