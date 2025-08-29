@@ -46,7 +46,7 @@ const TweetItem = (props: TweeetProps) => {
     <div className='delete-edit-button-container'>
       <MuiButton 
         text='Delete tweet' 
-        type='error' 
+        color='error' 
         onClick={ 
           (e) => { 
             if (window.confirm('Are you sure you want to delete this tweet?')) handleDelete(e) 
@@ -57,7 +57,7 @@ const TweetItem = (props: TweeetProps) => {
       />
       <MuiButton 
         text='Edit tweet'
-        type='primary' 
+        color='primary' 
         onClick={ () => setIsEditing(true) } 
         data={ props.id }
         hidden={ isEditing ? true : false }
@@ -86,13 +86,13 @@ const TweetItem = (props: TweeetProps) => {
                 <MuiButton 
                   text='Save' 
                   onClick={ handleSave } 
-                  type='success'
+                  color='success'
                   size='small'
                 />
                 <MuiButton 
                   text='Cancel' 
                   onClick={ () => setIsEditing(false) } 
-                  type='primary' 
+                  color='primary' 
                   size='small'
                 />
               </div>

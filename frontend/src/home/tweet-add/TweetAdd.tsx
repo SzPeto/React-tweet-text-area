@@ -57,15 +57,15 @@ const TweetAdd = () => {
       <div className="lower-container">
         {
           isActiveSubmit ? (
-            <MuiButton text='Submit' type='success' onClick={ handleSubmit } />
+            <MuiButton text='Submit' color='success' onClick={ handleSubmit } />
           ) : (
-            <MuiButton text='Submit' type='disabled' />
+            <MuiButton text='Submit' isDisabled={ true } />
           )
         }
-        <MuiButton text='Clear text' type='primary' onClick={ () => setTweet('') } />
+        <MuiButton text='Clear text' color='primary' onClick={ () => setTweet('') } />
         <MuiButton 
           text='Delete all tweets' 
-          type='error' 
+          color='error' 
           onClick={ () => { if (window.confirm('Are you sure you want to delete all tweets?')) handleDeleteAll() } 
           } 
         />

@@ -49,7 +49,7 @@ const Login = () => {
             }
           }}
         />
-        <MuiButton text='Login' isSubmit={ true } type="primary" />
+        <MuiButton text='Login' isSubmit={ true } color={ 'primary' } />
       </form>
     </div>
   )

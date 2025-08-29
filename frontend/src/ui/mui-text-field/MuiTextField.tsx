@@ -22,7 +22,7 @@ const MuiTextField = (props: PropTypes) => {
       sx={{ width: '80%' }}
       type={ props.type }
       slotProps={ props.slotProps }
-      error={props.error}
+      error={ props.error }
       helperText={props.helperText}
     />
   )

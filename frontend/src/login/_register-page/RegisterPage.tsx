@@ -49,14 +49,14 @@ const Register = () => {
           name='userName'
           control={ control }
           render={({ field }) => (
-            <>
-              <MuiTextField
-                {...field}
-                label='Username'
-                id='outlined-basic'
-              />
-              {errors.userName && <p className='error-text'>{errors.userName.message}</p>}
-            </>
+            <MuiTextField
+              {...field}
+              label='Username'
+              id='outlined-basic'
+              type='text'
+              error={ errors.userName ? true : false }
+              helperText={ errors.userName?.message } // optional chaining operator, access only messages if userName not null
+            />
           )}
         />
         <Controller
@@ -75,7 +75,7 @@ const Register = () => {
         />
         <Controller
           name='password'
-          control={control}
+          control={ control }
           render={({ field }) => (
             <>
               <MuiTextField
@@ -102,7 +102,7 @@ const Register = () => {
             </>
           )}
         />
-        <MuiButton text='Submit' isSubmit={ true } type='success' />
+        <MuiButton text='Submit' isSubmit={ true } color='success' />
       </form>
     </div>
   )
