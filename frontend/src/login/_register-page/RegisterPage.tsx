@@ -14,7 +14,7 @@ import * as yup from 'yup'
 // 1️⃣ Yup validation schema
 const schema = yup.object({
   userName: yup.string().min(3, 'Username has to be at least 3 characters').required('Username required!'),
-  email: yup.string().email('Invalid email').required('Email required'),
+  email: yup.string().email('Invalid email').required('Email required').min(6, 'Email has to be at least 6 characters long'),
   password: yup.string().required('Password required!').min(6, 'Password has to be at least 6 characters long')
 }).required()
 
@@ -36,6 +36,7 @@ const Register = () => {
     if (json.error) {
       setFlashMessage('User registration failed!', 'warning')
     } else {
+      reset()
       setFlashMessage(`User ${ json.userName } registered successfully`, 'success')
     }
   }
@@ -69,7 +70,7 @@ const Register = () => {
               id='outlined-basic'
               type='email'
               error={ errors.email ? true : false }
-              helperText={errors.email?.message}
+              helperText={ errors.email?.message }
             />
           )}
         />
@@ -77,29 +78,28 @@ const Register = () => {
           name='password'
           control={ control }
           render={({ field }) => (
-            <>
-              <MuiTextField
-                {...field}
-                label='Password'
-                id='outlined-password-input'
-                type={showPassword ? 'text' : 'password'}
-                slotProps={{
-                  input: {
-                    endAdornment: (
-                      <InputAdornment position='end'>
-                        <IconButton
-                          onClick={() => setShowPassword(!showPassword)}
-                          edge='end'
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    )
-                  }
-                }}
-              />
-              { errors.password && <p className='error-text'>{errors.password.message}</p> }
-            </>
+            <MuiTextField
+              {...field}
+              label='Password'
+              id='outlined-password-input'
+              type={ showPassword ? 'text' : 'password' }
+              error={ errors.password ? true : false }
+              helperText={ errors.password?.message }
+              slotProps={{
+                input: {
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <IconButton
+                        onClick={() => setShowPassword(!showPassword)}
+                        edge='end'
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }
+              }}
+            />
           )}
         />
         <MuiButton text='Submit' isSubmit={ true } color='success' />

@@ -5,7 +5,7 @@ type PropTypes = {
   label: string,
   onChange: (...args: any[]) => any,
   value: string,
-  type?: 'password' | 'email' | 'text',
+  type: 'password' | 'email' | 'text',
   slotProps?: TextFieldProps['slotProps'],
   error?: boolean
   helperText?: string

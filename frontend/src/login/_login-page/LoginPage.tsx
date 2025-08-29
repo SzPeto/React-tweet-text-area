@@ -1,53 +1,77 @@
 import { useFlashMessageStore } from "@/ui/flash/useFlashMessageStore"
 import MuiButton from "@/ui/mui-button/MuiButton"
 import MuiTextField from "@/ui/mui-text-field/MuiTextField"
-import { useState } from "react"
 import './LoginPage.css'
 import { IconButton, InputAdornment } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { useForm, Controller } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import { useState } from "react"
+
+const schema = yup.object({
+  userName: yup.string().min(3, 'Username has to be at least 3 characters').required('Username required!'),
+  password: yup.string().required('Password required!').min(6, 'Password has to be at least 6 characters long')
+}).required()
 
 const Login = () => {
-  const [ userName, setUserName ] = useState('')
-  const [ password, setPassword ] = useState('')
   const [ showPassword, setShowPassword ] = useState(false)
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
+  const { control, handleSubmit, reset, formState: { errors } } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: { userName: '', password: '' }
+  })
 
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const onSubmit = async (data: any) => {
 
   }
 
   return (
     <div className="login-container">
       <p className='login-heading'>Login user</p>
-      <form className='register-form' onSubmit={ handleSubmit } >
-        <MuiTextField 
-          label='username' 
-          onChange={ (e) => setUserName(e.target.value) } 
-          value={ userName } 
-          id='outlined-basic'
+      <form className='register-form' onSubmit={ handleSubmit(onSubmit) } >
+        <Controller
+          name='userName'
+          control={ control }
+          render={({ field }) => (
+            <MuiTextField
+              {...field}
+              label='Username'
+              id='outlined-basic'
+              type='text'
+              error={ errors.userName ? true : false }
+              helperText={ errors.userName?.message } // optional chaining operator, access only messages if userName not null
+            />
+          )}
         />
-        <MuiTextField 
-          label='password' 
-          onChange={ (e) => setPassword(e.target.value) } 
-          value={ password } 
-          id='outlined-password-input'
-          type={ showPassword ? 'text' : 'password' }
-          slotProps={{
-            input: {
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={() => setShowPassword(!showPassword)}
-                    edge="end"
-                  >
-                    { showPassword ? <VisibilityOff /> : <Visibility /> }
-                  </IconButton>
-                </InputAdornment>
-              )
-            }
-          }}
+        <Controller
+          name='password'
+          control={ control }
+          render={({ field }) => (
+            <MuiTextField
+              {...field}
+              label='Password'
+              id='outlined-password-input'
+              type={ showPassword ? 'text' : 'password' }
+              error={ errors.password ? true : false }
+              helperText={ errors.password?.message }
+              slotProps={{
+                input: {
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <IconButton
+                        onClick={() => setShowPassword(!showPassword)}
+                        edge='end'
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }
+              }}
+            />
+          )}
         />
         <MuiButton text='Login' isSubmit={ true } color={ 'primary' } />
       </form>
