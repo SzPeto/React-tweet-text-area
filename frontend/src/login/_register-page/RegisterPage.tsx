@@ -6,6 +6,16 @@ import { addUser } from './addUser'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import { IconButton, InputAdornment } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { useForm, Controller } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+
+
+const schema = yup.object({
+  userName: yup.string().min(3, 'Username has to be at least 3 characters').required('Username required!'),
+  email: yup.string().email('Invalid email').required('Email required'),
+  password: yup.string().required('Password required!').min(6, 'Password has to be at least 6 characters long')
+}).required()
 
 const Register = () => {
   const [ userName, setUserName ] = useState('')
