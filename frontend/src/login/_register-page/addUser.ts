@@ -11,7 +11,7 @@ export const addUser = async (userName: string, email: string, password: string)
   try {
     const response = await api.post('api/users/register', user)
     json = response.data
-  } catch(err) {
+  } catch(err: any) {
     return { error: err }
   }
 

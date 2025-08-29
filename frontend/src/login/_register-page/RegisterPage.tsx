@@ -37,7 +37,12 @@ const Register = () => {
     const json = await addUser(data.userName, data.email, data.password)
 
     if (json.error) {
-      setFlashMessage('User registration failed!', 'warning')
+      const message =
+        json.error?.response?.data?.message ??
+        json.error?.message ??
+        'unknown error'
+        
+      setFlashMessage(`User registration failed : ${ message }`, 'warning')
     } else {
       reset()
       setFlashMessage(`User ${ json.userName } registered successfully`, 'success')
@@ -133,7 +138,7 @@ const Register = () => {
             />
           )}
         />
-        <MuiButton text='Submit' isSubmit={ true } color='success' />
+        <MuiButton text='Submit' isSubmit={ true } color='success'  />
       </form>
     </div>
   )
