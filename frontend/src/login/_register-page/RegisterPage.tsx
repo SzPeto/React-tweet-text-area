@@ -11,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
 
+// 1️⃣ Yup validation schema
 const schema = yup.object({
   userName: yup.string().min(3, 'Username has to be at least 3 characters').required('Username required!'),
   email: yup.string().email('Invalid email').required('Email required'),
@@ -18,65 +19,88 @@ const schema = yup.object({
 }).required()
 
 const Register = () => {
-  const [ userName, setUserName ] = useState('')
-  const [ password, setPassword ] = useState('')
-  const [ email, setEmail ] = useState('')
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
   const [ showPassword, setShowPassword ] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const json = await addUser(userName, email, password)
+  // 2️⃣ Initialize react-hook-form
+  const { control, handleSubmit, reset, formState: { errors } } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: { userName: '', email: '', password: '' }
+  })
+
+  // 3️⃣ Modify submit handler (data: any), addUser(data.userName, data.email, data.password)
+  const onSubmit = async (data: any) => {
+    // When using react hook form, you don't have to prevent default
+    const json = await addUser(data.userName, data.email, data.password)
 
     if (json.error) {
       setFlashMessage('User registration failed!', 'warning')
     } else {
-      setUserName('')
-      setEmail('')
-      setPassword('')
       setFlashMessage(`User ${ json.userName } registered successfully`, 'success')
     }
   }
 
+  // 4️⃣ Modify onSubmit and add Controllers
   return (
-    <div className="register-container">
+    <div className='register-container'>
       <p className='register-heading'>Register user</p>
-      <form className='register-form' onSubmit={ handleSubmit } >
-        <MuiTextField 
-          label='username' 
-          onChange={ (e) => setUserName(e.target.value) } 
-          value={ userName } 
-          id='outlined-basic' 
+      <form className='register-form' onSubmit={ handleSubmit(onSubmit) } >
+        <Controller
+          name='userName'
+          control={ control }
+          render={({ field }) => (
+            <>
+              <MuiTextField
+                {...field}
+                label='Username'
+                id='outlined-basic'
+              />
+              {errors.userName && <p className='error-text'>{errors.userName.message}</p>}
+            </>
+          )}
         />
-        <MuiTextField 
-          label='email' 
-          onChange={ (e) => setEmail(e.target.value) } 
-          value={ email } 
-          id='outlined-basic'
-          type='email'
+        <Controller
+          name='email'
+          control={ control }
+          render={({ field }) => (
+            <MuiTextField
+              {...field}
+              label='Email'
+              id='outlined-basic'
+              type='email'
+              error={ errors.email ? true : false }
+              helperText={errors.email?.message}
+            />
+          )}
         />
-        <MuiTextField 
-          label='password' 
-          onChange={ (e) => setPassword(e.target.value) } 
-          value={ password } 
-          id='outlined-password-input'
-          type={ showPassword ? 'text' : 'password' }
-          // adornment in MUI is just something extra you “stick” inside an input field — 
-          // either at the start (left side) or at the end (right side).
-          slotProps={{
-            input: {
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={() => setShowPassword(!showPassword)}
-                    edge="end"
-                  >
-                    { showPassword ? <VisibilityOff /> : <Visibility /> }
-                  </IconButton>
-                </InputAdornment>
-              )
-            }
-          }}
+        <Controller
+          name='password'
+          control={control}
+          render={({ field }) => (
+            <>
+              <MuiTextField
+                {...field}
+                label='Password'
+                id='outlined-password-input'
+                type={showPassword ? 'text' : 'password'}
+                slotProps={{
+                  input: {
+                    endAdornment: (
+                      <InputAdornment position='end'>
+                        <IconButton
+                          onClick={() => setShowPassword(!showPassword)}
+                          edge='end'
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    )
+                  }
+                }}
+              />
+              { errors.password && <p className='error-text'>{errors.password.message}</p> }
+            </>
+          )}
         />
         <MuiButton text='Submit' isSubmit={ true } type='success' />
       </form>

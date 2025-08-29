@@ -6,7 +6,9 @@ type PropTypes = {
   onChange: (...args: any[]) => any,
   value: string,
   type?: 'password' | 'email' | 'text',
-  slotProps?: TextFieldProps['slotProps']
+  slotProps?: TextFieldProps['slotProps'],
+  error?: boolean
+  helperText?: string
 }
 
 const MuiTextField = (props: PropTypes) => {
@@ -20,6 +22,8 @@ const MuiTextField = (props: PropTypes) => {
       sx={{ width: '80%' }}
       type={ props.type }
       slotProps={ props.slotProps }
+      error={props.error}
+      helperText={props.helperText}
     />
   )
 }
