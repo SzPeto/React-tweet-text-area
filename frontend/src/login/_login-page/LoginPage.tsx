@@ -10,6 +10,7 @@ import * as yup from 'yup'
 import { useState } from 'react'
 import { authenticateUser } from './authenticateUser'
 import { useLoginStore } from './useLoginStore'
+import { useNavigate } from 'react-router-dom'
 
 const schema = yup.object({
   userName: yup.string().min(3, 'Username has to be at least 3 characters').required('Username required!'),
@@ -17,10 +18,10 @@ const schema = yup.object({
 }).required()
 
 const Login = () => {
+  const navigate = useNavigate()
   const [ showPassword, setShowPassword ] = useState(false)
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
   const loginUser = useLoginStore((s) => s.loginUser)
-  const currentUser = useLoginStore((s) => s.currentUser)
   const { control, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
     defaultValues: { userName: '', password: '' }
@@ -37,6 +38,7 @@ const Login = () => {
       reset()
       loginUser(data.userName, json.accessToken)
       setFlashMessage(`Login successful, welcome ${ data.userName }!`, 'success')
+      navigate('/')
     }
   }
 
