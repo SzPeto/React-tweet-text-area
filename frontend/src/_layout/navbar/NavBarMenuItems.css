@@ -61,3 +61,30 @@
     cursor-pointer
     max-md:block;
 }
+
+.dropdown {
+  @apply
+    relative;
+}
+
+.dropdown-menu {
+  @apply
+    hidden 
+    absolute 
+    bg-white 
+    list-none 
+    m-0 
+    p-2 
+    rounded-md 
+    border 
+    border-gray-300 
+    top-full 
+    left-0 
+    min-w-[150px] 
+    z-10;
+}
+
+.dropdown-menu.show {
+  @apply
+   block;
+}

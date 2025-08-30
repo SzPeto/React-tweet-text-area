@@ -7,7 +7,8 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 const NavBar = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [ profileOpen, setProfileOpen ] = useState(false)
+  const [ menuOpen, setMenuOpen ] = useState(false)
   const currentUser = useLoginStore((s) => s.currentUser)
   const logoutUser = useLoginStore((s) => s.logoutUser)
   const isLoggedIn = useLoginStore((s) => s.isLoggedIn)
@@ -43,14 +44,27 @@ const NavBar = () => {
         </ul>
         {
           isLoggedIn ? (
-            <ul className={`navbar-links-right ${menuOpen ? 'active' : ''}`}>
-              <p>Welcome { currentUser.userName }!</p>
-              <li>
-                <button onClick={ handleLogout }>Logout</button>
+            <ul className={`navbar-links-right ${ menuOpen ? 'active' : '' }`}>
+              <li 
+                className='dropdown'
+                onMouseEnter={ () => setProfileOpen(true) }
+                onMouseLeave={ () => setProfileOpen(false) }
+              >
+                <button className='dropdown-toggle'>
+                  { currentUser.userName } ▾
+                </button>
+                <ul className={`dropdown-menu ${ profileOpen ? 'show' : '' }`}>
+                  <li>
+                    <button>Profile</button>
+                  </li>
+                  <li onClick={ handleLogout } className='cursor-pointer'>
+                    <button>Logout</button>
+                  </li>
+                </ul>
               </li>
             </ul>
           ) : (
-            <ul className={`navbar-links-right ${menuOpen ? 'active' : ''}`}>
+            <ul className={`navbar-links-right ${ menuOpen ? 'active' : '' }`}>
               <NavLink to='/login'>
                 <li>
                   <p>Login</p>

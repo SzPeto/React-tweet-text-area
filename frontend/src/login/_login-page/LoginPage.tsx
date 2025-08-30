@@ -37,7 +37,7 @@ const Login = () => {
     } else {
       reset()
       loginUser(data.userName, json.accessToken)
-      setFlashMessage(`Login successful, welcome ${ data.userName }!`, 'success')
+      setFlashMessage(`Welcome ${ data.userName }!`, 'success')
       navigate('/')
     }
   }
