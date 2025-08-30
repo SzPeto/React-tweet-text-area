@@ -1,6 +1,6 @@
 import api from '@/api'
 
-export const loginUser = async (userName: string, password: string) => {
+export const authenticateUser = async (userName: string, password: string) => {
   let json
   const user = {
     userName: userName,

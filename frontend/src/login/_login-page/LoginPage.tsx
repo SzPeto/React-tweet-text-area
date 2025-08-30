@@ -8,7 +8,8 @@ import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useState } from 'react'
-import { loginUser } from './loginUser'
+import { authenticateUser } from './authenticateUser'
+import { useLoginStore } from './useLoginStore'
 
 const schema = yup.object({
   userName: yup.string().min(3, 'Username has to be at least 3 characters').required('Username required!'),
@@ -18,6 +19,8 @@ const schema = yup.object({
 const Login = () => {
   const [ showPassword, setShowPassword ] = useState(false)
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
+  const loginUser = useLoginStore((s) => s.loginUser)
+  const currentUser = useLoginStore((s) => s.currentUser)
   const { control, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
     defaultValues: { userName: '', password: '' }
@@ -25,15 +28,15 @@ const Login = () => {
 
 
   const onSubmit = async (data: any) => {
-    const json = await loginUser(data.userName, data.password)
+    const json = await authenticateUser(data.userName, data.password)
     
     if (json.error) {
       const message = json.error?.response?.data?.message ?? json.error?.message ?? 'unknown error'
       setFlashMessage(`Login unsuccessful : ${ message }`, 'warning')
     } else {
       reset()
-      setFlashMessage(`Login successful`, 'success')
-      console.log(json.accessToken)
+      loginUser(data.userName, json.accessToken)
+      setFlashMessage(`Login successful, welcome ${ data.userName }!`, 'success')
     }
   }
 
