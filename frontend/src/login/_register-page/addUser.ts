@@ -15,5 +15,5 @@ export const addUser = async (userName: string, email: string, password: string)
     return { error: err }
   }
 
-  return await json
+  return json
 }

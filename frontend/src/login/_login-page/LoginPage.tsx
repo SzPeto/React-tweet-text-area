@@ -1,13 +1,14 @@
-import { useFlashMessageStore } from "@/ui/flash/useFlashMessageStore"
-import MuiButton from "@/ui/mui-button/MuiButton"
-import MuiTextField from "@/ui/mui-text-field/MuiTextField"
+import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
+import MuiButton from '@/ui/mui-button/MuiButton'
+import MuiTextField from '@/ui/mui-text-field/MuiTextField'
 import './LoginPage.css'
 import { IconButton, InputAdornment } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { useState } from "react"
+import { useState } from 'react'
+import { loginUser } from './loginUser'
 
 const schema = yup.object({
   userName: yup.string().min(3, 'Username has to be at least 3 characters').required('Username required!'),
@@ -24,11 +25,20 @@ const Login = () => {
 
 
   const onSubmit = async (data: any) => {
-
+    const json = await loginUser(data.userName, data.password)
+    
+    if (json.error) {
+      const message = json.error?.response?.data?.message ?? json.error?.message ?? 'unknown error'
+      setFlashMessage(`Login unsuccessful : ${ message }`, 'warning')
+    } else {
+      reset()
+      setFlashMessage(`Login successful`, 'success')
+      console.log(json.accessToken)
+    }
   }
 
   return (
-    <div className="login-container">
+    <div className='login-container'>
       <p className='login-heading'>Login user</p>
       <form className='register-form' onSubmit={ handleSubmit(onSubmit) } >
         <Controller

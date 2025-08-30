@@ -24,7 +24,7 @@ export class UsersService {
 
   async findUserByName(userName: string) {
     const user = await this.userModel.findOne({ userName: userName })
-    if (!user) throw new NotFoundException(`User with name : ${ userName } doesn't exist`)
+    if (!user) throw new NotFoundException(`User with name ${ userName } doesn't exist`)
     return user
   }
 
