@@ -17,7 +17,7 @@ import { ConfigModule } from '@nestjs/config'
       global: true,
       secret: process.env.JWT_SECRET ?? 
               'RmReUXDJATGdqIh5KtkaQ0Z4pteLBUgBY1VPqa/ryIuLZjXKl9wISOYb6l/LHHro1JUbgb3a7NAXA6uWBJDucw==',
-      signOptions: { expiresIn: process.env.JWT_EXPIRES || '60m' }
+      signOptions: { expiresIn: process.env.JWT_EXPIRES || '15m' }
     })
   ],
   controllers: [AuthController],

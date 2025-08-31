@@ -12,6 +12,7 @@ import { authenticateUser } from './authenticateUser'
 import { useLoginStore } from './useLoginStore'
 import { useNavigate } from 'react-router-dom'
 import Hr from '@/ui/hr/Hr'
+import { getMe } from './getMe'
 
 const schema = yup.object({
   userName: yup.string().min(3, 'Username has to be at least 3 characters').required('Username required!'),
@@ -33,13 +34,19 @@ const Login = () => {
     const json = await authenticateUser(data.userName, data.password)
     
     if (json.error) {
-      const message = json.error?.response?.data?.message ?? json.error?.message ?? 'unknown error'
-      setFlashMessage(`Login unsuccessful : ${ message }`, 'warning')
+      const jsonErrorMessage = json.error?.response?.data?.message ?? json.error?.message ?? 'Error while authenticating user'
+      setFlashMessage(`Login unsuccessful, error while authenticating user : ${ jsonErrorMessage }`, 'warning')
     } else {
-      reset()
-      loginUser(data.userName, json.accessToken)
-      setFlashMessage(`Welcome ${ data.userName }!`, 'success')
-      navigate('/')
+      const user = await getMe(json.accessToken)
+      if (user.error) {
+        const userErrorMessage = user.error?.response?.data?.message ?? user.error?.message ?? 'Error fetching user'
+        setFlashMessage(`Login unsuccessful, error while fetching user : ${ userErrorMessage }`, 'warning')
+      } else {
+        reset()
+        loginUser(user.userName, json.accessToken, user.email, user.picturePath)
+        setFlashMessage(`Welcome ${ data.userName }!`, 'success')
+        navigate('/')
+      }
     }
   }
 
