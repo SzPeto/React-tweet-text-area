@@ -1,9 +1,9 @@
 import MainLayout from '@/_layout/main/MainLayout'
 import Home from '@/home/_page/HomePage'
-import Login from '@/login/_login-page/LoginPage'
-import Register from '@/login/_register-page/RegisterPage'
+import Login from '@/login/login-page/LoginPage'
+import Register from '@/login/register-page/RegisterPage'
 import NotFoundPage from '@/_layout/not-found-page/NotFoundPage'
-import ProfilePage from '@/login/_profile-page/ProfilePage'
+import ProfilePage from '@/login/profile-page/ProfilePage'
 
 
 export const rootRoutes = {

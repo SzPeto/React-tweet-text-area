@@ -1,40 +1,34 @@
 import { useState } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { IconButton, InputAdornment } from '@mui/material'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 import './RegisterPage.css'
+import Hr from '@/ui/hr/Hr'
 import MuiTextField from '@/ui/mui-text-field/MuiTextField'
 import MuiButton from '@/ui/mui-button/MuiButton'
 import { addUser } from './addUser'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
-import { IconButton, InputAdornment } from '@mui/material'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { useForm, Controller } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-import Hr from '@/ui/hr/Hr'
 
 
-// 1️⃣ Yup validation schema
-const schema = yup.object({
-  userName: yup.string().min(3, 'Username has to be at least 3 characters').required('Username required!'),
-  email: yup.string().email('Invalid email').required('Email required').min(6, 'Email has to be at least 6 characters long'),
-  password: yup.string().required('Password required!').min(6, 'Password has to be at least 6 characters long'),
-  confirmPassword: yup.string().required('Confirm password required').min(6, 'Must contain at least 6 charaters')
-                      .oneOf([yup.ref('password')], 'Passwords must match')
-}).required()
+const schema = z.object({
+  userName: z.string().min(3, 'Username has to be at least 3 characters').nonempty('Username required!'),
+  email: z.email('Invalid email').min(6, 'Email has to be at least 6 characters long').nonempty('Email required'),
+  password: z.string().min(6, 'Password has to be at least 6 characters long').nonempty('Password required!'),
+})
+
+type RegisterFormData = z.infer<typeof schema>
 
 const Register = () => {
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
   const [ showPassword, setShowPassword ] = useState(false)
-  const [ showPasswordConfirm, setShowPasswordConfirm ] = useState(false)
-
-  // 2️⃣ Initialize react-hook-form
-  const { control, handleSubmit, reset, formState: { errors } } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: { userName: '', email: '', password: '', confirmPassword: '' }
+  const { control, handleSubmit, reset, formState: { errors } } = useForm<RegisterFormData>({
+    resolver: zodResolver(schema),
+    defaultValues: { userName: '', email: '', password: '' }
   })
 
-  // 3️⃣ Modify submit handler (data: any), addUser(data.userName, data.email, data.password)
-  const onSubmit = async (data: any) => {
-    // When using react hook form, you don't have to prevent default
+  const onSubmit = async (data: RegisterFormData) => {
     const json = await addUser(data.userName, data.email, data.password)
 
     if (json.error) {
@@ -45,13 +39,13 @@ const Register = () => {
       setFlashMessage(`User ${ json.userName } registered successfully`, 'success')
     }
   }
-
-  // 4️⃣ Modify onSubmit and add Controllers
+  
   return (
     <div className='register-container'>
       <form className='register-form' onSubmit={ handleSubmit(onSubmit) } >
         <p className='register-heading'>Register user</p>
         <Hr className='mb-8' />
+
         <Controller
           name='userName'
           control={ control }
@@ -66,6 +60,7 @@ const Register = () => {
             />
           )}
         />
+
         <Controller
           name='email'
           control={ control }
@@ -80,6 +75,7 @@ const Register = () => {
             />
           )}
         />
+
         <Controller
           name='password'
           control={ control }
@@ -108,34 +104,7 @@ const Register = () => {
             />
           )}
         />
-        <Controller
-          name='confirmPassword'
-          control={ control }
-          render={({ field }) => (
-            <MuiTextField
-              {...field}
-              label='Confirm password'
-              id='outlined-password-input'
-              type={ showPasswordConfirm ? 'text' : 'password' }
-              error={ errors.confirmPassword ? true : false }
-              helperText={ errors.confirmPassword?.message }
-              slotProps={{
-                input: {
-                  endAdornment: (
-                    <InputAdornment position='end'>
-                      <IconButton
-                        onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
-                        edge='end'
-                      >
-                        { showPasswordConfirm ? <VisibilityOff /> : <Visibility /> }
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }
-              }}
-            />
-          )}
-        />
+
         <MuiButton text='Submit' isSubmit={ true } color='success'  />
       </form>
     </div>

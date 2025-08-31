@@ -2,7 +2,7 @@ import BaseBackground from '@/ui/base-background/BaseBackground'
 import Card from '@/ui/card/Card'
 import './ProfilePage.css'
 import Hr from '@/ui/hr/Hr'
-import { useLoginStore } from '../_login-page/useLoginStore'
+import { useLoginStore } from '../login-page/useLoginStore'
 import { Navigate } from 'react-router-dom'
 
 

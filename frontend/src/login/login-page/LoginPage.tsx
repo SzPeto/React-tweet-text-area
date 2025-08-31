@@ -1,36 +1,37 @@
-import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
-import MuiButton from '@/ui/mui-button/MuiButton'
-import MuiTextField from '@/ui/mui-text-field/MuiTextField'
-import './LoginPage.css'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 import { IconButton, InputAdornment } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { useForm, Controller } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-import { useState } from 'react'
-import { authenticateUser } from './authenticateUser'
-import { useLoginStore } from './useLoginStore'
-import { useNavigate } from 'react-router-dom'
+import './LoginPage.css'
+import MuiButton from '@/ui/mui-button/MuiButton'
+import MuiTextField from '@/ui/mui-text-field/MuiTextField'
+import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import Hr from '@/ui/hr/Hr'
+import { useLoginStore } from './useLoginStore'
+import { authenticateUser } from './authenticateUser'
 import { getMe } from './getMe'
 
-const schema = yup.object({
-  userName: yup.string().min(3, 'Username has to be at least 3 characters').required('Username required!'),
-  password: yup.string().required('Password required!').min(6, 'Password has to be at least 6 characters long')
-}).required()
+const schema = z.object({
+  userName: z.string().min(3, 'Username has to be at least 3 characters').nonempty('Username required!'),
+  password: z.string().min(6, 'Password has to be at least 6 characters long').nonempty('Password required!')
+})
+
+type LoginFormData = z.infer<typeof schema>
 
 const Login = () => {
   const navigate = useNavigate()
   const [ showPassword, setShowPassword ] = useState(false)
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
   const loginUser = useLoginStore((s) => s.loginUser)
-  const { control, handleSubmit, reset, formState: { errors } } = useForm({
-    resolver: yupResolver(schema),
+  const { control, handleSubmit, reset, formState: { errors } } = useForm<LoginFormData>({
+    resolver: zodResolver(schema),
     defaultValues: { userName: '', password: '' }
   })
 
-
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: LoginFormData) => {
     const json = await authenticateUser(data.userName, data.password)
     
     if (json.error) {
@@ -55,6 +56,7 @@ const Login = () => {
       <form className='login-form' onSubmit={ handleSubmit(onSubmit) } >
         <p className='login-heading'>Login user</p>
         <Hr className='mb-8' />
+
         <Controller
           name='userName'
           control={ control }
@@ -69,6 +71,7 @@ const Login = () => {
             />
           )}
         />
+
         <Controller
           name='password'
           control={ control }
@@ -97,6 +100,7 @@ const Login = () => {
             />
           )}
         />
+
         <MuiButton text='Login' isSubmit={ true } color={ 'primary' } />
       </form>
     </div>
