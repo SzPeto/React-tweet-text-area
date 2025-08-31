@@ -5,7 +5,7 @@ export const getMe = async (accessToken: string) => {
   const request = {
     headers: {
       Authorization: `Bearer ${ accessToken }`,
-    },
+    }
   }
 
   try {
