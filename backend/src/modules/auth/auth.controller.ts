@@ -23,5 +23,4 @@ export class AuthController {
   me(@Request() request) {
     return request.user
   }
-
 }

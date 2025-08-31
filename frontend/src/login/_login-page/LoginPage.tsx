@@ -11,6 +11,7 @@ import { useState } from 'react'
 import { authenticateUser } from './authenticateUser'
 import { useLoginStore } from './useLoginStore'
 import { useNavigate } from 'react-router-dom'
+import Card from '@/ui/card/Card'
 
 const schema = yup.object({
   userName: yup.string().min(3, 'Username has to be at least 3 characters').required('Username required!'),

@@ -54,9 +54,11 @@ const NavBar = () => {
                   { currentUser.userName } ▾
                 </button>
                 <ul className={`dropdown-menu ${ profileOpen ? 'show' : '' }`}>
-                  <li>
-                    <button>Profile</button>
-                  </li>
+                  <NavLink to='/user'>
+                    <li>
+                      <button>Profile</button>
+                    </li>
+                  </NavLink>
                   <li onClick={ handleLogout } className='cursor-pointer'>
                     <button>Logout</button>
                   </li>

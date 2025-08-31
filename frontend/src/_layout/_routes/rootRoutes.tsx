@@ -3,6 +3,7 @@ import Home from '@/home/_page/HomePage'
 import Login from '@/login/_login-page/LoginPage'
 import Register from '@/login/_register-page/RegisterPage'
 import NotFoundPage from '@/_layout/not-found-page/NotFoundPage'
+import ProfilePage from '@/login/_profile-page/ProfilePage'
 
 
 export const rootRoutes = {
@@ -12,6 +13,7 @@ export const rootRoutes = {
   children: [
     { index: true, element: <Home /> },
     { path: 'login', element: <Login /> },
-    { path: 'register', element: <Register /> }
+    { path: 'register', element: <Register /> },
+    { path: 'user', element: <ProfilePage /> }
   ]
 }
