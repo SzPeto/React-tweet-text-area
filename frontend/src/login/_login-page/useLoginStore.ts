@@ -3,7 +3,7 @@ import { create } from 'zustand'
 type LoginStore = {
   currentUser: {
     userName: string,
-    accessToken: string
+    accessToken: string | null
   },
   isLoggedIn: boolean,
   loginUser: (userName: string, accessToken: string) => void,
@@ -13,7 +13,7 @@ type LoginStore = {
 export const useLoginStore = create<LoginStore>((set) => ({
   currentUser: {
     userName: '',
-    accessToken: ''
+    accessToken: null
   },
   isLoggedIn: false,
   loginUser: (userName, accessToken) => set({ currentUser: { 
@@ -22,6 +22,6 @@ export const useLoginStore = create<LoginStore>((set) => ({
   }, isLoggedIn: true }),
   logoutUser: () => set({ currentUser: { 
     userName: '', 
-    accessToken: '' 
+    accessToken: null 
   }, isLoggedIn: false })
 }))
