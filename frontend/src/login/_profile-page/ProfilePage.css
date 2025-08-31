@@ -1,0 +1,5 @@
+.profile-heading {
+  @apply
+    text-[34px]
+    mt-2 mr-2 mb-4 ml-2;
+}

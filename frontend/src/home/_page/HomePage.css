@@ -4,14 +4,6 @@
     pt-8;
 }
 
-.home-container hr{
-  @apply
-    w-full
-    border-none
-    h-px
-    bg-gray-300;
-}
-
 .tweet-input-container-l1 {
   @apply
     flex flex-col justify-center items-center w-[700px] max-md:w-[90%];

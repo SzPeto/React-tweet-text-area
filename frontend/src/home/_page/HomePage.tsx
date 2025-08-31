@@ -1,3 +1,4 @@
+import Hr from '@/ui/hr/Hr'
 import TweetAdd from '../tweet-add/TweetAdd'
 import TweetList from '../tweet-list/TweetList'
 import './HomePage.css'
@@ -9,7 +10,7 @@ const Home = () => {
       <div className='tweet-input-container-l1'>
         <TweetAdd />
       </div>
-      <hr />
+      <Hr />
       <div className='tweet-list-container'>
         <TweetList />
       </div>

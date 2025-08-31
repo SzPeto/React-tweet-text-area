@@ -11,7 +11,7 @@ import { useState } from 'react'
 import { authenticateUser } from './authenticateUser'
 import { useLoginStore } from './useLoginStore'
 import { useNavigate } from 'react-router-dom'
-import Card from '@/ui/card/Card'
+import Hr from '@/ui/hr/Hr'
 
 const schema = yup.object({
   userName: yup.string().min(3, 'Username has to be at least 3 characters').required('Username required!'),
@@ -45,8 +45,9 @@ const Login = () => {
 
   return (
     <div className='login-container'>
-      <p className='login-heading'>Login user</p>
-      <form className='register-form' onSubmit={ handleSubmit(onSubmit) } >
+      <form className='login-form' onSubmit={ handleSubmit(onSubmit) } >
+        <p className='login-heading'>Login user</p>
+        <Hr className='mb-8' />
         <Controller
           name='userName'
           control={ control }

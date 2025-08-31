@@ -1,6 +1,6 @@
 .card-container {
   @apply
     flex flex-col justify-center items-start
-    bg-white rounded-lg shadow-lg min-w-[600px]
+    bg-white rounded-lg shadow-lg min-w-[600px] max-md:min-w-[90%]
     gap-7 p-8;
 }

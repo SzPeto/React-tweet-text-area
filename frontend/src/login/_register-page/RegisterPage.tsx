@@ -9,6 +9,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import Hr from '@/ui/hr/Hr'
 
 
 // 1️⃣ Yup validation schema
@@ -48,8 +49,9 @@ const Register = () => {
   // 4️⃣ Modify onSubmit and add Controllers
   return (
     <div className='register-container'>
-      <p className='register-heading'>Register user</p>
       <form className='register-form' onSubmit={ handleSubmit(onSubmit) } >
+        <p className='register-heading'>Register user</p>
+        <Hr className='mb-8' />
         <Controller
           name='userName'
           control={ control }

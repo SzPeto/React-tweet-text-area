@@ -1,0 +1,7 @@
+.horizontal-rule {
+  @apply
+    w-full
+    border-none
+    h-px
+    bg-gray-300;
+}
