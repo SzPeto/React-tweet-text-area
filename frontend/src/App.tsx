@@ -1,6 +1,6 @@
-import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { rootRoutes } from '@/_layout/_routes/rootRoutes'
+import './App.css'
 
 function App() {
 

@@ -1,10 +1,10 @@
-import './NavBarContainers.css'
-import './NavBarMenuItems.css'
-import logo from '@/_layout/_assets/letter-t.png'
-import { useLoginStore } from '@/login/login-page/useLoginStore'
-import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useLoginStore } from '@/login/login-page/useLoginStore'
+import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
+import logo from '@/_layout/_assets/letter-t.png'
+import './NavBarContainers.css'
+import './NavBarMenuItems.css'
 
 const NavBar = () => {
   const [ profileOpen, setProfileOpen ] = useState(false)

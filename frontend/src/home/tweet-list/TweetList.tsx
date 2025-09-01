@@ -1,8 +1,8 @@
-import './TweetList.css'
+import { useEffect, useState } from 'react'
 import Tweet from '@/home/tweet-item/TweetItem'
 import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
-import { useEffect, useState } from 'react'
 import { fetchTweets } from './fetchTweets'
+import './TweetList.css'
 
 const TweetList = () => {
   const tweets = useTweetsStore((s) => s.tweets)
