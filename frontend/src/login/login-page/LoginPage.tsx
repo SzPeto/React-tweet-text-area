@@ -28,6 +28,7 @@ const Login = () => {
   const [ showPassword, setShowPassword ] = useState(false)
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
   const loginUser = useLoginStore((s) => s.loginUser)
+  const setAccessToken = useLoginStore((s) => s.setAccessToken)
   const { control, handleSubmit, reset, formState: { errors } } = useForm<LoginFormData>({
     resolver: zodResolver(schema),
     defaultValues: { userName: '', password: '' }
@@ -40,7 +41,8 @@ const Login = () => {
       const jsonErrorMessage = json.error?.response?.data?.message ?? json.error?.message ?? 'Error while authenticating user'
       setFlashMessage(`Login unsuccessful, error while authenticating user : ${ jsonErrorMessage }`, 'warning')
     } else {
-      const user = await getMe(json.accessToken)
+      setAccessToken(json.accessToken)
+      const user = await getMe()
       if (user.error) {
         const userErrorMessage = user.error?.response?.data?.message ?? user.error?.message ?? 'Error fetching user'
         setFlashMessage(`Login unsuccessful, error while fetching user : ${ userErrorMessage }`, 'warning')

@@ -8,11 +8,13 @@ type LoginStore = {
     picturePath: string
   },
   isLoggedIn: boolean,
+  accessToken: () => string | null,
+  setAccessToken: (newToken: string) => void,
   loginUser: (userName: string, accessToken: string, email: string, picturePath: string) => void,
   logoutUser: () => void
 }
 
-export const useLoginStore = create<LoginStore>((set) => ({
+export const useLoginStore = create<LoginStore>((set,get) => ({
   currentUser: {
     userName: '',
     accessToken: null,
@@ -20,6 +22,8 @@ export const useLoginStore = create<LoginStore>((set) => ({
     picturePath: ''
   },
   isLoggedIn: false,
+  accessToken: () => get().currentUser.accessToken,
+  setAccessToken: (newToken) => set((s) => ({ currentUser: { ...s.currentUser, accessToken: newToken } })),
   loginUser: (userName, accessToken, email, picturePath) => set({ currentUser: { 
     userName: userName, 
     accessToken: accessToken,
