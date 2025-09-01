@@ -3,7 +3,6 @@ import TextArea from '@/ui/text-area/TextArea'
 import './TweetAdd.css'
 import { useState } from 'react'
 import { addTweet } from './addTweet'
-import { deleteAllTweets } from './deleteAllTweets'
 import { getDateTime } from '@/_utils/date-time/getDateTime'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import { useTweetsStore } from '../tweet-list/useTweetsStore'
@@ -30,19 +29,6 @@ const TweetAdd = () => {
 
     setTweets(getJson)
     setIsActiveSubmit(true)
-  }
-
-  const handleDeleteAll = async () => {
-    const json = await deleteAllTweets()
-    const getJson = await fetchTweets()
-
-    if (json) {
-      setFlashMessage('All tweets deleted successfully!', 'success')
-    } else {
-      setFlashMessage('Error on deleting tweets', 'warning')
-    }
-    
-    setTweets(getJson)
   }
 
   return (
