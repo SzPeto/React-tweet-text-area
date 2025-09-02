@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError, type AxiosResponse } from 'axios'
 import { useLoginStore } from './login/login-page/useLoginStore'
 
 // --- Extend Axios config module with our custom flag to avoid TS errors ---
@@ -14,11 +14,10 @@ const api = axios.create({
 })
 
 // Interceptor for attaching tokens, now every request with axios will have attached to its header the token
-// If you want to remove the token from a request : api.post('/api/auth/login', creds, { headers: { Authorization: '' } })
 api.interceptors.request.use((config) => {
     const token = useLoginStore.getState().currentUser.accessToken
     if (token) {
-      config.headers = config.headers ?? {}
+      config.headers = config.headers ?? {} // If not present in config, initialize it as object
       config.headers.Authorization = `Bearer ${ token }`
     }
     return config
@@ -51,11 +50,11 @@ async function refreshAccessToken(): Promise<string> {
   return refreshPromise
 }
 
-// --- Response interceptor: if 401 => refresh => retry once ---
+// Response interceptor: if 401 => refresh => retry once
 api.interceptors.response.use(
-  (response) => response, // success → just pass through
+  (response: AxiosResponse) => response, // success → just pass through
 
-  async (error) => {
+  async (error: AxiosError) => {
     const original = error.config             // the request we tried
     const status = error.response?.status     // HTTP status code
     const url = original?.url || ''
