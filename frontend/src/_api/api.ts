@@ -1,14 +1,15 @@
 import axios, { AxiosError, type AxiosResponse } from 'axios'
 import { useLoginStore } from '@/login/login-page/useLoginStore'
+import { refreshAccessToken } from './resreshAccessToken'
 
 const api = axios.create({
   baseURL: 'http://localhost:3000', // backend URL
   withCredentials: true, // needed if you use cookies/sessions
 })
 
-// Interceptor for attaching tokens, now every request with axios will have attached to its header the token
+// Request interceptor for attaching tokens, now every request with axios will have attached to its header the token
 api.interceptors.request.use((config) => {
-    const token = useLoginStore.getState().currentUser.accessToken
+    const token = useLoginStore.getState().accessToken()
     if (token) {
       config.headers = config.headers ?? {} // If not present in config, initialize it as object
       config.headers.Authorization = `Bearer ${ token }`

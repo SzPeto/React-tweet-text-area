@@ -3,7 +3,7 @@ import { useLoginStore } from '@/login/login-page/useLoginStore'
 
 let refreshPromise: Promise<string> | null = null
 
-async function refreshAccessToken(): Promise<string> {
+export async function refreshAccessToken(): Promise<string> {
   // If no refresh is in progress, start one
   if (!refreshPromise) {
     refreshPromise = (async () => {
@@ -21,7 +21,6 @@ async function refreshAccessToken(): Promise<string> {
       }
     })()
   }
-
   // If a refresh is already happening, wait for it
   return refreshPromise
 }
