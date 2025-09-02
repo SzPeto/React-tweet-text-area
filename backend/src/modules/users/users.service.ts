@@ -38,4 +38,12 @@ export class UsersService {
     return await this.userModel.find()
   }
 
+  async updateRefreshTokenHash(userId: string, hash: string) {
+    await this.userModel.updateOne({ _id: userId }, { $set: { refreshTokenHash: hash } })
+  }
+
+  async removeRefreshTokenHash(userId: string) {
+    await this.userModel.updateOne({ _id: userId }, { $set: { refreshTokenHash: null } })
+  }
+
 }

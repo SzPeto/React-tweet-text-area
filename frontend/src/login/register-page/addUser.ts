@@ -1,4 +1,4 @@
-import api from '@/api'
+import api from '@/_api/api'
 
 export const addUser = async (userName: string, email: string, password: string) => {
   let json

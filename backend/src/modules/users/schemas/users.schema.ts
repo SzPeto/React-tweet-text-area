@@ -21,6 +21,9 @@ export class User {
   @Prop({ default: false })
   isAdmin: boolean
 
+  @Prop({ default: null })
+  refreshTokenHash: string | null
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)
