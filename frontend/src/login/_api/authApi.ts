@@ -4,10 +4,9 @@ import { authenticateUser } from '../login-page/authenticateUser'
 import { getMe } from '../login-page/getMe'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 
-const loginUserFe = useLoginStore((s) => s.loginUserFe)
-const logoutUserFe = useLoginStore((s) => s.logoutUserFe)
-const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
-const setAccessToken = useLoginStore((s) => s.setAccessToken)
+// Use store's imperative API when outside React component
+const { loginUserFe, logoutUserFe, setAccessToken } = useLoginStore.getState()
+const { setFlashMessage } = useFlashMessageStore.getState()
 
 export const login = async (userName: string, password: string) => {
   const json = await authenticateUser(userName, password)
@@ -33,7 +32,13 @@ export const login = async (userName: string, password: string) => {
 
 export const me = () => getMe()
 
-export const logout = () => {
+export const logout = async () => {
+  try {
+    await api.post('/api/auth/logout') // Logout in backend
+  } catch(err) {
+    setFlashMessage(`Server logout failed, session may still be active : ${ err }`, 'warning')
+  }
+
   logoutUserFe() // Logout in frontend
-  api.post('/api/auth/logout') // Logout in backend
+  setFlashMessage('User logged out successfully', 'success')
 }

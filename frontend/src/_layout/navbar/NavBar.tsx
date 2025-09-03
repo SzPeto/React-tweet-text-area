@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useLoginStore } from '@/login/login-page/useLoginStore'
-import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
+import { logout } from '@/login/_api/authApi'
 import logo from '@/_layout/_assets/letter-t.png'
 import './NavBarContainers.css'
 import './NavBarMenuItems.css'
@@ -10,13 +10,10 @@ const NavBar = () => {
   const [ profileOpen, setProfileOpen ] = useState(false)
   const [ menuOpen, setMenuOpen ] = useState(false)
   const currentUser = useLoginStore((s) => s.currentUser)
-  const logoutUserFe = useLoginStore((s) => s.logoutUserFe)
   const isLoggedIn = useLoginStore((s) => s.isLoggedIn)
-  const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
 
-  const handleLogout = () => {
-    logoutUserFe()
-    setFlashMessage('User logged out successfully', 'success')
+  const handleLogout = async () => {
+    await logout()
   }
 
   return(

@@ -20,9 +20,7 @@ const ProfilePage = () => {
       if (user.error) {
         const userErrorMessage = user.error?.response?.data?.message ?? user.error?.message ?? 'Error fetching user'
         console.log('Error message on fetching user : ', userErrorMessage)
-      } else {
-        console.log(user.userName)
-      }
+      } 
     })()
   })
 
