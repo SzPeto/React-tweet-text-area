@@ -5,7 +5,6 @@ import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import { useTweetsStore } from '../tweet-list/useTweetsStore'
 import { addTweet } from './addTweet'
 import { fetchTweets } from '../tweet-list/fetchTweets'
-import { getDateTime } from '@/_utils/date-time/getDateTime'
 import './TweetAdd.css'
 
 const TweetAdd = () => {
@@ -15,9 +14,8 @@ const TweetAdd = () => {
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
 
   const handleSubmit = async () => {
-    const dateSubmitted = getDateTime()
     setIsActiveSubmit(false)
-    const json = await addTweet(tweet, dateSubmitted)
+    const json = await addTweet(tweet)
     const getJson = await fetchTweets()
 
     if (json) {

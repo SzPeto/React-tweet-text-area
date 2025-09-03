@@ -4,8 +4,4 @@ export class CreateTweetDto{
   @IsString()
   @IsNotEmpty()
   content: string
-
-  @IsString()
-  @IsNotEmpty()
-  dateSubmitted: string
 }

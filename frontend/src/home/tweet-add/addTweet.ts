@@ -1,9 +1,8 @@
 
-export async function addTweet(tweet: string, dateSubmitted: string) {
+export async function addTweet(tweet: string) {
   let json
   const postMessage = {
-    content: tweet,
-    dateSubmitted: dateSubmitted
+    content: tweet
   }
   
   try {

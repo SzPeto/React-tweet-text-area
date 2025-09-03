@@ -19,7 +19,7 @@ const MainLayout = () => {
       <footer><Footer /></footer>
 
       {/* Floating Flash Message */}
-      {flashMessage.message && ( <FlashMessage value={flashMessage.message} type={flashMessage.type} /> )}
+      { flashMessage.message && ( <FlashMessage value={ flashMessage.message } type={ flashMessage.type } /> ) }
     </>
   )
 }

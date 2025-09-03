@@ -7,9 +7,6 @@ export type TweetDocument = HydratedDocument<Tweet>
 export class Tweet {
   @Prop({ required: true, trim: true })
   content: string
-
-  @Prop({ requiured: true })
-  dateSubmitted: string
 }
 
 export const TweetSchema = SchemaFactory.createForClass(Tweet)

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -13,6 +13,7 @@ import Hr from '@/ui/hr/Hr'
 import { schema } from './login.schema'
 import { login } from '@/login/_api/authApi'
 import './LoginPage.css'
+import { useLoginStore } from './useLoginStore'
 
 type LoginFormData = z.infer<typeof schema>
 
@@ -33,7 +34,11 @@ const Login = () => {
     }
   }
 
-  return (
+  console.log(`${ useLoginStore.getState().isLoggedIn }`)
+
+  return useLoginStore.getState().isLoggedIn ? (
+    <Navigate to='/' />
+  ) : (
     <div className='login-container'>
       <form className='login-form' onSubmit={ handleSubmit(onSubmit) } >
         <p className='login-heading'>Login user</p>
