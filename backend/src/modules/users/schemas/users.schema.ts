@@ -21,7 +21,7 @@ export class User {
   @Prop({ default: false })
   isAdmin: boolean
 
-  @Prop({ default: null })
+  @Prop({ default: null, type: String })
   refreshTokenHash: string | null
 
 }

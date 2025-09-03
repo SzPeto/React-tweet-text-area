@@ -42,7 +42,7 @@ export class AuthService {
     const userName = user.userName
     const { accessToken, refreshToken } = await this.signTokens(userId, userName)
     const hash = await bcrypt.hash(refreshToken, 10)
-    await this.usersService.updateRefreshTokenHash(userId, hash)
+    await this.usersService.updateRefreshTokenHash(userId, hash) // This saves the refresh token hash to user db
     return { accessToken, refreshToken, userId, userName }
   }
 

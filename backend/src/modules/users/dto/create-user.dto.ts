@@ -22,4 +22,9 @@ export class CreateUserDto {
   @IsOptional()
   isAdmin: boolean
 
+  @IsString()
+  @IsOptional()
+  refreshTokenHash: string
+
+
 }
