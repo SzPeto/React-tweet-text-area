@@ -17,9 +17,9 @@ const Home = () => {
         loginUserFe(user.userName, user.email, user.picturePath)
       }
     })()
-  }, [])
+  }, [loginUserFe])
   
-  return(
+  return (
     <div className='home-container'>
       <div className='tweet-input-container-l1'>
         <TweetAdd />

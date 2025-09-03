@@ -14,9 +14,8 @@ const ProfilePage = () => {
       <Card>
         <p className='profile-heading'>User profile</p>
         <Hr className='mb-8' />
-        <p>Username : { currentUser.userName }</p>
-        <p>Email : { currentUser.email }</p>
-        <p>Picture path : { currentUser.picturePath }</p>
+        <p><b>Username : </b>{ currentUser.userName }</p>
+        <p><b>Email : </b>{ currentUser.email }</p>
       </Card>
     </BaseBackground>
   ) : (

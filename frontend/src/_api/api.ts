@@ -1,6 +1,6 @@
 import axios, { AxiosError, type AxiosResponse } from 'axios'
 import { useLoginStore } from '@/login/login-page/useLoginStore'
-import { refreshAccessToken } from './resreshAccessToken'
+import { refreshAccessToken } from './refreshAccessToken'
 
 const api = axios.create({
   baseURL: 'http://localhost:3000', // backend URL

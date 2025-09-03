@@ -12,8 +12,6 @@ export class AuthController {
   
   constructor(private readonly authService: AuthService, private readonly jwtService: JwtService) {}
 
-  // Before the the request reaches the route, LocalAuthGuard do its work, it enriches the request by user, if credentials correct
-  //
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Request() req, @Res({ passthrough: true }) res: Response) {
@@ -30,7 +28,6 @@ export class AuthController {
 
   @Post('refresh')
   async refresh(@Req() req: ExpressRequest, @Res({ passthrough: true }) res: Response) {
-    console.log('Reached auth.controller/refresh')
     // Read RT from cookie (no body, no headers from FE)
     const cookieName = process.env.COOKIE_NAME || 'rt'
     const presentedRt = req?.cookies?.[cookieName] ?? null // Get the RT from cookie
@@ -42,8 +39,7 @@ export class AuthController {
     // Extract userId from the RT payload (so we can call service.refresh)
     let userId: string
     try {
-      const payload = await this.jwtService.verifyAsync<any>(
-        presentedRt,
+      const payload = await this.jwtService.verifyAsync<any>(presentedRt,
         { secret: process.env.REFRESH_TOKEN_SECRET || process.env.JWT_SECRET }
       )
       userId = payload?.sub
@@ -53,8 +49,7 @@ export class AuthController {
     }
 
     // Rotate tokens (service returns both; we only expose AT)
-    const { accessToken, refreshToken } =
-      await this.authService.refresh(userId, presentedRt)
+    const { accessToken, refreshToken } = await this.authService.refresh(userId, presentedRt)
 
     // Reset cookie with the new RT
     setRefreshCookie(res, refreshToken)

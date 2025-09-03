@@ -9,16 +9,10 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Hr from '@/ui/hr/Hr'
 import MuiTextField from '@/ui/mui-text-field/MuiTextField'
 import MuiButton from '@/ui/mui-button/MuiButton'
+import { schema } from './register.schema'
 import { addUser } from './addUser'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import './RegisterPage.css'
-
-
-const schema = z.object({
-  userName: z.string().min(3, 'Username has to be at least 3 characters').nonempty('Username required!'),
-  email: z.email('Invalid email').min(6, 'Email has to be at least 6 characters long').nonempty('Email required'),
-  password: z.string().min(6, 'Password has to be at least 6 characters long').nonempty('Password required!'),
-})
 
 type RegisterFormData = z.infer<typeof schema>
 

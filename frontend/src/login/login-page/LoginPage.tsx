@@ -10,13 +10,9 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import MuiButton from '@/ui/mui-button/MuiButton'
 import MuiTextField from '@/ui/mui-text-field/MuiTextField'
 import Hr from '@/ui/hr/Hr'
+import { schema } from './login.schema'
 import { login } from '@/login/_api/authApi'
 import './LoginPage.css'
-
-const schema = z.object({
-  userName: z.string().min(3, 'Username has to be at least 3 characters').nonempty('Username required!'),
-  password: z.string().min(6, 'Password has to be at least 6 characters long').nonempty('Password required!')
-})
 
 type LoginFormData = z.infer<typeof schema>
 

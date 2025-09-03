@@ -3,7 +3,6 @@ import { UsersService } from '../users/users.service'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
 
-// TODO - Modify the entire class to not return refresh token at all to FE, only store it to http-only cookie in BE
 @Injectable()
 export class AuthService {
 
