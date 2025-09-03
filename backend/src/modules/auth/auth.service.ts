@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { UsersService } from '../users/users.service'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
 
+// TODO - Modify the entire class to not return refresh token at all to FE, only store it to http-only cookie in BE
 @Injectable()
 export class AuthService {
 
@@ -20,11 +21,45 @@ export class AuthService {
     return safeFields
   }
 
+  // This creates the access and refresh tokens with user id and userName
+  private async signTokens(userId: string, userName: string) {
+    const accessPayload = { sub: userId, userName: userName }
+    const refreshPayload = { sub: userId, userName: userName }
+
+    const accessToken = await this.jwtService.signAsync(accessPayload, {
+      secret: process.env.JWT_SECRET,
+      expiresIn: process.env.JWT_EXPIRES || '15m',
+    })
+    const refreshToken = await this.jwtService.signAsync(refreshPayload, {
+      secret: process.env.REFRESH_TOKEN_SECRET || process.env.JWT_SECRET,
+      expiresIn: process.env.REFRESH_TOKEN_EXPIRES || '7d',
+    })
+    return { accessToken, refreshToken }
+  }
+
   async login(user: any) {
-    // ?? Nullish coalescing operator, use 'a' if not null or undefined, otherwise use 'b'
-    const payload = { username: user.userName, sub: user._id ?? user.id }
-    console.log(`User logged in successfully : ${ payload.username }`)
-    return { accessToken: this.jwtService.sign(payload) } // This goes back to frontend through API
+    const userId = user._id ?? user.id
+    const userName = user.userName
+    const { accessToken, refreshToken } = await this.signTokens(userId, userName)
+    const hash = await bcrypt.hash(refreshToken, 10)
+    await this.usersService.updateRefreshTokenHash(userId, hash)
+    return { accessToken, refreshToken, userId, userName }
+  }
+
+  async refresh(userId: string, presentedRefreshToken: string) {
+    const dbUser = await this.usersService.findUserById(userId)
+    if (!dbUser?.refreshTokenHash) throw new UnauthorizedException('No session')
+    const matches = await bcrypt.compare(presentedRefreshToken, dbUser.refreshTokenHash)
+    if (!matches) throw new UnauthorizedException('Invalid session')
+
+    const { accessToken, refreshToken } = await this.signTokens(dbUser.id, dbUser.userName)
+    const newHash = await bcrypt.hash(refreshToken, 10)
+    await this.usersService.updateRefreshTokenHash(dbUser.id, newHash)
+    return { accessToken, refreshToken }
+  }
+
+  async logout(userId: string) {
+    await this.usersService.removeRefreshTokenHash(userId)
   }
 
 }
