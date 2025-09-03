@@ -4,11 +4,10 @@ import { authenticateUser } from '../login-page/authenticateUser'
 import { getMe } from '../login-page/getMe'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 
-// Use store's imperative API when outside React component
-const { loginUserFe, logoutUserFe, setAccessToken } = useLoginStore.getState()
-const { setFlashMessage } = useFlashMessageStore.getState()
-
 export const login = async (userName: string, password: string) => {
+  // Use store's imperative API when outside React component
+  const { loginUserFe, setAccessToken } = useLoginStore.getState()
+  const { setFlashMessage } = useFlashMessageStore.getState()
   const json = await authenticateUser(userName, password)
 
   if (json.error) {
@@ -23,7 +22,7 @@ export const login = async (userName: string, password: string) => {
       setFlashMessage(`Login unsuccessful, error while fetching user : ${ userErrorMessage }`, 'warning')
       return { success: false }
     } else {
-      loginUserFe(user.userName, json.accessToken, user.email, user.picturePath)
+      loginUserFe(user.userName, user.email, user.picturePath)
       setFlashMessage(`Welcome ${ userName }!`, 'success')
       return { success: true }
     }
@@ -33,6 +32,9 @@ export const login = async (userName: string, password: string) => {
 export const me = () => getMe()
 
 export const logout = async () => {
+  const { logoutUserFe } = useLoginStore.getState()
+  const { setFlashMessage } = useFlashMessageStore.getState()
+
   try {
     await api.post('/api/auth/logout') // Logout in backend
   } catch(err) {
