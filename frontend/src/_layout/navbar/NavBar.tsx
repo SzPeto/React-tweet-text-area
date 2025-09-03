@@ -10,12 +10,12 @@ const NavBar = () => {
   const [ profileOpen, setProfileOpen ] = useState(false)
   const [ menuOpen, setMenuOpen ] = useState(false)
   const currentUser = useLoginStore((s) => s.currentUser)
-  const logoutUser = useLoginStore((s) => s.logoutUser)
+  const logoutUserFe = useLoginStore((s) => s.logoutUserFe)
   const isLoggedIn = useLoginStore((s) => s.isLoggedIn)
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
 
   const handleLogout = () => {
-    logoutUser()
+    logoutUserFe()
     setFlashMessage('User logged out successfully', 'success')
   }
 

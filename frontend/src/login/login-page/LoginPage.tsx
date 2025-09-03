@@ -10,10 +10,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import MuiButton from '@/ui/mui-button/MuiButton'
 import MuiTextField from '@/ui/mui-text-field/MuiTextField'
 import Hr from '@/ui/hr/Hr'
-import { useLoginStore } from './useLoginStore'
-import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
-import { authenticateUser } from './authenticateUser'
-import { getMe } from './getMe'
+import { login } from '@/login/_api/authApi'
 import './LoginPage.css'
 
 const schema = z.object({
@@ -26,32 +23,17 @@ type LoginFormData = z.infer<typeof schema>
 const Login = () => {
   const navigate = useNavigate()
   const [ showPassword, setShowPassword ] = useState(false)
-  const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
-  const loginUser = useLoginStore((s) => s.loginUser)
-  const setAccessToken = useLoginStore((s) => s.setAccessToken)
   const { control, handleSubmit, reset, formState: { errors } } = useForm<LoginFormData>({
     resolver: zodResolver(schema),
     defaultValues: { userName: '', password: '' }
   })
 
   const onSubmit = async (data: LoginFormData) => {
-    const json = await authenticateUser(data.userName, data.password)
-    
-    if (json.error) {
-      const jsonErrorMessage = json.error?.response?.data?.message ?? json.error?.message ?? 'Error while authenticating user'
-      setFlashMessage(`Login unsuccessful, error while authenticating user : ${ jsonErrorMessage }`, 'warning')
-    } else {
-      setAccessToken(json.accessToken)
-      const user = await getMe()
-      if (user.error) {
-        const userErrorMessage = user.error?.response?.data?.message ?? user.error?.message ?? 'Error fetching user'
-        setFlashMessage(`Login unsuccessful, error while fetching user : ${ userErrorMessage }`, 'warning')
-      } else {
-        reset()
-        loginUser(user.userName, json.accessToken, user.email, user.picturePath)
-        setFlashMessage(`Welcome ${ data.userName }!`, 'success')
-        navigate('/')
-      }
+    const response = await login(data.userName, data.password)
+
+    if (response.success === true) {
+      reset()
+      navigate('/')
     }
   }
 

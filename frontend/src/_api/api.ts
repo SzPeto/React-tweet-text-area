@@ -45,7 +45,7 @@ api.interceptors.response.use(
 
         return api(original) // retry the request
       } catch {
-        useLoginStore.getState().logoutUser() // refresh failed → logout
+        useLoginStore.getState().logoutUserFe() // refresh failed → logout
       }
     }
 

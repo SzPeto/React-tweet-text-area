@@ -10,8 +10,8 @@ type LoginStore = {
   isLoggedIn: boolean,
   accessToken: () => string | null,
   setAccessToken: (newToken: string) => void,
-  loginUser: (userName: string, accessToken: string, email: string, picturePath: string) => void,
-  logoutUser: () => void
+  loginUserFe: (userName: string, accessToken: string, email: string, picturePath: string) => void,
+  logoutUserFe: () => void
 }
 
 export const useLoginStore = create<LoginStore>((set,get) => ({
@@ -24,13 +24,13 @@ export const useLoginStore = create<LoginStore>((set,get) => ({
   isLoggedIn: false,
   accessToken: () => get().currentUser.accessToken,
   setAccessToken: (newToken) => set((s) => ({ currentUser: { ...s.currentUser, accessToken: newToken } })),
-  loginUser: (userName, accessToken, email, picturePath) => set({ currentUser: { 
+  loginUserFe: (userName, accessToken, email, picturePath) => set({ currentUser: { 
     userName: userName, 
     accessToken: accessToken,
     email: email,
     picturePath: picturePath
   }, isLoggedIn: true }),
-  logoutUser: () => set({ currentUser: { 
+  logoutUserFe: () => set({ currentUser: { 
     userName: '', 
     accessToken: null,
     email: '',
