@@ -5,7 +5,7 @@ import api from '@/_utils/api/api'
 import { getMe } from '@/account/login-page/getMe'
 
 export const login = async (userName: string, password: string) => {
-  // Use store's imperative API when outside React component
+  // Use zustand store's imperative API when outside React component
   const { loginUserFe, setAccessToken } = useLoginStore.getState()
   const { setFlashMessage } = useFlashMessageStore.getState()
   const json = await authenticateUser(userName, password)
@@ -22,8 +22,8 @@ export const login = async (userName: string, password: string) => {
       setFlashMessage(`Login unsuccessful, error while fetching user : ${ userErrorMessage }`, 'warning')
       return { success: false }
     } else {
-      loginUserFe(user.userName, user.email, user.picturePath)
-      setFlashMessage(`Welcome ${ userName }!`, 'success')
+      loginUserFe(user._id, user.userName, user.email, user.picturePath)
+      setFlashMessage(`Welcome ${ user.userName }!`, 'success')
       return { success: true }
     }
   }

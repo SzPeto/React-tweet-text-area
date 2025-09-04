@@ -1,8 +1,10 @@
 
-export async function addTweet(tweet: string) {
+export async function addTweet(tweet: string, user: string) {
   let json
+  console.log('user : ', user)
   const postMessage = {
-    content: tweet
+    content: tweet,
+    user: user
   }
   
   try {

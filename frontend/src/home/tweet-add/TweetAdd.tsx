@@ -6,6 +6,7 @@ import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
 import { addTweet } from './addTweet'
 import { fetchTweets } from '@/home/tweet-list/fetchTweets'
 import './TweetAdd.css'
+import { useLoginStore } from '@/account/login-page/useLoginStore'
 
 const TweetAdd = () => {
   const [ tweet, setTweet ] = useState('')
@@ -15,7 +16,7 @@ const TweetAdd = () => {
 
   const handleSubmit = async () => {
     setIsActiveSubmit(false)
-    const json = await addTweet(tweet)
+    const json = await addTweet(tweet, useLoginStore.getState().currentUser.userId)
     const getJson = await fetchTweets()
 
     if (json) {

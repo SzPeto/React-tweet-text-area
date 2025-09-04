@@ -20,7 +20,7 @@ export class TweetsService {
     }
 
     const tweets = await this.tweetModel.find({ user: userId }).populate('user').exec()
-    
+
     if (!tweets) {
       throw new NotFoundException(`User with ID : ${ userId } has no tweets!`)
     }

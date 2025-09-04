@@ -9,11 +9,11 @@ import { deleteTweet } from './deleteTweet'
 import { formatIsoDateTime } from '@/_utils/date-time/formatIsoDateTime'
 import './TweetItem.css'
 
-
 type TweeetProps = {
   id: string,
   content: string,
   dateSubmitted: string
+  userId: string
 }
 
 const TweetItem = (props: TweeetProps) => {
@@ -108,6 +108,7 @@ const TweetItem = (props: TweeetProps) => {
       </div>
       <hr />
       <small>🗓️ { formatIsoDateTime(props.dateSubmitted) }</small>
+      <p>User id : { props.userId }</p>
       <div className='on-desktop-container'>
         { isVisibleEdit && (<Buttons />) }
       </div>
