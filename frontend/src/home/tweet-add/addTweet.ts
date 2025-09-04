@@ -1,20 +1,16 @@
+import api from '@/_utils/axios/axios'
+
 export async function addTweet(tweet: string) {
-  let json
+  let response
   const postMessage = {
     content: tweet
   }
   
   try {
-    const response = await fetch('/api/tweets', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(postMessage)
-    })
-    json = await response.json()
+    response = await api.post('/api/tweets', postMessage)
   }catch(err) {
-    json = null
-    console.log('Error during POST request to backend : ', err)
+    return { error: err }
   }
   
-  return json
+  return response.data
 }

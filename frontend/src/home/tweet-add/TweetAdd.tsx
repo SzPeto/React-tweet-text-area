@@ -6,12 +6,15 @@ import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
 import { addTweet } from './addTweet'
 import { fetchTweets } from '@/home/tweet-list/fetchTweets'
 import './TweetAdd.css'
+import { useLoginStore } from '@/account/login-page/useLoginStore'
+import { Link, Navigate } from 'react-router-dom'
 
 const TweetAdd = () => {
   const [ tweet, setTweet ] = useState('')
   const [ isActiveSubmit, setIsActiveSubmit ] = useState(true)
   const setTweets = useTweetsStore((s) => s.setTweets)
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
+  const isLoggedIn = useLoginStore((s) => s.isLoggedIn)
 
   const handleSubmit = async () => {
     setIsActiveSubmit(false)
@@ -41,7 +44,14 @@ const TweetAdd = () => {
       <div className="lower-container">
         {
           isActiveSubmit ? (
-            <MuiButton text='Add tweet' color='success' onClick={ handleSubmit } />
+            isLoggedIn ? (
+              <MuiButton text='Add tweet' color='success' onClick={ handleSubmit } />
+            ) : (
+              <div className='flex flex-col items-center justify-center'>
+                <p>ℹ️ Please log in to add tweet</p>
+                <MuiButton text='Add tweet' isDisabled={ true } />
+              </div>
+            )
           ) : (
             <MuiButton text='Add tweet' isDisabled={ true } />
           )
