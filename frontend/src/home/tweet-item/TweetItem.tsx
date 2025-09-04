@@ -8,6 +8,7 @@ import { fetchTweets } from '../tweet-list/fetchTweets'
 import { deleteTweet } from './deleteTweet'
 import { formatIsoDateTime } from '@/_utils/date-time/formatIsoDateTime'
 import './TweetItem.css'
+import { useLoginStore } from '@/account/login-page/useLoginStore'
 
 type TweeetProps = {
   id: string,
@@ -18,7 +19,6 @@ type TweeetProps = {
 
 const TweetItem = (props: TweeetProps) => {
   const [ editValue, setEditValue ] = useState( props.content )
-  const [ isVisibleEdit, setIsVisibleEdit ] = useState(false)
   const [ isEditing, setIsEditing ] = useState(false)
   const setTweets = useTweetsStore((s) => s.setTweets)
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
@@ -71,10 +71,7 @@ const TweetItem = (props: TweeetProps) => {
   )
 
   return (
-    <div className="tweet-tweet-container" 
-         onMouseEnter={ () => setIsVisibleEdit(true) } 
-         onMouseLeave={ () => setIsVisibleEdit( false ) }
-    >
+    <div className="tweet-tweet-container" >
       <p className="titles-label"> 🆔 { props.id } </p>
       <div className='logic-container'>
         {/* Editing logic */}
@@ -109,11 +106,8 @@ const TweetItem = (props: TweeetProps) => {
       <hr />
       <small>🗓️ { formatIsoDateTime(props.dateSubmitted) }</small>
       <p>User id : { props.userId }</p>
-      <div className='on-desktop-container'>
-        { isVisibleEdit && (<Buttons />) }
-      </div>
-      <div className='on-mobile-container'>
-        <Buttons />
+      <div className='edit-buttons-container'>
+        { props.userId === useLoginStore.getState().currentUser._id && (<Buttons />) }
       </div>
     </div>
   )

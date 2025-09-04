@@ -31,10 +31,6 @@
   @apply flex flex-col w-full m-3;
 }
 
-.on-desktop-container {
-  @apply flex flex-row max-md:hidden h-8;
-}
-
-.on-mobile-container {
-  @apply hidden max-md:flex max-md:flex-row max-md:h-8;
+edit-buttons-container {
+  @apply flex flex-row h-8;
 }
