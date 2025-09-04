@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post, Patch } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, Patch, UseGuards, Req } from '@nestjs/common'
 import { TweetsService } from './tweets.service'
 import { CreateTweetDto } from './dto/create-tweet.dto'
 import { UpdateTweetDto } from './dto/update-tweet.dto'
 import { TweetDocument } from './schemas/tweet.schema'
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'
 
 @Controller('tweets')
 export class TweetsController {
@@ -18,9 +19,13 @@ export class TweetsController {
     return await this.tweetsService.getTweetByUserId(userId)
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
-  async addTweet(@Body() createTweetDto: CreateTweetDto): Promise<TweetDocument> {
-    return await this.tweetsService.addTweet(createTweetDto)
+  async addTweet(
+    @Body() createTweetDto: CreateTweetDto,
+    @Req() req
+  ): Promise<TweetDocument> {
+    return await this.tweetsService.addTweet(createTweetDto, req.user._id)
   }
 
   @Patch(':id')

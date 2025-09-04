@@ -28,8 +28,11 @@ export class TweetsService {
     return tweets
   }
 
-  async addTweet(createTweetDto: CreateTweetDto): Promise<TweetDocument> {
-    const tweet = new this.tweetModel(createTweetDto)
+  async addTweet(createTweetDto: CreateTweetDto, userId: string): Promise<TweetDocument> {
+    const tweet = new this.tweetModel({
+      content: createTweetDto.content,
+      user: new Types.ObjectId(userId)
+    })
     return await tweet.save()
   }
 

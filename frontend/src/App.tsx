@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { rootRoutes } from '@/_layout/_routes/rootRoutes'
 import { useLoginStore } from './account/login-page/useLoginStore'
-import { getMe } from './account/login-page/getMe'
+import { me } from '@/account/_session-control/me'
 import './App.css'
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
   // Main user fetch, after refresh checks for active session, if active fetches the logged in user from BE
   useEffect(() => {
     (async () => {
-      const user = await getMe()
+      const user = await me()
       if (!user.error) {
         loginUserFe(user.userName, user.email, user.picturePath)
       }

@@ -6,7 +6,6 @@ import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
 import { addTweet } from './addTweet'
 import { fetchTweets } from '@/home/tweet-list/fetchTweets'
 import './TweetAdd.css'
-import { useLoginStore } from '@/account/login-page/useLoginStore'
 
 const TweetAdd = () => {
   const [ tweet, setTweet ] = useState('')
@@ -16,14 +15,14 @@ const TweetAdd = () => {
 
   const handleSubmit = async () => {
     setIsActiveSubmit(false)
-    const json = await addTweet(tweet, useLoginStore.getState().currentUser.userId)
+    const json = await addTweet(tweet)
     const getJson = await fetchTweets()
 
-    if (json) {
+    if (!json.error) {
       setTweet('')
       setFlashMessage('Tweet added successfully!', 'success')
     } else {
-      setFlashMessage('Error on inserting tweet', 'warning')
+      setFlashMessage(`Error on inserting tweet`, 'warning')
     }
 
     setTweets(getJson)

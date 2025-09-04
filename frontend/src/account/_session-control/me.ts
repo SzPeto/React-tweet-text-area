@@ -1,6 +1,6 @@
-import api from '@/_utils/api/api'
+import api from '@/_utils/axios/axios'
 
-export const getMe = async () => {
+export const me = async () => {
   try {
     const response = await api.get('/api/auth/me')
     return response.data

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useLoginStore } from '@/account/login-page/useLoginStore'
-import { logout } from '@/account/_api/authApi'
+import { logout } from '@/account/_session-control/logout'
 import logo from '@/_layout/_assets/letter-t.png'
 import './NavBarContainers.css'
 import './NavBarMenuItems.css'

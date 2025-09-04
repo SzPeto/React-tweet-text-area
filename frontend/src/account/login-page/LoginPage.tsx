@@ -11,7 +11,7 @@ import MuiButton from '@/ui/mui-button/MuiButton'
 import MuiTextField from '@/ui/mui-text-field/MuiTextField'
 import Hr from '@/ui/hr/Hr'
 import { schema } from './login.schema'
-import { login } from '@/account/_api/authApi'
+import { login } from '@/account/_session-control/login'
 import { useLoginStore } from './useLoginStore'
 import './LoginPage.css'
 
@@ -33,8 +33,6 @@ const Login = () => {
       navigate('/')
     }
   }
-
-  console.log(`${ useLoginStore.getState().isLoggedIn }`)
 
   return useLoginStore.getState().isLoggedIn ? (
     <Navigate to='/' />

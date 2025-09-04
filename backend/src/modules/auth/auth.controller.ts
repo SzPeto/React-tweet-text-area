@@ -15,7 +15,6 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Request() req, @Res({ passthrough: true }) res: Response) {
-    console.log('Reached auth.controller/login')
     // LocalGuard puts the validated user on req.user
     const { accessToken, refreshToken } =
       await this.authService.login(req.user)
@@ -63,7 +62,6 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Post('logout')
   async logout(@Request() req, @Res({ passthrough: true }) res: Response) {
-    console.log('Reached auth.controller/logout')
     const userId = req.user._id ?? req.user.id ?? req.user.sub
     await this.authService.logout(userId)
     clearRefreshCookie(res)
@@ -73,7 +71,6 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Get('me')
   me(@Request() request) {
-    console.log('Reached auth.controller/me')
     return request.user
   }
 }

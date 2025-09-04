@@ -1,4 +1,4 @@
-import api from '@/_utils/api/api'
+import api from '@/_utils/axios/axios'
 
 export const addUser = async (userName: string, email: string, password: string) => {
   let json

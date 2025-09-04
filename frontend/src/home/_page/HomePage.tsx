@@ -4,7 +4,7 @@ import TweetList from '@/home/tweet-list/TweetList'
 import './HomePage.css'
 
 const Home = () => {
-  
+
   return (
     <div className='home-container'>
       <div className='tweet-input-container-l1'>
