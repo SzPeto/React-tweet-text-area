@@ -6,8 +6,6 @@ import { TweetDocument } from './schemas/tweet.schema'
 
 @Controller('tweets')
 export class TweetsController {
-
-  // NestJS automatic DI via constructor, readonly is like const, but for instances
   constructor(private readonly tweetsService: TweetsService) {}
 
   @Get()
@@ -15,9 +13,9 @@ export class TweetsController {
     return await this.tweetsService.getAllTweets()
   }
 
-  @Get(':id')
-  async getTweetById(@Param('id') id: string): Promise<TweetDocument> {
-    return await this.tweetsService.getTweetById(id)
+  @Get('user/:userId')
+  async getTweetByUserId(@Param('userId') userId: string) {
+    return await this.tweetsService.getTweetByUserId(userId)
   }
 
   @Post()
@@ -31,12 +29,6 @@ export class TweetsController {
     @Body() updateTweetDto: UpdateTweetDto
   ): Promise<TweetDocument> {
     return await this.tweetsService.replaceTweetById(id, updateTweetDto)
-  }
-
-  @Delete()
-  async deleteAll(): Promise<object> {
-    const response = await this.tweetsService.deleteAllTweets()
-    return { success: response.acknowledged, deletedCount: response.deletedCount }
   }
 
   @Delete(':id')

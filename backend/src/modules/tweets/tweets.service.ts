@@ -14,16 +14,16 @@ export class TweetsService {
     return await this.tweetModel.find()
   }
 
-  async getTweetById(id: string): Promise<TweetDocument> {
-    // Ensure to throw NotFoundException if the id isn't valid
-    if (!Types.ObjectId.isValid(id)) {
-      throw new NotFoundException(`Invalid Tweet ID : ${ id }`)
+  async getTweetByUserId(userId: string) {
+    if (!Types.ObjectId.isValid(userId)) {
+      throw new NotFoundException(`Invalid user ID : ${ userId }`)
     }
-    const tweet = await this.tweetModel.findById(id)
-    if (!tweet) {
-      throw new NotFoundException(`Tweet with ID : ${ id } not found!`)
+    const tweets = await this.tweetModel.find({ user: userId })
+    if (!tweets) {
+      throw new NotFoundException(`User with ID : ${ userId } has no tweets!`)
     }
-    return tweet
+
+    return tweets
   }
 
   async addTweet(createTweetDto: CreateTweetDto): Promise<TweetDocument> {
@@ -40,10 +40,6 @@ export class TweetsService {
       throw new NotFoundException(`Error during updating, tweet with ID : ${ id } not found`)
     }
     return updated
-  }
-
-  async deleteAllTweets(): Promise<DeleteResult> {
-    return await this.tweetModel.deleteMany({})
   }
 
   async deleteTweetById(id: string): Promise<DeleteResult> {
