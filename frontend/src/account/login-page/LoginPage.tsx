@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -7,43 +7,41 @@ import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import Hr from '@/ui/hr/Hr'
-import MuiTextField from '@/ui/mui-text-field/MuiTextField'
 import MuiButton from '@/ui/mui-button/MuiButton'
-import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
-import { schema } from './register.schema'
-import { useLoginStore } from '@/login/login-page/useLoginStore'
-import { addUser } from './addUser'
-import './RegisterPage.css'
+import MuiTextField from '@/ui/mui-text-field/MuiTextField'
+import Hr from '@/ui/hr/Hr'
+import { schema } from './login.schema'
+import { login } from '@/account/_api/authApi'
+import { useLoginStore } from './useLoginStore'
+import './LoginPage.css'
 
-type RegisterFormData = z.infer<typeof schema>
+type LoginFormData = z.infer<typeof schema>
 
-const Register = () => {
-  const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
+const Login = () => {
+  const navigate = useNavigate()
   const [ showPassword, setShowPassword ] = useState(false)
-  const { control, handleSubmit, reset, formState: { errors } } = useForm<RegisterFormData>({
+  const { control, handleSubmit, reset, formState: { errors } } = useForm<LoginFormData>({
     resolver: zodResolver(schema),
-    defaultValues: { userName: '', email: '', password: '' }
+    defaultValues: { userName: '', password: '' }
   })
 
-  const onSubmit = async (data: RegisterFormData) => {
-    const json = await addUser(data.userName, data.email, data.password)
+  const onSubmit = async (data: LoginFormData) => {
+    const response = await login(data.userName, data.password)
 
-    if (json.error) {
-      const message = json.error?.response?.data?.message ?? json.error?.message ?? 'unknown error'
-      setFlashMessage(`User registration failed : ${ message }`, 'warning')
-    } else {
+    if (response.success === true) {
       reset()
-      setFlashMessage(`User ${ json.userName } registered successfully`, 'success')
+      navigate('/')
     }
   }
-  
+
+  console.log(`${ useLoginStore.getState().isLoggedIn }`)
+
   return useLoginStore.getState().isLoggedIn ? (
     <Navigate to='/' />
   ) : (
-    <div className='register-container'>
-      <form className='register-form' onSubmit={ handleSubmit(onSubmit) } >
-        <p className='register-heading'>Register user</p>
+    <div className='login-container'>
+      <form className='login-form' onSubmit={ handleSubmit(onSubmit) } >
+        <p className='login-heading'>Login user</p>
         <Hr className='mb-8' />
 
         <Controller
@@ -56,22 +54,7 @@ const Register = () => {
               id='outlined-basic'
               type='text'
               error={ errors.userName ? true : false }
-              helperText={ errors.userName?.message }
-            />
-          )}
-        />
-
-        <Controller
-          name='email'
-          control={ control }
-          render={({ field }) => (
-            <MuiTextField
-              {...field}
-              label='Email'
-              id='outlined-basic'
-              type='email'
-              error={ errors.email ? true : false }
-              helperText={ errors.email?.message }
+              helperText={ errors.userName?.message } // optional chaining operator, access only messages if userName not null
             />
           )}
         />
@@ -95,7 +78,7 @@ const Register = () => {
                         onClick={() => setShowPassword(!showPassword)}
                         edge='end'
                       >
-                        { showPassword ? <VisibilityOff /> : <Visibility /> }
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
                   )
@@ -105,10 +88,10 @@ const Register = () => {
           )}
         />
 
-        <MuiButton text='Submit' isSubmit={ true } color='success'  />
+        <MuiButton text='Login' isSubmit={ true } color={ 'primary' } />
       </form>
     </div>
   )
 }
 
-export default Register
+export default Login

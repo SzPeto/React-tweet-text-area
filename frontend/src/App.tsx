@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { rootRoutes } from '@/_layout/_routes/rootRoutes'
-import { useLoginStore } from './login/login-page/useLoginStore'
-import { getMe } from './login/login-page/getMe'
+import { useLoginStore } from './account/login-page/useLoginStore'
+import { getMe } from './account/login-page/getMe'
 import './App.css'
 
 function App() {

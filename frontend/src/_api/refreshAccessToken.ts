@@ -1,5 +1,5 @@
 import api from './api'
-import { useLoginStore } from '@/login/login-page/useLoginStore'
+import { useLoginStore } from '@/account/login-page/useLoginStore'
 
 let refreshPromise: Promise<string> | null = null
 

@@ -1,5 +1,5 @@
 import axios, { AxiosError, type AxiosResponse } from 'axios'
-import { useLoginStore } from '@/login/login-page/useLoginStore'
+import { useLoginStore } from '@/account/login-page/useLoginStore'
 import { refreshAccessToken } from './refreshAccessToken'
 
 const api = axios.create({
