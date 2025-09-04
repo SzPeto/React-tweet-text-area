@@ -18,7 +18,9 @@ export class TweetsService {
     if (!Types.ObjectId.isValid(userId)) {
       throw new NotFoundException(`Invalid user ID : ${ userId }`)
     }
-    const tweets = await this.tweetModel.find({ user: userId })
+
+    const tweets = await this.tweetModel.find({ user: userId }).populate('user').exec()
+    
     if (!tweets) {
       throw new NotFoundException(`User with ID : ${ userId } has no tweets!`)
     }

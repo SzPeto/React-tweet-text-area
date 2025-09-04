@@ -4,4 +4,6 @@ export class UpdateTweetDto{
   @IsString()
   @IsNotEmpty()
   content: string
+
+  
 }
