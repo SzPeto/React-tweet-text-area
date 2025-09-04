@@ -1,8 +1,8 @@
-import api from '@/_api/api'
-import { useLoginStore } from '../login-page/useLoginStore'
-import { authenticateUser } from '../login-page/authenticateUser'
-import { getMe } from '../login-page/getMe'
+import { useLoginStore } from '@/login/login-page/useLoginStore'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
+import { authenticateUser } from '@/login/login-page/authenticateUser'
+import api from '@/_api/api'
+import { getMe } from '@/login/login-page/getMe'
 
 export const login = async (userName: string, password: string) => {
   // Use store's imperative API when outside React component

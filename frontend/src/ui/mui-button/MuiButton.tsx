@@ -12,7 +12,9 @@ type MuiButtonProps = {
 }
 
 const MuiButton = (props: MuiButtonProps) => {
-  if (props.hidden) return null
+  if (props.hidden) {
+    return null
+  }
   
   return (
     <Button

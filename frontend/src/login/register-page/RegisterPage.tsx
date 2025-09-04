@@ -10,9 +10,9 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Hr from '@/ui/hr/Hr'
 import MuiTextField from '@/ui/mui-text-field/MuiTextField'
 import MuiButton from '@/ui/mui-button/MuiButton'
-import { schema } from './register.schema'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
-import { useLoginStore } from '../login-page/useLoginStore'
+import { schema } from './register.schema'
+import { useLoginStore } from '@/login/login-page/useLoginStore'
 import { addUser } from './addUser'
 import './RegisterPage.css'
 
@@ -56,7 +56,7 @@ const Register = () => {
               id='outlined-basic'
               type='text'
               error={ errors.userName ? true : false }
-              helperText={ errors.userName?.message } // optional chaining operator, access only messages if userName not null
+              helperText={ errors.userName?.message }
             />
           )}
         />

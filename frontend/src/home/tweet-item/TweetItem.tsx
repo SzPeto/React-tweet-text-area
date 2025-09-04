@@ -6,8 +6,9 @@ import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import { updateTweet } from './updateTweet'
 import { fetchTweets } from '../tweet-list/fetchTweets'
 import { deleteTweet } from './deleteTweet'
-import './TweetItem.css'
 import { formatIsoDateTime } from '@/_utils/date-time/formatIsoDateTime'
+import './TweetItem.css'
+
 
 type TweeetProps = {
   id: string,
@@ -50,7 +51,9 @@ const TweetItem = (props: TweeetProps) => {
         color='error' 
         onClick={ 
           (e) => { 
-            if (window.confirm('Are you sure you want to delete this tweet?')) handleDelete(e) 
+            if (window.confirm('Are you sure you want to delete this tweet?')) {
+              handleDelete(e) 
+            }
           }
         } 
         data={ props.id }

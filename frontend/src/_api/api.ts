@@ -29,7 +29,9 @@ api.interceptors.response.use(
     const url = original?.url || ''
 
     // If we don't know what failed → just bubble up
-    if (!original || !status) return Promise.reject(error)
+    if (!original || !status) {
+      return Promise.reject(error)
+    }
 
     // Don't refresh while calling refresh (avoid loops)
     const isRefreshCall = url.includes('/auth/refresh')

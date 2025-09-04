@@ -2,9 +2,9 @@ import { useState } from 'react'
 import MuiButton from '@/ui/mui-button/MuiButton'
 import TextArea from '@/ui/text-area/TextArea'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
-import { useTweetsStore } from '../tweet-list/useTweetsStore'
+import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
 import { addTweet } from './addTweet'
-import { fetchTweets } from '../tweet-list/fetchTweets'
+import { fetchTweets } from '@/home/tweet-list/fetchTweets'
 import './TweetAdd.css'
 
 const TweetAdd = () => {

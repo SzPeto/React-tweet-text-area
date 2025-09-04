@@ -12,8 +12,8 @@ import MuiTextField from '@/ui/mui-text-field/MuiTextField'
 import Hr from '@/ui/hr/Hr'
 import { schema } from './login.schema'
 import { login } from '@/login/_api/authApi'
-import './LoginPage.css'
 import { useLoginStore } from './useLoginStore'
+import './LoginPage.css'
 
 type LoginFormData = z.infer<typeof schema>
 

@@ -1,4 +1,3 @@
-
 function pad(s: any): string {
   return s.toString().padStart(2, "0")
 }

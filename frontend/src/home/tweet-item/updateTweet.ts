@@ -1,4 +1,3 @@
-
 export async function updateTweet(id: string, tweet: string) {
   let json
   const updateMessage = {
