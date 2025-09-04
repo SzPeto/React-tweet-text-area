@@ -1,7 +1,9 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common'
-import { UsersService } from '../users/users.service'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
+import { UsersService } from '../users/users.service'
+
+
 
 @Injectable()
 export class AuthService {
@@ -10,9 +12,13 @@ export class AuthService {
 
   async validateUser(userName: string, pw: string) {
     const user = await this.usersService.findUserByName(userName)
-    if (!user) return null
+    if (!user) {
+      return null
+    }
     const passwordMatch = await bcrypt.compare(pw, user.password)
-    if (!passwordMatch) return null
+    if (!passwordMatch) {
+      return null
+    }
     // user.toObject() checks if it is a Mongoose document, if yes, it converts it to plain TS object, if not return user
     // The destructuring extracts the password and the left fields besides password separately, e.g. : 
     // safeFields = { username: "peter", email: "a@b.com" }
@@ -47,9 +53,13 @@ export class AuthService {
 
   async refresh(userId: string, presentedRefreshToken: string) {
     const dbUser = await this.usersService.findUserById(userId)
-    if (!dbUser?.refreshTokenHash) throw new UnauthorizedException('No session')
+    if (!dbUser?.refreshTokenHash) {
+      throw new UnauthorizedException('No session')
+    }
     const matches = await bcrypt.compare(presentedRefreshToken, dbUser.refreshTokenHash)
-    if (!matches) throw new UnauthorizedException('Invalid session')
+    if (!matches) {
+      throw new UnauthorizedException('Invalid session')
+    }
 
     const { accessToken, refreshToken } = await this.signTokens(dbUser.id, dbUser.userName)
     const newHash = await bcrypt.hash(refreshToken, 10)

@@ -18,7 +18,9 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   async validate(payload: any) {
     // payload comes from sign({ userId, username }) in AuthService
     const user = await this.usersService.findUserById(payload.sub)
-    if (!user) throw new NotFoundException(`User with id ${ payload.sub } not found`)
+    if (!user) {
+      throw new NotFoundException(`User with id ${ payload.sub } not found`)
+    }
     return user // This attaches to request.user
   }
 }

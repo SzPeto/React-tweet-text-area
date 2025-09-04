@@ -12,7 +12,9 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
   // to super() : super({ usernameField: 'username', passwordField: 'password' })
   async validate(userName: string, password: string) { // The inherited method from Passport
     const user = this.authService.validateUser(userName, password) // Service return safeFields
-    if (!user) throw new UnauthorizedException('Authorization failed!')
+    if (!user) {
+      throw new UnauthorizedException('Authorization failed!')
+    }
     return user // Returns to Passport and Passport attaches to request.user
   }
 

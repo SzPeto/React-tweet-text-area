@@ -1,62 +1,40 @@
 .tweet-tweet-container {
-  @apply
-    flex flex-col justify-center items-start w-full
-    border-2 border-gray-300 rounded-md shadow-md bg-white
-    text-base text-gray-500 font-light
-    m-2 p-4;
+  @apply flex flex-col justify-center items-start w-full border-2 border-gray-300 rounded-md shadow-md bg-white text-base 
+       text-gray-500 font-light m-2 p-4;
 }
 
 .tweet-tweet-container p {
-  @apply
-    break-words
-    m-5;
+  @apply break-words m-5;
 }
 
 .tweet-tweet-container small {
-  @apply
-    my-3 mx-5;
+  @apply my-3 mx-5;
 }
 
 .tweet-tweet-container hr {
-  @apply
-    w-full
-    border-none
-    h-px
-    bg-gray-300;
+  @apply w-full border-none h-px bg-gray-300;
 }
 
 .titles-label {
-  @apply
-    text-lg;
+  @apply text-lg;
 }
 
 .delete-edit-button-container {
-  @apply
-    flex flex-row justify-start items-center
-    mx-5;
+  @apply flex flex-row justify-start items-center mx-5;
 }
 
 .logic-container {
-  @apply
-    flex flex-row justify-start items-center w-full;
+  @apply flex flex-row justify-start items-center w-full;
 }
 
 .edit-container {
-  @apply
-    flex flex-col w-full
-    m-3;
+  @apply flex flex-col w-full m-3;
 }
 
 .on-desktop-container {
-  @apply
-    flex flex-row
-    max-md:hidden
-    h-8;
+  @apply flex flex-row max-md:hidden h-8;
 }
 
 .on-mobile-container {
-  @apply
-    hidden
-    max-md:flex max-md:flex-row
-    max-md:h-8;
+  @apply hidden max-md:flex max-md:flex-row max-md:h-8;
 }

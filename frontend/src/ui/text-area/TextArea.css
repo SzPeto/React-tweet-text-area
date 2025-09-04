@@ -1,7 +1,3 @@
 .text-area-l1 {
-  @apply
-    rounded-lg
-    border-2 border-gray-200
-    p-4
-    w-full;
+  @apply rounded-lg border-2 border-gray-200 p-4 w-full;
 }

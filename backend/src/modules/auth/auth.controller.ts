@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Request, UseGuards, Res, Req } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
+import { type Response, type Request as ExpressRequest } from 'express'
 import { AuthService } from './auth.service'
 import { LocalAuthGuard } from './guards/local-auth.guard'
 import { JwtAuthGuard } from './guards/jwt-auth.guard'
-import { JwtService } from '@nestjs/jwt'
-import { type Response, type Request as ExpressRequest } from 'express'
 import { setRefreshCookie, clearRefreshCookie } from './cookie.util'
 
 
@@ -43,7 +43,9 @@ export class AuthController {
         { secret: process.env.REFRESH_TOKEN_SECRET || process.env.JWT_SECRET }
       )
       userId = payload?.sub
-      if (!userId) throw new Error('No sub in token')
+      if (!userId) {
+        throw new Error('No sub in token')
+      }
     } catch {
       return res.status(401).json({ message: 'Invalid session' })
     }

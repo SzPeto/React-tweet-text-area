@@ -10,13 +10,6 @@ export class TweetsController {
   // NestJS automatic DI via constructor, readonly is like const, but for instances
   constructor(private readonly tweetsService: TweetsService) {}
 
-
-  /*
-  ============================================================================================================================
-                                                GET mappings
-  ============================================================================================================================
-  */
-
   @Get()
   async getAllTweets(): Promise<TweetDocument[]> {
     return await this.tweetsService.getAllTweets()
@@ -27,24 +20,10 @@ export class TweetsController {
     return await this.tweetsService.getTweetById(id)
   }
 
-
-  /*
-  ============================================================================================================================
-                                                POST mapping
-  ============================================================================================================================
-  */
-
   @Post()
   async addTweet(@Body() createTweetDto: CreateTweetDto): Promise<TweetDocument> {
     return await this.tweetsService.addTweet(createTweetDto)
   }
-
-
-  /*
-  ============================================================================================================================
-                                                PATCH mapping
-  ============================================================================================================================
-  */
 
   @Patch(':id')
   async replaceTweetById(
@@ -53,13 +32,6 @@ export class TweetsController {
   ): Promise<TweetDocument> {
     return await this.tweetsService.replaceTweetById(id, updateTweetDto)
   }
-
-
-  /*
-  ============================================================================================================================
-                                                DELETE mappings
-  ============================================================================================================================
-  */
 
   @Delete()
   async deleteAll(): Promise<object> {

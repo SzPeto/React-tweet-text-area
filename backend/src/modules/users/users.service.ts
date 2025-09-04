@@ -1,9 +1,10 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common'
-import { User, UserDocument } from './schemas/users.schema'
-import { Model } from 'mongoose'
 import { InjectModel } from '@nestjs/mongoose'
-import { CreateUserDto } from './dto/create-user.dto'
+import { Model } from 'mongoose'
 import * as bcrypt from 'bcrypt'
+import { User, UserDocument } from './schemas/users.schema'
+import { CreateUserDto } from './dto/create-user.dto'
+
 
 @Injectable()
 export class UsersService {
@@ -12,7 +13,9 @@ export class UsersService {
 
   async createUser(createUserDto: CreateUserDto) {
     const userExist = await this.userModel.findOne({ userName: createUserDto.userName })
-    if (userExist) throw new ConflictException(`User with name ${ createUserDto.userName } already exists!`)
+    if (userExist) {
+      throw new ConflictException(`User with name ${ createUserDto.userName } already exists!`)
+    }
     const hashedPw = await bcrypt.hash(createUserDto.password, 10)
     const user = new this.userModel({ 
       userName: createUserDto.userName, 
@@ -24,13 +27,17 @@ export class UsersService {
 
   async findUserByName(userName: string) {
     const user = await this.userModel.findOne({ userName: userName })
-    if (!user) throw new NotFoundException(`User with name ${ userName } doesn't exist`)
+    if (!user) {
+      throw new NotFoundException(`User with name ${ userName } doesn't exist`)
+    }
     return user
   }
 
   async findUserById(id: string) {
     const user = await this.userModel.findOne({ _id: id })
-    if (!user) throw new NotFoundException(`User with id ${ id } doesn't exist`)
+    if (!user) {
+      throw new NotFoundException(`User with id ${ id } doesn't exist`)
+    }
     return user
   }
 
