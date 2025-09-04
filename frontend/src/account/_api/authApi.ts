@@ -1,7 +1,7 @@
 import { useLoginStore } from '@/account/login-page/useLoginStore'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import { authenticateUser } from '@/account/login-page/authenticateUser'
-import api from '@/_api/api'
+import api from '@/_utils/api/api'
 import { getMe } from '@/account/login-page/getMe'
 
 export const login = async (userName: string, password: string) => {

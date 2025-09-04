@@ -15,7 +15,7 @@ export class User {
   @Prop({ required: true })
   password: string
 
-  @Prop({ default: '/uploads/profile-pictures/Default - user.jpg' })
+  @Prop({ default: 'public/uploads/profile-pictures/Default-user.jpg' })
   picturePath: string
 
   @Prop({ default: false })

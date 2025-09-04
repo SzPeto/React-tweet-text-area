@@ -1,4 +1,4 @@
-import api from '@/_api/api'
+import api from '@/_utils/api/api'
 
 export const getMe = async () => {
   try {
