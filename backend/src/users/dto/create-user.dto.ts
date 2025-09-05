@@ -1,7 +1,6 @@
 import { IsBoolean, IsOptional, IsString, MinLength } from 'class-validator'
 
 export class CreateUserDto {
-
   @IsString()
   @MinLength(3)
   userName: string
@@ -25,6 +24,4 @@ export class CreateUserDto {
   @IsString()
   @IsOptional()
   refreshTokenHash: string
-
-
 }

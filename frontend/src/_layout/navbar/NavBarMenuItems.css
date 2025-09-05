@@ -37,7 +37,7 @@
 }
 
 .dropdown {
-  @apply relative;
+  @apply relative cursor-pointer;
 }
 
 .dropdown-menu {

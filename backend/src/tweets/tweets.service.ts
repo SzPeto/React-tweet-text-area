@@ -7,7 +7,6 @@ import { Tweet, TweetDocument } from './schemas/tweet.schema'
 
 @Injectable()
 export class TweetsService {
-
   constructor(@InjectModel(Tweet.name) private tweetModel: Model<TweetDocument>) {}
 
   async getAllTweets(): Promise<TweetDocument[]> {

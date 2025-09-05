@@ -9,7 +9,6 @@ import { setRefreshCookie, clearRefreshCookie } from './cookie.util'
 
 @Controller('auth')
 export class AuthController {
-  
   constructor(private readonly authService: AuthService, private readonly jwtService: JwtService) {}
 
   @UseGuards(LocalAuthGuard)

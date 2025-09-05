@@ -1,13 +1,13 @@
 .tweet-tweet-container {
   @apply flex flex-col justify-center items-start w-full border-2 border-gray-300 rounded-md shadow-md bg-white text-base 
-       text-gray-500 font-light m-2 p-4;
+       text-black font-light m-2 p-4;
 }
 
 .tweet-tweet-container p {
   @apply break-words;
 }
 
-.tweet-tweet-container hr {
+.horizontal-rule {
   @apply w-full border-none h-px bg-gray-300;
 }
 
@@ -24,11 +24,15 @@
 }
 
 .content-container {
-  @apply my-8;
+  @apply my-8 px-4;
+}
+
+.delete-edit-button-wrapper-container {
+  @apply flex flex-col justify-end w-full m-0 p-0 gap-1;
 }
 
 .delete-edit-button-container {
-  @apply flex flex-row justify-start items-center mx-5;
+  @apply flex flex-row justify-end items-center m-0 p-0 w-full;
 }
 
 .logic-container {
@@ -40,5 +44,5 @@
 }
 
 .edit-buttons-container {
-  @apply flex flex-row h-8;
+  @apply flex flex-row h-full mt-3 w-full;
 }

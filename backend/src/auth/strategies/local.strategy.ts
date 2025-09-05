@@ -5,7 +5,6 @@ import { AuthService } from '../auth.service'
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
-
   constructor(private authService: AuthService) { super({ usernameField: 'userName' }) }
 
   // Validate extracts from request body by default userName and password, but you can change it by passing an argument
@@ -17,5 +16,4 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
     }
     return user // Returns to Passport and Passport attaches to request.user
   }
-
 }

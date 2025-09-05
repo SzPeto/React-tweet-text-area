@@ -7,7 +7,6 @@ import { UsersService } from '../users/users.service'
 
 @Injectable()
 export class AuthService {
-
   constructor(private usersService: UsersService, private jwtService: JwtService) {}
 
   async validateUser(userName: string, pw: string) {
@@ -70,5 +69,4 @@ export class AuthService {
   async logout(userId: string) {
     await this.usersService.removeRefreshTokenHash(userId)
   }
-
 }

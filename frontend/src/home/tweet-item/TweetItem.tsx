@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import TextArea from '@/ui/text-area/TextArea'
 import Button from '@/ui/mui-button/Button'
+import IconButton from '@/ui/mui-icon-button/IconButton'
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded'
+import EditRoundedIcon from '@mui/icons-material/EditRounded'
 import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import { useLoginStore } from '@/account/login-page/useLoginStore'
@@ -48,28 +51,31 @@ const TweetItem = (props: TweeetProps) => {
 
   // Reusable inline component Buttons, to avoid code duplication
   const Buttons = () => (
-    <div className='delete-edit-button-container'>
-      <Button 
-        text='Delete tweet' 
-        color='error' 
-        onClick={ 
-          (e) => { 
+    <div className='delete-edit-button-wrapper-container'>
+      <hr className='horizontal-rule'/>
+      <div className='delete-edit-button-container'>
+        <IconButton 
+          size='large' 
+          onClick={ () => setIsEditing(true) } 
+          hidden={ isEditing ? true : false }
+          data={ props.id }
+          color='primary'
+        >
+          <EditRoundedIcon />
+        </IconButton>
+        <IconButton 
+          size='large' 
+          onClick={ (e) => { 
             if (window.confirm('Are you sure you want to delete this tweet?')) {
               handleDelete(e) 
             }
-          }
-        } 
-        data={ props.id }
-        size='small'
-      />
-      <Button 
-        text='Edit tweet'
-        color='primary' 
-        onClick={ () => setIsEditing(true) } 
-        data={ props.id }
-        hidden={ isEditing ? true : false }
-        size='small'
-      />
+          }} 
+          data={ props.id }
+          color='error'
+        >
+          <DeleteRoundedIcon />
+        </IconButton>
+      </div>
     </div>
   )
 
@@ -86,7 +92,7 @@ const TweetItem = (props: TweeetProps) => {
         </div>
       </div>
 
-      <hr />
+      <hr className='horizontal-rule' />
 
       <div className='logic-container'>
         {/* Editing logic */}

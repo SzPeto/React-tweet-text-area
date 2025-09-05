@@ -42,11 +42,7 @@ const NavBar = () => {
         {
           isLoggedIn ? (
             <ul className={`navbar-links-right ${ menuOpen ? 'active' : '' }`}>
-              <li 
-                className='dropdown'
-                onMouseEnter={ () => setProfileOpen(true) }
-                onMouseLeave={ () => setProfileOpen(false) }
-              >
+              <li className='dropdown' onClick={ () => setProfileOpen((s) => !s) }>
                 <button className='dropdown-toggle'>
                   { currentUser.userName } ▾
                 </button>

@@ -5,7 +5,6 @@ export type UserDocument = HydratedDocument<User>
 
 @Schema({ timestamps: true })
 export class User {
-
   @Prop({ required: true, unique: true, trim: true })
   userName: string
 
@@ -23,7 +22,6 @@ export class User {
 
   @Prop({ default: null, type: String })
   refreshTokenHash: string | null
-
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)
