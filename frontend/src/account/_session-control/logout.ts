@@ -8,8 +8,8 @@ export const logout = async () => {
 
   try {
     await api.post('/api/auth/logout') // Logout in backend
-  } catch(err) {
-    setFlashMessage(`Server logout failed, session may still be active : ${ err }`, 'warning')
+  } catch(err: any) {
+    setFlashMessage(`Server logout failed, session may still be active : ${ err.message ?? err  }`, 'warning')
   }
 
   logoutUserFe() // Logout in frontend
