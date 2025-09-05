@@ -4,7 +4,7 @@ import { Strategy } from 'passport-local'
 import { AuthService } from '../auth.service'
 
 @Injectable()
-export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
+export class LoginAuthStrategy extends PassportStrategy(Strategy, 'login-auth') {
   constructor(private authService: AuthService) { super({ usernameField: 'userName' }) }
 
   // Validate extracts from request body by default userName and password, but you can change it by passing an argument

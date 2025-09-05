@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Post, Patch, UseGuards, Req } from '@nestjs/common'
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'
 import { TweetsService } from './tweets.service'
 import { CreateTweetDto } from './dto/create-tweet.dto'
 import { UpdateTweetDto } from './dto/update-tweet.dto'
 import { TweetDocument } from './schemas/tweet.schema'
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'
 
 @Controller('tweets')
 export class TweetsController {

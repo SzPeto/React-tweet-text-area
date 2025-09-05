@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Request, UseGuards, Res, Req } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { type Response, type Request as ExpressRequest } from 'express'
-import { AuthService } from './auth.service'
-import { LocalAuthGuard } from './guards/local-auth.guard'
+import { LoginAuthGuard } from './guards/login-auth.guard'
 import { JwtAuthGuard } from './guards/jwt-auth.guard'
+import { AuthService } from './auth.service'
 import { setRefreshCookie, clearRefreshCookie } from './cookie.util'
 
 
@@ -11,7 +11,7 @@ import { setRefreshCookie, clearRefreshCookie } from './cookie.util'
 export class AuthController {
   constructor(private readonly authService: AuthService, private readonly jwtService: JwtService) {}
 
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(LoginAuthGuard)
   @Post('login')
   async login(@Request() req, @Res({ passthrough: true }) res: Response) {
     // LocalGuard puts the validated user on req.user

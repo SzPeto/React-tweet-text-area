@@ -1,5 +1,5 @@
-import MuiIconButton from '@mui/material/IconButton'
 import type { ReactNode } from 'react'
+import MuiIconButton from '@mui/material/IconButton'
 
 type IconButtonProps = {
   data?: string | number,
