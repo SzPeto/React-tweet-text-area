@@ -24,7 +24,7 @@ export const login = async (userName: string, password: string) => {
                                user.error?.message ?? 
                                'Error fetching user'
                                
-      setFlashMessage(`Login unsuccessful, error while fetching user : ${ userErrorMessage }`, 'warning')
+      setFlashMessage(userErrorMessage, 'warning')
       return { success: false }
     } else {
       loginUserFe(user._id, user.userName, user.email, user.picturePath)
