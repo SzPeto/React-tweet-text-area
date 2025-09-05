@@ -31,7 +31,7 @@ const TweetList = () => {
                 id={ tweet._id } 
                 content={ tweet.content }
                 dateSubmitted={ tweet.createdAt }
-                userId={ tweet.user }
+                user={ tweet.user }
                 key={ tweet._id }
               />
             ))

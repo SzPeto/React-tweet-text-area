@@ -15,8 +15,8 @@
   @apply w-full border-none h-px bg-gray-300;
 }
 
-.titles-label {
-  @apply text-lg;
+.titles-container {
+  @apply flex flex-row justify-center items-center gap-1 m-4 text-lg;
 }
 
 .delete-edit-button-container {

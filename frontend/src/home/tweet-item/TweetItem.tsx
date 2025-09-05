@@ -3,18 +3,20 @@ import TextArea from '@/ui/text-area/TextArea'
 import MuiButton from '@/ui/mui-button/MuiButton'
 import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
+import { useLoginStore } from '@/account/login-page/useLoginStore'
 import { updateTweet } from './updateTweet'
 import { fetchTweets } from '../tweet-list/fetchTweets'
 import { deleteTweet } from './deleteTweet'
 import { formatIsoDateTime } from '@/_utils/date-time/formatIsoDateTime'
+import { type User } from '@/account/login-page/user.type'
 import './TweetItem.css'
-import { useLoginStore } from '@/account/login-page/useLoginStore'
+
 
 type TweeetProps = {
   id: string,
   content: string,
   dateSubmitted: string
-  userId: string
+  user: User
 }
 
 const TweetItem = (props: TweeetProps) => {
@@ -22,7 +24,7 @@ const TweetItem = (props: TweeetProps) => {
   const [ isEditing, setIsEditing ] = useState(false)
   const setTweets = useTweetsStore((s) => s.setTweets)
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
-  const currentUserId = useLoginStore((s) => s.currentUser._id)
+  const currentUser = useLoginStore((s) => s.currentUser)
 
   const handleSave = async () => {
     const response = await updateTweet(props.id, editValue)
@@ -73,7 +75,10 @@ const TweetItem = (props: TweeetProps) => {
 
   return (
     <div className="tweet-tweet-container" >
-      <p className="titles-label"> 🆔 { props.id } </p>
+      <div className="titles-container">
+        <img src={ props.user.picturePath } width='40px' /> 
+        <p><b>{ props.user.userName }</b></p>
+      </div>
       <div className='logic-container'>
         {/* Editing logic */}
         {
@@ -106,9 +111,8 @@ const TweetItem = (props: TweeetProps) => {
       </div>
       <hr />
       <small>🗓️ { formatIsoDateTime(props.dateSubmitted) }</small>
-      <p>User id : { props.userId }</p>
       <div className='edit-buttons-container'>
-        { props.userId === currentUserId && (<Buttons />) }
+        { props.user._id === currentUser._id && (<Buttons />) }
       </div>
     </div>
   )
