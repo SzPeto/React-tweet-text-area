@@ -10,7 +10,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Hr from '@/ui/hr/Hr'
 import MuiTextField from '@/ui/mui-text-field/MuiTextField'
 import Button from '@/ui/mui-button/Button'
-import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import { schema } from './register.schema'
 import { useLoginStore } from '@/account/login-page/useLoginStore'
 import { addUser } from './addUser'
@@ -19,7 +18,6 @@ import './RegisterPage.css'
 type RegisterFormData = z.infer<typeof schema>
 
 const Register = () => {
-  const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
   const [ showPassword, setShowPassword ] = useState(false)
   const { control, handleSubmit, reset, formState: { errors } } = useForm<RegisterFormData>({
     resolver: zodResolver(schema),
@@ -29,12 +27,8 @@ const Register = () => {
   const onSubmit = async (data: RegisterFormData) => {
     const json = await addUser(data.userName, data.email, data.password)
 
-    if (json.error) {
-      const message = json.error?.response?.data?.message ?? json.error?.message ?? 'unknown error'
-      setFlashMessage(`Registration error : ${ message }`, 'warning')
-    } else {
-      reset()
-      setFlashMessage(`User ${ json.userName } registered successfully`, 'success')
+    if (!json.error) {
+     reset()
     }
   }
   

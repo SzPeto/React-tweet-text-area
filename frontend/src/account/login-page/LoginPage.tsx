@@ -28,7 +28,7 @@ const Login = () => {
   const onSubmit = async (data: LoginFormData) => {
     const response = await login(data.userName, data.password)
 
-    if (response.success === true) {
+    if (response.success) {
       reset()
       navigate('/')
     }
