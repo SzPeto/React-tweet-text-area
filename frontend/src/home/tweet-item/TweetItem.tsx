@@ -128,7 +128,7 @@ const TweetItem = (props: TweeetProps) => {
       </div>
 
       <div className='edit-buttons-container'>
-        { props.user._id === currentUser._id && (<Buttons />) }
+        { (props.user._id === currentUser._id || currentUser.isAdmin ) && (<Buttons />) }
       </div>
 
     </div>

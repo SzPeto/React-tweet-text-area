@@ -7,12 +7,13 @@ type LoginStore = {
     userName: string,
     accessToken: string | null,
     email: string,
-    picturePath: string
+    picturePath: string,
+    isAdmin: boolean
   },
   isLoggedIn: boolean,
   accessToken: () => string | null,
   setAccessToken: (newToken: string) => void,
-  loginUserFe: (_id: string, userName: string, email: string, picturePath: string) => void,
+  loginUserFe: (_id: string, userName: string, email: string, picturePath: string, isAdmin: boolean) => void,
   logoutUserFe: () => void
 }
 
@@ -22,24 +23,27 @@ export const useLoginStore = create<LoginStore>()(persist((set, get) => ({
         userName: '',
         accessToken: null,
         email: '',
-        picturePath: ''
+        picturePath: '',
+        isAdmin: false
       },
       isLoggedIn: false,
       accessToken: () => get().currentUser.accessToken,
       setAccessToken: (newToken) => set((s) => ({ currentUser: { ...s.currentUser, accessToken: newToken } })),
-      loginUserFe: (_id, userName, email, picturePath) => set((s) => ({ currentUser: {
+      loginUserFe: (_id, userName, email, picturePath, isAdmin) => set((s) => ({ currentUser: {
         ...s.currentUser,
         _id: _id,
         userName: userName,
         email: email,
-        picturePath: picturePath
+        picturePath: picturePath,
+        isAdmin: isAdmin
       }, isLoggedIn: true })),
       logoutUserFe: () => set({ currentUser: {
         _id: '',
         userName: '',
         accessToken: null,
         email: '',
-        picturePath: ''
+        picturePath: '',
+        isAdmin: false
       }, isLoggedIn: false })
     }),
     {

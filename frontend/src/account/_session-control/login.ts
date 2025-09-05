@@ -22,7 +22,7 @@ export const login = async (userName: string, password: string) => {
     if (user.error) {
       return { success: false }
     } else {
-      loginUserFe(user._id, user.userName, user.email, user.picturePath)
+      loginUserFe(user._id, user.userName, user.email, user.picturePath, user.isAdmin)
       setFlashMessage(`Welcome ${ user.userName }!`, 'success')
       return { success: true }
     }
