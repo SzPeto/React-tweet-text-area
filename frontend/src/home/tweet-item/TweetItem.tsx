@@ -28,11 +28,10 @@ const TweetItem = (props: TweeetProps) => {
   const currentUser = useLoginStore((s) => s.currentUser)
 
   const handleSave = async () => {
-    const response = await updateTweet(props.id, editValue)
+    await updateTweet(props.id, editValue)
     const getJson = await fetchTweets()
     setIsEditing(false)
     setTweets(getJson)
-    console.log(response)
   }
 
   const handleDelete = async () => {

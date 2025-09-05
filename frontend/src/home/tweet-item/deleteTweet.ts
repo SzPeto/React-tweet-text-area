@@ -16,7 +16,7 @@ export async function deleteTweet(id: string) {
     }
   }catch(err: any) {
     const errorMessage = err.message ?? err.error ?? 'Unknown error while deleting tweet'
-    setFlashMessage(errorMessage, 'warning')
+    setFlashMessage(`Error deleting tweet : ${errorMessage}`, 'warning')
     return json
   }
   setFlashMessage('Tweet deleted successfully', 'success')
