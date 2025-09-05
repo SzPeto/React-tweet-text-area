@@ -9,14 +9,14 @@ export const me = async () => {
     const response = await api.get('/api/auth/me')
     return response.data
   } catch (err: any) {
-    console.log('Error : ', err.response?.status)
-    if (err.response?.status === 401) {
-      return { error: err }
+    if (err.response?.status !== 401) {
+      const userErrorMessage = err.message ?? 
+                              'Error fetching user'
+
+      setFlashMessage(userErrorMessage, 'warning')
+      logout()
     }
-    const userErrorMessage = err.message ?? 
-                            'Error fetching user'
-    setFlashMessage(userErrorMessage, 'warning')
-    logout()
+    
     return { error: err }
   }
 }
