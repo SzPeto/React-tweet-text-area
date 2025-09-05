@@ -20,11 +20,6 @@ export const login = async (userName: string, password: string) => {
     setAccessToken(authResponse.accessToken)
     const user = await me()
     if (user.error) {
-      const userErrorMessage = user.error?.response?.data?.message ?? 
-                               user.error?.message ?? 
-                               'Error fetching user'
-                               
-      setFlashMessage(userErrorMessage, 'warning')
       return { success: false }
     } else {
       loginUserFe(user._id, user.userName, user.email, user.picturePath)

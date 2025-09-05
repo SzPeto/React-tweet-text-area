@@ -31,7 +31,7 @@ const Register = () => {
 
     if (json.error) {
       const message = json.error?.response?.data?.message ?? json.error?.message ?? 'unknown error'
-      setFlashMessage(`User registration failed : ${ message }`, 'warning')
+      setFlashMessage(`Registration error : ${ message }`, 'warning')
     } else {
       reset()
       setFlashMessage(`User ${ json.userName } registered successfully`, 'success')
