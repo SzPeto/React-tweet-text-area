@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common'
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
 import { UsersService } from '../users/users.service'
@@ -12,11 +12,11 @@ export class AuthService {
   async validateUser(userName: string, pw: string) {
     const user = await this.usersService.findUserByName(userName)
     if (!user) {
-      return null
+      throw new NotFoundException(`User with name ${ userName } doesn't exist!`)
     }
     const passwordMatch = await bcrypt.compare(pw, user.password)
     if (!passwordMatch) {
-      return null
+      throw new UnauthorizedException('Wrong password!')
     }
     // user.toObject() checks if it is a Mongoose document, if yes, it converts it to plain TS object, if not return user
     // The destructuring extracts the password and the left fields besides password separately, e.g. : 

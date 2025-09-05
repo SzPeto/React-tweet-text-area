@@ -14,9 +14,7 @@ export class AuthController {
   @UseGuards(LoginAuthGuard)
   @Post('login')
   async login(@Request() req, @Res({ passthrough: true }) res: Response) {
-    // LocalGuard puts the validated user on req.user
-    const { accessToken, refreshToken } =
-      await this.authService.login(req.user)
+    const { accessToken, refreshToken } = await this.authService.login(req.user)
 
     // ✅ Set RT as HttpOnly cookie (not returned in JSON)
     setRefreshCookie(res, refreshToken)

@@ -14,7 +14,7 @@ export const login = async (userName: string, password: string) => {
                               authResponse.error?.message ?? 
                               'Error while authenticating user'
 
-    setFlashMessage(`Login unsuccessful, error while authenticating user : ${ tokenErrorMessage }`, 'warning')
+    setFlashMessage(tokenErrorMessage, 'warning')
     return { success: false }
   } else {
     setAccessToken(authResponse.accessToken)
