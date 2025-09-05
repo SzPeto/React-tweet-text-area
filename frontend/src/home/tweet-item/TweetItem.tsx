@@ -22,6 +22,7 @@ const TweetItem = (props: TweeetProps) => {
   const [ isEditing, setIsEditing ] = useState(false)
   const setTweets = useTweetsStore((s) => s.setTweets)
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
+  const currentUserId = useLoginStore((s) => s.currentUser._id)
 
   const handleSave = async () => {
     const response = await updateTweet(props.id, editValue)
@@ -107,7 +108,7 @@ const TweetItem = (props: TweeetProps) => {
       <small>🗓️ { formatIsoDateTime(props.dateSubmitted) }</small>
       <p>User id : { props.userId }</p>
       <div className='edit-buttons-container'>
-        { props.userId === useLoginStore.getState().currentUser._id && (<Buttons />) }
+        { props.userId === currentUserId && (<Buttons />) }
       </div>
     </div>
   )

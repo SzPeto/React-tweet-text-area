@@ -14,7 +14,7 @@ function App() {
     (async () => {
       const user = await me()
       if (!user.error) {
-        loginUserFe(user.userName, user.email, user.picturePath)
+        loginUserFe(user._id, user.userName, user.email, user.picturePath)
       }
     })()
   }, [ loginUserFe ])
