@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Button from '@/ui/mui-button/Button'
 import TextArea from '@/ui/text-area/TextArea'
-import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
 import { useLoginStore } from '@/account/login-page/useLoginStore'
 import { addTweet } from './addTweet'
@@ -13,7 +12,6 @@ const TweetAdd = () => {
   const [ tweet, setTweet ] = useState('')
   const [ isActiveSubmit, setIsActiveSubmit ] = useState(true)
   const setTweets = useTweetsStore((s) => s.setTweets)
-  const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
   const isLoggedIn = useLoginStore((s) => s.isLoggedIn)
 
   const handleSubmit = async () => {
@@ -23,10 +21,7 @@ const TweetAdd = () => {
 
     if (!json.error) {
       setTweet('')
-      setFlashMessage('Tweet added successfully!', 'success')
-    } else {
-      setFlashMessage(`Error on inserting tweet`, 'warning')
-    }
+    } 
 
     setTweets(getJson)
     setIsActiveSubmit(true)
