@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import TextArea from '@/ui/text-area/TextArea'
-import MuiButton from '@/ui/mui-button/MuiButton'
+import Button from '@/ui/mui-button/Button'
 import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import { useLoginStore } from '@/account/login-page/useLoginStore'
@@ -49,7 +49,7 @@ const TweetItem = (props: TweeetProps) => {
   // Reusable inline component Buttons, to avoid code duplication
   const Buttons = () => (
     <div className='delete-edit-button-container'>
-      <MuiButton 
+      <Button 
         text='Delete tweet' 
         color='error' 
         onClick={ 
@@ -62,7 +62,7 @@ const TweetItem = (props: TweeetProps) => {
         data={ props.id }
         size='small'
       />
-      <MuiButton 
+      <Button 
         text='Edit tweet'
         color='primary' 
         onClick={ () => setIsEditing(true) } 
@@ -75,10 +75,19 @@ const TweetItem = (props: TweeetProps) => {
 
   return (
     <div className="tweet-tweet-container" >
-      <div className="titles-container">
-        <img src={ props.user.picturePath } width='40px' /> 
-        <p><b>{ props.user.userName }</b></p>
+
+      <div className='upper-container'>
+        <div className="titles-container">
+          <img src={ props.user.picturePath } width='40px' /> 
+          <p><b>{ props.user.userName }</b></p>
+        </div>
+        <div className='date-time-container'>
+          <small>{ formatIsoDateTime(props.dateSubmitted) }</small>
+        </div>
       </div>
+
+      <hr />
+
       <div className='logic-container'>
         {/* Editing logic */}
         {
@@ -90,13 +99,13 @@ const TweetItem = (props: TweeetProps) => {
                 placeholder='Edit tweet'
               />
               <div>
-                <MuiButton 
+                <Button 
                   text='Save' 
                   onClick={ handleSave } 
                   color='success'
                   size='small'
                 />
-                <MuiButton 
+                <Button 
                   text='Cancel' 
                   onClick={ () => setIsEditing(false) } 
                   color='primary' 
@@ -105,15 +114,17 @@ const TweetItem = (props: TweeetProps) => {
               </div>
             </div>
           ) : (
-            <p>{ props.content }</p>
+            <div className='content-container'>
+              <p>{ props.content }</p>
+            </div>
           )
         }
       </div>
-      <hr />
-      <small>🗓️ { formatIsoDateTime(props.dateSubmitted) }</small>
+
       <div className='edit-buttons-container'>
         { props.user._id === currentUser._id && (<Buttons />) }
       </div>
+
     </div>
   )
 }

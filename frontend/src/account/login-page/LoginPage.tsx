@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import MuiButton from '@/ui/mui-button/MuiButton'
+import Button from '@/ui/mui-button/Button'
 import MuiTextField from '@/ui/mui-text-field/MuiTextField'
 import Hr from '@/ui/hr/Hr'
 import { schema } from './login.schema'
@@ -86,7 +86,7 @@ const Login = () => {
           )}
         />
 
-        <MuiButton text='Login' isSubmit={ true } color={ 'primary' } />
+        <Button text='Login' isSubmit={ true } color={ 'primary' } />
       </form>
     </div>
   )

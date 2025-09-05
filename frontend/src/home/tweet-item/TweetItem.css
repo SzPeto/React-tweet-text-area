@@ -4,19 +4,27 @@
 }
 
 .tweet-tweet-container p {
-  @apply break-words m-5;
-}
-
-.tweet-tweet-container small {
-  @apply my-3 mx-5;
+  @apply break-words;
 }
 
 .tweet-tweet-container hr {
   @apply w-full border-none h-px bg-gray-300;
 }
 
+.upper-container {
+  @apply flex flex-row items-start w-full;
+}
+
 .titles-container {
-  @apply flex flex-row justify-center items-center gap-1 m-4 text-lg;
+  @apply flex flex-row justify-center items-center gap-3 mr-auto text-lg;
+}
+
+.date-time-container {
+  @apply ml-auto;
+}
+
+.content-container {
+  @apply my-8;
 }
 
 .delete-edit-button-container {
@@ -31,6 +39,6 @@
   @apply flex flex-col w-full m-3;
 }
 
-edit-buttons-container {
+.edit-buttons-container {
   @apply flex flex-row h-8;
 }

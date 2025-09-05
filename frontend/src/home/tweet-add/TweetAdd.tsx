@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import MuiButton from '@/ui/mui-button/MuiButton'
+import Button from '@/ui/mui-button/Button'
 import TextArea from '@/ui/text-area/TextArea'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
+import { useLoginStore } from '@/account/login-page/useLoginStore'
 import { addTweet } from './addTweet'
 import { fetchTweets } from '@/home/tweet-list/fetchTweets'
 import './TweetAdd.css'
-import { useLoginStore } from '@/account/login-page/useLoginStore'
-import { Link, Navigate } from 'react-router-dom'
+
 
 const TweetAdd = () => {
   const [ tweet, setTweet ] = useState('')
@@ -45,15 +45,15 @@ const TweetAdd = () => {
         {
           isActiveSubmit ? (
             isLoggedIn ? (
-              <MuiButton text='Add tweet' color='success' onClick={ handleSubmit } />
+              <Button text='Add tweet' color='success' onClick={ handleSubmit } />
             ) : (
               <div className='flex flex-col items-center justify-center'>
                 <p>ℹ️ Please log in to add tweet</p>
-                <MuiButton text='Add tweet' isDisabled={ true } />
+                <Button text='Add tweet' isDisabled={ true } />
               </div>
             )
           ) : (
-            <MuiButton text='Add tweet' isDisabled={ true } />
+            <Button text='Add tweet' isDisabled={ true } />
           )
         }
       </div>

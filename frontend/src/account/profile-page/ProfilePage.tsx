@@ -16,7 +16,6 @@ const ProfilePage = () => {
         <Hr className='mb-8' />
         <p><b>Username : </b>{ currentUser.userName }</p>
         <p><b>Email : </b>{ currentUser.email }</p>
-        <p><b>Id : </b>{ currentUser._id }</p>
       </Card>
     </BaseBackground>
   ) : (

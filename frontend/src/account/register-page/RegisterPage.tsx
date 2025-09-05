@@ -9,7 +9,7 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Hr from '@/ui/hr/Hr'
 import MuiTextField from '@/ui/mui-text-field/MuiTextField'
-import MuiButton from '@/ui/mui-button/MuiButton'
+import Button from '@/ui/mui-button/Button'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import { schema } from './register.schema'
 import { useLoginStore } from '@/account/login-page/useLoginStore'
@@ -105,7 +105,7 @@ const Register = () => {
           )}
         />
 
-        <MuiButton text='Submit' isSubmit={ true } color='success'  />
+        <Button text='Submit' isSubmit={ true } color='success'  />
       </form>
     </div>
   )
