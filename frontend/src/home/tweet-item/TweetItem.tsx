@@ -5,7 +5,6 @@ import TextArea from '@/ui/text-area/TextArea'
 import Button from '@/ui/mui-button/Button'
 import IconButton from '@/ui/mui-icon-button/IconButton'
 import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
-import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import { useLoginStore } from '@/account/login-page/useLoginStore'
 import { updateTweet } from './updateTweet'
 import { fetchTweets } from '@/home/tweet-list/fetchTweets'
@@ -26,7 +25,6 @@ const TweetItem = (props: TweeetProps) => {
   const [ editValue, setEditValue ] = useState( props.content )
   const [ isEditing, setIsEditing ] = useState(false)
   const setTweets = useTweetsStore((s) => s.setTweets)
-  const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
   const currentUser = useLoginStore((s) => s.currentUser)
 
   const handleSave = async () => {
@@ -37,15 +35,9 @@ const TweetItem = (props: TweeetProps) => {
     console.log(response)
   }
 
-  const handleDelete = async (e: any) => {
-    const idToDelete = e.currentTarget.getAttribute('data-id')
-    const json = await deleteTweet(idToDelete)
+  const handleDelete = async () => {
+    await deleteTweet(props.id)
     const getJson = await fetchTweets()
-    if (json) {
-      setFlashMessage('Tweet deleted successfully!', 'success')
-    } else {
-      setFlashMessage('Error on deleting tweet', 'warning')
-    }
     setTweets(getJson)
   }
 
@@ -58,19 +50,17 @@ const TweetItem = (props: TweeetProps) => {
           size='large' 
           onClick={ () => setIsEditing(true) } 
           hidden={ isEditing ? true : false }
-          data={ props.id }
           color='primary'
         >
           <EditRoundedIcon />
         </IconButton>
         <IconButton 
           size='large' 
-          onClick={ (e) => { 
+          onClick={ () => { 
             if (window.confirm('Are you sure you want to delete this tweet?')) {
-              handleDelete(e) 
+              handleDelete() 
             }
           }} 
-          data={ props.id }
           color='error'
         >
           <DeleteRoundedIcon />
