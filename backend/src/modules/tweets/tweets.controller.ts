@@ -6,65 +6,24 @@ import { TweetDocument } from './schemas/tweet.schema'
 
 @Controller('tweets')
 export class TweetsController {
-
-  // NestJS automatic DI via constructor, readonly is like const, but for instances
   constructor(private readonly tweetsService: TweetsService) {}
-
-
-  /*
-  ============================================================================================================================
-                                                GET mappings
-  ============================================================================================================================
-  */
 
   @Get()
   async getAllTweets(): Promise<TweetDocument[]> {
     return await this.tweetsService.getAllTweets()
   }
 
-  @Get(':id')
-  async getTweetById(@Param('id') id: string): Promise<TweetDocument> {
-    return await this.tweetsService.getTweetById(id)
-  }
-
-
-  /*
-  ============================================================================================================================
-                                                POST mapping
-  ============================================================================================================================
-  */
-
   @Post()
   async addTweet(@Body() createTweetDto: CreateTweetDto): Promise<TweetDocument> {
     return await this.tweetsService.addTweet(createTweetDto)
   }
 
-
-  /*
-  ============================================================================================================================
-                                                PATCH mapping
-  ============================================================================================================================
-  */
-
   @Patch(':id')
-  async replaceTweetById(
+  async updateTweetById(
     @Param('id') id: string, 
     @Body() updateTweetDto: UpdateTweetDto
   ): Promise<TweetDocument> {
     return await this.tweetsService.replaceTweetById(id, updateTweetDto)
-  }
-
-
-  /*
-  ============================================================================================================================
-                                                DELETE mappings
-  ============================================================================================================================
-  */
-
-  @Delete()
-  async deleteAll(): Promise<object> {
-    const response = await this.tweetsService.deleteAllTweets()
-    return { success: response.acknowledged, deletedCount: response.deletedCount }
   }
 
   @Delete(':id')

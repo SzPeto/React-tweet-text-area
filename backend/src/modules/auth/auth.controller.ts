@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common'
 import { AuthService } from './auth.service'
-import { LocalAuthGuard } from './guards/local-auth.guard'
+import { LoginAuthGuard } from './guards/login-auth.guard'
 import { JwtAuthGuard } from './guards/jwt-auth.guard'
 
 @Controller('auth')
@@ -9,12 +9,9 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   // Before the the request reaches the route, LocalAuthGuard do its work, it enriches the request by user, if credentials correct
-  @UseGuards(LocalAuthGuard) 
+  @UseGuards(LoginAuthGuard) 
   @Post('login')
   login(@Request() request) { // You can omit the use of DTO, since LocalStrategy and Passport substitute it
-    console.log('Request body:', JSON.stringify(request.body, null, 2))
-    console.log('Request headers:', JSON.stringify(request.headers, null, 2))
-    console.log('Request user:', JSON.stringify(request.user, null, 2))
     return this.authService.login(request.user) // This returns the access token for frontend
   }
 
