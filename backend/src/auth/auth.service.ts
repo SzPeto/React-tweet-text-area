@@ -16,15 +16,14 @@ export class AuthService {
     if (!passwordMatch) {
       throw new UnauthorizedException('Wrong password!')
     }
-    // user.toObject() checks if it is a Mongoose document, if yes, it converts it to plain TS object, if not return user
-    // The destructuring extracts the password and the left fields besides password separately, e.g. : 
-    // safeFields = { username: "peter", email: "a@b.com" }
+    /* user.toObject() checks if it is a Mongoose document, if yes, it converts it to plain TS object, if not return user
+       The destructuring extracts the password and the left fields besides password separately, e.g. : 
+       safeFields = { username: "peter", email: "a@b.com" } */
     const { password, ...safeFields } = user.toObject ? user.toObject() : user
     return safeFields
   }
 
   async login(user: any) {
-    // ?? Nullish coalescing operator, use 'a' if not null or undefined, otherwise use 'b'
     const payload = { username: user.userName, sub: user._id ?? user.id }
 
     return { accessToken: this.jwtService.sign(payload) } // This goes back to frontend through API

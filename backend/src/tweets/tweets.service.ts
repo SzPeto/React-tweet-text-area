@@ -10,7 +10,7 @@ export class TweetsService {
   constructor(@InjectModel(Tweet.name) private tweetModel: Model<TweetDocument>) {}
 
   async getAllTweets(): Promise<TweetDocument[]> {
-    return await this.tweetModel.find()
+    return await this.tweetModel.find().populate('user').exec()
   }
 
   async addTweet(createTweetDto: CreateTweetDto, userId: string): Promise<TweetDocument> {

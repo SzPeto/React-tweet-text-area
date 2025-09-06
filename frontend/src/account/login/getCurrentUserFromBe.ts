@@ -2,7 +2,7 @@ import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import api from '@/_utils/axios/axios'
 import { logout } from './logout'
 
-export const me = async () => {
+export const getCurrentUserFromBe = async () => {
   const { setFlashMessage } = useFlashMessageStore.getState()
 
   try {

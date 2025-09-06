@@ -1,12 +1,11 @@
 import { useLoginStore } from '@/account/login/useLoginStore'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import { authenticateUser } from '@/account/login/authenticateUser'
-import { me } from './getCurrentUser'
+import { getCurrentUserFromBe } from './getCurrentUserFromBe'
 
 export const login = async (userName: string, password: string) => {
-  // Use zustand store's imperative API when outside React component
   const loginUserFe = useLoginStore.getState().loginUserFe
-  const { setFlashMessage } = useFlashMessageStore.getState()
+  const setFlashMessage = useFlashMessageStore.getState().setFlashMessage
   const authResponse = await authenticateUser(userName, password)
 
   if (authResponse.error) {
@@ -17,8 +16,8 @@ export const login = async (userName: string, password: string) => {
     setFlashMessage(tokenErrorMessage, 'warning')
     return { success: false }
   } else {
-    setAccessToken(authResponse.accessToken)
-    const user = await me()
+    localStorage.setItem('accessToken', authResponse.accessToken)
+    const user = await getCurrentUserFromBe()
     if (user.error) {
       return { success: false }
     } else {
