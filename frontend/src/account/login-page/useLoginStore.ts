@@ -1,35 +1,38 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 type LoginStore = {
   currentUser: {
+    _id: string,
     userName: string,
-    accessToken: string | null,
     email: string,
-    picturePath: string
   },
   isLoggedIn: boolean,
-  loginUser: (userName: string, accessToken: string, email: string, picturePath: string) => void,
-  logoutUser: () => void
+  loginUserFe: (_id: string, userName: string, email: string) => void,
+  logoutUserFe: () => void
 }
 
-export const useLoginStore = create<LoginStore>((set) => ({
-  currentUser: {
-    userName: '',
-    accessToken: null,
-    email: '',
-    picturePath: ''
-  },
-  isLoggedIn: false,
-  loginUser: (userName, accessToken, email, picturePath) => set({ currentUser: { 
-    userName: userName, 
-    accessToken: accessToken,
-    email: email,
-    picturePath: picturePath
-  }, isLoggedIn: true }),
-  logoutUser: () => set({ currentUser: { 
-    userName: '', 
-    accessToken: null,
-    email: '',
-    picturePath: ''
-  }, isLoggedIn: false })
-}))
+export const useLoginStore = create<LoginStore>()(persist((set) => ({
+      currentUser: {
+        _id: '',
+        userName: '',
+        email: '',
+      },
+      isLoggedIn: false,
+      loginUserFe: (_id, userName, email) => set({ currentUser: {
+        _id: _id,
+        userName: userName,
+        email: email,
+      }, isLoggedIn: true }),
+      logoutUserFe: () => set({ currentUser: {
+        _id: '',
+        userName: '',
+        email: '',
+      }, isLoggedIn: false })
+    }),
+    {
+      name: 'login-storage',
+      partialize: (state) => ({ isLoggedIn: state.isLoggedIn }) // ✅ only persist isLoggedIn to avoid flow issues on refresh
+    }
+  )
+)

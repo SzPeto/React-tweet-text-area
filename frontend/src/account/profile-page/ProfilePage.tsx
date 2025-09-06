@@ -2,10 +2,8 @@ import { Navigate } from 'react-router-dom'
 import BaseBackground from '@/ui/base-background/BaseBackground'
 import Card from '@/ui/card/Card'
 import Hr from '@/ui/hr/Hr'
-import { useLoginStore } from '@/login/login-page/useLoginStore'
+import { useLoginStore } from '@/account/login-page/useLoginStore'
 import './ProfilePage.css'
-
-
 
 const ProfilePage = () => {
   const currentUser = useLoginStore((s) => s.currentUser)
@@ -16,9 +14,8 @@ const ProfilePage = () => {
       <Card>
         <p className='profile-heading'>User profile</p>
         <Hr className='mb-8' />
-        <p>Username : { currentUser.userName }</p>
-        <p>Email : { currentUser.email }</p>
-        <p>Picture path : { currentUser.picturePath }</p>
+        <p><b>Username : </b>{ currentUser.userName }</p>
+        <p><b>Email : </b>{ currentUser.email }</p>
       </Card>
     </BaseBackground>
   ) : (
