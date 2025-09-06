@@ -1,77 +1,88 @@
 import { useState } from 'react'
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded'
+import EditRoundedIcon from '@mui/icons-material/EditRounded'
 import TextArea from '@/ui/text-area/TextArea'
-import MuiButton from '@/ui/mui-button/MuiButton'
+import Button from '@/ui/button/Button'
+import IconButton from '@/ui/icon-button/IconButton'
 import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
-import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
+import { useLoginStore } from '@/account/login-page/useLoginStore'
 import { updateTweet } from './updateTweet'
-import { fetchTweets } from '../tweet-list/fetchTweets'
+import { fetchTweets } from '@/home/tweet-list/fetchTweets'
 import { deleteTweet } from './deleteTweet'
+import { formatIsoDateTime } from '@/_utils/date-time/formatIsoDateTime'
+import { type User } from '@/account/login-page/user.type'
 import './TweetItem.css'
+
 
 type TweeetProps = {
   id: string,
   content: string,
   dateSubmitted: string
+  user: User
 }
 
 const TweetItem = (props: TweeetProps) => {
   const [ editValue, setEditValue ] = useState( props.content )
-  const [ isVisibleEdit, setIsVisibleEdit ] = useState(false)
   const [ isEditing, setIsEditing ] = useState(false)
   const setTweets = useTweetsStore((s) => s.setTweets)
-  const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
+  const currentUser = useLoginStore((s) => s.currentUser)
 
   const handleSave = async () => {
-    const response = await updateTweet(props.id, editValue)
+    await updateTweet(props.id, editValue)
     const getJson = await fetchTweets()
     setIsEditing(false)
     setTweets(getJson)
-    console.log(response)
   }
 
-  const handleDelete = async (e: any) => {
-    const idToDelete = e.currentTarget.getAttribute('data-id')
-    const json = await deleteTweet(idToDelete)
+  const handleDelete = async () => {
+    await deleteTweet(props.id)
     const getJson = await fetchTweets()
-    if (json) {
-      setFlashMessage('Tweet deleted successfully!', 'success')
-    } else {
-      setFlashMessage('Error on deleting tweet', 'warning')
-    }
     setTweets(getJson)
   }
 
   // Reusable inline component Buttons, to avoid code duplication
   const Buttons = () => (
-    <div className='delete-edit-button-container'>
-      <MuiButton 
-        text='Delete tweet' 
-        color='error' 
-        onClick={ 
-          (e) => { 
-            if (window.confirm('Are you sure you want to delete this tweet?')) handleDelete(e) 
-          }
-        } 
-        data={ props.id }
-        size='small'
-      />
-      <MuiButton 
-        text='Edit tweet'
-        color='primary' 
-        onClick={ () => setIsEditing(true) } 
-        data={ props.id }
-        hidden={ isEditing ? true : false }
-        size='small'
-      />
+    <div className='delete-edit-button-wrapper-container'>
+      <hr className='horizontal-rule'/>
+      <div className='delete-edit-button-container'>
+        <IconButton 
+          size='large' 
+          onClick={ () => setIsEditing(true) } 
+          hidden={ isEditing ? true : false }
+          color='primary'
+        >
+          <EditRoundedIcon />
+        </IconButton>
+        <IconButton 
+          size='large' 
+          onClick={ () => { 
+            if (window.confirm('Are you sure you want to delete this tweet?')) {
+              handleDelete() 
+            }
+          }} 
+          color='error'
+        >
+          <DeleteRoundedIcon />
+        </IconButton>
+      </div>
     </div>
   )
 
   return (
-    <div className="tweet-tweet-container" 
-         onMouseEnter={ () => setIsVisibleEdit(true) } 
-         onMouseLeave={ () => setIsVisibleEdit( false ) }
-    >
-      <p className="titles-label"> 🆔 { props.id } </p>
+    <div className="tweet-tweet-container" >
+
+      <div className='upper-container'>
+        <div className="titles-container">
+          <img src={ props.user.picturePath } width='40px' /> 
+          <p><b>{ props.user.userName }</b></p>
+        </div>
+        <div className='date-time-container'>
+          <small>{ formatIsoDateTime(props.dateSubmitted) }</small>
+        </div>
+      </div>
+
+      <hr className='horizontal-rule' />
+
       <div className='logic-container'>
         {/* Editing logic */}
         {
@@ -83,13 +94,13 @@ const TweetItem = (props: TweeetProps) => {
                 placeholder='Edit tweet'
               />
               <div>
-                <MuiButton 
+                <Button 
                   text='Save' 
                   onClick={ handleSave } 
                   color='success'
                   size='small'
                 />
-                <MuiButton 
+                <Button 
                   text='Cancel' 
                   onClick={ () => setIsEditing(false) } 
                   color='primary' 
@@ -98,18 +109,17 @@ const TweetItem = (props: TweeetProps) => {
               </div>
             </div>
           ) : (
-            <p>{ props.content }</p>
+            <div className='content-container'>
+              <p>{ props.content }</p>
+            </div>
           )
         }
       </div>
-      <hr />
-      <small>🗓️ { props.dateSubmitted }</small>
-      <div className='on-desktop-container'>
-        { isVisibleEdit && (<Buttons />) }
+
+      <div className='edit-buttons-container'>
+        { (props.user._id === currentUser._id || currentUser.isAdmin ) && (<Buttons />) }
       </div>
-      <div className='on-mobile-container'>
-        <Buttons />
-      </div>
+
     </div>
   )
 }

@@ -1,31 +1,27 @@
 import { useState } from 'react'
-import MuiButton from '@/ui/mui-button/MuiButton'
+import Button from '@/ui/button/Button'
 import TextArea from '@/ui/text-area/TextArea'
-import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
-import { useTweetsStore } from '../tweet-list/useTweetsStore'
+import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
+import { useLoginStore } from '@/account/login-page/useLoginStore'
 import { addTweet } from './addTweet'
-import { fetchTweets } from '../tweet-list/fetchTweets'
-import { getDateTime } from '@/_utils/date-time/getDateTime'
+import { fetchTweets } from '@/home/tweet-list/fetchTweets'
 import './TweetAdd.css'
+
 
 const TweetAdd = () => {
   const [ tweet, setTweet ] = useState('')
   const [ isActiveSubmit, setIsActiveSubmit ] = useState(true)
   const setTweets = useTweetsStore((s) => s.setTweets)
-  const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
+  const isLoggedIn = useLoginStore((s) => s.isLoggedIn)
 
   const handleSubmit = async () => {
-    const dateSubmitted = getDateTime()
     setIsActiveSubmit(false)
-    const json = await addTweet(tweet, dateSubmitted)
+    const json = await addTweet(tweet)
     const getJson = await fetchTweets()
 
-    if (json) {
+    if (!json.error) {
       setTweet('')
-      setFlashMessage('Tweet added successfully!', 'success')
-    } else {
-      setFlashMessage('Error on inserting tweet', 'warning')
-    }
+    } 
 
     setTweets(getJson)
     setIsActiveSubmit(true)
@@ -43,9 +39,16 @@ const TweetAdd = () => {
       <div className="lower-container">
         {
           isActiveSubmit ? (
-            <MuiButton text='Add tweet' color='success' onClick={ handleSubmit } />
+            isLoggedIn ? (
+              <Button text='Add tweet' color='success' onClick={ handleSubmit } />
+            ) : (
+              <div className='flex flex-col items-center justify-center'>
+                <p>ℹ️ Please log in to add tweet</p>
+                <Button text='Add tweet' isDisabled={ true } />
+              </div>
+            )
           ) : (
-            <MuiButton text='Add tweet' isDisabled={ true } />
+            <Button text='Add tweet' isDisabled={ true } />
           )
         }
       </div>

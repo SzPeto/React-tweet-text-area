@@ -1,11 +1,11 @@
 import Hr from '@/ui/hr/Hr'
-import TweetAdd from '../tweet-add/TweetAdd'
-import TweetList from '../tweet-list/TweetList'
+import TweetAdd from '@/home/tweet-add/TweetAdd'
+import TweetList from '@/home/tweet-list/TweetList'
 import './HomePage.css'
 
 const Home = () => {
-  
-  return(
+
+  return (
     <div className='home-container'>
       <div className='tweet-input-container-l1'>
         <TweetAdd />

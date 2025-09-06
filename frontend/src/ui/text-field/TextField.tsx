@@ -1,4 +1,4 @@
-import TextField, { type TextFieldProps } from '@mui/material/TextField'
+import MuiTextField, { type TextFieldProps } from '@mui/material/TextField'
 
 type PropTypes = {
   id: 'outlined-basic' | 'outlined-required' | 'outlined-password-input'
@@ -11,10 +11,10 @@ type PropTypes = {
   helperText?: string
 }
 
-const MuiTextField = (props: PropTypes) => {
+const TextField = (props: PropTypes) => {
 
   return (
-    <TextField 
+    <MuiTextField 
       id='outlined-basic' 
       label={ props.label } 
       onChange={ props.onChange }
@@ -28,4 +28,4 @@ const MuiTextField = (props: PropTypes) => {
   )
 }
 
-export default MuiTextField
+export default TextField

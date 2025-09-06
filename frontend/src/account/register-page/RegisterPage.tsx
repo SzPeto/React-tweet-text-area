@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -7,56 +6,46 @@ import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import MuiButton from '@/ui/mui-button/MuiButton'
-import MuiTextField from '@/ui/mui-text-field/MuiTextField'
 import Hr from '@/ui/hr/Hr'
-import { useLoginStore } from './useLoginStore'
+import MuiTextField from '@/ui/text-field/TextField'
+import MuiButton from '@/ui/button/Button'
+import { addUser } from './addUser'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
-import { authenticateUser } from './authenticateUser'
-import { getMe } from './getMe'
-import './LoginPage.css'
+import './RegisterPage.css'
+
 
 const schema = z.object({
   userName: z.string().min(3, 'Username has to be at least 3 characters').nonempty('Username required!'),
-  password: z.string().min(6, 'Password has to be at least 6 characters long').nonempty('Password required!')
+  email: z.email('Invalid email').min(6, 'Email has to be at least 6 characters long').nonempty('Email required'),
+  password: z.string().min(6, 'Password has to be at least 6 characters long').nonempty('Password required!'),
 })
 
-type LoginFormData = z.infer<typeof schema>
+type RegisterFormData = z.infer<typeof schema>
 
-const Login = () => {
-  const navigate = useNavigate()
-  const [ showPassword, setShowPassword ] = useState(false)
+const Register = () => {
   const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
-  const loginUser = useLoginStore((s) => s.loginUser)
-  const { control, handleSubmit, reset, formState: { errors } } = useForm<LoginFormData>({
+  const [ showPassword, setShowPassword ] = useState(false)
+  const { control, handleSubmit, reset, formState: { errors } } = useForm<RegisterFormData>({
     resolver: zodResolver(schema),
-    defaultValues: { userName: '', password: '' }
+    defaultValues: { userName: '', email: '', password: '' }
   })
 
-  const onSubmit = async (data: LoginFormData) => {
-    const json = await authenticateUser(data.userName, data.password)
-    
+  const onSubmit = async (data: RegisterFormData) => {
+    const json = await addUser(data.userName, data.email, data.password)
+
     if (json.error) {
-      const jsonErrorMessage = json.error?.response?.data?.message ?? json.error?.message ?? 'Error while authenticating user'
-      setFlashMessage(`Login unsuccessful, error while authenticating user : ${ jsonErrorMessage }`, 'warning')
+      const message = json.error?.response?.data?.message ?? json.error?.message ?? 'unknown error'
+      setFlashMessage(`User registration failed : ${ message }`, 'warning')
     } else {
-      const user = await getMe(json.accessToken)
-      if (user.error) {
-        const userErrorMessage = user.error?.response?.data?.message ?? user.error?.message ?? 'Error fetching user'
-        setFlashMessage(`Login unsuccessful, error while fetching user : ${ userErrorMessage }`, 'warning')
-      } else {
-        reset()
-        loginUser(user.userName, json.accessToken, user.email, user.picturePath)
-        setFlashMessage(`Welcome ${ data.userName }!`, 'success')
-        navigate('/')
-      }
+      reset()
+      setFlashMessage(`User ${ json.userName } registered successfully`, 'success')
     }
   }
-
+  
   return (
-    <div className='login-container'>
-      <form className='login-form' onSubmit={ handleSubmit(onSubmit) } >
-        <p className='login-heading'>Login user</p>
+    <div className='register-container'>
+      <form className='register-form' onSubmit={ handleSubmit(onSubmit) } >
+        <p className='register-heading'>Register user</p>
         <Hr className='mb-8' />
 
         <Controller
@@ -70,6 +59,21 @@ const Login = () => {
               type='text'
               error={ errors.userName ? true : false }
               helperText={ errors.userName?.message } // optional chaining operator, access only messages if userName not null
+            />
+          )}
+        />
+
+        <Controller
+          name='email'
+          control={ control }
+          render={({ field }) => (
+            <MuiTextField
+              {...field}
+              label='Email'
+              id='outlined-basic'
+              type='email'
+              error={ errors.email ? true : false }
+              helperText={ errors.email?.message }
             />
           )}
         />
@@ -93,7 +97,7 @@ const Login = () => {
                         onClick={() => setShowPassword(!showPassword)}
                         edge='end'
                       >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                        { showPassword ? <VisibilityOff /> : <Visibility /> }
                       </IconButton>
                     </InputAdornment>
                   )
@@ -103,10 +107,10 @@ const Login = () => {
           )}
         />
 
-        <MuiButton text='Login' isSubmit={ true } color={ 'primary' } />
+        <MuiButton text='Submit' isSubmit={ true } color='success'  />
       </form>
     </div>
   )
 }
 
-export default Login
+export default Register

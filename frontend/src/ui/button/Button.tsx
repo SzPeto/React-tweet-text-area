@@ -1,6 +1,6 @@
-import Button from '@mui/material/Button'
+import MuiButton from '@mui/material/Button'
 
-type MuiButtonProps = {
+type ButtonProps = {
   text?: string,
   color?: 'primary' | 'success' | 'error' | 'info',
   data?: string | number,
@@ -11,11 +11,13 @@ type MuiButtonProps = {
   isDisabled?: boolean
 }
 
-const MuiButton = (props: MuiButtonProps) => {
-  if (props.hidden) return null
+const Button = (props: ButtonProps) => {
+  if (props.hidden) {
+    return null
+  }
   
   return (
-    <Button
+    <MuiButton
       onClick={ props.onClick }
       data-id={ props.data ?? '' }
       variant='contained'
@@ -26,8 +28,8 @@ const MuiButton = (props: MuiButtonProps) => {
       disabled={ props.isDisabled ? true : false }
     >
       {props.text ?? 'Push me'}
-    </Button>
+    </MuiButton>
   )
 }
 
-export default MuiButton
+export default Button
