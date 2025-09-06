@@ -1,4 +1,4 @@
-import type { User } from "@/account/login-page/user.type"
+import type { User } from "@/account/login/user.type"
 
 export type TweetType = {
   _id: string

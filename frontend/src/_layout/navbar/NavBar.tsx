@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { useLoginStore } from '@/login/login-page/useLoginStore'
-import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
+import { useLoginStore } from '@/account/login/useLoginStore'
+import { logout } from '@/account/login/logout'
 import logo from '@/_layout/_assets/letter-t.png'
 import './NavBarContainers.css'
 import './NavBarMenuItems.css'
@@ -10,13 +10,10 @@ const NavBar = () => {
   const [ profileOpen, setProfileOpen ] = useState(false)
   const [ menuOpen, setMenuOpen ] = useState(false)
   const currentUser = useLoginStore((s) => s.currentUser)
-  const logoutUser = useLoginStore((s) => s.logoutUser)
   const isLoggedIn = useLoginStore((s) => s.isLoggedIn)
-  const setFlashMessage = useFlashMessageStore((s) => s.setFlashMessage)
 
-  const handleLogout = () => {
-    logoutUser()
-    setFlashMessage('User logged out successfully', 'success')
+  const handleLogout = async () => {
+    await logout()
   }
 
   return(
@@ -45,11 +42,7 @@ const NavBar = () => {
         {
           isLoggedIn ? (
             <ul className={`navbar-links-right ${ menuOpen ? 'active' : '' }`}>
-              <li 
-                className='dropdown'
-                onMouseEnter={ () => setProfileOpen(true) }
-                onMouseLeave={ () => setProfileOpen(false) }
-              >
+              <li className='dropdown' onClick={ () => setProfileOpen((s) => !s) }>
                 <button className='dropdown-toggle'>
                   { currentUser.userName } ▾
                 </button>

@@ -5,12 +5,12 @@ import TextArea from '@/ui/text-area/TextArea'
 import Button from '@/ui/button/Button'
 import IconButton from '@/ui/icon-button/IconButton'
 import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
-import { useLoginStore } from '@/account/login-page/useLoginStore'
+import { useLoginStore } from '@/account/login/useLoginStore'
 import { updateTweet } from './updateTweet'
 import { fetchTweets } from '@/home/tweet-list/fetchTweets'
 import { deleteTweet } from './deleteTweet'
 import { formatIsoDateTime } from '@/_utils/date-time/formatIsoDateTime'
-import { type User } from '@/account/login-page/user.type'
+import { type User } from '@/account/login/user.type'
 import './TweetItem.css'
 
 
@@ -117,7 +117,7 @@ const TweetItem = (props: TweeetProps) => {
       </div>
 
       <div className='edit-buttons-container'>
-        { (props.user._id === currentUser._id || currentUser.isAdmin ) && (<Buttons />) }
+        { (props.user._id === currentUser._id ) && (<Buttons />) }
       </div>
 
     </div>

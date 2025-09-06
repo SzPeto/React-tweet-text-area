@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom'
 import BaseBackground from '@/ui/base-background/BaseBackground'
 import Card from '@/ui/card/Card'
 import Hr from '@/ui/hr/Hr'
-import { useLoginStore } from '@/account/login-page/useLoginStore'
+import { useLoginStore } from '@/account/login/useLoginStore'
 import './ProfilePage.css'
 
 const ProfilePage = () => {

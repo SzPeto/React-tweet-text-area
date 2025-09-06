@@ -1,14 +1,7 @@
 .navbar {
-  @apply
-    flex flex-row items-center w-full fixed top-0 left-0
-    m-auto py-4 px-[7%]
-    bg-cyan-100 text-gray-500 font-semibold 
-    z-40;
+  @apply flex flex-row items-center w-full fixed top-0 left-0 m-auto py-4 px-[7%] bg-cyan-100 text-gray-500 font-semibold z-40;
 }
 
 .wrapper-container {
-  @apply
-    flex flex-row 
-    w-[80%]
-    max-md:flex-col;
+  @apply flex flex-row w-[80%] max-md:flex-col;
 }

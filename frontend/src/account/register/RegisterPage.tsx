@@ -11,7 +11,7 @@ import Hr from '@/ui/hr/Hr'
 import MuiTextField from '@/ui/text-field/TextField'
 import Button from '@/ui/button/Button'
 import { schema } from './register.schema'
-import { useLoginStore } from '@/account/login-page/useLoginStore'
+import { useLoginStore } from '@/account/login/useLoginStore'
 import { addUser } from './addUser'
 import './RegisterPage.css'
 

@@ -1,9 +1,10 @@
+import { Outlet } from 'react-router-dom'
 import NavBar from '@/_layout/navbar/NavBar'
 import Footer from '@/_layout/footer/Footer'
-import { Outlet } from 'react-router-dom'
-import './MainLayout.css'
-import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 import FlashMessage from '@/ui/flash/FlashMessage'
+import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
+import './MainLayout.css'
+
 
 const MainLayout = () => {
   const flashMessage = useFlashMessageStore((s) => s.flashMessage)
@@ -19,7 +20,7 @@ const MainLayout = () => {
       <footer><Footer /></footer>
 
       {/* Floating Flash Message */}
-      {flashMessage.message && ( <FlashMessage value={flashMessage.message} type={flashMessage.type} /> )}
+      { flashMessage.message && ( <FlashMessage value={ flashMessage.message } type={ flashMessage.type } /> ) }
     </>
   )
 }
