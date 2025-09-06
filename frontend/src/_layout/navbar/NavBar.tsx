@@ -24,7 +24,6 @@ const NavBar = () => {
       <button
         className='menu-toggle'
         onClick={() => setMenuOpen(!menuOpen)}
-        aria-label='Toggle menu'
       >
         ☰
       </button>

@@ -4,15 +4,17 @@ import Home from '@/home/_page/HomePage'
 import Login from '@/account/login/LoginPage'
 import Register from '@/account/register/RegisterPage'
 import ProfilePage from '@/account/profile/ProfilePage'
+import TweetEdit from '@/home/tweet-edit/TweetEdit'
 
 export const rootRoutes = {
   path: '/',
   element: <MainLayout />,
-  errorElement: <NotFoundPage/ >,
+  errorElement: <NotFoundPage />,
   children: [
     { index: true, element: <Home /> },
     { path: 'login', element: <Login /> },
     { path: 'register', element: <Register /> },
-    { path: 'user', element: <ProfilePage /> }
+    { path: 'user', element: <ProfilePage /> },
+    { path: 'tweets/edit', element: <TweetEdit /> }
   ]
 }
