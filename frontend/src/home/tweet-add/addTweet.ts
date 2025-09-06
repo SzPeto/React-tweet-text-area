@@ -1,4 +1,4 @@
-import api from '@/_utils/axios/axios'
+import api from '@/account/_auth-headers/authHeaders'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 
 export async function addTweet(tweet: string) {

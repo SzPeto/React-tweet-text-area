@@ -1,4 +1,4 @@
-import api from '@/_utils/axios/axios'
+import api from '@/account/_auth-headers/authHeaders'
 import { useFlashMessageStore } from '@/ui/flash/useFlashMessageStore'
 
 export const addUser = async (userName: string, email: string, password: string) => {

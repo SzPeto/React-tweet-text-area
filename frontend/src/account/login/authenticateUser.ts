@@ -1,4 +1,4 @@
-import api from '@/_utils/axios/axios'
+import api from '@/account/_auth-headers/authHeaders'
 
 export const authenticateUser = async (userName: string, password: string) => {
   let json

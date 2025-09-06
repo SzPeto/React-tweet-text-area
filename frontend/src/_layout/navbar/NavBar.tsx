@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useLoginStore } from '@/account/login/useLoginStore'
-import { logout } from '@/account/login/logout'
-import logo from '@/_layout/_assets/letter-t.png'
+import { logout } from '@/_layout/navbar/logout'
 import './NavBarContainers.css'
 import './NavBarMenuItems.css'
 
@@ -19,7 +18,6 @@ const NavBar = () => {
   return(
     <nav className='navbar'>
       <NavLink to='/' style={{ textDecoration: 'none' }} className='navbar-brand' >
-        <img src={ logo } className='brand-image' />
         <p className='min-w-[150px]'>Peter's Tweet</p>
       </NavLink>
 

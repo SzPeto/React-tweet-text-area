@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded'
 import EditRoundedIcon from '@mui/icons-material/EditRounded'
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import TextArea from '@/ui/text-area/TextArea'
 import Button from '@/ui/button/Button'
 import IconButton from '@/ui/icon-button/IconButton'
@@ -70,10 +71,10 @@ const TweetItem = (props: TweeetProps) => {
 
   return (
     <div className="tweet-tweet-container" >
-
+      
       <div className='upper-container'>
         <div className="titles-container">
-          <img src={ props.user.picturePath } width='40px' /> 
+          <AccountCircleRoundedIcon color='primary' fontSize='large' /> 
           <p><b>{ props.user.userName }</b></p>
         </div>
         <div className='date-time-container'>

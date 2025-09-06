@@ -3,7 +3,9 @@ import { useEffect } from 'react'
 import { rootRoutes } from '@/_layout/_routes/rootRoutes'
 import { useLoginStore } from './account/login/useLoginStore'
 import { getCurrentUserFromBe } from './account/login/getCurrentUserFromBe'
+import { logout } from './_layout/navbar/logout'
 import './App.css'
+
 
 function App() {
   const router = createBrowserRouter([ rootRoutes ])
@@ -15,9 +17,11 @@ function App() {
       const user = await getCurrentUserFromBe()
       if (!user.error) {
         loginUserFe(user._id, user.userName, user.email)
+      } else {
+        logout()
       }
     })()
-  }, [ loginUserFe ])
+  }, [])
 
   return (
     <div className='body'>
