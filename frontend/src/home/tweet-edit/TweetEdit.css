@@ -2,7 +2,7 @@
   @apply flex flex-col w-full;
 }
 
-.edit-buttons-container {
+.edit-cancel-container {
   @apply flex flex-row h-full mt-3 w-full;
 }
 

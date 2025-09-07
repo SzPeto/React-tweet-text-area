@@ -31,9 +31,9 @@ const TweetItem = (props: TweeetProps) => {
 
   // Reusable inline component Buttons
   const Buttons = () => (
-    <div className='delete-edit-button-wrapper-container'>
+    <div className='buttons-wrapper-container'>
       <hr className='horizontal-rule'/>
-      <div className='delete-edit-button-container'>
+      <div className='buttons-container'>
         <IconButton 
           size='large' 
           onClick={ () => navigate(`/tweets/${ props.id }/edit`) } 
@@ -57,7 +57,7 @@ const TweetItem = (props: TweeetProps) => {
   )
 
   return (
-    <div className="tweet-tweet-container" >
+    <div className="tweet-main-container" >
       
       <div className='upper-container'>
         <div className="titles-container">
@@ -71,12 +71,10 @@ const TweetItem = (props: TweeetProps) => {
 
       <hr className='horizontal-rule' />
 
-      <div className='logic-container'>
-        <div className='content-container'>
-          <p>{ props.content }</p>
-        </div>
+      <div className='content-container'>
+        <p>{ props.content }</p>
       </div>
-
+      
       <div className='edit-buttons-container'>
         { (props.user._id === currentUser._id ) && (<Buttons />) }
       </div>

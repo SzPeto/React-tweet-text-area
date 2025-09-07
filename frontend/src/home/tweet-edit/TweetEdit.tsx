@@ -27,6 +27,7 @@ const TweetEdit = () => {
     await updateTweet(id!, editText)
     const getJson = await fetchTweets()
     setTweets(getJson)
+    navigate('/')
   }
 
   return (
@@ -36,7 +37,7 @@ const TweetEdit = () => {
           <p className='edit-heading'>Edit tweet</p>
           <div className='edit-container'>
             <TextArea onChange={ (e) => setEditText(e.target.value) } value={ editText } />
-            <div className='edit-buttons-container'>
+            <div className='edit-cancel-container'>
               <Button 
                 text='Save' 
                 onClick={ handleSave } 
