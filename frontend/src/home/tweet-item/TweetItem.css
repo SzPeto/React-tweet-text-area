@@ -39,10 +39,6 @@
   @apply flex flex-row justify-start items-center w-full;
 }
 
-.edit-container {
-  @apply flex flex-col w-full m-3;
-}
-
 .edit-buttons-container {
   @apply flex flex-row h-full mt-3 w-full;
 }

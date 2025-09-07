@@ -15,6 +15,6 @@ export const rootRoutes = {
     { path: 'login', element: <Login /> },
     { path: 'register', element: <Register /> },
     { path: 'user', element: <ProfilePage /> },
-    { path: 'tweets/edit', element: <TweetEdit /> }
+    { path: 'tweets/:id/edit', element: <TweetEdit /> }
   ]
 }

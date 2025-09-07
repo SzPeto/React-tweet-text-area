@@ -14,6 +14,11 @@ export class TweetsController {
     return await this.tweetsService.getAllTweets()
   }
 
+  @Get(':id')
+  async getTweetById(@Param('id') id: string): Promise<TweetDocument> {
+    return await this.tweetsService.getTweetById(id)
+  }
+
   @UseGuards(JwtAuthGuard)
   @Post()
   async addTweet(

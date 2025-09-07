@@ -1,0 +1,11 @@
+.edit-container {
+  @apply flex flex-col w-full;
+}
+
+.edit-buttons-container {
+  @apply flex flex-row h-full mt-3 w-full;
+}
+
+.edit-heading {
+  @apply text-[34px] mt-2 mr-2 mb-4 ml-2;
+}

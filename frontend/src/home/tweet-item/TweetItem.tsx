@@ -1,19 +1,15 @@
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded'
 import EditRoundedIcon from '@mui/icons-material/EditRounded'
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
-import TextArea from '@/ui/text-area/TextArea'
-import Button from '@/ui/button/Button'
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded'
 import IconButton from '@/ui/icon-button/IconButton'
-import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
+import { useTweetsStore } from '../tweet-list/useTweetsStore'
 import { useLoginStore } from '@/account/login/useLoginStore'
-import { updateTweet } from './updateTweet'
-import { fetchTweets } from '@/home/tweet-list/fetchTweets'
 import { deleteTweet } from './deleteTweet'
+import { fetchTweets } from '../tweet-list/fetchTweets'
 import { formatIsoDateTime } from '@/_utils/date-time/formatIsoDateTime'
 import { type User } from '@/account/login/user.type'
 import './TweetItem.css'
-
 
 type TweeetProps = {
   id: string,
@@ -23,17 +19,9 @@ type TweeetProps = {
 }
 
 const TweetItem = (props: TweeetProps) => {
-  const [ editValue, setEditValue ] = useState( props.content )
-  const [ isEditing, setIsEditing ] = useState(false)
-  const setTweets = useTweetsStore((s) => s.setTweets)
   const currentUser = useLoginStore((s) => s.currentUser)
-
-  const handleSave = async () => {
-    await updateTweet(props.id, editValue)
-    const getJson = await fetchTweets()
-    setIsEditing(false)
-    setTweets(getJson)
-  }
+  const navigate  = useNavigate()
+  const setTweets = useTweetsStore((s) => s.setTweets)
 
   const handleDelete = async () => {
     await deleteTweet(props.id)
@@ -41,15 +29,14 @@ const TweetItem = (props: TweeetProps) => {
     setTweets(getJson)
   }
 
-  // Reusable inline component Buttons, to avoid code duplication
+  // Reusable inline component Buttons
   const Buttons = () => (
     <div className='delete-edit-button-wrapper-container'>
       <hr className='horizontal-rule'/>
       <div className='delete-edit-button-container'>
         <IconButton 
           size='large' 
-          onClick={ () => setIsEditing(true) } 
-          hidden={ isEditing ? true : false }
+          onClick={ () => navigate(`/tweets/${ props.id }/edit`) } 
           color='primary'
         >
           <EditRoundedIcon />
@@ -85,36 +72,9 @@ const TweetItem = (props: TweeetProps) => {
       <hr className='horizontal-rule' />
 
       <div className='logic-container'>
-        {/* Editing logic */}
-        {
-          isEditing ? (
-            <div className='edit-container'>
-              <TextArea 
-                onChange={ (e) => setEditValue(e.target.value) } 
-                value={ editValue } 
-                placeholder='Edit tweet'
-              />
-              <div>
-                <Button 
-                  text='Save' 
-                  onClick={ handleSave } 
-                  color='success'
-                  size='small'
-                />
-                <Button 
-                  text='Cancel' 
-                  onClick={ () => setIsEditing(false) } 
-                  color='primary' 
-                  size='small'
-                />
-              </div>
-            </div>
-          ) : (
-            <div className='content-container'>
-              <p>{ props.content }</p>
-            </div>
-          )
-        }
+        <div className='content-container'>
+          <p>{ props.content }</p>
+        </div>
       </div>
 
       <div className='edit-buttons-container'>
