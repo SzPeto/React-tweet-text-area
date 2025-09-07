@@ -14,11 +14,13 @@ function App() {
   // Initial / refresh user fetch
   useEffect(() => {
     (async () => {
-      const user = await getCurrentUserFromBe()
-      if (!user.error) {
-        loginUserFe(user._id, user.userName, user.email)
-      } else {
-        logout()
+      if (localStorage.getItem('accessToken')) {
+        const user = await getCurrentUserFromBe()
+        if (!user.error) {
+          loginUserFe(user._id, user.userName, user.email)
+        } else {
+          logout()
+        }
       }
     })()
   }, [])
