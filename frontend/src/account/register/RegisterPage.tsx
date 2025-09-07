@@ -47,7 +47,6 @@ const Register = () => {
             <MuiTextField
               {...field}
               label='Username'
-              id='outlined-basic'
               type='text'
               error={ errors.userName ? true : false }
               helperText={ errors.userName?.message }
@@ -62,7 +61,6 @@ const Register = () => {
             <MuiTextField
               {...field}
               label='Email'
-              id='outlined-basic'
               type='email'
               error={ errors.email ? true : false }
               helperText={ errors.email?.message }
@@ -77,7 +75,6 @@ const Register = () => {
             <MuiTextField
               {...field}
               label='Password'
-              id='outlined-password-input'
               type={ showPassword ? 'text' : 'password' }
               error={ errors.password ? true : false }
               helperText={ errors.password?.message }

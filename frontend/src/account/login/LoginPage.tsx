@@ -49,7 +49,6 @@ const Login = () => {
             <MuiTextField
               {...field}
               label='Username'
-              id='outlined-basic'
               type='text'
               error={ errors.userName ? true : false }
               helperText={ errors.userName?.message } // optional chaining operator, access only messages if userName not null
@@ -64,7 +63,6 @@ const Login = () => {
             <MuiTextField
               {...field}
               label='Password'
-              id='outlined-password-input'
               type={ showPassword ? 'text' : 'password' }
               error={ errors.password ? true : false }
               helperText={ errors.password?.message }

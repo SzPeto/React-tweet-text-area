@@ -10,8 +10,7 @@ export const getCurrentUserFromBe = async () => {
     return response.data
   } catch (err: any) {
     if (err.response?.status !== 401) {
-      const userErrorMessage = err.message ?? 
-                              'Error fetching user'
+      const userErrorMessage = err.message ?? 'Error fetching user'
 
       setFlashMessage(userErrorMessage, 'warning')
       logout()

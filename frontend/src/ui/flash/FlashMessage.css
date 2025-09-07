@@ -3,10 +3,6 @@
          left-1/2 transform -translate-x-1/2 z-50 cursor-pointer;
 }
 
-/* flex flex-col justify-center items-center w-fit 
-rounded-lg shadow-md
-mx-auto my-4 px-10 py-3  */
-
 .success {
   @apply bg-green-100 text-green-800;
 }

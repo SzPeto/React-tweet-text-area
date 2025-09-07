@@ -1,7 +1,6 @@
 import MuiTextField, { type TextFieldProps } from '@mui/material/TextField'
 
 type PropTypes = {
-  id: 'outlined-basic' | 'outlined-required' | 'outlined-password-input'
   label: string,
   onChange: (...args: any[]) => any,
   value: string,
@@ -15,7 +14,6 @@ const TextField = (props: PropTypes) => {
 
   return (
     <MuiTextField 
-      id='outlined-basic' 
       label={ props.label } 
       onChange={ props.onChange }
       value={ props.value }
