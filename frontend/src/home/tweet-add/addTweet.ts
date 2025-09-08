@@ -1,19 +1,23 @@
 import api from '@/account/_auth-headers/authHeaders'
+import { useFlashMessagesStore } from '@/ui/flash/useFlashMessageStore'
 
 export async function addTweet(tweet: string) {
-  let response
-  const postMessage = {
-    content: tweet
-  }
+  let json
+  const postMessage = { content: tweet }
+  const addFlashMessage = useFlashMessagesStore.getState().addFlashMessage
   
   try {
-    response = await api.post('/api/tweets', postMessage)
+    const response = await api.post('/api/tweets', postMessage)
+    json = response.data
   }catch(err: any) {
-    const errorMessage = err.message ?? err.data?.message ?? 'Unknown error'
-    /* setFlashMessage(`Error on inserting tweet : ${ errorMessage }`, 'warning') */
-    return { error: err }
+    const errorMessage = err.response?.data?.message ?? 
+                         err.data?.message ?? 
+                         err.message ?? 
+                         'Unknown error while adding tweet'
+                         
+    return { success: false, error: errorMessage }
   }
   
-  /* setFlashMessage('Tweet added successfully!', 'success') */
-  return response.data
+  addFlashMessage('Tweet added successfully!', 'success')
+  return { success: true, json: json }
 }

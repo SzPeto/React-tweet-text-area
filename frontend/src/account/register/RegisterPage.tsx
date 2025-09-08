@@ -14,21 +14,25 @@ import { schema } from './register.schema'
 import { useLoginStore } from '@/account/login/useLoginStore'
 import { addUser } from './addUser'
 import './RegisterPage.css'
+import ErrorSlot from '@/ui/error-slot/ErrorSlot'
 
 type RegisterFormData = z.infer<typeof schema>
 
 const Register = () => {
   const [ showPassword, setShowPassword ] = useState(false)
+  const [ errorMessage, setErrorMessage ] = useState('')
   const { control, handleSubmit, reset, formState: { errors } } = useForm<RegisterFormData>({
     resolver: zodResolver(schema),
     defaultValues: { userName: '', email: '', password: '' }
   })
 
   const onSubmit = async (data: RegisterFormData) => {
-    const json = await addUser(data.userName, data.email, data.password)
+    const res = await addUser(data.userName, data.email, data.password)
 
-    if (!json.error) {
-     reset()
+    if (res.success) {
+      reset()
+    } else {
+      setErrorMessage(`Error creating user : ${ res.error }`)
     }
   }
   
@@ -36,6 +40,7 @@ const Register = () => {
     <Navigate to='/' />
   ) : (
     <div className='register-container'>
+      <ErrorSlot message={ errorMessage } />
       <form className='register-form' onSubmit={ handleSubmit(onSubmit) } >
         <p className='register-heading'>Register user</p>
         <Hr className='mb-8' />

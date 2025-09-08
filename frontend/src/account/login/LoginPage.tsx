@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -9,40 +9,32 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Button from '@/ui/button/Button'
 import MuiTextField from '@/ui/text-field/TextField'
-import FlashMessagesStack from '@/ui/flash/FlashMessagesStack'
 import Hr from '@/ui/hr/Hr'
 import { schema } from './login.schema'
 import { login } from './login'
 import { useLoginStore } from './useLoginStore'
-import { useLocalFlashMessages } from '@/ui/flash/useLocalFlashMessages'
 import './LoginPage.css'
+import ErrorSlot from '@/ui/error-slot/ErrorSlot'
 
 type LoginFormData = z.infer<typeof schema>
 
 const Login = () => {
-  const { flashMessages, addFlashMessage } = useLocalFlashMessages()
   const navigate = useNavigate()
   const [ showPassword, setShowPassword ] = useState(false)
   const { control, handleSubmit, reset, formState: { errors } } = useForm<LoginFormData>({
     resolver: zodResolver(schema),
     defaultValues: { userName: '', password: '' }
   })
-
-  useEffect(() => {
-    addFlashMessage('Success test', 'success')
-    addFlashMessage('Info test', 'info')
-    addFlashMessage('Error test', 'warning')
-    addFlashMessage('Success test 2', 'success')
-    addFlashMessage('Info test 2', 'info')
-    addFlashMessage('Error test 2', 'warning')
-  }, [])
+  const [ errorMessage, setErrorMessage ] = useState('')
 
   const onSubmit = async (data: LoginFormData) => {
-    const response = await login(data.userName, data.password)
+    const res = await login(data.userName, data.password)
 
-    if (response.success) {
+    if (res.success) {
       reset()
       navigate('/')
+    } else {
+      setErrorMessage(res.error)
     }
   }
 
@@ -50,10 +42,8 @@ const Login = () => {
     <Navigate to='/' />
   ) : (
     <div className='login-container'>
+      <ErrorSlot message={ errorMessage } />
 
-      {/* Component for displaying flash messages */}
-      <FlashMessagesStack messages={ flashMessages } />
-      
       <form className='login-form' onSubmit={ handleSubmit(onSubmit) } >
         <p className='login-heading'>Login user</p>
         <Hr className='mb-8' />

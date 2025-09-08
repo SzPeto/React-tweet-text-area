@@ -1,27 +1,29 @@
+import { useFlashMessagesStore } from '@/ui/flash/useFlashMessageStore'
 import { useLoginStore } from '@/account/login/useLoginStore'
 import { authenticateUser } from '@/account/login/authenticateUser'
 import { getCurrentUserFromBe } from './getCurrentUserFromBe'
 
 export const login = async (userName: string, password: string) => {
   const loginUserFe = useLoginStore.getState().loginUserFe
-  const authResponse = await authenticateUser(userName, password)
+  const addFlashMessage = useFlashMessagesStore.getState().addFlashMessage
 
-  if (authResponse.error) {
-    const tokenErrorMessage = authResponse.error?.response?.data?.message ?? 
-                              authResponse.error?.message ?? 
-                              'Error while authenticating user'
+  // Checking the username and pw against DB
+  const resAuth = await authenticateUser(userName, password)
+  if (resAuth.error) {
+    return { success: false, error: resAuth.error }
+  } 
 
-    /* setFlashMessage(tokenErrorMessage, 'warning') */
-    return { success: false }
+  // Setting the returned access token to local storage and getting the user from db with access token
+  localStorage.setItem('accessToken', resAuth.json.accessToken)
+  const resGet = await getCurrentUserFromBe()
+
+  if (resGet.success) {
+    const user = resGet.json
+    loginUserFe(user._id, user.userName, user.email)
+    addFlashMessage(`Welcome ${ user.userName }!`, 'success')
   } else {
-    localStorage.setItem('accessToken', authResponse.accessToken)
-    const user = await getCurrentUserFromBe()
-    if (user.error) {
-      return { success: false }
-    } else {
-      loginUserFe(user._id, user.userName, user.email)
-      /* setFlashMessage(`Welcome ${ user.userName }!`, 'success') */
-      return { success: true }
-    }
+    return { success: false, error: resGet.error }
   }
+
+  return { success: true } 
 }

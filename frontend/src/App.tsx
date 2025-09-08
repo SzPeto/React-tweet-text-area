@@ -15,8 +15,9 @@ function App() {
   useEffect(() => {
     (async () => {
       if (localStorage.getItem('accessToken')) {
-        const user = await getCurrentUserFromBe()
-        if (!user.error) {
+        const res = await getCurrentUserFromBe()
+        if (res.success) {
+          const user = res.json
           loginUserFe(user._id, user.userName, user.email)
         } else {
           logout()

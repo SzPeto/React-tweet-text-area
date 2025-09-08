@@ -6,29 +6,35 @@ import { useLoginStore } from '@/account/login/useLoginStore'
 import { addTweet } from './addTweet'
 import { fetchTweets } from '@/home/tweet-list/fetchTweets'
 import './TweetAdd.css'
+import ErrorSlot from '@/ui/error-slot/ErrorSlot'
 
 
 const TweetAdd = () => {
   const [ tweet, setTweet ] = useState('')
   const [ isActiveSubmit, setIsActiveSubmit ] = useState(true)
+  const [ errorMessage, setErrorMessage ] = useState('')
   const setTweets = useTweetsStore((s) => s.setTweets)
   const isLoggedIn = useLoginStore((s) => s.isLoggedIn)
 
   const handleSubmit = async () => {
     setIsActiveSubmit(false)
-    const json = await addTweet(tweet)
-    const getJson = await fetchTweets()
+    const resAdd = await addTweet(tweet)
+    const resFetch = await fetchTweets()
 
-    if (!json.error) {
+    if (resAdd.success) {
       setTweet('')
+    } else {
+      setErrorMessage(`Error adding tweet : ${ resAdd.error }`)
+    }
+    if (resFetch.success) {
+      setTweets(resFetch.json!)
     } 
-
-    setTweets(getJson)
     setIsActiveSubmit(true)
   }
 
   return (
     <div className='tweet-input-container-l2'>
+      <ErrorSlot message={ errorMessage } />
       <div className="upper-container">
         <TextArea 
           value={ tweet } 

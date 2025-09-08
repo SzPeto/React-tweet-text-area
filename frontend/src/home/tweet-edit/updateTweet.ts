@@ -1,8 +1,9 @@
+import { useFlashMessagesStore } from "@/ui/flash/useFlashMessageStore"
+
 export async function updateTweet(id: string, tweet: string) {
   let json
-  const updateMessage = {
-    content: tweet
-  }
+  const updateMessage = { content: tweet }
+  const addFlashMessage = useFlashMessagesStore.getState().addFlashMessage
 
   try {
     const response = await fetch(`/api/tweets/${id}`, {
@@ -13,14 +14,13 @@ export async function updateTweet(id: string, tweet: string) {
     json = await response.json()
     if (json.error) {
       const errorMessage = json.message ?? json.error ?? 'Unknown error while updating tweet'
-      /* setFlashMessage(`Error updating tweet : ${errorMessage}`, 'warning') */
-      return json
+      return { success: false, error: errorMessage }
     }
   }catch(err: any) {
     const errorMessage = err.message ?? err.error ?? 'Unknown error while updating tweet'
-    /* setFlashMessage(`Error updating tweet : ${errorMessage}`, 'warning') */
-    return json
+    return { success: false, error: errorMessage }
   }
-  /* setFlashMessage('Tweet updated successfully', 'success') */
-  return json
+
+  addFlashMessage('Tweet updated successfully', 'success')
+  return { success: true, json: json }
 }

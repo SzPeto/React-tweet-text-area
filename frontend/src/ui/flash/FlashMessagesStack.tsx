@@ -1,16 +1,15 @@
 import FlashMessage from '@/ui/flash/FlashMessage'
+import { useFlashMessagesStore } from './useFlashMessageStore'
 
-type FlashMessageStackProps = {
-  messages: any[]
-}
+const FlashMessagesStack = () => {
+  const flashMessages = useFlashMessagesStore((s) => s.flashMessages)
 
-const FlashMessagesStack = (props: FlashMessageStackProps) => {
   return (
     <div className="messages-container">
       {
-        props.messages.map((msg, index) => (
+        flashMessages.map((msg, index) => (
           <FlashMessage 
-            key={ msg.id } 
+            key={ index } 
             value={ msg.message } 
             type={ msg.type } 
             offset={ index }

@@ -1,4 +1,7 @@
+import { useFlashMessagesStore } from "@/ui/flash/useFlashMessageStore"
+
 export async function deleteTweet(id: string) {
+  const addFlashMessage = useFlashMessagesStore.getState().addFlashMessage
   let json
 
   try {
@@ -8,14 +11,13 @@ export async function deleteTweet(id: string) {
     json = await response.json()
     if (json.error) {
       const errorMessage = json.message ?? json.error ?? 'Unknown error while deleting tweet'
-      /* setFlashMessage(`Error deleting tweet : ${errorMessage}`, 'warning') */
-      return json
+      return { success: false, error: errorMessage}
     }
-  }catch(err: any) {
+  } catch(err: any) {
     const errorMessage = err.message ?? err.error ?? 'Unknown error while deleting tweet'
-    /* setFlashMessage(`Error deleting tweet : ${errorMessage}`, 'warning') */
-    return json
+    return { success: false, error: errorMessage}
   }
-  /* setFlashMessage('Tweet deleted successfully', 'success') */
-  return json
+  
+  addFlashMessage('Tweet deleted successfully', 'success')
+  return { success: true, json: json }
 }

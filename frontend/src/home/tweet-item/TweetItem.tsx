@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded'
 import EditRoundedIcon from '@mui/icons-material/EditRounded'
@@ -10,6 +11,8 @@ import { fetchTweets } from '../tweet-list/fetchTweets'
 import { formatIsoDateTime } from '@/_utils/date-time/formatIsoDateTime'
 import { type User } from '@/account/login/user.type'
 import './TweetItem.css'
+import ErrorSlot from '@/ui/error-slot/ErrorSlot'
+
 
 type TweeetProps = {
   id: string,
@@ -22,11 +25,18 @@ const TweetItem = (props: TweeetProps) => {
   const currentUser = useLoginStore((s) => s.currentUser)
   const navigate  = useNavigate()
   const setTweets = useTweetsStore((s) => s.setTweets)
+  const [ errorMessage, setErrorMessage ] = useState('')
 
   const handleDelete = async () => {
-    await deleteTweet(props.id)
-    const getJson = await fetchTweets()
-    setTweets(getJson)
+    const resDelete = await deleteTweet(props.id)
+    const resFetch = await fetchTweets()
+
+    if (!resDelete.success) {
+      setErrorMessage(`Error deleting tweet : ${ resDelete.error }`)
+    } 
+    if (resFetch.success) {
+      setTweets(resFetch.json!)
+    } 
   }
 
   // Reusable inline component Buttons
@@ -57,29 +67,32 @@ const TweetItem = (props: TweeetProps) => {
   )
 
   return (
-    <div className="tweet-main-container" >
-      
-      <div className='upper-container'>
-        <div className="titles-container">
-          <AccountCircleRoundedIcon color='primary' fontSize='large' /> 
-          <p><b>{ props.user.userName }</b></p>
+    <>
+      <ErrorSlot message={ errorMessage } />
+      <div className="tweet-main-container" >
+        
+        <div className='upper-container'>
+          <div className="titles-container">
+            <AccountCircleRoundedIcon color='primary' fontSize='large' /> 
+            <p><b>{ props.user.userName }</b></p>
+          </div>
+          <div className='date-time-container'>
+            <small>{ formatIsoDateTime(props.dateSubmitted) }</small>
+          </div>
         </div>
-        <div className='date-time-container'>
-          <small>{ formatIsoDateTime(props.dateSubmitted) }</small>
+
+        <hr className='horizontal-rule' />
+
+        <div className='content-container'>
+          <p>{ props.content }</p>
         </div>
-      </div>
+        
+        <div className='edit-buttons-container'>
+          { (props.user._id === currentUser._id ) && (<Buttons />) }
+        </div>
 
-      <hr className='horizontal-rule' />
-
-      <div className='content-container'>
-        <p>{ props.content }</p>
       </div>
-      
-      <div className='edit-buttons-container'>
-        { (props.user._id === currentUser._id ) && (<Buttons />) }
-      </div>
-
-    </div>
+    </>
   )
 }
 
