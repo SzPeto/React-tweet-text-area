@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import Button from '@/ui/button/Button'
 import TextArea from '@/ui/text-area/TextArea'
+import ErrorSlot from '@/ui/error-slot/ErrorSlot'
 import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
 import { useLoginStore } from '@/account/login/useLoginStore'
 import { addTweet } from './addTweet'
 import { fetchTweets } from '@/home/tweet-list/fetchTweets'
 import './TweetAdd.css'
-import ErrorSlot from '@/ui/error-slot/ErrorSlot'
-
 
 const TweetAdd = () => {
   const [ tweet, setTweet ] = useState('')

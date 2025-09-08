@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import ErrorSlot from '@/ui/error-slot/ErrorSlot'
 import Hr from '@/ui/hr/Hr'
 import MuiTextField from '@/ui/text-field/TextField'
 import Button from '@/ui/button/Button'
@@ -14,7 +15,6 @@ import { schema } from './register.schema'
 import { useLoginStore } from '@/account/login/useLoginStore'
 import { addUser } from './addUser'
 import './RegisterPage.css'
-import ErrorSlot from '@/ui/error-slot/ErrorSlot'
 
 type RegisterFormData = z.infer<typeof schema>
 

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import Tweet from '@/home/tweet-item/TweetItem'
+import ErrorSlot from '@/ui/error-slot/ErrorSlot'
 import { useTweetsStore } from '@/home/tweet-list/useTweetsStore'
 import { fetchTweets } from './fetchTweets'
 import './TweetList.css'
-import ErrorSlot from '@/ui/error-slot/ErrorSlot'
 
 const TweetList = () => {
   const tweets = useTweetsStore((s) => s.tweets)

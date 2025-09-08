@@ -3,12 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom'
 import Card from '@/ui/card/Card'
 import TextArea from '@/ui/text-area/TextArea'
 import BaseBackground from '@/ui/base-background/BaseBackground'
+import ErrorSlot from '@/ui/error-slot/ErrorSlot'
 import { useTweetsStore } from '../tweet-list/useTweetsStore'
 import { fetchTweets } from '@/home/tweet-list/fetchTweets'
 import { updateTweet } from '../tweet-edit/updateTweet'
 import Button from '@/ui/button/Button'
 import './TweetEdit.css'
-import ErrorSlot from '@/ui/error-slot/ErrorSlot'
 
 const TweetEdit = () => {
   const [ editText, setEditText ] = useState('')

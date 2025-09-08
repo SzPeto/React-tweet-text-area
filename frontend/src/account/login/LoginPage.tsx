@@ -10,11 +10,11 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Button from '@/ui/button/Button'
 import MuiTextField from '@/ui/text-field/TextField'
 import Hr from '@/ui/hr/Hr'
+import ErrorSlot from '@/ui/error-slot/ErrorSlot'
 import { schema } from './login.schema'
 import { login } from './login'
 import { useLoginStore } from './useLoginStore'
 import './LoginPage.css'
-import ErrorSlot from '@/ui/error-slot/ErrorSlot'
 
 type LoginFormData = z.infer<typeof schema>
 

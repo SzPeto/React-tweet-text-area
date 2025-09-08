@@ -4,6 +4,8 @@ import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded'
 import EditRoundedIcon from '@mui/icons-material/EditRounded'
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded'
 import IconButton from '@/ui/icon-button/IconButton'
+import ErrorSlot from '@/ui/error-slot/ErrorSlot'
+
 import { useTweetsStore } from '../tweet-list/useTweetsStore'
 import { useLoginStore } from '@/account/login/useLoginStore'
 import { deleteTweet } from './deleteTweet'
@@ -11,8 +13,6 @@ import { fetchTweets } from '../tweet-list/fetchTweets'
 import { formatIsoDateTime } from '@/_utils/date-time/formatIsoDateTime'
 import { type User } from '@/account/login/user.type'
 import './TweetItem.css'
-import ErrorSlot from '@/ui/error-slot/ErrorSlot'
-
 
 type TweeetProps = {
   id: string,

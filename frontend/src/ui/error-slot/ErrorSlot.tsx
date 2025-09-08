@@ -12,7 +12,6 @@ const ErrorSlot = (props: ErrorSlotProps) => {
 
   const [ isVisible, setIsVisible ] = useState(true)
 
-
   return (
     <div 
       className='error-container' 

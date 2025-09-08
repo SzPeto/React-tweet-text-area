@@ -1,5 +1,5 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { useEffect } from 'react'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { rootRoutes } from '@/_layout/_routes/rootRoutes'
 import { useLoginStore } from './account/login/useLoginStore'
 import { getCurrentUserFromBe } from './account/login/getCurrentUserFromBe'
