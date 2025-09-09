@@ -7,7 +7,7 @@ export const getCurrentUserFromBe = async () => {
   try {
     const response = await api.get('/api/auth/me')
     json = response.data
-  } catch (err: any) {
+  } catch(err: any) {
     const errorMessage = err.response?.data?.message ?? 
                          err.data?.message ?? 
                          err.message ?? 
@@ -19,6 +19,5 @@ export const getCurrentUserFromBe = async () => {
 
     return { success: false, error: errorMessage }
   }
-
   return { success: true, json: json }
 }

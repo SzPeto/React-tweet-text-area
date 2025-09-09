@@ -15,6 +15,5 @@ export const authenticateUser = async (userName: string, password: string) => {
 
     return { success: false, error: errorMessage }
   }
-
   return { success: true, json: json }
 }

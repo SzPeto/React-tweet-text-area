@@ -35,7 +35,6 @@ export class UsersService {
                            
       throw new ConflictException(errorMessage)
     }
-    
     return created
   }
 

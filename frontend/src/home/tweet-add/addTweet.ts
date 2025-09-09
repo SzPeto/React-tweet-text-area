@@ -7,10 +7,10 @@ export async function addTweet(tweet: string) {
   const addFlashMessage = useFlashMessagesStore.getState().addFlashMessage
   
   try {
-    const response = await api.post('/api/tweets', postMessage)
-    json = response.data
+    const res = await api.post('/api/tweets', postMessage)
+    json = res.data
   } catch(err: any) {
-    const errorMessage = err.response?.data?.message ?? 
+    const errorMessage = err.res?.data?.message ?? 
                          err.data?.message ?? 
                          err.message ?? 
                          'Unknown error while adding tweet'

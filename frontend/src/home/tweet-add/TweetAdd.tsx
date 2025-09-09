@@ -16,19 +16,21 @@ const TweetAdd = () => {
   const isLoggedIn = useLoginStore((s) => s.isLoggedIn)
 
   const handleSubmit = async () => {
-    setIsActiveTweetAdd(false)
-    const resAdd = await addTweet(tweet)
-    const resFetch = await fetchTweets()
+    if (tweet) {
+      setIsActiveTweetAdd(false)
+      const resAdd = await addTweet(tweet)
+      const resFetch = await fetchTweets()
 
-    if (resAdd.success) {
-      setTweet('')
-    } else {
-      setErrorMessage(`Error adding tweet : ${ resAdd.error }`)
+      if (resAdd.success) {
+        setTweet('')
+      } else {
+        setErrorMessage(`Error adding tweet : ${ resAdd.error }`)
+      }
+      if (resFetch.success) {
+        setTweets(resFetch.json!)
+      } 
+      setIsActiveTweetAdd(true)
     }
-    if (resFetch.success) {
-      setTweets(resFetch.json!)
-    } 
-    setIsActiveTweetAdd(true)
   }
 
   return (
