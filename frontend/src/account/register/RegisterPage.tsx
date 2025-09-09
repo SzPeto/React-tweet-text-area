@@ -40,7 +40,7 @@ const Register = () => {
     <Navigate to='/' />
   ) : (
     <div className='register-container'>
-      <ErrorSlot message={ errorMessage } />
+      <ErrorSlot message={ errorMessage } UUID={ crypto.randomUUID() } />
       <form className='register-form' onSubmit={ handleSubmit(onSubmit) } >
         <p className='register-heading'>Register user</p>
         <Hr className='mb-8' />

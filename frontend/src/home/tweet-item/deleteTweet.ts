@@ -1,14 +1,14 @@
-import { useFlashMessagesStore } from "@/ui/flash/useFlashMessageStore"
+import { useFlashMessagesStore } from '@/ui/flash/useFlashMessageStore'
 
 export async function deleteTweet(id: string) {
   const addFlashMessage = useFlashMessagesStore.getState().addFlashMessage
   let json
 
   try {
-    const response = await fetch(`/api/tweets/${id}`, {
+    const res = await fetch(`/api/tweets/${id}`, {
       method: 'DELETE',
     })
-    json = await response.json()
+    json = await res.json()
     if (json.error) {
       const errorMessage = json.message ?? json.error ?? 'Unknown error while deleting tweet'
       return { success: false, error: errorMessage}

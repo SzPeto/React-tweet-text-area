@@ -33,7 +33,6 @@ export class TweetsController {
     @Param('id') id: string, 
     @Body() updateTweetDto: UpdateTweetDto
   ): Promise<TweetDocument> {
-    
     return await this.tweetsService.updateTweetById(id, updateTweetDto)
   }
 

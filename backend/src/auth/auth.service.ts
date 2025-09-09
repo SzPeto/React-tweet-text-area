@@ -28,5 +28,4 @@ export class AuthService {
 
     return { accessToken: this.jwtService.sign(payload) } // This goes back to frontend through API
   }
-
 }

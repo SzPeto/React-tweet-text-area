@@ -10,13 +10,13 @@ import './TweetAdd.css'
 
 const TweetAdd = () => {
   const [ tweet, setTweet ] = useState('')
-  const [ isActiveSubmit, setIsActiveSubmit ] = useState(true)
+  const [ isActiveTweetAdd, setIsActiveTweetAdd ] = useState(true)
   const [ errorMessage, setErrorMessage ] = useState('')
   const setTweets = useTweetsStore((s) => s.setTweets)
   const isLoggedIn = useLoginStore((s) => s.isLoggedIn)
 
   const handleSubmit = async () => {
-    setIsActiveSubmit(false)
+    setIsActiveTweetAdd(false)
     const resAdd = await addTweet(tweet)
     const resFetch = await fetchTweets()
 
@@ -28,22 +28,24 @@ const TweetAdd = () => {
     if (resFetch.success) {
       setTweets(resFetch.json!)
     } 
-    setIsActiveSubmit(true)
+    setIsActiveTweetAdd(true)
   }
 
   return (
     <div className='tweet-input-container-l2'>
-      <ErrorSlot message={ errorMessage } />
+      <ErrorSlot message={ errorMessage } UUID={ crypto.randomUUID() } />
       <div className="upper-container">
+
         <TextArea 
           value={ tweet } 
           onChange={ (e) => setTweet(e.target.value) } 
           placeholder={ 'Tweet me!' } 
         />
+        
       </div>
       <div className="lower-container">
         {
-          isActiveSubmit ? (
+          isActiveTweetAdd ? (
             isLoggedIn ? (
               <Button text='Add tweet' color='success' onClick={ handleSubmit } />
             ) : (

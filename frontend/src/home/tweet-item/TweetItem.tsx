@@ -17,7 +17,7 @@ import './TweetItem.css'
 type TweeetProps = {
   id: string,
   content: string,
-  dateSubmitted: string
+  dateSubmitted: string,
   user: User
 }
 
@@ -44,6 +44,7 @@ const TweetItem = (props: TweeetProps) => {
     <div className='buttons-wrapper-container'>
       <hr className='horizontal-rule'/>
       <div className='buttons-container'>
+
         <IconButton 
           size='large' 
           onClick={ () => navigate(`/tweets/${ props.id }/edit`) } 
@@ -51,6 +52,7 @@ const TweetItem = (props: TweeetProps) => {
         >
           <EditRoundedIcon />
         </IconButton>
+
         <IconButton 
           size='large' 
           onClick={ () => { 
@@ -62,13 +64,14 @@ const TweetItem = (props: TweeetProps) => {
         >
           <DeleteRoundedIcon />
         </IconButton>
+        
       </div>
     </div>
   )
 
   return (
     <>
-      <ErrorSlot message={ errorMessage } />
+      <ErrorSlot message={ errorMessage } UUID={ crypto.randomUUID() } />
       <div className="tweet-main-container" >
         
         <div className='upper-container'>

@@ -11,10 +11,11 @@ export class LoginAuthStrategy extends PassportStrategy(Strategy, 'login-auth') 
   // to super() : super({ usernameField: 'username', passwordField: 'password' })
   async validate(userName: string, password: string) { // The inherited method from Passport
     const user = this.authService.validateUser(userName, password) // Service return safeFields
+
     if (!user) {
       throw new UnauthorizedException('Authorization failed!')
     }
-    return user // Returns to Passport and Passport attaches to request.user
-  }
 
+    return user // Returns to Passport and Passport attaches to req.user
+  }
 }

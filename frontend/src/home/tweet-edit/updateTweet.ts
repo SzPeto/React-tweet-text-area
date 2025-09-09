@@ -16,7 +16,7 @@ export async function updateTweet(id: string, tweet: string) {
       const errorMessage = json.message ?? json.error ?? 'Unknown error while updating tweet'
       return { success: false, error: errorMessage }
     }
-  }catch(err: any) {
+  } catch(err: any) {
     const errorMessage = err.message ?? err.error ?? 'Unknown error while updating tweet'
     return { success: false, error: errorMessage }
   }

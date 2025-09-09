@@ -28,7 +28,7 @@ const TweetList = () => {
 
   return (
     <div className='tweet-list-container-l2'>
-      <ErrorSlot message={ errorMessage } />
+      <ErrorSlot message={ errorMessage } UUID={ crypto.randomUUID() } />
       {
         isLoading ? (
           <p>Loading tweets...</p>

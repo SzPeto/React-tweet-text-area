@@ -1,21 +1,26 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './ErrorSlot.css'
 
 type ErrorSlotProps = {
-  message?: string
+  message: string,
+  UUID: string
 }
 
 const ErrorSlot = (props: ErrorSlotProps) => {
-  if (!props.message) {
+  const [ isVisible, setIsVisible ] = useState(true)
+
+   // Whenever props.message changes, show it again
+  useEffect(() => {
+    setIsVisible(!!props.message)
+  }, [props.UUID])
+
+  if (!props.message || !isVisible) {
     return null
   }
-
-  const [ isVisible, setIsVisible ] = useState(true)
 
   return (
     <div 
       className='error-container' 
-      style={ isVisible ? {} : { display: 'none' } }
       onClick={ () => setIsVisible(false) }
     >
       { props.message }

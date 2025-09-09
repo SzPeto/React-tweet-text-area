@@ -1,4 +1,3 @@
 main {
-  margin-top: 60px;
-  padding-top: 20px;
+  @apply mt-14 pt-5;
 }

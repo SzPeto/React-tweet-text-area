@@ -1,3 +1,3 @@
 .error-container {
-  @apply mb-4 w-full max-w-md rounded-lg bg-red-100 px-4 py-2 text-center text-red-900 shadow cursor-pointer;
+  @apply mb-4 w-full max-w-md rounded-lg bg-red-100 px-4 py-2 text-center text-red-900 shadow cursor-pointer z-40;
 }

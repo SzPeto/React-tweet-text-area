@@ -9,7 +9,7 @@ export async function addTweet(tweet: string) {
   try {
     const response = await api.post('/api/tweets', postMessage)
     json = response.data
-  }catch(err: any) {
+  } catch(err: any) {
     const errorMessage = err.response?.data?.message ?? 
                          err.data?.message ?? 
                          err.message ?? 

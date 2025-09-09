@@ -42,7 +42,7 @@ const Login = () => {
     <Navigate to='/' />
   ) : (
     <div className='login-container'>
-      <ErrorSlot message={ errorMessage } />
+      <ErrorSlot message={ errorMessage } UUID={ crypto.randomUUID() } />
 
       <form className='login-form' onSubmit={ handleSubmit(onSubmit) } >
         <p className='login-heading'>Login user</p>

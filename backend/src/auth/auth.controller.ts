@@ -9,15 +9,13 @@ export class AuthController {
 
   @UseGuards(LoginAuthGuard) 
   @Post('login')
-  login(@Request() request) {
-
-    return this.authService.login(request.user) // This returns the access token for frontend
+  login(@Request() req) {
+    return this.authService.login(req.user) // This returns the access token for frontend
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('me')
-  me(@Request() request) {
-
-    return request.user
+  me(@Request() req) {
+    return req.user
   }
 }

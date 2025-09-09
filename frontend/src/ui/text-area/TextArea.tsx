@@ -2,7 +2,7 @@ import './TextArea.css'
 
 type TextAreaProps = {
   value?: string,
-  onChange: (...args: any[]) => any
+  onChange: (...args: any[]) => any,
   placeholder?: string
 }
 

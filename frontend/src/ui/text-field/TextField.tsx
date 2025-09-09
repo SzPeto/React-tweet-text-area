@@ -6,7 +6,7 @@ type PropTypes = {
   value: string,
   type: 'password' | 'email' | 'text',
   slotProps?: TextFieldProps['slotProps'],
-  error?: boolean
+  error?: boolean,
   helperText?: string
 }
 
@@ -21,7 +21,7 @@ const TextField = (props: PropTypes) => {
       type={ props.type }
       slotProps={ props.slotProps }
       error={ props.error }
-      helperText={props.helperText}
+      helperText={ props.helperText }
     />
   )
 }

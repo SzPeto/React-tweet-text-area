@@ -5,7 +5,7 @@ const FlashMessagesStack = () => {
   const flashMessages = useFlashMessagesStore((s) => s.flashMessages)
 
   return (
-    <div className="messages-container">
+    <div className='messages-container'>
       {
         flashMessages.map((msg, index) => (
           <FlashMessage 

@@ -3,17 +3,17 @@ import { create } from 'zustand'
 type FlashType = 'success' | 'info' | 'warning'
 
 type FlashMessage = {
-  id: string
-  message: string
+  id: string,
+  message: string,
   type: FlashType
 }
 
-type FlashStore = {
-  flashMessages: FlashMessage[]
+type FlashMessagesStore = {
+  flashMessages: FlashMessage[],
   addFlashMessage: (message: string, type: FlashType) => void
 }
 
-export const useFlashMessagesStore = create<FlashStore>((set) => ({
+export const useFlashMessagesStore = create<FlashMessagesStore>((set) => ({
   flashMessages: [],
   addFlashMessage: (message, type) => {
     const id = crypto.randomUUID() // Ensure the id is really unique
@@ -23,14 +23,11 @@ export const useFlashMessagesStore = create<FlashStore>((set) => ({
       type: type 
     }
 
-    set((state) => {
-      const updated = [newMessage, ...state.flashMessages].slice(0, 3)
-      return { flashMessages: updated }
-    })
+    set((s) => ({ flashMessages: [newMessage, ...s.flashMessages].slice(0, 3) }))
 
     setTimeout(() => {
-      set((state) => ({
-        flashMessages: state.flashMessages.filter((msg) => msg.id !== id),
+      set((s) => ({
+        flashMessages: s.flashMessages.filter((msg) => msg.id !== id),
       }))
     }, 8000)
   }

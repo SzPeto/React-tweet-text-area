@@ -38,6 +38,7 @@ const NavBar = () => {
         </ul>
         {
           isLoggedIn ? (
+
             <ul className={`navbar-links-right ${ menuOpen ? 'active' : '' }`}>
               <li className='dropdown' onClick={ () => setProfileOpen((s) => !s) }>
                 <button className='dropdown-toggle'>
@@ -55,7 +56,9 @@ const NavBar = () => {
                 </ul>
               </li>
             </ul>
+
           ) : (
+
             <ul className={`navbar-links-right ${ menuOpen ? 'active' : '' }`}>
               <NavLink to='/login'>
                 <li>
@@ -68,6 +71,7 @@ const NavBar = () => {
                 </li>
               </NavLink>
             </ul>
+            
           )
         }
       </div>
