@@ -36,7 +36,7 @@ const TweetAdd = () => {
   return (
     <div className='tweet-input-container-l2'>
       <ErrorSlot message={ errorMessage } UUID={ crypto.randomUUID() } />
-      <div className="upper-container">
+      <div className='upper-container'>
 
         <TextArea 
           value={ tweet } 
@@ -45,7 +45,7 @@ const TweetAdd = () => {
         />
         
       </div>
-      <div className="lower-container">
+      <div className='lower-container'>
         {
           isActiveTweetAdd ? (
             isLoggedIn ? (

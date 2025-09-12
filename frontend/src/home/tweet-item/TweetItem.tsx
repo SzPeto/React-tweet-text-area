@@ -37,10 +37,10 @@ const TweetItem = (props: TweeetProps) => {
   return (
     <>
       <ErrorSlot message={ errorMessage } UUID={ crypto.randomUUID() } />
-      <div className="tweet-main-container" >
+      <div className='tweet-main-container' >
         
         <div className='upper-container'>
-          <div className="titles-container">
+          <div className='titles-container'>
             <AccountCircleRoundedIcon color='primary' fontSize='large' /> 
             <p><b>{ props.user.userName }</b></p>
           </div>

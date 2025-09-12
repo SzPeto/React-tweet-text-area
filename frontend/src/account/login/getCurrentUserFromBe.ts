@@ -1,4 +1,4 @@
-import { api } from "@/_utils/swagger-api/swaggerApi"
+import { api } from '@/_utils/swagger-api/swaggerApi'
 import { logout } from '../../_layout/navbar/logout'
 
 export const getCurrentUserFromBe = async () => {

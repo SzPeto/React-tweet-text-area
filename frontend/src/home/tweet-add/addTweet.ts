@@ -1,4 +1,4 @@
-import { api } from "@/_utils/swagger-api/swaggerApi"
+import { api } from '@/_utils/swagger-api/swaggerApi'
 import { useFlashMessagesStore } from '@/ui/flash/useFlashMessageStore'
 
 export async function addTweet(tweet: string) {

@@ -14,7 +14,7 @@ export const initSwagger = (app: INestApplication) => {
     .build()
     
   const docOptions: SwaggerDocumentOptions = {
-    ignoreGlobalPrefix: true, // remove "/api" from each path in the spec
+    ignoreGlobalPrefix: true, // remove '/api' from each path in the spec
   }
 
   const document = SwaggerModule.createDocument(app, config, docOptions)

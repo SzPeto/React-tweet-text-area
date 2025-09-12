@@ -18,7 +18,7 @@ export class AuthService {
     }
     /* user.toObject() checks if it is a Mongoose document, if yes, it converts it to plain TS object, if not return user
        The destructuring extracts the password and the left fields besides password separately, e.g. : 
-       safeFields = { username: "peter", email: "a@b.com" } */
+       safeFields = { username: 'peter', email: 'a@b.com' } */
     const { password, ...safeFields } = user.toObject ? user.toObject() : user
     return safeFields
   }

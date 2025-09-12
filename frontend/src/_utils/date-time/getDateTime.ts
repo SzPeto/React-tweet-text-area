@@ -1,6 +1,6 @@
 
 function pad(s: any): string {
-  return s.toString().padStart(2, "0")
+  return s.toString().padStart(2, '0')
 }
 
 export function getDateTime(): string {

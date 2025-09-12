@@ -53,13 +53,13 @@ import type {
   AxiosResponse,
   HeadersDefaults,
   ResponseType,
-} from 'axios';
-import axios from 'axios';
+} from "axios";
+import axios from "axios";
 
 export type QueryParamsType = Record<string | number, any>;
 
 export interface FullRequestParams
-  extends Omit<AxiosRequestConfig, 'data' | 'params' | 'url' | 'responseType'> {
+  extends Omit<AxiosRequestConfig, "data" | "params" | "url" | "responseType"> {
   /** set parameter to `true` for call `securityWorker` for this request */
   secure?: boolean;
   /** request path */
@@ -68,7 +68,7 @@ export interface FullRequestParams
   type?: ContentType;
   /** query params */
   query?: QueryParamsType;
-  /** format of response (i.e. response.json() -> format: 'json') */
+  /** format of response (i.e. response.json() -> format: "json") */
   format?: ResponseType;
   /** request body */
   body?: unknown;
@@ -76,11 +76,11 @@ export interface FullRequestParams
 
 export type RequestParams = Omit<
   FullRequestParams,
-  'body' | 'method' | 'query' | 'path'
+  "body" | "method" | "query" | "path"
 >;
 
 export interface ApiConfig<SecurityDataType = unknown>
-  extends Omit<AxiosRequestConfig, 'data' | 'cancelToken'> {
+  extends Omit<AxiosRequestConfig, "data" | "cancelToken"> {
   securityWorker?: (
     securityData: SecurityDataType | null,
   ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
@@ -89,17 +89,17 @@ export interface ApiConfig<SecurityDataType = unknown>
 }
 
 export enum ContentType {
-  Json = 'application/json',
-  JsonApi = 'application/vnd.api+json',
-  FormData = 'multipart/form-data',
-  UrlEncoded = 'application/x-www-form-urlencoded',
-  Text = 'text/plain',
+  Json = "application/json",
+  JsonApi = "application/vnd.api+json",
+  FormData = "multipart/form-data",
+  UrlEncoded = "application/x-www-form-urlencoded",
+  Text = "text/plain",
 }
 
 export class HttpClient<SecurityDataType = unknown> {
   public instance: AxiosInstance;
   private securityData: SecurityDataType | null = null;
-  private securityWorker?: ApiConfig<SecurityDataType>['securityWorker'];
+  private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
   private secure?: boolean;
   private format?: ResponseType;
 
@@ -111,7 +111,7 @@ export class HttpClient<SecurityDataType = unknown> {
   }: ApiConfig<SecurityDataType> = {}) {
     this.instance = axios.create({
       ...axiosConfig,
-      baseURL: axiosConfig.baseURL || 'http://localhost:3000/api',
+      baseURL: axiosConfig.baseURL || "http://localhost:3000/api",
     });
     this.secure = secure;
     this.format = format;
@@ -145,7 +145,7 @@ export class HttpClient<SecurityDataType = unknown> {
   }
 
   protected stringifyFormItem(formItem: unknown) {
-    if (typeof formItem === 'object' && formItem !== null) {
+    if (typeof formItem === "object" && formItem !== null) {
       return JSON.stringify(formItem);
     } else {
       return `${formItem}`;
@@ -183,7 +183,7 @@ export class HttpClient<SecurityDataType = unknown> {
     ...params
   }: FullRequestParams): Promise<AxiosResponse<T>> => {
     const secureParams =
-      ((typeof secure === 'boolean' ? secure : this.secure) &&
+      ((typeof secure === "boolean" ? secure : this.secure) &&
         this.securityWorker &&
         (await this.securityWorker(this.securityData))) ||
       {};
@@ -194,7 +194,7 @@ export class HttpClient<SecurityDataType = unknown> {
       type === ContentType.FormData &&
       body &&
       body !== null &&
-      typeof body === 'object'
+      typeof body === "object"
     ) {
       body = this.createFormData(body as Record<string, unknown>);
     }
@@ -203,7 +203,7 @@ export class HttpClient<SecurityDataType = unknown> {
       type === ContentType.Text &&
       body &&
       body !== null &&
-      typeof body !== 'string'
+      typeof body !== "string"
     ) {
       body = JSON.stringify(body);
     }
@@ -212,7 +212,7 @@ export class HttpClient<SecurityDataType = unknown> {
       ...requestParams,
       headers: {
         ...(requestParams.headers || {}),
-        ...(type ? { 'Content-Type': type } : {}),
+        ...(type ? { "Content-Type": type } : {}),
       },
       params: query,
       responseType: responseFormat,
@@ -244,8 +244,8 @@ export class Api<
     tweetsControllerGetAllTweets: (params: RequestParams = {}) =>
       this.request<Tweet[], any>({
         path: `/tweets`,
-        method: 'GET',
-        format: 'json',
+        method: "GET",
+        format: "json",
         ...params,
       }),
 
@@ -263,7 +263,7 @@ export class Api<
     ) =>
       this.request<void, any>({
         path: `/tweets`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
@@ -280,8 +280,8 @@ export class Api<
     tweetsControllerGetTweetById: (id: string, params: RequestParams = {}) =>
       this.request<Tweet, any>({
         path: `/tweets/${id}`,
-        method: 'GET',
-        format: 'json',
+        method: "GET",
+        format: "json",
         ...params,
       }),
 
@@ -299,7 +299,7 @@ export class Api<
     ) =>
       this.request<void, any>({
         path: `/tweets/${id}`,
-        method: 'PATCH',
+        method: "PATCH",
         body: data,
         type: ContentType.Json,
         ...params,
@@ -315,7 +315,7 @@ export class Api<
     tweetsControllerDeleteTweetById: (id: string, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/tweets/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
         ...params,
       }),
   };
@@ -333,10 +333,10 @@ export class Api<
     ) =>
       this.request<User, any>({
         path: `/users/register`,
-        method: 'POST',
+        method: "POST",
         body: data,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
   };
@@ -351,10 +351,10 @@ export class Api<
     authControllerLogin: (data: LoginDto, params: RequestParams = {}) =>
       this.request<LoginResponseDto, any>({
         path: `/auth/login`,
-        method: 'POST',
+        method: "POST",
         body: data,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -369,9 +369,9 @@ export class Api<
     authControllerMe: (params: RequestParams = {}) =>
       this.request<User, any>({
         path: `/auth/me`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
   };

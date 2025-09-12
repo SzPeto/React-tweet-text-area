@@ -1,5 +1,5 @@
-import { api } from "@/_utils/swagger-api/swaggerApi"
-import { useFlashMessagesStore } from "@/ui/flash/useFlashMessageStore"
+import { api } from '@/_utils/swagger-api/swaggerApi'
+import { useFlashMessagesStore } from '@/ui/flash/useFlashMessageStore'
 
 export async function updateTweet(id: string, tweet: string) {
   let json

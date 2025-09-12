@@ -1,4 +1,4 @@
-import { api } from "@/_utils/swagger-api/swaggerApi"
+import { api } from '@/_utils/swagger-api/swaggerApi'
 
 export const authenticateUser = async (userName: string, password: string) => {
   let json
