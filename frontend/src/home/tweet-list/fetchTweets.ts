@@ -1,10 +1,10 @@
-import { tweetsApi } from "@/_utils/swagger-api/swaggerApi"
+import { api } from "@/_utils/swagger-api/swaggerApi"
 
 export async function fetchTweets() {
   let json: any
   
   try {
-    const res = await tweetsApi.tweetsControllerGetAllTweets()
+    const res = await api.tweets.tweetsControllerGetAllTweets()
     json = res.data
   } catch (err: any) {
     const errorMessage = err.res?.data?.message ?? 

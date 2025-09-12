@@ -1,4 +1,4 @@
-import { tweetsApi } from '@/_utils/swagger-api/swaggerApi'
+import { api } from "@/_utils/swagger-api/swaggerApi"
 import { useFlashMessagesStore } from '@/ui/flash/useFlashMessageStore'
 
 export async function deleteTweet(id: string) {
@@ -6,7 +6,7 @@ export async function deleteTweet(id: string) {
   let json
 
   try {
-    const res = await tweetsApi.tweetsControllerDeleteTweetById(id)
+    const res = await api.tweets.tweetsControllerDeleteTweetById(id)
     json = res.data
   } catch(err: any) {
     const errorMessage = err.res?.data?.message ?? 

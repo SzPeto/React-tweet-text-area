@@ -1,10 +1,9 @@
-import { Configuration, TweetsApi, UsersApi, AuthApi } from '@/_api'
+import { Api } from "@/_api/Api"  
 
-const publicConfig = new Configuration({})
-const privateConfig = new Configuration({
-  accessToken: () => localStorage.getItem('accessToken') ?? ''
+// create instance with baseURL and optional securityWorker
+export const api = new Api({
+  securityWorker: () => {
+    const token = localStorage.getItem("accessToken")
+    return token ? { headers: { Authorization: `Bearer ${token}` } } : {}
+  },
 })
-
-export const tweetsApi = new TweetsApi(privateConfig)
-export const usersApi = new UsersApi(publicConfig)
-export const authApi = new AuthApi(privateConfig)
