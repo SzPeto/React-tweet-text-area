@@ -18,11 +18,10 @@ const TweetList = () => {
       const res = await fetchTweets()
       if (res.success) {
         setTweets(res.json!)
-        setIsLoading(false)
       } else {
         setErrorMessage(`Error fetching tweets : ${ res.error! }`)
-        setIsLoading(false)
       }
+      setIsLoading(false)
     })()
   }, [])
 

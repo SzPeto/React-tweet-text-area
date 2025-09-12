@@ -1,3 +1,4 @@
+import { tweetsApi } from '@/_utils/swagger-api/swaggerApi'
 import { useFlashMessagesStore } from '@/ui/flash/useFlashMessageStore'
 
 export async function deleteTweet(id: string) {
@@ -5,16 +6,14 @@ export async function deleteTweet(id: string) {
   let json
 
   try {
-    const res = await fetch(`/api/tweets/${id}`, {
-      method: 'DELETE',
-    })
-    json = await res.json()
-    if (json.error) {
-      const errorMessage = json.message ?? json.error ?? 'Unknown error while deleting tweet'
-      return { success: false, error: errorMessage}
-    }
+    const res = await tweetsApi.tweetsControllerDeleteTweetById(id)
+    json = res.data
   } catch(err: any) {
-    const errorMessage = err.message ?? err.error ?? 'Unknown error while deleting tweet'
+    const errorMessage = err.res?.data?.message ?? 
+                         err.data?.message ?? 
+                         err.message ?? 
+                         'Unknown error while adding tweet'
+                         
     return { success: false, error: errorMessage}
   }
   

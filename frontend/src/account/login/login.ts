@@ -14,11 +14,11 @@ export const login = async (userName: string, password: string) => {
   } 
 
   // Setting the returned access token to local storage and getting the user from db with access token
-  localStorage.setItem('accessToken', resAuth.json.accessToken)
+  localStorage.setItem('accessToken', resAuth.json!.accessToken)
   const resGet = await getCurrentUserFromBe()
 
   if (resGet.success) {
-    const user = resGet.json
+    const user = resGet.json!
     loginUserFe(user._id, user.userName, user.email)
     addFlashMessage(`Welcome ${ user.userName }!`, 'success')
   } else {

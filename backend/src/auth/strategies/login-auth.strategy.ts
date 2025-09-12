@@ -10,7 +10,7 @@ export class LoginAuthStrategy extends PassportStrategy(Strategy, 'login-auth') 
   // Validate extracts from request body by default userName and password, but you can change it by passing an argument
   // to super() : super({ usernameField: 'username', passwordField: 'password' })
   async validate(userName: string, password: string) { // The inherited method from Passport
-    const user = this.authService.validateUser(userName, password) // Service return safeFields
+    const user = await this.authService.validateUser(userName, password) // Service return safeFields
 
     if (!user) {
       throw new UnauthorizedException('Authorization failed!')

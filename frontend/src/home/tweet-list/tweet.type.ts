@@ -1,8 +1,3 @@
-import type { User } from "@/account/login/user.type"
+import type { Tweet as SwaggerTweet } from "@/_api"  
 
-export type TweetType = {
-  _id: string,
-  content: string,
-  createdAt: string,
-  user: User
-}
+export type TweetType = SwaggerTweet

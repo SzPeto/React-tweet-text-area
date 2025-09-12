@@ -1,4 +1,4 @@
-import api from '@/account/_auth-headers/authHeaders'
+import { tweetsApi } from '@/_utils/swagger-api/swaggerApi'
 import { useFlashMessagesStore } from '@/ui/flash/useFlashMessageStore'
 
 export async function addTweet(tweet: string) {
@@ -7,7 +7,7 @@ export async function addTweet(tweet: string) {
   const addFlashMessage = useFlashMessagesStore.getState().addFlashMessage
   
   try {
-    const res = await api.post('/api/tweets', postMessage)
+    const res = await tweetsApi.tweetsControllerAddTweet(postMessage)
     json = res.data
   } catch(err: any) {
     const errorMessage = err.res?.data?.message ?? 

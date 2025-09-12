@@ -1,18 +1,17 @@
+import { tweetsApi } from "@/_utils/swagger-api/swaggerApi"
+
 export async function fetchTweets() {
   let json: any
-  let res: any
   
   try {
-    res = await fetch('/api/tweets')
-    json = await res.json()
-    if (json.error) {
-      const errorMessage = json.message ?? json.error ?? 'Unknown error while deleting tweet'
-      return { success: false, error: errorMessage}
-    }
-  } catch (err) {
-    const errorMessage = `${ res.statusText ?? 'Error fetching tweets' } ${ res.status ?? '' }`
+    const res = await tweetsApi.tweetsControllerGetAllTweets()
+    json = res.data
+  } catch (err: any) {
+    const errorMessage = err.res?.data?.message ?? 
+                         err.data?.message ?? 
+                         err.message ?? 
+                         'Unknown error while adding tweet'
     return { success: false, error: errorMessage }
   }
-  
   return { success: true, json: json }
 }

@@ -1,4 +1,4 @@
-import api from '@/account/_auth-headers/authHeaders'
+import { usersApi } from '@/_utils/swagger-api/swaggerApi'
 import { useFlashMessagesStore } from '@/ui/flash/useFlashMessageStore'
 
 export const addUser = async (userName: string, email: string, password: string) => {
@@ -11,7 +11,7 @@ export const addUser = async (userName: string, email: string, password: string)
   const addFlashMessage = useFlashMessagesStore.getState().addFlashMessage
 
   try {
-    const response = await api.post('api/users/register', user)
+    const response = await usersApi.usersControllerCreateUser(user)
     json = response.data
   } catch(err: any) {
     const errorMessage = err.response?.data?.message ?? 

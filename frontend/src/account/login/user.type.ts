@@ -1,7 +1,3 @@
-export type User = {
-  _id: string,
-  userName: string,
-  email: string,
-  picturePath: string,
-  isAdmin: boolean
-}
+import type { User as SwaggerUser } from "@/_api"  
+
+export type UserType = SwaggerUser

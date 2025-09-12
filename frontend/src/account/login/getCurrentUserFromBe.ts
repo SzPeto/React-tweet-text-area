@@ -1,12 +1,12 @@
-import api from '@/account/_auth-headers/authHeaders'
+import { authApi } from '@/_utils/swagger-api/swaggerApi'
 import { logout } from '../../_layout/navbar/logout'
 
 export const getCurrentUserFromBe = async () => {
   let json
 
   try {
-    const response = await api.get('/api/auth/me')
-    json = response.data
+    const res = await authApi.authControllerMe()
+    json = res.data
   } catch(err: any) {
     const errorMessage = err.response?.data?.message ?? 
                          err.data?.message ?? 

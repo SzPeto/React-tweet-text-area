@@ -23,6 +23,6 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
       throw new NotFoundException(`User with id ${ payload.sub } not found`)
     }
     
-    return user // This attaches to request.user
+    return user // This attaches to req.user
   }
 }

@@ -1,12 +1,12 @@
-import api from '@/account/_auth-headers/authHeaders'
+import { authApi } from "@/_utils/swagger-api/swaggerApi"
 
 export const authenticateUser = async (userName: string, password: string) => {
   let json
   const user = { userName: userName, password: password }
 
   try {
-    const response = await api.post('/api/auth/login', user)
-    json = response.data
+    const res = await authApi.authControllerLogin(user)
+    json = res.data
   } catch(err: any) {
     const errorMessage = err.response?.data?.message ?? 
                          err.data?.message ?? 

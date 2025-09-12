@@ -6,7 +6,6 @@ import { getCurrentUserFromBe } from './account/login/getCurrentUserFromBe'
 import { logout } from './_layout/navbar/logout'
 import './App.css'
 
-
 function App() {
   const router = createBrowserRouter([ rootRoutes ])
   const loginUserFe = useLoginStore((s) => s.loginUserFe)
@@ -18,7 +17,7 @@ function App() {
         const res = await getCurrentUserFromBe()
         if (res.success) {
           const user = res.json
-          loginUserFe(user._id, user.userName, user.email)
+          loginUserFe(user!._id, user!.userName, user!.email)
         } else {
           logout()
         }
