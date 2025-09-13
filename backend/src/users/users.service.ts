@@ -38,6 +38,10 @@ export class UsersService {
     return created
   }
 
+  async getAllUsers() {
+    return await this.userModel.find().exec()
+  }
+
   async findUserById(id: string) {
     const user = await this.userModel.findOne({ _id: id })
 

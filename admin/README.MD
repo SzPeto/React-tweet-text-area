@@ -1,48 +1,26 @@
-# Admin
+# Admin panel - Refine.dev
 
-<div align="center" style="margin: 30px;">
-    <a href="https://refine.dev">
-    <img alt="refine logo" src="https://refine.ams3.cdn.digitaloceanspaces.com/readme/refine-readme-banner.png">
-    </a>
-</div>
-<br/>
+## Prerequisites
+Make sure you have Node.js (>=18) and npm installed.
 
-This [Refine](https://github.com/refinedev/refine) project was generated with [create refine-app](https://github.com/refinedev/refine/tree/master/packages/create-refine-app).
+## How to run
 
-## Getting Started
-
-A React Framework for building internal tools, admin panels, dashboards & B2B apps with unmatched flexibility ✨
-
-Refine's hooks and components simplifies the development process and eliminates the repetitive tasks by providing industry-standard solutions for crucial aspects of a project, including authentication, access control, routing, networking, state management, and i18n.
-
-## Available Scripts
-
-### Running the development server.
-
+1. Navigate to the frontend folder:
 ```bash
-    npm run dev
+cd admin
 ```
 
-### Building for production.
-
+2. Install dependencies:
 ```bash
-    npm run build
+npm install
 ```
 
-### Running the production server.
-
+3. Start the development server:
 ```bash
-    npm run start
+npm run dev
 ```
 
-## Learn More
+4. Open your browser at the address shown in the terminal (by default : http://localhost:5173)
 
-To learn more about **Refine**, please check out the [Documentation](https://refine.dev/docs)
-
-- **REST Data Provider** [Docs](https://refine.dev/docs/core/providers/data-provider/#overview)
-- **Ant Design** [Docs](https://refine.dev/docs/ui-frameworks/antd/tutorial/)
-- **React Router** [Docs](https://refine.dev/docs/core/providers/router-provider/)
-
-## License
-
-MIT
+# Side note : 
+admin\node_modules\@refinedev\core\tsconfig.json - "extends": "../../tsconfig.build.json" - commented out

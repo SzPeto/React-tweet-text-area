@@ -1,5 +1,5 @@
-import type { RefineThemedLayoutHeaderProps } from '@refinedev/antd';
-import { useGetIdentity } from '@refinedev/core';
+import type { RefineThemedLayoutHeaderProps } from '@refinedev/antd'
+import { useGetIdentity } from '@refinedev/core'
 import {
   Layout as AntdLayout,
   Avatar,
@@ -7,25 +7,25 @@ import {
   Switch,
   theme,
   Typography,
-} from 'antd';
-import React, { useContext } from 'react';
-import { ColorModeContext } from '../../contexts/color-mode';
+} from 'antd'
+import React, { useContext } from 'react'
+import { ColorModeContext } from '../../contexts/color-mode'
 
-const { Text } = Typography;
-const { useToken } = theme;
+const { Text } = Typography
+const { useToken } = theme
 
 type IUser = {
-  id: number;
-  name: string;
-  avatar: string;
-};
+  id: number
+  name: string
+  avatar: string
+}
 
 export const Header: React.FC<RefineThemedLayoutHeaderProps> = ({
   sticky = true,
 }) => {
-  const { token } = useToken();
-  const { data: user } = useGetIdentity<IUser>();
-  const { mode, setMode } = useContext(ColorModeContext);
+  const { token } = useToken()
+  const { data: user } = useGetIdentity<IUser>()
+  const { mode, setMode } = useContext(ColorModeContext)
 
   const headerStyles: React.CSSProperties = {
     backgroundColor: token.colorBgElevated,
@@ -34,12 +34,12 @@ export const Header: React.FC<RefineThemedLayoutHeaderProps> = ({
     alignItems: 'center',
     padding: '0px 24px',
     height: '64px',
-  };
+  }
 
   if (sticky) {
-    headerStyles.position = 'sticky';
-    headerStyles.top = 0;
-    headerStyles.zIndex = 1;
+    headerStyles.position = 'sticky'
+    headerStyles.top = 0
+    headerStyles.zIndex = 1
   }
 
   return (
@@ -57,5 +57,5 @@ export const Header: React.FC<RefineThemedLayoutHeaderProps> = ({
         </Space>
       </Space>
     </AntdLayout.Header>
-  );
-};
+  )
+}
