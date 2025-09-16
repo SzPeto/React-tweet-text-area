@@ -1,35 +1,45 @@
 import React from 'react'
-import { useOne, type BaseRecord } from '@refinedev/core'
-import { List, useTable, DateField, TextField } from '@refinedev/antd'
-import { Table } from 'antd'
-
-type User = { 
-  _id: string,
-  userName: string,
-  email: string 
-}
-type Tweet = BaseRecord & {
-  _id: string,
-  content: string,
-  createdAt: string,
-  updatedAt: string,
-  user: User
-}
+import { List, useTable, DateField, TextField, ShowButton, EditButton, DeleteButton } from '@refinedev/antd'
+import { Space, Table } from 'antd'
+import { TweetType } from './tweet.type'
 
 export const TweetsList: React.FC = () => {
-  const { result, query: { isLoading } } = useOne<Tweet>({ resource: 'tweets' })
-  const { tableProps } = useTable<Tweet>({ resource: 'tweets', pagination: { mode: 'off' } })
+  const { tableProps, tableQuery } = useTable<TweetType>({ resource: 'tweets', pagination: { mode: 'off' } })
 
-  if (isLoading) {
+  if (tableQuery.isLoading) {
     return <p>Loading...</p>
   }
 
   return (
     <List title='Tweets'>
       <Table { ...tableProps } rowKey='_id'>
-        <Table.Column<Tweet> title='Content' dataIndex='content' render={ (v) => <TextField value={v} /> } />
-        <Table.Column<Tweet> title='Author' render={(_, r) => r.user?.userName ?? '—'} />
-        <Table.Column<Tweet> title='Created' dataIndex='createdAt' render={ (v) => <DateField value={v} /> } />
+        <Table.Column<TweetType> 
+          title='Content' 
+          dataIndex='content' 
+          render={ (v) => <TextField value={ v } /> } 
+        />
+
+        <Table.Column<TweetType> 
+          title='Author' 
+          render={ (_, r) => r.user?.userName ?? '—' } 
+        />
+
+        <Table.Column<TweetType> 
+          title='Created' 
+          dataIndex='createdAt' 
+          render={ (v) => <DateField value={ v } /> } 
+        />
+
+        <Table.Column<TweetType>
+          title='Actions'
+          render={ (_, record) => (
+            <Space>
+              <ShowButton hideText size='small' recordItemId={ record._id } />
+              <EditButton hideText size='small' recordItemId={ record._id } />
+              <DeleteButton hideText size='small' recordItemId={ record._id } />
+            </Space>
+          ) }
+        />
       </Table>
     </List>
   )

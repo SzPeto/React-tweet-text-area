@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common'
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
 import { UsersService } from './users.service'
 import { CreateUserDto } from './dto/create-user.dto'
 import { User, UserDocument } from './schemas/users.schema'
+import { UpdateUserDto } from './dto/update-user.dto'
 
 @ApiTags('users')
 @Controller('users')
@@ -23,7 +24,22 @@ export class UsersController {
 
   @ApiOkResponse({ type: User })
   @Get(':id')
-  async getUserById(@Param('id') id: string) {
+  async getUserById(@Param('id') id: string): Promise<UserDocument> {
     return await this.usersService.getUserById(id)
+  }
+
+  @Patch(':id')
+  async updateUserById(
+    @Param('id') id: string, 
+    @Body() updateUserDto: UpdateUserDto
+  ): Promise<UserDocument> {
+    return await this.usersService.updateUserById(id, updateUserDto)
+  }
+
+  @Delete(':id')
+  async deleteUserById(@Param('id') id: string): Promise<object> {
+    const response = await this.usersService.deleteUserById(id)
+
+    return { success: response.acknowledged, deletedCount: response.deletedCount }
   }
 }

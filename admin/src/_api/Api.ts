@@ -10,6 +10,10 @@
  * ---------------------------------------------------------------
  */
 
+export interface CreateTweetDto {
+  content: string;
+}
+
 export interface User {
   _id: string;
   userName: string;
@@ -24,10 +28,6 @@ export interface Tweet {
   user: User;
 }
 
-export interface CreateTweetDto {
-  content: string;
-}
-
 export interface UpdateTweetDto {
   content: string;
 }
@@ -36,6 +36,11 @@ export interface CreateUserDto {
   userName: string;
   email: string;
   password: string;
+}
+
+export interface UpdateUserDto {
+  userName: string;
+  email: string;
 }
 
 export interface LoginDto {
@@ -238,21 +243,6 @@ export class Api<
      * No description
      *
      * @tags tweets
-     * @name TweetsControllerGetAllTweets
-     * @request GET:/tweets
-     */
-    tweetsControllerGetAllTweets: (params: RequestParams = {}) =>
-      this.request<Tweet[], any>({
-        path: `/tweets`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags tweets
      * @name TweetsControllerAddTweet
      * @request POST:/tweets
      * @secure
@@ -267,6 +257,21 @@ export class Api<
         body: data,
         secure: true,
         type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags tweets
+     * @name TweetsControllerGetAllTweets
+     * @request GET:/tweets
+     */
+    tweetsControllerGetAllTweets: (params: RequestParams = {}) =>
+      this.request<Tweet[], any>({
+        path: `/tweets`,
+        method: "GET",
+        format: "json",
         ...params,
       }),
 
@@ -367,6 +372,40 @@ export class Api<
         path: `/users/${id}`,
         method: "GET",
         format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags users
+     * @name UsersControllerUpdateUserById
+     * @request PATCH:/users/{id}
+     */
+    usersControllerUpdateUserById: (
+      id: string,
+      data: UpdateUserDto,
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/users/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags users
+     * @name UsersControllerDeleteUserById
+     * @request DELETE:/users/{id}
+     */
+    usersControllerDeleteUserById: (id: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/users/${id}`,
+        method: "DELETE",
         ...params,
       }),
   };

@@ -11,6 +11,16 @@ import { Tweet, TweetDocument } from './schemas/tweet.schema'
 export class TweetsController {
   constructor(private readonly tweetsService: TweetsService) {}
 
+  @ApiBearerAuth('access-token')
+  @UseGuards(JwtAuthGuard)
+  @Post()
+  async addTweet(
+    @Body() createTweetDto: CreateTweetDto,
+    @Req() req: any
+  ): Promise<TweetDocument> {
+    return await this.tweetsService.addTweet(createTweetDto, req.user._id)
+  }
+
   @ApiOkResponse({ type: Tweet, isArray: true })
   @Get()
   async getAllTweets(): Promise<TweetDocument[]> {
@@ -21,16 +31,6 @@ export class TweetsController {
   @Get(':id')
   async getTweetById(@Param('id') id: string): Promise<TweetDocument> {
     return await this.tweetsService.getTweetById(id)
-  }
-
-  @ApiBearerAuth('access-token')
-  @UseGuards(JwtAuthGuard)
-  @Post()
-  async addTweet(
-    @Body() createTweetDto: CreateTweetDto,
-    @Req() req: any
-  ): Promise<TweetDocument> {
-    return await this.tweetsService.addTweet(createTweetDto, req.user._id)
   }
 
   @Patch(':id')

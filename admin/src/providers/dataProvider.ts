@@ -1,26 +1,32 @@
 import type { DataProvider } from '@refinedev/core'
 import { getListHelper } from './utils/getListHelper'
 import { getOneHelper } from './utils/getOneHelper'
+import { updateHelper } from './utils/updateHelper'
+import { deleteOneHelper } from './utils/deleteOneHelper'
+import { createHelper } from './utils/createHelper'
 
 const API_URL = 'http://localhost:3000/api'
 
 export const dataProvider: DataProvider = {
-  getOne: async ({ resource, id }) => {
-    const data = await getOneHelper(id, resource)
+  create: async ({ resource, variables }) => {
+    const data = await createHelper(resource, variables)
     return { data }
   },
-  update: () => {
-    throw new Error('Not implemented')
+  getOne: async ({ id, resource }) => {
+    const data = await getOneHelper(id, resource)
+    return { data }
   },
   getList: async ({ resource }) => {
     const data = await getListHelper(resource)
     return { data, total: data.length }
   },
-  create: () => {
-    throw new Error('Not implemented')
+  update: async ({ id, resource, variables }) => {
+    const data = await updateHelper(id, resource, variables)
+    return { data }
   },
-  deleteOne: () => {
-    throw new Error('Not implemented')
+  deleteOne: async ({ id, resource }) => {
+    const data = await deleteOneHelper(id, resource)
+    return { data }
   },
   getApiUrl: () => API_URL,
 }

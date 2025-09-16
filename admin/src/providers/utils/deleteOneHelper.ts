@@ -1,15 +1,15 @@
 import { BaseKey } from '@refinedev/core'
 import { api } from '../../_api/swagger-api/swaggerApi'
 
-export const getOneHelper = async (id: BaseKey, resource: string) => {
+export const deleteOneHelper = async (id: BaseKey, resource: string) => {
   let res: any
   let data: any
   
   if (resource === 'tweets') {
-    res = await api.tweets.tweetsControllerGetTweetById(id as any)
+    res = await api.tweets.tweetsControllerDeleteTweetById(id as any)
     data = res.data
   } else if (resource === 'users') {
-    res = await api.users.usersControllerGetUserById(id as any)
+    res = await api.users.usersControllerDeleteUserById(id as any)
     data = res.data
   }
 

@@ -1,9 +1,10 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { Model } from 'mongoose'
+import { DeleteResult, Model, Types } from 'mongoose'
 import * as bcrypt from 'bcrypt'
 import { User, UserDocument } from './schemas/users.schema'
 import { CreateUserDto } from './dto/create-user.dto'
+import { UpdateUserDto } from './dto/update-user.dto'
 
 
 @Injectable()
@@ -42,13 +43,15 @@ export class UsersService {
     return await this.userModel.find().exec()
   }
 
-  async getUserById(id: string) {
+  async getUserById(id: string): Promise<UserDocument> {
+    if (!Types.ObjectId.isValid(id)) {
+      throw new NotFoundException(`Invalid User ID : ${ id }`)
+    }
     const user = await this.userModel.findOne({ _id: id })
-
+    
     if (!user) {
       throw new NotFoundException(`User with id ${ id } doesn't exist`)
     }
-      
     return user
   }
 
@@ -60,5 +63,27 @@ export class UsersService {
     }
 
     return user
+  }
+
+  async updateUserById(id: string, updateUserDto: UpdateUserDto): Promise<UserDocument> {
+    if (!Types.ObjectId.isValid(id)) {
+      throw new NotFoundException(`Invalid User ID : ${ id }`)
+    }
+    const updated = await this.userModel.findByIdAndUpdate(id, { $set: updateUserDto }, { new: true }).exec()
+    if (!updated) {
+      throw new NotFoundException(`Error during updating, user with ID : ${ id } not found`)
+    }
+    return updated
+  }
+
+  async deleteUserById(id: string): Promise<DeleteResult> {
+    if (!Types.ObjectId.isValid(id)) {
+      throw new NotFoundException(`Invalid User ID : ${ id }`)
+    }
+    const result = await this.userModel.deleteOne({ _id: id })
+    if (result.deletedCount === 0) {
+      throw new NotFoundException(`User with ID : ${ id } not found!`)
+    }
+    return result
   }
 }

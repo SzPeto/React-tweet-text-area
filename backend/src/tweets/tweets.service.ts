@@ -14,11 +14,11 @@ export class TweetsService {
   }
 
   async getTweetById(id: string): Promise<TweetDocument> {
-    // Ensure to throw NotFoundException if the id isn't valid
     if (!Types.ObjectId.isValid(id)) {
       throw new NotFoundException(`Invalid Tweet ID : ${ id }`)
     }
-    const tweet = await this.tweetModel.findById(id)
+    const tweet = await this.tweetModel.findById(id).populate('user').exec()
+    
     if (!tweet) {
       throw new NotFoundException(`Tweet with ID : ${ id } not found!`)
     }

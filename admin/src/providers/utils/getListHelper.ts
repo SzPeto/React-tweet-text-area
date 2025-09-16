@@ -11,9 +11,9 @@ export const getListHelper = async (resource: any) => {
     res = await api.users.usersControllerGetAllUsers()
     data = res.data
   }
+  
   if (res.status < 200 || res.status > 299) {
     throw res
   }
-  
   return data
 }
