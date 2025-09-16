@@ -1,5 +1,5 @@
 import React from 'react'
-import type { BaseRecord } from '@refinedev/core'
+import { useOne, type BaseRecord } from '@refinedev/core'
 import { List, useTable, TextField } from '@refinedev/antd'
 import { Table } from 'antd'
 
@@ -10,7 +10,12 @@ type User = BaseRecord & {
 }
 
 export const UsersList: React.FC = () => {
+  const { result, query: { isLoading } } = useOne<User>({ resource: 'tweets' })
   const { tableProps } = useTable<User>({ resource: 'users', pagination: { mode: 'off' } })
+
+  if (isLoading) {
+    return <p>Loading...</p>
+  }
 
   return (
     <List title='Users'>

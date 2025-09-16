@@ -8,7 +8,7 @@ export class AuthService {
   constructor(private usersService: UsersService, private jwtService: JwtService) {}
 
   async validateUser(userName: string, pw: string) {
-    const user = await this.usersService.findUserByName(userName)
+    const user = await this.usersService.getUserByName(userName)
     if (!user) {
       throw new NotFoundException(`User with name ${ userName } doesn't exist!`)
     }

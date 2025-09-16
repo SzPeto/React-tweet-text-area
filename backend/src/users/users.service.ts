@@ -42,7 +42,7 @@ export class UsersService {
     return await this.userModel.find().exec()
   }
 
-  async findUserById(id: string) {
+  async getUserById(id: string) {
     const user = await this.userModel.findOne({ _id: id })
 
     if (!user) {
@@ -52,7 +52,7 @@ export class UsersService {
     return user
   }
 
-  async findUserByName(userName: string) {
+  async getUserByName(userName: string) {
     const user = await this.userModel.findOne({ userName: userName })
     
     if (!user) {

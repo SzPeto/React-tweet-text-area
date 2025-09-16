@@ -354,6 +354,21 @@ export class Api<
         format: "json",
         ...params,
       }),
+
+    /**
+     * No description
+     *
+     * @tags users
+     * @name UsersControllerGetUserById
+     * @request GET:/users/{id}
+     */
+    usersControllerGetUserById: (id: string, params: RequestParams = {}) =>
+      this.request<User, any>({
+        path: `/users/${id}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
   };
   auth = {
     /**

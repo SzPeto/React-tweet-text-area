@@ -5,7 +5,7 @@ Make sure you have Node.js (>=18) and npm installed.
 
 ## How to run
 
-1. Navigate to the frontend folder:
+1. Navigate to the admin folder:
 ```bash
 cd admin
 ```

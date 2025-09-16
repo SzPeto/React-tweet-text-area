@@ -1,7 +1,6 @@
 import { Refine } from '@refinedev/core'
 import { useNotificationProvider, RefineThemes, ThemedLayout } from '@refinedev/antd'
 import { RefineKbar, RefineKbarProvider } from '@refinedev/kbar'
-import { DevtoolsPanel, DevtoolsProvider } from '@refinedev/devtools'
 import routerProvider, { DocumentTitleHandler, UnsavedChangesNotifier } from '@refinedev/react-router'
 import { App as AntdApp, ConfigProvider } from 'antd'
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
@@ -16,30 +15,27 @@ function App() {
       <ConfigProvider theme={ RefineThemes.Blue }>
         <RefineKbarProvider>
           <AntdApp>
-            <DevtoolsProvider>
-              <Refine
-                dataProvider={ dataProvider }
-                notificationProvider={ useNotificationProvider }
-                routerProvider={ routerProvider }
-                options={{ syncWithLocation: true }}
-                resources={[
-                  { name: 'tweets', list: '/tweets' },
-                  { name: 'users', list: '/users' },
-                ]}
-              >
-                <Routes>
-                  <Route element={<ThemedLayout><Outlet /></ThemedLayout>}>
-                    <Route path='/tweets' element={<TweetsList />} />
-                    <Route path='/users' element={<UsersList />} />
-                    <Route index element={<TweetsList />} />
-                  </Route>
-                </Routes>
-                <RefineKbar />
-                <UnsavedChangesNotifier />
-                <DocumentTitleHandler />
-              </Refine>
-              <DevtoolsPanel />
-            </DevtoolsProvider>
+            <Refine
+              dataProvider={ dataProvider }
+              notificationProvider={ useNotificationProvider }
+              routerProvider={ routerProvider }
+              options={{ syncWithLocation: true }}
+              resources={[
+                { name: 'tweets', list: '/tweets' },
+                { name: 'users', list: '/users' },
+              ]}
+            >
+              <Routes>
+                <Route element={<ThemedLayout><Outlet /></ThemedLayout>}>
+                  <Route path='/tweets' element={<TweetsList />} />
+                  <Route path='/users' element={<UsersList />} />
+                  <Route index element={<TweetsList />} />
+                </Route>
+              </Routes>
+              <RefineKbar />
+              <UnsavedChangesNotifier />
+              <DocumentTitleHandler />
+            </Refine>
           </AntdApp>
         </RefineKbarProvider>
       </ConfigProvider>
