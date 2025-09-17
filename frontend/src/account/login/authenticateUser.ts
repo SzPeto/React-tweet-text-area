@@ -2,7 +2,7 @@ import { api } from '@/_utils/swagger-api/swaggerApi'
 
 export const authenticateUser = async (userName: string, password: string) => {
   let json
-  const user = { userName: userName, password: password }
+  const user = { userName, password }
 
   try {
     const res = await api.auth.authControllerLogin(user)

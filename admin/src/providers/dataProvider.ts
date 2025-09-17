@@ -1,9 +1,9 @@
 import type { DataProvider } from '@refinedev/core'
-import { getListHelper } from './utils/getListHelper'
-import { getOneHelper } from './utils/getOneHelper'
-import { updateHelper } from './utils/updateHelper'
-import { deleteOneHelper } from './utils/deleteOneHelper'
-import { createHelper } from './utils/createHelper'
+import { getListHelper } from './data-utils/getListHelper'
+import { getOneHelper } from './data-utils/getOneHelper'
+import { updateHelper } from './data-utils/updateHelper'
+import { deleteOneHelper } from './data-utils/deleteOneHelper'
+import { createHelper } from './data-utils/createHelper'
 
 const API_URL = 'http://localhost:3000/api'
 

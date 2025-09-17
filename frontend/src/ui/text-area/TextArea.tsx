@@ -3,13 +3,14 @@ import './TextArea.css'
 type TextAreaProps = {
   value?: string,
   onChange: (...args: any[]) => any,
-  placeholder?: string
+  placeholder?: string,
+  className?: string
 }
 
 const TextArea = (props: TextAreaProps) => {
     
   return (
-    <textarea className='text-area-l1'
+    <textarea className={ `text-area-l1 ${ props.className }` }
       value={ props.value }
       onChange={ props.onChange }
       rows={ 4 }

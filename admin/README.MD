@@ -22,5 +22,5 @@ npm run dev
 
 4. Open your browser at the address shown in the terminal (by default : http://localhost:5173)
 
-# Side note : 
+**Side note :** 
 admin\node_modules\@refinedev\core\tsconfig.json - "extends": "../../tsconfig.build.json" - commented out

@@ -16,7 +16,6 @@ export const getCurrentUserFromBe = async () => {
     if (err.response?.status !== 401) {
       logout()
     }
-
     return { success: false, error: errorMessage }
   }
   return { success: true, json: json }

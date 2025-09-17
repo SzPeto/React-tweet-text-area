@@ -10,41 +10,46 @@
  * ---------------------------------------------------------------
  */
 
+export interface CreateTweetDto {
+  content: string;
+}
+
 export interface User {
-  _id: string
-  userName: string
-  email: string
+  _id: string;
+  userName: string;
+  email: string;
 }
 
 export interface Tweet {
-  _id: string
-  content: string
-  createdAt: string
-  updatedAt: string
-  user: User
-}
-
-export interface CreateTweetDto {
-  content: string
+  _id: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  user: User;
 }
 
 export interface UpdateTweetDto {
-  content: string
+  content: string;
 }
 
 export interface CreateUserDto {
-  userName: string
-  email: string
-  password: string
+  userName: string;
+  email: string;
+  password: string;
+}
+
+export interface UpdateUserDto {
+  userName: string;
+  email: string;
 }
 
 export interface LoginDto {
-  userName: string
-  password: string
+  userName: string;
+  password: string;
 }
 
 export interface LoginResponseDto {
-  accessToken: string
+  accessToken: string;
 }
 
 import type {
@@ -53,55 +58,55 @@ import type {
   AxiosResponse,
   HeadersDefaults,
   ResponseType,
-} from 'axios'
-import axios from 'axios'
+} from "axios";
+import axios from "axios";
 
-export type QueryParamsType = Record<string | number, any>
+export type QueryParamsType = Record<string | number, any>;
 
 export interface FullRequestParams
-  extends Omit<AxiosRequestConfig, 'data' | 'params' | 'url' | 'responseType'> {
+  extends Omit<AxiosRequestConfig, "data" | "params" | "url" | "responseType"> {
   /** set parameter to `true` for call `securityWorker` for this request */
-  secure?: boolean
+  secure?: boolean;
   /** request path */
-  path: string
+  path: string;
   /** content type of request body */
-  type?: ContentType
+  type?: ContentType;
   /** query params */
-  query?: QueryParamsType
-  /** format of response (i.e. response.json() -> format: 'json') */
-  format?: ResponseType
+  query?: QueryParamsType;
+  /** format of response (i.e. response.json() -> format: "json") */
+  format?: ResponseType;
   /** request body */
-  body?: unknown
+  body?: unknown;
 }
 
 export type RequestParams = Omit<
   FullRequestParams,
-  'body' | 'method' | 'query' | 'path'
->
+  "body" | "method" | "query" | "path"
+>;
 
 export interface ApiConfig<SecurityDataType = unknown>
-  extends Omit<AxiosRequestConfig, 'data' | 'cancelToken'> {
+  extends Omit<AxiosRequestConfig, "data" | "cancelToken"> {
   securityWorker?: (
     securityData: SecurityDataType | null,
-  ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void
-  secure?: boolean
-  format?: ResponseType
+  ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
+  secure?: boolean;
+  format?: ResponseType;
 }
 
 export enum ContentType {
-  Json = 'application/json',
-  JsonApi = 'application/vnd.api+json',
-  FormData = 'multipart/form-data',
-  UrlEncoded = 'application/x-www-form-urlencoded',
-  Text = 'text/plain',
+  Json = "application/json",
+  JsonApi = "application/vnd.api+json",
+  FormData = "multipart/form-data",
+  UrlEncoded = "application/x-www-form-urlencoded",
+  Text = "text/plain",
 }
 
 export class HttpClient<SecurityDataType = unknown> {
-  public instance: AxiosInstance
-  private securityData: SecurityDataType | null = null
-  private securityWorker?: ApiConfig<SecurityDataType>['securityWorker']
-  private secure?: boolean
-  private format?: ResponseType
+  public instance: AxiosInstance;
+  private securityData: SecurityDataType | null = null;
+  private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
+  private secure?: boolean;
+  private format?: ResponseType;
 
   constructor({
     securityWorker,
@@ -111,22 +116,22 @@ export class HttpClient<SecurityDataType = unknown> {
   }: ApiConfig<SecurityDataType> = {}) {
     this.instance = axios.create({
       ...axiosConfig,
-      baseURL: axiosConfig.baseURL || 'http://localhost:3000/api',
-    })
-    this.secure = secure
-    this.format = format
-    this.securityWorker = securityWorker
+      baseURL: axiosConfig.baseURL || "http://localhost:3000/api",
+    });
+    this.secure = secure;
+    this.format = format;
+    this.securityWorker = securityWorker;
   }
 
   public setSecurityData = (data: SecurityDataType | null) => {
-    this.securityData = data
-  }
+    this.securityData = data;
+  };
 
   protected mergeRequestParams(
     params1: AxiosRequestConfig,
     params2?: AxiosRequestConfig,
   ): AxiosRequestConfig {
-    const method = params1.method || (params2 && params2.method)
+    const method = params1.method || (params2 && params2.method);
 
     return {
       ...this.instance.defaults,
@@ -141,36 +146,36 @@ export class HttpClient<SecurityDataType = unknown> {
         ...(params1.headers || {}),
         ...((params2 && params2.headers) || {}),
       },
-    }
+    };
   }
 
   protected stringifyFormItem(formItem: unknown) {
-    if (typeof formItem === 'object' && formItem !== null) {
-      return JSON.stringify(formItem)
+    if (typeof formItem === "object" && formItem !== null) {
+      return JSON.stringify(formItem);
     } else {
-      return `${formItem}`
+      return `${formItem}`;
     }
   }
 
   protected createFormData(input: Record<string, unknown>): FormData {
     if (input instanceof FormData) {
-      return input
+      return input;
     }
     return Object.keys(input || {}).reduce((formData, key) => {
-      const property = input[key]
+      const property = input[key];
       const propertyContent: any[] =
-        property instanceof Array ? property : [property]
+        property instanceof Array ? property : [property];
 
       for (const formItem of propertyContent) {
-        const isFileType = formItem instanceof Blob || formItem instanceof File
+        const isFileType = formItem instanceof Blob || formItem instanceof File;
         formData.append(
           key,
           isFileType ? formItem : this.stringifyFormItem(formItem),
-        )
+        );
       }
 
-      return formData
-    }, new FormData())
+      return formData;
+    }, new FormData());
   }
 
   public request = async <T = any, _E = any>({
@@ -183,43 +188,43 @@ export class HttpClient<SecurityDataType = unknown> {
     ...params
   }: FullRequestParams): Promise<AxiosResponse<T>> => {
     const secureParams =
-      ((typeof secure === 'boolean' ? secure : this.secure) &&
+      ((typeof secure === "boolean" ? secure : this.secure) &&
         this.securityWorker &&
         (await this.securityWorker(this.securityData))) ||
-      {}
-    const requestParams = this.mergeRequestParams(params, secureParams)
-    const responseFormat = format || this.format || undefined
+      {};
+    const requestParams = this.mergeRequestParams(params, secureParams);
+    const responseFormat = format || this.format || undefined;
 
     if (
       type === ContentType.FormData &&
       body &&
       body !== null &&
-      typeof body === 'object'
+      typeof body === "object"
     ) {
-      body = this.createFormData(body as Record<string, unknown>)
+      body = this.createFormData(body as Record<string, unknown>);
     }
 
     if (
       type === ContentType.Text &&
       body &&
       body !== null &&
-      typeof body !== 'string'
+      typeof body !== "string"
     ) {
-      body = JSON.stringify(body)
+      body = JSON.stringify(body);
     }
 
     return this.instance.request({
       ...requestParams,
       headers: {
         ...(requestParams.headers || {}),
-        ...(type ? { 'Content-Type': type } : {}),
+        ...(type ? { "Content-Type": type } : {}),
       },
       params: query,
       responseType: responseFormat,
       data: body,
       url: path,
-    })
-  }
+    });
+  };
 }
 
 /**
@@ -238,21 +243,6 @@ export class Api<
      * No description
      *
      * @tags tweets
-     * @name TweetsControllerGetAllTweets
-     * @request GET:/tweets
-     */
-    tweetsControllerGetAllTweets: (params: RequestParams = {}) =>
-      this.request<Tweet[], any>({
-        path: `/tweets`,
-        method: 'GET',
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags tweets
      * @name TweetsControllerAddTweet
      * @request POST:/tweets
      * @secure
@@ -263,10 +253,25 @@ export class Api<
     ) =>
       this.request<void, any>({
         path: `/tweets`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags tweets
+     * @name TweetsControllerGetAllTweets
+     * @request GET:/tweets
+     */
+    tweetsControllerGetAllTweets: (params: RequestParams = {}) =>
+      this.request<Tweet[], any>({
+        path: `/tweets`,
+        method: "GET",
+        format: "json",
         ...params,
       }),
 
@@ -280,8 +285,8 @@ export class Api<
     tweetsControllerGetTweetById: (id: string, params: RequestParams = {}) =>
       this.request<Tweet, any>({
         path: `/tweets/${id}`,
-        method: 'GET',
-        format: 'json',
+        method: "GET",
+        format: "json",
         ...params,
       }),
 
@@ -299,7 +304,7 @@ export class Api<
     ) =>
       this.request<void, any>({
         path: `/tweets/${id}`,
-        method: 'PATCH',
+        method: "PATCH",
         body: data,
         type: ContentType.Json,
         ...params,
@@ -315,10 +320,10 @@ export class Api<
     tweetsControllerDeleteTweetById: (id: string, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/tweets/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
         ...params,
       }),
-  }
+  };
   users = {
     /**
      * No description
@@ -333,13 +338,77 @@ export class Api<
     ) =>
       this.request<User, any>({
         path: `/users/register`,
-        method: 'POST',
+        method: "POST",
         body: data,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
-  }
+
+    /**
+     * No description
+     *
+     * @tags users
+     * @name UsersControllerGetAllUsers
+     * @request GET:/users
+     */
+    usersControllerGetAllUsers: (params: RequestParams = {}) =>
+      this.request<User[], any>({
+        path: `/users`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags users
+     * @name UsersControllerGetUserById
+     * @request GET:/users/{id}
+     */
+    usersControllerGetUserById: (id: string, params: RequestParams = {}) =>
+      this.request<User, any>({
+        path: `/users/${id}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags users
+     * @name UsersControllerUpdateUserById
+     * @request PATCH:/users/{id}
+     */
+    usersControllerUpdateUserById: (
+      id: string,
+      data: UpdateUserDto,
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/users/${id}`,
+        method: "PATCH",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags users
+     * @name UsersControllerDeleteUserById
+     * @request DELETE:/users/{id}
+     */
+    usersControllerDeleteUserById: (id: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/users/${id}`,
+        method: "DELETE",
+        ...params,
+      }),
+  };
   auth = {
     /**
      * No description
@@ -351,10 +420,10 @@ export class Api<
     authControllerLogin: (data: LoginDto, params: RequestParams = {}) =>
       this.request<LoginResponseDto, any>({
         path: `/auth/login`,
-        method: 'POST',
+        method: "POST",
         body: data,
         type: ContentType.Json,
-        format: 'json',
+        format: "json",
         ...params,
       }),
 
@@ -369,10 +438,10 @@ export class Api<
     authControllerMe: (params: RequestParams = {}) =>
       this.request<User, any>({
         path: `/auth/me`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
+        format: "json",
         ...params,
       }),
-  }
+  };
 }
