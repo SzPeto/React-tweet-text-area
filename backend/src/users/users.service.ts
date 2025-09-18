@@ -25,7 +25,7 @@ export class UsersService {
       email: createUserDto.email, 
       password: hashedPw 
     })
-    
+
     try {
       created = await user.save()
     } catch(err) {
@@ -61,7 +61,6 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException(`User with name ${ userName } doesn't exist!`)
     }
-
     return user
   }
 

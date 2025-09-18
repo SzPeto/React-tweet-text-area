@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common'
+import { Controller, Get, Post, Req, UseGuards } from '@nestjs/common'
 import { ApiBearerAuth, ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger'
 import { LoginAuthGuard } from './guards/login-auth.guard'
 import { JwtAuthGuard } from './guards/jwt-auth.guard'
@@ -16,7 +16,7 @@ export class AuthController {
   @ApiBody({ type: LoginDto }) // 👈 important for Swagger
   @UseGuards(LoginAuthGuard) 
   @Post('login')
-  login(@Request() req) {
+  login(@Req() req) {
     return this.authService.login(req.user) // This returns the access token for frontend
   }
 
@@ -24,7 +24,7 @@ export class AuthController {
   @ApiOkResponse({ type: User })
   @UseGuards(JwtAuthGuard)
   @Get('me')
-  me(@Request() req) {
+  me(@Req() req) {
     return req.user
   }
 }

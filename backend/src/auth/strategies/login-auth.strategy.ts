@@ -15,7 +15,6 @@ export class LoginAuthStrategy extends PassportStrategy(Strategy, 'login-auth') 
     if (!user) {
       throw new UnauthorizedException('Authorization failed!')
     }
-
     return user // Returns to Passport and Passport attaches to req.user
   }
 }

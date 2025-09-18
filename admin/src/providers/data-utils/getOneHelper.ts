@@ -5,16 +5,22 @@ export const getOneHelper = async (id: BaseKey, resource: string) => {
   let res: any
   let data: any
   
-  if (resource === 'tweets') {
-    res = await api.tweets.tweetsControllerGetTweetById(id as any)
-    data = res.data
-  } else if (resource === 'users') {
-    res = await api.users.usersControllerGetUserById(id as any)
-    data = res.data
-  }
-
-  if (res.status < 200 || res.status > 299) {
-    throw res
+  try {
+    if (resource === 'tweets') {
+      res = await api.tweets.tweetsControllerGetTweetById(id as any)
+      data = res.data
+    } else if (resource === 'users') {
+      res = await api.users.usersControllerGetUserById(id as any)
+      data = res.data
+    }
+  } catch(err: any) {
+    const errorMessage = err.response?.data?.message ?? 
+                         err.res?.data?.message ?? 
+                         err.data?.message ?? 
+                         err.message ?? 
+                         'Unknown error while fetching resource'
+    
+    throw new Error(errorMessage)
   }
   return data
 }

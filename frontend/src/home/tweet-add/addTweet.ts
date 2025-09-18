@@ -10,7 +10,8 @@ export async function addTweet(tweet: string) {
     const res = await api.tweets.tweetsControllerAddTweet(postMessage)
     json = res.data
   } catch(err: any) {
-    const errorMessage = err.res?.data?.message ?? 
+    const errorMessage = err.response?.data?.message ?? 
+                         err.res?.data?.message ?? 
                          err.data?.message ?? 
                          err.message ?? 
                          'Unknown error while adding tweet'

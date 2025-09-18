@@ -1,12 +1,13 @@
 import { Route } from 'react-router'
-import { TweetsList } from '../pages/tweets/TweetList'
-import { TweetCreate } from '../pages/tweets/TweetCreate'
-import { TweetShow } from '../pages/tweets/TweetShow'
-import { TweetEdit } from '../pages/tweets/TweetEdit'
-import { UsersList } from '../pages/users/UserList'
-import { UserCreate } from '../pages/users/UserCreate'
-import { UserShow } from '../pages/users/UserShow'
-import { UserEdit } from '../pages/users/UserEdit'
+import TweetsList from '../pages/tweets/TweetsList'
+import TweetCreate from '../pages/tweets/TweetCreate'
+import TweetShow from '../pages/tweets/TweetShow'
+import TweetEdit from '../pages/tweets/TweetEdit'
+import UsersList from '../pages/users/UsersList'
+import UserCreate from '../pages/users/UserCreate'
+import UserShow from '../pages/users/UserShow'
+import UserEdit from '../pages/users/UserEdit'
+import HomePage from '../pages/home/Home'
 
 export const rootRoutes = [
   <Route path='/tweets' element={<TweetsList />} />,
@@ -17,5 +18,5 @@ export const rootRoutes = [
   <Route path='/users/create' element={<UserCreate />} />,
   <Route path='/users/:id' element={<UserShow />} />,
   <Route path='/users/:id/edit' element={<UserEdit />} />,
-  <Route index element={<TweetsList />} />
+  <Route index element={<HomePage />} />
 ]

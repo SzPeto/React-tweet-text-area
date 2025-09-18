@@ -15,6 +15,7 @@ export const addUser = async (userName: string, email: string, password: string)
     json = response.data
   } catch(err: any) {
     const errorMessage = err.response?.data?.message ?? 
+                         err.res?.data?.message ?? 
                          err.data?.message ?? 
                          err.message ?? 
                          'Unknown error while registering user'

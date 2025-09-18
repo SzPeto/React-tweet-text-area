@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common'
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
 import { UsersService } from './users.service'
-import { CreateUserDto } from './dto/create-user.dto'
 import { User, UserDocument } from './schemas/users.schema'
+import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 
 @ApiTags('users')
@@ -39,7 +39,6 @@ export class UsersController {
   @Delete(':id')
   async deleteUserById(@Param('id') id: string): Promise<object> {
     const response = await this.usersService.deleteUserById(id)
-
     return { success: response.acknowledged, deletedCount: response.deletedCount }
   }
 }

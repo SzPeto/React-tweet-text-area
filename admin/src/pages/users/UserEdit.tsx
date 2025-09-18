@@ -1,12 +1,12 @@
 import { Edit, useForm } from '@refinedev/antd'
 import { Form, Input } from 'antd'
 
-export const UserEdit: React.FC = () => {
+const UserEdit: React.FC = () => {
   const { formProps, saveButtonProps } = useForm({ redirect: 'show' })
 
   return (
     <Edit saveButtonProps={ saveButtonProps }>
-      <Form {...formProps} layout='vertical'>
+      <Form { ...formProps } layout='vertical'>
         <Form.Item label='Username' name='userName'>
           <Input />
         </Form.Item>
@@ -18,3 +18,5 @@ export const UserEdit: React.FC = () => {
     </Edit>
   )
 }
+
+export default UserEdit

@@ -25,7 +25,6 @@ export class AuthService {
 
   async login(user: any) {
     const payload = { username: user.userName, sub: user._id ?? user.id }
-
     return { accessToken: this.jwtService.sign(payload) } // This goes back to frontend through API
   }
 }

@@ -3,8 +3,12 @@ import { List, useTable, TextField, ShowButton, EditButton, DeleteButton } from 
 import { Space, Table } from 'antd'
 import { UserType } from './user.type'
 
-export const UsersList: React.FC = () => {
-  const { tableProps, tableQuery } = useTable<UserType>({ resource: 'users', pagination: { mode: 'off' } })
+const UsersList: React.FC = () => {
+  const { tableProps, tableQuery } = useTable<UserType>({ 
+    resource: 'users', 
+    pagination: { mode: 'off' },
+    sorters: { mode: 'server' }
+  })
 
   if (tableQuery.isLoading) {
     return <p>Loading...</p>
@@ -12,10 +16,11 @@ export const UsersList: React.FC = () => {
 
   return (
     <List title='Users'>
-      <Table { ...tableProps } rowKey='_id'>
+      <Table { ...tableProps } rowKey='_id' pagination={{ pageSize: 10 }}>
         <Table.Column<UserType> 
           title='User Name' 
           dataIndex='userName' 
+          sorter={ (a, b) => (a.userName || '').localeCompare(b.userName || '') }
           render={ (v) => ( <TextField value={ v } />) } 
         />
 
@@ -39,3 +44,5 @@ export const UsersList: React.FC = () => {
     </List>
   )
 }
+
+export default UsersList

@@ -2,7 +2,7 @@ import { useShow } from '@refinedev/core'
 import { TextField, MarkdownField, Show } from '@refinedev/antd'
 import { Typography } from 'antd'
 
-export const TweetShow: React.FC = () => {
+const TweetShow: React.FC = () => {
   const { result: tweet, query: { isLoading } } = useShow()
 
   return (
@@ -18,3 +18,5 @@ export const TweetShow: React.FC = () => {
     </Show>
   )
 }
+
+export default TweetShow

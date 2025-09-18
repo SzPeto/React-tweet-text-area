@@ -44,7 +44,6 @@ export class TweetsController {
   @Delete(':id')
   async deleteTweetById(@Param('id') id: string): Promise<object> {
     const response = await this.tweetsService.deleteTweetById(id)
-
     return { success: response.acknowledged, deletedCount: response.deletedCount }
   }
 }

@@ -15,8 +15,8 @@ const { Text } = Typography
 const { useToken } = theme
 
 type IUser = {
-  id: number
-  name: string
+  _id: string
+  userName: string
   avatar: string
 }
 
@@ -52,8 +52,8 @@ export const Header: React.FC<RefineThemedLayoutHeaderProps> = ({
           defaultChecked={mode === 'dark'}
         />
         <Space style={{ marginLeft: '8px' }} size='middle'>
-          {user?.name && <Text strong>{user.name}</Text>}
-          {user?.avatar && <Avatar src={user?.avatar} alt={user?.name} />}
+          {user?.userName && <Text strong>{user.userName}</Text>}
+          {user?.avatar && <Avatar src={user?.avatar} alt={user?.userName} />}
         </Space>
       </Space>
     </AntdLayout.Header>

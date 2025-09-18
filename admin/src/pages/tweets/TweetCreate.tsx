@@ -1,7 +1,7 @@
 import { useForm, Create } from '@refinedev/antd'
 import { Form, Input } from 'antd'
 
-export const TweetCreate: React.FC = () => {
+const TweetCreate: React.FC = () => {
   const { formProps, saveButtonProps } = useForm({ redirect: 'edit' })
 
   return (
@@ -14,3 +14,5 @@ export const TweetCreate: React.FC = () => {
     </Create>
   )
 }
+
+export default TweetCreate

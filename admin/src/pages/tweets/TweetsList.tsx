@@ -3,8 +3,12 @@ import { List, useTable, DateField, TextField, ShowButton, EditButton, DeleteBut
 import { Space, Table } from 'antd'
 import { TweetType } from './tweet.type'
 
-export const TweetsList: React.FC = () => {
-  const { tableProps, tableQuery } = useTable<TweetType>({ resource: 'tweets', pagination: { mode: 'off' } })
+const TweetsList: React.FC = () => {
+  const { tableProps, tableQuery } = useTable<TweetType>({ 
+    resource: 'tweets', 
+    pagination: { mode: 'off' },
+    sorters: { mode: 'server' }
+  })
 
   if (tableQuery.isLoading) {
     return <p>Loading...</p>
@@ -12,7 +16,7 @@ export const TweetsList: React.FC = () => {
 
   return (
     <List title='Tweets'>
-      <Table { ...tableProps } rowKey='_id'>
+      <Table { ...tableProps } rowKey='_id' pagination={{ pageSize: 10 }}>
         <Table.Column<TweetType> 
           title='Content' 
           dataIndex='content' 
@@ -21,13 +25,15 @@ export const TweetsList: React.FC = () => {
 
         <Table.Column<TweetType> 
           title='Author' 
+          sorter={ (a, b) => (a.user.userName || '').localeCompare(b.user.userName || '') }
           render={ (_, r) => r.user?.userName ?? '—' } 
         />
 
         <Table.Column<TweetType> 
           title='Created' 
           dataIndex='createdAt' 
-          render={ (v) => <DateField value={ v } /> } 
+          sorter={ (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime() }
+          render={ (v) => <DateField value={ v } format='YYYY-MM-DD HH:mm' /> } 
         />
 
         <Table.Column<TweetType>
@@ -44,3 +50,5 @@ export const TweetsList: React.FC = () => {
     </List>
   )
 }
+
+export default TweetsList

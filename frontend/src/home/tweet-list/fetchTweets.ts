@@ -6,11 +6,13 @@ export async function fetchTweets() {
   try {
     const res = await api.tweets.tweetsControllerGetAllTweets()
     json = res.data
-  } catch (err: any) {
-    const errorMessage = err.res?.data?.message ?? 
+  } catch(err: any) {
+    const errorMessage = err.response?.data?.message ?? 
+                         err.res?.data?.message ?? 
                          err.data?.message ?? 
                          err.message ?? 
                          'Unknown error while adding tweet'
+                         
     return { success: false, error: errorMessage }
   }
   return { success: true, json: json }

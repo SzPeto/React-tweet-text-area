@@ -9,6 +9,7 @@ export const authenticateUser = async (userName: string, password: string) => {
     json = res.data
   } catch(err: any) {
     const errorMessage = err.response?.data?.message ?? 
+                         err.res?.data?.message ?? 
                          err.data?.message ?? 
                          err.message ?? 
                          'Unknown error while authenticating user'

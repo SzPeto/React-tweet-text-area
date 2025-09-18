@@ -6,7 +6,6 @@ import {
   useLogin,
   useTranslate,
 } from '@refinedev/core'
-import { ThemedTitle } from '@refinedev/antd'
 import {
   bodyStyles,
   containerStyles,
@@ -54,9 +53,7 @@ export const LoginPage: React.FC<LoginProps> = ({
   const [form] = Form.useForm<LoginFormTypes>()
   const translate = useTranslate()
   const Link = useLink()
-
   const { mutate: login, isPending } = useLogin<LoginFormTypes>()
-
   const PageTitle =
     title === false ? null : (
       <div
@@ -67,7 +64,7 @@ export const LoginPage: React.FC<LoginProps> = ({
           fontSize: '20px',
         }}
       >
-        {title ?? <ThemedTitle collapsed={false} />}
+        { title ?? '' /* <ThemedTitle collapsed={false} text='Tweets admin' /> */ }
       </div>
     )
 
@@ -79,7 +76,7 @@ export const LoginPage: React.FC<LoginProps> = ({
         ...titleStyles,
       }}
     >
-      {translate('pages.login.title', 'Sign in to your account')}
+      {translate('pages.login.title', 'Sign in to tweets admin')}
     </Typography.Title>
   )
 

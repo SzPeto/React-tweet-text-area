@@ -28,5 +28,5 @@ export const dataProvider: DataProvider = {
     const data = await deleteOneHelper(id, resource)
     return { data }
   },
-  getApiUrl: () => API_URL,
+  getApiUrl: () => API_URL
 }

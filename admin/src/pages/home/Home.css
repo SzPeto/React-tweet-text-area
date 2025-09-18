@@ -1,0 +1,7 @@
+.main-container {
+  @apply flex flex-col justify-start items-center w-fit gap-8 ml-auto mr-auto p-11 rounded-lg bg-white shadow-md;
+}
+
+.description-container {
+  @apply flex flex-row justify-center items-center;
+}
